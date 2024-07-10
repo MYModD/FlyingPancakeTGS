@@ -129,7 +129,7 @@ public class PlayerMove : MonoBehaviour {
         }
     }
     private void ChangeSpeed() {
-        float inputRStick = Input.GetAxis("RStickH");
+        float inputRStick = Input.GetAxis("RStickV");
         print(inputRStick);
         float speed = CalculateSpeed(inputRStick);
         _splineAnimate.ElapsedTime += speed;
