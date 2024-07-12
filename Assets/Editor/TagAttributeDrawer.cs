@@ -1,19 +1,7 @@
-using System;
-using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
-#endif
+using UnityEngine;
 
-/// <summary>
-/// タグの専用UIを表示させるための属性
-/// </summary>
-[AttributeUsage(AttributeTargets.Field)]
-public class TagAttribute : PropertyAttribute
-{
-}
-
-#if UNITY_EDITOR
 /// <summary>
 /// タグ名の専用UIを表示させるためのPropertyDrawer
 /// </summary>

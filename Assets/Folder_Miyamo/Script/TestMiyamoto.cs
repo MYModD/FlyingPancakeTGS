@@ -1,9 +1,20 @@
+using Cinemachine;
 using UnityEngine;
+using UnityEditor;
 
 
 public class TestMiyamoto : MonoBehaviour
 {
-    [SerializeField]
+
+    public enum CharacterState
+    {
+        Standing,
+        Walking,
+        Running,
+        Jumping
+    }
+
+
     void Start()
     {
 
