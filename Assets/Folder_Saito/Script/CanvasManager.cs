@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
@@ -15,11 +16,26 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("ゲーム終了ボタン")] private Button _titleGameEnd;
     [SerializeField, Header("設定ボタン")] private Button _titleSetting;
 
-    [SerializeField] private GameObject[] _titleObj;
-    [SerializeField] private GameObject[] _menuObj;
-    [SerializeField] private GameObject[] _gamePlayObj;
-    [SerializeField] private GameObject[] _resultObj;
+    [SerializeField, Header("タイトルのオブジェクト")] private GameObject[] _titleObjs;
+    [SerializeField, Header("一時停止のオブジェクト")] private GameObject[] _menuObjs;
+    [SerializeField, Header("ゲーム中のオブジェクト")] private GameObject[] _gamePlayObjs;
+    [SerializeField, Header("リザルトのオブジェクト")] private GameObject[] _resultObjs;
+    [SerializeField, Header("設定画面のオブジェクト")] private GameObject[] _settingObjs;
 
+    [SerializeField, Header("タイトルに行かせたいタグ"),Tag] private string _tagTitle;
+    [SerializeField, Header("ゲームに行かせたいタグ"),Tag] private string _tagGame;
+    [SerializeField, Header("設定に行かせたいタグ"),Tag] private string _tagSetting;
+    [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
+
+    private enum UIState {
+        title,
+        gamePlay,
+        result,
+        menu,
+        setting
+    }
+    private UIState _state;
+    private UIState _prevState;
     #endregion
     #region プロパティ
     #endregion
@@ -36,56 +52,141 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-
+        _state = UIState.title;
     }
     /// <summary>
     /// 更新処理
     /// </summary>
-    void Update()
-    {
-
-    }
-    private void OnClickSw()
-    {
-
-    }
-    private void StartToGamePlay()
-    {
-        foreach (GameObject obj in _titleObj)
-        {
-           obj.SetActive(false);
+    void Update() {
+        if (_state == UIState.gamePlay) {
+            if (Input.GetKeyDown(KeyCode.Z)) {
+                PlayToResult();
+            }
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                PlayToMenu();
+            }
         }
-        foreach (GameObject obj in _gamePlayObj)
-        {
-            obj.SetActive(true);
+        if (_state == UIState.result) {
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                MenuOrResultToStart();
+            }
+        }
+        if (_state == UIState.menu) {
+            if (Input.GetKeyDown(KeyCode.R)) {
+                MenuToPlay();
+            }
+            if (Input.GetKeyDown(KeyCode.E)) {
+                TitleOrMenuToSetting();
+            }
+        }
+        if (_state == UIState.setting) {
+            if (Input.GetKeyDown(KeyCode.T)) {
+                SettingToTitleOrMenu();
+            }
         }
     }
+    /// <summary>
+    /// 押された時の処理を決める
+    /// </summary>
+    public void OnClickSw(string tagname) {
+        //タイトルからゲームへ
+        if (tagname==_tagGame) {
+            TitleToGamePlay();
+        } else if (tagname==_tagSetting) {
+            TitleOrMenuToSetting();
+        } else if (tagname==_tagFinish) {
+            GameFinish();
+        }
+        else if (tagname==_tagTitle) {
+            MenuOrResultToStart();
+        }
+    }
+    /// <summary>
+    /// タイトルからゲーム画面へ
+    /// </summary>
+    private void TitleToGamePlay()
+    {
+        GameObjTrueFalse(_gamePlayObjs, _titleObjs);
+        _state = UIState.gamePlay;
+    }
+    /// <summary>
+    /// ゲーム終了
+    /// </summary>
     private void GameFinish()
     {
-        foreach (GameObject obj in _gamePlayObj)
-        {
-            obj.SetActive(false);
-        }
-        foreach (GameObject obj in _resultObj)
-        {
-            obj.SetActive(true);
-        }
+#if UNITY_EDITOR
+        // Unityエディタ内での終了処理
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // ビルドされたゲームの終了処理
+        Application.Quit();
+#endif
     }
+    /// <summary>
+    /// ゲーム画面からポーズへ
+    /// </summary>
     private void PlayToMenu()
     {
-        
+        GameObjTrueFalse(_menuObjs,_gamePlayObjs);
+        _state = UIState.menu;
     }
+    /// <summary>
+    /// ポーズからゲーム画面へ
+    /// </summary>
     private void MenuToPlay()
     {
-
+        GameObjTrueFalse(_menuObjs, _gamePlayObjs);
+        _state=UIState.gamePlay;
     }
-    private void GameObjTrueFalse()
+    /// <summary>
+    /// タイトルかポーズから設定画面へ
+    /// </summary>
+    private void TitleOrMenuToSetting() {
+        _prevState = _state;
+        if (_prevState == UIState.title) {
+            GameObjTrueFalse(_settingObjs, _titleObjs);
+        } else if (_prevState == UIState.menu) {
+            GameObjTrueFalse(_settingObjs, _menuObjs);
+        }
+        _state = UIState.setting;
+    }
+    /// <summary>
+    /// 設定画面からタイトルかポーズへ
+    /// </summary>
+    private void SettingToTitleOrMenu() {
+        if (_prevState == UIState.title) {
+            GameObjTrueFalse(_titleObjs,_settingObjs);
+        } else if (_prevState == UIState.menu) {
+            GameObjTrueFalse(_menuObjs, _settingObjs);
+        }
+        _state = _prevState;
+    }
+    private void PlayToResult() {
+        GameObjTrueFalse(_resultObjs, _gamePlayObjs);
+        _state = UIState.result;
+    }
+    /// <summary>
+    /// 有効化と無効化のスイッチ
+    /// 引数１：有効　引数２：無効
+    /// </summary>
+    /// <param name="trueObjects">有効化したいゲームオブジェクト配列</param>
+    /// <param name="falseObjects">無効化したいゲームオブジェクト配列</param>
+    private void GameObjTrueFalse(GameObject[] trueObjects, GameObject[] falseObjects)
     {
-
+        foreach (GameObject obj in trueObjects) {
+            obj.SetActive(true);
+        }
+        foreach (GameObject obj in falseObjects) {
+        obj.SetActive(false);
+        }
     }
+    /// <summary>
+    /// リザルトからタイトルへ
+    /// </summary>
     private void MenuOrResultToStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        _state = UIState.title;
     }
     #endregion
 }
