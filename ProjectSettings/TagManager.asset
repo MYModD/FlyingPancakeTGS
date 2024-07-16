@@ -8,6 +8,7 @@ TagManager:
   - GoGame
   - GoSetting
   - GameFinish
+  - BackGame
   layers:
   - Default
   - TransparentFX
