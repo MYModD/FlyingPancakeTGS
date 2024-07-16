@@ -5333,6 +5333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1709925275}
   - component: {fileID: 1709925276}
+  - component: {fileID: 1709925277}
   m_Layer: 0
   m_Name: CanvasManager
   m_TagString: Untagged
@@ -5410,6 +5411,22 @@ MonoBehaviour:
   _tagBackGame: BackGame
   _tagSetting: GoSetting
   _tagFinish: GameFinish
+--- !u!114 &1709925277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709925274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c9c251775ed444b84cbd868a8691f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasManager: {fileID: 1709925276}
+  _title: 
+  _menu: 
+  _setting: 
 --- !u!1 &1733920836
 GameObject:
   m_ObjectHideFlags: 0

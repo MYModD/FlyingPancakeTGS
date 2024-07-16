@@ -28,7 +28,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("設定に行かせたいタグ"),Tag] private string _tagSetting;
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
 
-    private enum UIState {
+    public enum UIState {
         title,
         gamePlay,
         result,
@@ -192,6 +192,9 @@ public class CanvasManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         _state = UIState.title;
+    }
+    public string StateSet() {
+        return _state.ToString();
     }
     #endregion
 }
