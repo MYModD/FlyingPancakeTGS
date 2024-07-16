@@ -135,7 +135,7 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     private void MenuToPlay()
     {
-        GameObjTrueFalse(_menuObjs, _gamePlayObjs);
+        GameObjTrueFalse(_gamePlayObjs,_menuObjs);
         _state=UIState.gamePlay;
     }
     /// <summary>
