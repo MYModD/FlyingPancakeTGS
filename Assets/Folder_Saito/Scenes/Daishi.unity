@@ -537,11 +537,11 @@ PrefabInstance:
       objectReference: {fileID: 1997597662}
     - target: {fileID: 1592537704699720318, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
       propertyPath: m_Duration
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1592537704699720318, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
       propertyPath: m_MaxSpeed
-      value: 64.22575
+      value: 12.845151
       objectReference: {fileID: 0}
     - target: {fileID: 6916908994250368466, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
       propertyPath: m_Name
@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029210835271887133, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7029210835271887133, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
       propertyPath: m_LocalPosition.z
