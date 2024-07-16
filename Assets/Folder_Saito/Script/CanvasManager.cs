@@ -23,7 +23,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("設定画面のオブジェクト")] private GameObject[] _settingObjs;
 
     [SerializeField, Header("タイトルに行かせたいタグ"),Tag] private string _tagTitle;
-    [SerializeField, Header("ゲームに行かせたいタグ"),Tag] private string _tagGame;
+    [SerializeField, Header("ゲームに行かせたいタグ"), Tag] private string _tagGame;
+    [SerializeField, Header("ゲームに戻すタグ"), Tag] private string _tagBackGame;
     [SerializeField, Header("設定に行かせたいタグ"),Tag] private string _tagSetting;
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
 
@@ -100,6 +101,10 @@ public class CanvasManager : MonoBehaviour
         else if (tagname==_tagTitle) {
             MenuOrResultToStart();
         }
+        else if (tagname == _tagBackGame) {
+            MenuToPlay();
+        }
+
     }
     /// <summary>
     /// タイトルからゲーム画面へ
