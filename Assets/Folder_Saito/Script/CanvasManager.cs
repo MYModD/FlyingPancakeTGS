@@ -29,7 +29,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
 
     public enum UIState {
-        title,
+        title = 0,
         gamePlay,
         result,
         menu,
@@ -178,12 +178,13 @@ public class CanvasManager : MonoBehaviour
     /// <param name="falseObjects">無効化したいゲームオブジェクト配列</param>
     private void GameObjTrueFalse(GameObject[] trueObjects, GameObject[] falseObjects)
     {
+        foreach (GameObject obj in falseObjects) {
+            obj.SetActive(false);
+        }
         foreach (GameObject obj in trueObjects) {
             obj.SetActive(true);
         }
-        foreach (GameObject obj in falseObjects) {
-        obj.SetActive(false);
-        }
+       
     }
     /// <summary>
     /// リザルトからタイトルへ

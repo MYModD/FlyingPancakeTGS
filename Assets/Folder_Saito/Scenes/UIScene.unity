@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d2718b7cbc7dacd4289411e6f6aa44b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 858a4a999ff996d4ab6984b2b5dffc92, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5424,9 +5424,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasManager: {fileID: 1709925276}
-  _title: 
-  _menu: 
-  _setting: 
+  _nowSprites: {fileID: 21300000, guid: 858a4a999ff996d4ab6984b2b5dffc92, type: 3}
+  _notSprites: {fileID: 21300000, guid: d2718b7cbc7dacd4289411e6f6aa44b2, type: 3}
+  _title: title
+  _titleButtons:
+  - {fileID: 696497210}
+  - {fileID: 1562825204}
+  - {fileID: 1578822963}
+  _menu: menu
+  _menuButtons:
+  - {fileID: 1934865611}
+  - {fileID: 1570256485}
+  _setting: setting
+  _settingButtons:
+  - {fileID: 1051023878}
+  - {fileID: 460429394}
+  - {fileID: 697156190}
+  - {fileID: 900640990}
 --- !u!1 &1733920836
 GameObject:
   m_ObjectHideFlags: 0
@@ -6455,7 +6469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d2718b7cbc7dacd4289411e6f6aa44b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 858a4a999ff996d4ab6984b2b5dffc92, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
