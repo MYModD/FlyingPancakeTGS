@@ -125,7 +125,7 @@ public class ControllerSelectButton : MonoBehaviour {
             _selected = false;
         }
         if (Input.GetButton("Submit")) {
-            _titleNowSelect.GetComponent<TestButton>().OnClickSw();
+            _menuNowSelect.GetComponent<TestButton>().OnClickSw();
             _selected = true;
         }
 

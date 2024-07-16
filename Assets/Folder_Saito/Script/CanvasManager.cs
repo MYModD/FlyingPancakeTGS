@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
+using UnityEngine.InputSystem;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
@@ -28,6 +29,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("設定に行かせたいタグ"),Tag] private string _tagSetting;
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
 
+    private bool _isStartPush=true;
     public enum UIState {
         title = 0,
         gamePlay,
@@ -63,25 +65,24 @@ public class CanvasManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Z)) {
                 PlayToResult();
             }
-            if (Input.GetKeyDown(KeyCode.Q)) {
+            if (Input.GetKeyDown("joystick button 7")&&_isStartPush) {
                 PlayToMenu();
+                _isStartPush = false;
             }
         }
         if (_state == UIState.result) {
-            if (Input.GetKeyDown(KeyCode.Return)) {
+            if (Input.anyKeyDown&&_isStartPush) {
                 MenuOrResultToStart();
             }
         }
         if (_state == UIState.menu) {
-            if (Input.GetKeyDown(KeyCode.R)) {
+            if (Input.GetKeyDown("joystick button 7") && _isStartPush) {
                 MenuToPlay();
-            }
-            if (Input.GetKeyDown(KeyCode.E)) {
-                TitleOrMenuToSetting();
+                _isStartPush=false;
             }
         }
         if (_state == UIState.setting) {
-            if (Input.GetKeyDown(KeyCode.T)) {
+            if (Input.GetButtonDown("Cancel")) {
                 SettingToTitleOrMenu();
             }
         }
@@ -102,7 +103,7 @@ public class CanvasManager : MonoBehaviour
             MenuOrResultToStart();
         }
         else if (tagname == _tagBackGame) {
-            MenuToPlay();
+            MenuOrResultToStart();
         }
 
     }
@@ -140,6 +141,7 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     private void MenuToPlay()
     {
+        print("menuから戻るよ");
         GameObjTrueFalse(_gamePlayObjs,_menuObjs);
         _state=UIState.gamePlay;
     }
