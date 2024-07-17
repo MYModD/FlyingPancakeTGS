@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 116.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 116.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 116.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -140,7 +152,7 @@ MonoBehaviour:
   target: {fileID: 0}
   hissatsu: 0
   lerpT: 0.811
-  speed: 30
+  speed: 124.99
   timer: 10
   randomPower: 5
   randomTimer: 10
