@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @FlyingPancakeTGS: IInputActionCollection2, IDisposable
+public partial class @GamePadController: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @FlyingPancakeTGS()
+    public @GamePadController()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""FlyingPancakeTGS"",
@@ -165,17 +165,6 @@ public partial class @FlyingPancakeTGS: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3ea4d645-4504-4529-b061-ab81934c3752"",
-                    ""path"": ""<Joystick>/stick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -864,8 +853,8 @@ public partial class @FlyingPancakeTGS: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
-        private @FlyingPancakeTGS m_Wrapper;
-        public PlayerActions(@FlyingPancakeTGS wrapper) { m_Wrapper = wrapper; }
+        private @GamePadController m_Wrapper;
+        public PlayerActions(@GamePadController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Speed => m_Wrapper.m_Player_Speed;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
@@ -933,8 +922,8 @@ public partial class @FlyingPancakeTGS: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     public struct UIActions
     {
-        private @FlyingPancakeTGS m_Wrapper;
-        public UIActions(@FlyingPancakeTGS wrapper) { m_Wrapper = wrapper; }
+        private @GamePadController m_Wrapper;
+        public UIActions(@GamePadController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
