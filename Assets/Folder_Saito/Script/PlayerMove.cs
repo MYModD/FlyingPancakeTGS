@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField, Header("プレイヤーの移動速度値")] private float _moveSpeed;
     [SerializeField, Header("角度戻すスピード")] private float _resetSpeed;
 
+
     [SerializeField, Header("スピード調整倍率")] private float _speedMagnification;
     private float _maxSpeed;
     private float _minSpeed;
