@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class TagSelector : MonoBehaviour
 {
-    private GamePadController _inController;
+    
 
 
 
