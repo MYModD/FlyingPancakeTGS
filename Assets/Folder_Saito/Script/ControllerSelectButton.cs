@@ -13,6 +13,18 @@ public class ControllerSelectButton : MonoBehaviour {
     private string _stateName;
     [SerializeField, Header("選ばれているときのスプライト")] private Sprite _nowSprites;
     [SerializeField, Header("選ばれてないときのスプライト")] private Sprite _notSprites;
+    [SerializeField, Header("BGMスピーカー")]
+    private AudioSource _audioBGM;
+    [SerializeField, Header("BGMスライダー")]
+    private Slider _sliderBGM;
+    [SerializeField, Header("BGMの丸")]
+    private Image _imageBGM;
+    [SerializeField, Header("SEスピーカー")]
+    private AudioSource _audioSE;
+    [SerializeField, Header("SEスライダー")]
+    private Slider _sliderSE;
+    [SerializeField, Header("SEの丸")]
+    private Image _imageSE;
 
     [Header("タイトル")]
     [SerializeField] private string _title;
@@ -62,7 +74,7 @@ public class ControllerSelectButton : MonoBehaviour {
             SelectMenuButton();
         }
         if (_stateName == _setting) {
-
+            SelectSettingButton();
         }
     }
     private void SelectTitleButton() {
@@ -131,7 +143,80 @@ public class ControllerSelectButton : MonoBehaviour {
 
     }
     private void SelectSettingButton() {
+        float inputVertical = Input.GetAxis("Vertical");
+        float inputHorizontal = Input.GetAxis("Horizontal");
+        float volumeBGM = _audioBGM.volume;
+        float volumeSE = _audioSE.volume;
+        if (inputVertical < 0.5f && inputVertical > -0.5f) {
+            _selected = true;
+        }
+        if (inputVertical >= 0.5f && _selected) {
+            if (_settingNowSelect == _settingButtons[0]) {
+                return;
+            }
+            _settingIndex--;
+            _settingNowSelect = _settingButtons[_settingIndex];
+            _selected = false;
+            //冗長
+            if (_settingNowSelect == _settingButtons[2]) {
+                _imageSE.color = Color.white;
+                _imageBGM.color = Color.white;
+                _settingButtons[2].GetComponent<Image>().sprite = _nowSprites;
+                _settingButtons[3].GetComponent<Image>().sprite = _notSprites;
+            } else if (_settingNowSelect == _settingButtons[3]) {
+                _settingButtons[3].GetComponent<Image>().sprite = _nowSprites;
+                _settingButtons[2].GetComponent<Image>().sprite = _notSprites;
+            } else {
+                _settingButtons[2].GetComponent<Image>().sprite = _notSprites;
+                _settingButtons[3].GetComponent<Image>().sprite = _notSprites;
+            }
+        }
+        if (inputVertical <= -0.5f && _selected) {
+            if (_settingNowSelect == _settingButtons[_settingButtons.Length - 1]) {
+                return;
+            }
+            _settingIndex++;
+            _settingNowSelect = _settingButtons[_settingIndex];
+            _selected = false;
+            //冗長
+            if (_settingNowSelect == _settingButtons[2]) {
+                _imageSE.color = Color.white;
+                _imageBGM.color = Color.white;
+                _settingButtons[2].GetComponent<Image>().sprite = _nowSprites;
+                _settingButtons[3].GetComponent<Image>().sprite = _notSprites;
+            } else if (_settingNowSelect == _settingButtons[3]) {
+                _settingButtons[3].GetComponent<Image>().sprite = _nowSprites;
+                _settingButtons[2].GetComponent<Image>().sprite = _notSprites;
+            } else {
+                _settingButtons[2].GetComponent<Image>().sprite = _notSprites;
+                _settingButtons[3].GetComponent<Image>().sprite = _notSprites;
+            }
+        }
+        if (_settingNowSelect == _settingButtons[0]) {
+            _imageBGM.color = Color.yellow; 
+            _imageSE.color = Color.white;
+            volumeBGM += Time.deltaTime * Input.GetAxisRaw("RStickH");
+            _audioBGM.volume = volumeBGM;
+            _sliderBGM.value = volumeBGM;
+        }
+        if (_settingNowSelect == _settingButtons[1]) {
+            _imageBGM.color = Color.white;
+            _imageSE.color = Color.yellow;
+            volumeSE += Time.deltaTime * Input.GetAxisRaw("RStickH");
+            _audioSE.volume = volumeSE;
+            _sliderSE.value = volumeSE;
 
+        }
+        if (Input.GetButton("Submit")) {
+            if (_settingNowSelect == _settingButtons[0] || _settingNowSelect == _settingButtons[1]) {
+                return;
+            } else {
+                //_settingNowSelect.GetComponent<TestButton>().OnClickSw();
+                _settingNowSelect.GetComponent<Image>().sprite = _nowSprites;
+            }
+            _selected = true;
+        }
+        
     }
     private void GetStateName() {
         _stateName = _canvasManager.StateSet();
