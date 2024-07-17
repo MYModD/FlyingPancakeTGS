@@ -124,11 +124,13 @@ public class TestMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("è’ìÀ");
         if (other.gameObject.CompareTag("Enemy"))
         {
             print("ìGÇ∆è’ìÀ");
-            Destroy(this.gameObject);
             other.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+            
         }
     }
 
