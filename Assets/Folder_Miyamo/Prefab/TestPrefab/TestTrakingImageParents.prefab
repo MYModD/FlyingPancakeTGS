@@ -1211,7 +1211,7 @@ GameObject:
   - component: {fileID: 1501710498933812486}
   - component: {fileID: 8094194373996976235}
   m_Layer: 5
-  m_Name: TrakingImageParents
+  m_Name: TestTrakingImageParents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

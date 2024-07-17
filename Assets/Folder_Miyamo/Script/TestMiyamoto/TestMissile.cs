@@ -128,6 +128,7 @@ public class TestMissile : MonoBehaviour
         {
             print("ìGÇ∆è’ìÀ");
             Destroy(this.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 
