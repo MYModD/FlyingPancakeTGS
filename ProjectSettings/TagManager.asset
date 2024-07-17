@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - DeathItem
+  - GoGame
+  - BackGame
+  - GoSetting
+  - GameFinish
+  - Missile
   layers:
   - Default
   - TransparentFX

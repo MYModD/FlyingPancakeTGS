@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+using System.Collections;
 using UnityEngine.Pool;
 
 public class TestMissile : MonoBehaviour
@@ -35,7 +35,7 @@ public class TestMissile : MonoBehaviour
     //public IObjectPool<Missile> ObjectPool { set => objectPool = value; }  //外部から値を変えた場合、上のobjectpoolに代入される
 
 
-
+    private float _delay = 0.02f;
 
     private new Rigidbody rigidbody;
     private float OFFtimeValue; //ミサイルの時間計算用
@@ -128,12 +128,17 @@ public class TestMissile : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             print("敵と衝突");
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
+            StartCoroutine(DeactivateAfterDelay());
             Destroy(this.gameObject);
             
         }
     }
-
+    private IEnumerator DeactivateAfterDelay()
+    {
+        yield return new WaitForSeconds(_delay);
+        gameObject.SetActive(false);
+    }
 
     private void OnEnable()
     {
