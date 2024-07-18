@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.Splines;
+using UnityEngine.InputSystem.HID;
 public class PlayerMove : MonoBehaviour {
     #region 変数
     [SerializeField, Header("プレイヤーの上下移動最大値")] private float _maxHeight;
@@ -15,18 +16,16 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField, Header("プレイヤーの移動速度値")] private float _moveSpeed;
     [SerializeField, Header("角度戻すスピード")] private float _resetSpeed;
 
-
     [SerializeField, Header("スピード調整倍率")] private float _speedMagnification;
     private float _maxSpeed;
     private float _minSpeed;
-
-
 
     [SerializeField, Header("プレイヤーの移動角度値")] private float _moveAngle;
 
     [SerializeField, Header("カメラが見ているオブジェクト")] private GameObject _lookAtObj;
     [SerializeField, Header("カメラ入れて")] private Camera _camera;
     [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate;
+    private bool _isTurn=true;
     #endregion
     #region プロパティ
     #endregion
@@ -161,6 +160,11 @@ public class PlayerMove : MonoBehaviour {
         Quaternion targetRotation = Quaternion.identity;
         //０に戻す
         transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, Time.deltaTime * _resetSpeed);
+        _isTurn = true;
+    }
+    private void MovingResetRotation() {
+        this.transform.localRotation = Quaternion.identity;
+        _isTurn = false;
     }
     #endregion
     //--------------ここから返り値あり-------------------------------------------------------------------------------------------------
@@ -212,6 +216,9 @@ public class PlayerMove : MonoBehaviour {
     /// <param name="horizontal">Horizontalの入力値</param>
     /// <returns>１フレームで加算、減算される角度</returns>
     private Vector3 RotateHorizontal(float horizontal) {
+        if (_isTurn) {
+            MovingResetRotation();
+        }
         //角度計算
         Vector3 rotateIndex = (Vector3.forward * _moveAngle  * Time.deltaTime);
         //入力値によって正負を変える
