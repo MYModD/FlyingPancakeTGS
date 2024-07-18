@@ -1,9 +1,13 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TestTrackingUI : MonoBehaviour
 {
+    #region 変数+便利ボタン
+
+    
     [SerializeField] private GameObject[] _enemyIncameraUI; // 視錐台内の敵のImage
     [SerializeField] private GameObject[] _enemyInCone; // 円錐内の敵のImage
 
@@ -13,6 +17,22 @@ public class TestTrackingUI : MonoBehaviour
                                                         //Imageコンポーネント
     private Image[] _enemyInConeImages;
 
+    [SerializeField, Header("子のスケール変更の値")] private float _childrenScale = default;
+    [SerializeField, Button,]
+    private void ChengeChildrenScale()
+    {
+
+        for (int i = 0; i < _enemyIncameraUI.Length; i++)
+        {
+            _enemyIncameraUI[i].GetComponent<RectTransform>().localScale = new Vector3(_childrenScale, _childrenScale, _childrenScale);
+        }
+        for (int i = 0; i < _enemyInCone.Length; i++)
+        {
+            _enemyInCone[i].GetComponent<RectTransform>().localScale = new Vector3(_childrenScale, _childrenScale, _childrenScale);
+        }
+
+    }
+    #endregion
     void Start()
     {
         _enemyInCameraImages = InitializeUIElements(_enemyIncameraUI);
@@ -61,4 +81,6 @@ public class TestTrackingUI : MonoBehaviour
             uiElements[i].enabled = false;
         }
     }
+
+    
 }
