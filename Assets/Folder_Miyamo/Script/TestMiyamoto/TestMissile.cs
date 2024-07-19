@@ -39,11 +39,11 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
     private float _delay = 0.02f;
     private  Rigidbody _rigidbody;
-    private float _OFFtimeValue; //ミサイルの時間計算用
-    private float _OFFtimeRandomValue; //ミサイルの時間計算用
+    private float _offtimeValue; //ミサイルの時間計算用
+    private float _offtimeRandomValue; //ミサイルの時間計算用
     private Vector3 _previousVelocity; //前の加速度
 
-    private const float _oneG = 9.81f;  //1Gの加速度
+    private const float ONEG = 9.81f;  //1Gの加速度
 
     public IObjectPool<TestMissile> ObjectPool { get; set; }
 
@@ -56,8 +56,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     /// </summary>
     public void Initialize()
     {
-        _OFFtimeValue = _timer;
-        _OFFtimeRandomValue = _randomTimer;
+        _offtimeValue = _timer;
+        _offtimeRandomValue = _randomTimer;
     }
 
     /// <summary>
@@ -92,9 +92,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
         }
 
-        _OFFtimeValue = Mathf.Max(0, _OFFtimeValue - Time.fixedDeltaTime);
+        _offtimeValue = Mathf.Max(0, _offtimeValue - Time.fixedDeltaTime);
 
-        if (_OFFtimeValue == 0)
+        if (_offtimeValue == 0)
         {
             ReturnToPool();
 
@@ -119,7 +119,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
 
         //加速度の大きさ          1G=9.81 m/s2で割ってる
-        float gForce = acceleration.magnitude / _oneG;
+        float gForce = acceleration.magnitude / ONEG;
 
 
         //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
