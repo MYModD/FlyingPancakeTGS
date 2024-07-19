@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
-  _lerpT: 0.1
-  _speed: 0
+  _lerpT: 0.837
+  _speed: 124
   _timer: 10
   _randomPower: 5
   _randomTimer: 10
