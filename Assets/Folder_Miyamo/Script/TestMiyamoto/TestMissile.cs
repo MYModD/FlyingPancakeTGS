@@ -3,46 +3,74 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Pool;
 
-public class TestMissile : MonoBehaviour
+public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 {
+    #region 変数
 
+    
     [Header("目標ターゲット")]
-    public Transform target;                //あとでset = value get privateに変えるかも
-
-    [Header("必中の場合チェック")]
-    public bool hissatsu = true;
+    public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
 
     [Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
-    public float lerpT = 0.1f;
+    public float _lerpT = 0.1f;
 
     [Header("スピード")]
-    public float speed;
+    public float _speed;
 
     [Header("飛行時間")]
-    public float timer = 10f;
+    public float _timer = 10f;
 
     [Header("ランダムの範囲、力")]
-    public float randomPower = 5f;
+    public float _randomPower = 5f;
 
     [Header("ランダムが適用される時間")]
-    public float randomTimer = 10f;
+    public float _randomTimer = 10f;
 
     [Header("Gforceの最大値")]
-    public float maxAcceleration = 10f;
+    public float _maxAcceleration = 10f;
 
-    //private IObjectPool<Missile> objectPool;
-    //public IObjectPool<Missile> ObjectPool { set => objectPool = value; }  //外部から値を変えた場合、上のobjectpoolに代入される
+
+    [Header("敵のタグ"), Tag]
+    public string _enemyTag;
 
 
     private float _delay = 0.02f;
-
     private new Rigidbody rigidbody;
     private float OFFtimeValue; //ミサイルの時間計算用
     private float OFFtimeRandomValue; //ミサイルの時間計算用
     private Vector3 previousVelocity; //前の加速度
 
     private const float oneG = 9.81f;  //1Gの加速度
+
+    public IObjectPool<TestMissile> ObjectPool { get; set; }
+
+    #endregion
+
+    #region メソッド
+    //-------------------------------objectpoolインターフェイスの処理--------------------------------
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Initialize()
+    {
+        OFFtimeValue = _timer;
+        OFFtimeRandomValue = _randomTimer;
+    }
+
+    /// <summary>
+    /// プールに戻す処理
+    /// </summary>
+    public void  ReturnToPool()
+
+    {
+        ObjectPool.Release(this);
+
+    }
+
+
+    //-------------------------------ミサイルの処理--------------------------------
+
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -50,29 +78,25 @@ public class TestMissile : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target == null)
+        if (_enemyTarget == null)
         {
             Debug.LogError("アタッチされてないよ");
             return;
         }
 
-
-        if (target.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
+        if (_enemyTarget.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
         {
-            //PoolReurn();
-            Destroy(this.gameObject);
+            ReturnToPool();
+
         }
 
         OFFtimeValue = Mathf.Max(0, OFFtimeValue - Time.fixedDeltaTime);
 
         if (OFFtimeValue == 0)
         {
-            //PoolReurn();
-            Destroy(this.gameObject);
+            ReturnToPool();
 
-            
-        }//時間切れになったら返す
-
+        }
 
         CalculationFlying();
 
@@ -84,7 +108,7 @@ public class TestMissile : MonoBehaviour
     {
 
         // 前進する
-        rigidbody.velocity = transform.forward * speed;
+        rigidbody.velocity = transform.forward * _speed;
 
         Vector3 currentVelocity = rigidbody.velocity;
         //(今の加速度 - 前の加速度)/ 時間
@@ -97,54 +121,34 @@ public class TestMissile : MonoBehaviour
 
 
         //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
-        if (gForce > maxAcceleration && !hissatsu) return;
+        if (gForce > _maxAcceleration ) return;
 
-        Vector3 diff = target.position - transform.position;
+        Vector3 diff = _enemyTarget.position - transform.position;
 
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
 
         // 球面線形補間を使って回転を徐々にターゲットに向ける
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lerpT);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
 
 
     }
 
 
 
-    //private void PoolReurn()
-    //{
 
-    //    rigidbody.velocity = Vector3.zero;
-    //    rigidbody.angularVelocity = Vector3.zero;  //オブジェクトをfalseにする直前までここに付け足すかも
-    //    transform.rotation = new Quaternion(0, 0, 0, 0);
-    //    objectPool.Release(this);
-
-    //}
 
     private void OnTriggerEnter(Collider other)
     {
         print("衝突");
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag(_enemyTag))
         {
-            print("敵と衝突");
-            //other.gameObject.SetActive(false);
-            StartCoroutine(DeactivateAfterDelay());
-            Destroy(this.gameObject);
-            
+            print("敵と衝突");          
+            ReturnToPool();
         }
     }
-    private IEnumerator DeactivateAfterDelay()
-    {
-        yield return new WaitForSeconds(_delay);
-        gameObject.SetActive(false);
-    }
-
-    private void OnEnable()
-    {
-        OFFtimeValue = timer;
-        OFFtimeRandomValue = randomTimer;   //オンになったらタイマーの値を初期化
-    }
+    
+    #endregion
 
 
 }
