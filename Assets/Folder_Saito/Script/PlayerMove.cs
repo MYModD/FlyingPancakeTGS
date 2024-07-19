@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour {
         //カメラが見ているオブジェクトの位置の調整
         //プレイヤーの１/２のX座標、Y座標の位置に移動させる
         _lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
-
+        
         //入力値が０だったら何もさせない
         if (inputHorizontal == 0 && inputVertical == 0) {
             //角度を０に戻す処理
@@ -242,7 +242,7 @@ public class PlayerMove : MonoBehaviour {
         //０をなくすために加算
         input += 2;
         //速度変化させる値の決定
-        float changePower = Time.deltaTime * input;
+        float changePower = Time.deltaTime * input*_speedMagnification;
         return changePower;
     }
     #endregion
