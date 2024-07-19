@@ -25,14 +25,14 @@ public class TestFireMissile : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
            
-            var hage = _testLockOnManger.targetsInCone;
-            foreach (var item in hage)
-            {
-                var hoge = Instantiate(_missileObject, _firePostion);
-                hoge.transform.parent = null;
-                hoge.GetComponent<TestMissile>().target = item.transform;
-                print($"”­ŽË+{_firePostion.position}");
-            }
+            //var hage = _testLockOnManger.targetsInCone;
+            //foreach (var item in hage)
+            //{
+            //    var hoge = Instantiate(_missileObject, _firePostion);
+            //    hoge.transform.parent = null;
+            //    hoge.GetComponent<TestMissile>().target = item.transform;
+            //    print($"”­ŽË+{_firePostion.position}");
+            //}
             
         }
     }
