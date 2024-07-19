@@ -37,4 +37,9 @@ public class CameraManager : MonoBehaviour {
         _cameras[_mainCameraIndex].SetActive(true);
         _cameras[_swichCameraIndex].SetActive(false);
     }
+
+    public float TimeToSwitchCamera() {
+
+        return _delay;
+    }
 }
