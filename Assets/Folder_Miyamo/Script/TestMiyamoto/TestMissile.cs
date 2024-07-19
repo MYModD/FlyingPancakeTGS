@@ -34,14 +34,16 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     [Header("敵のタグ"), Tag]
     public string _enemyTag;
 
+    [Header("effectのプール"), Tag]
+    public ExplosionPoolManger _explosionPoolManger;
 
     private float _delay = 0.02f;
-    private new Rigidbody rigidbody;
-    private float OFFtimeValue; //ミサイルの時間計算用
-    private float OFFtimeRandomValue; //ミサイルの時間計算用
-    private Vector3 previousVelocity; //前の加速度
+    private  Rigidbody _rigidbody;
+    private float _OFFtimeValue; //ミサイルの時間計算用
+    private float _OFFtimeRandomValue; //ミサイルの時間計算用
+    private Vector3 _previousVelocity; //前の加速度
 
-    private const float oneG = 9.81f;  //1Gの加速度
+    private const float _oneG = 9.81f;  //1Gの加速度
 
     public IObjectPool<TestMissile> ObjectPool { get; set; }
 
@@ -54,8 +56,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     /// </summary>
     public void Initialize()
     {
-        OFFtimeValue = _timer;
-        OFFtimeRandomValue = _randomTimer;
+        _OFFtimeValue = _timer;
+        _OFFtimeRandomValue = _randomTimer;
     }
 
     /// <summary>
@@ -73,7 +75,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -90,9 +92,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
         }
 
-        OFFtimeValue = Mathf.Max(0, OFFtimeValue - Time.fixedDeltaTime);
+        _OFFtimeValue = Mathf.Max(0, _OFFtimeValue - Time.fixedDeltaTime);
 
-        if (OFFtimeValue == 0)
+        if (_OFFtimeValue == 0)
         {
             ReturnToPool();
 
@@ -108,16 +110,16 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     {
 
         // 前進する
-        rigidbody.velocity = transform.forward * _speed;
+        _rigidbody.velocity = transform.forward * _speed;
 
-        Vector3 currentVelocity = rigidbody.velocity;
+        Vector3 currentVelocity = _rigidbody.velocity;
         //(今の加速度 - 前の加速度)/ 時間
-        Vector3 acceleration = (currentVelocity - previousVelocity) / Time.fixedDeltaTime;
-        previousVelocity = currentVelocity;
+        Vector3 acceleration = (currentVelocity - _previousVelocity) / Time.fixedDeltaTime;
+        _previousVelocity = currentVelocity;
 
 
         //加速度の大きさ          1G=9.81 m/s2で割ってる
-        float gForce = acceleration.magnitude / oneG;
+        float gForce = acceleration.magnitude / _oneG;
 
 
         //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
@@ -143,7 +145,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
         print("衝突");
         if (other.gameObject.CompareTag(_enemyTag))
         {
-            print("敵と衝突");          
+            print("敵と衝突");
+            
+            _explosionPoolManger.StartExplosion(other.transform);
             ReturnToPool();
         }
     }

@@ -20,10 +20,6 @@ public class EnemyDeathProcessing : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Missile"))
-        {
-            _effectsManager.GetPointOfOccurrence(this.gameObject.transform);
-            this.gameObject.SetActive(false);
-        }
+        
     }
 }
