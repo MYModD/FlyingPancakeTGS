@@ -27,19 +27,43 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField, Header("カメラが見ているオブジェクト")] private GameObject _lookAtObj;
     [SerializeField, Header("カメラ入れて")] private Camera _camera;
     [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate;
+
+    private float _stopTime;
+    private float _nowTime;
+    private bool _isStop = false;
     #endregion
     #region プロパティ
     #endregion
     #region メソッド
-    
+
     /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
-        //動きと角度
-        MovePosition();
-        //速度
-        ChangeSpeed();
+        StopOrMoving();
+        //if (Input.GetKeyDown(KeyCode.Space)) {
+        //    StopMoving(5f);
+        //}
+    }
+    /// <summary>
+    /// 動いているか止まっているかの分岐
+    /// </summary>
+    private void StopOrMoving() {
+        if (_isStop) {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * _resetSpeed);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.deltaTime * _resetSpeed);
+            _nowTime += Time.deltaTime;
+            if (_nowTime >= _stopTime) {
+                _isStop = false;
+                _nowTime = 0;
+            }
+        } else {
+
+            //動きと角度
+            MovePosition();
+            //速度
+            ChangeSpeed();
+        }
     }
     /// <summary>
     /// 動き管理プロセスを実行
@@ -50,11 +74,11 @@ public class PlayerMove : MonoBehaviour {
         float inputVertical = Input.GetAxis("Vertical");
         //横方向の入力値保存
         float inputHorizontal = Input.GetAxis("Horizontal");
-        
+
         //カメラが見ているオブジェクトの位置の調整
         //プレイヤーの１/２のX座標、Y座標の位置に移動させる
         _lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
-        
+
         //入力値が０だったら何もさせない
         if (inputHorizontal == 0 && inputVertical == 0) {
             //角度を０に戻す処理
@@ -120,8 +144,8 @@ public class PlayerMove : MonoBehaviour {
             Horizontal_RotateMove(inputHorizontal);
         }
     }/// <summary>
-    /// プレイヤーの速度変化
-    /// </summary>
+     /// プレイヤーの速度変化
+     /// </summary>
     private void ChangeSpeed() {
         //インプットはUpdateでまとめて取りたい
         float inputRStick = Input.GetAxis("RStickV");
@@ -225,7 +249,7 @@ public class PlayerMove : MonoBehaviour {
     /// <returns>１フレームで加算、減算される角度</returns>
     private Vector3 RotateHorizontal(float horizontal) {
         //角度計算
-        Vector3 rotateIndex = (Vector3.forward * _moveAngle  * Time.deltaTime*_rotateSpeed);
+        Vector3 rotateIndex = (Vector3.forward * _moveAngle * Time.deltaTime * _rotateSpeed);
         //入力値によって正負を変える
         if (horizontal > 0) {
             return rotateIndex;
@@ -242,8 +266,17 @@ public class PlayerMove : MonoBehaviour {
         //０をなくすために加算
         input += 2;
         //速度変化させる値の決定
-        float changePower = Time.deltaTime * input*_speedMagnification;
+        float changePower = Time.deltaTime * input * _speedMagnification;
         return changePower;
+    }
+    //-------------------------ここからパブリックメソッド---------------------------------------
+    /// <summary>
+    /// 指定の秒数停止メソッド
+    /// </summary>
+    /// <param name="seconds">止めたい秒数</param>
+    public void StopMoving(float seconds) {
+        _stopTime = seconds;
+        _isStop = true;
     }
     #endregion
 }
