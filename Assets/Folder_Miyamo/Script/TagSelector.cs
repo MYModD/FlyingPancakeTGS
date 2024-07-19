@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class TagSelector : MonoBehaviour
 {
-    private GamePadController _inController;
+    //private GamePadController _inController;
 
 
 
@@ -16,6 +16,7 @@ public class TagSelector : MonoBehaviour
     {
         
         //Debug.Log(Gamepad.current.leftStick.ReadValue());
+        
         
 
     }
