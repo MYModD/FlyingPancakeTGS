@@ -8,17 +8,13 @@ public class CameraSwitchingJudgment : MonoBehaviour
     [SerializeField, Tag] private string _player = default;
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private PlayerMove _playerMove;
+    [SerializeField] private float _stopTime = 4.0f;
 
-    private float _stopTime = default;
-    private void Start() {
-
-        _stopTime = _cameraManager.TimeToSwitchCamera();
-    }
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag(_player)) {
  
-            _cameraManager.GetCameraSwitchingValue(_switchiCameraManagementIndex);
+            _cameraManager.GetCameraSwitchingValue(_switchiCameraManagementIndex,_stopTime);
             _playerMove.StopMoving(_stopTime);
         }
     }

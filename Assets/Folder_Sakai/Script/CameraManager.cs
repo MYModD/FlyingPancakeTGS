@@ -6,7 +6,7 @@ public class CameraManager : MonoBehaviour {
     [SerializeField] private GameObject[] _cameras;
     private int _mainCameraIndex = 0;
     private int _swichCameraIndex = default;
-    [SerializeField] private float _delay = 4.0f;
+    private float _cameraSwitchingDuration;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,9 +18,10 @@ public class CameraManager : MonoBehaviour {
 
     }
 
-    public void GetCameraSwitchingValue(int value) {
+    public void GetCameraSwitchingValue(int value,float cameraSwitchingDuration) {
 
         _swichCameraIndex = value;
+        _cameraSwitchingDuration = cameraSwitchingDuration;
         CameraSwitchingSub();
     }
 
@@ -33,13 +34,9 @@ public class CameraManager : MonoBehaviour {
 
     private IEnumerator CameraSwitchingMain() {
 
-        yield return new WaitForSeconds(_delay);
+        yield return new WaitForSeconds(_cameraSwitchingDuration);
         _cameras[_mainCameraIndex].SetActive(true);
         _cameras[_swichCameraIndex].SetActive(false);
     }
 
-    public float TimeToSwitchCamera() {
-
-        return _delay;
-    }
 }
