@@ -7,16 +7,20 @@ public class GameController : MonoBehaviour
 
 
     [Foldout("ミサイル係")]
-    [SerializeField,Header("発射位置")] Transform _firePostion;
+    [SerializeField,Header("発射位置")]
+    private Transform _firePostion;
+
     [Foldout("ミサイル係")]
-    [SerializeField, Header("プールマネージャー")] MissilePoolManager _missilePoolManger;
+    [SerializeField] 
+    private MissilePoolManager _missilePoolManger;
 
     [Foldout("ロックオン系")]
-    [SerializeField] TestLockOnManager _testLockOnManager;
+    [SerializeField]
+    private  TestLockOnManager _testLockOnManager;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))     //ここをinputsystemに移行するとき直せる
+        if (Input.GetKeyDown(KeyCode.Space))     //ここをinputsystemに移行するとき直す
         {
             var enemy = _testLockOnManager.targetsInCone;
 

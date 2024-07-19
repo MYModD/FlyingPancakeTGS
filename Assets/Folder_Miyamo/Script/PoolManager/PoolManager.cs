@@ -21,10 +21,13 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 
     private const bool _collectionCheck = true; // コレクションチェックのフラグ。特に意味がないのでtrue
 
+  
+    
+    
+    
     /// <summary>
     /// プールマネージャーの初期化 _defaultCapacity分最初に生成する 重すぎたらコルーチンをいれる
     /// </summary>
-
 
     private void Awake()
     {
@@ -64,7 +67,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 
 
     /// <summary>
-    /// オブジェクトをプールに戻す際に呼び出されるメソッド _objectPool.Release()するときに呼ばれる？
+    /// オブジェクトをプールに戻す際に呼び出されるメソッド _objectPool.Release()するときに呼ばれる
     /// </summary>
     protected virtual void OnReleaseToPool(T pooledObject)
     {
@@ -72,7 +75,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     }
 
     /// <summary>
-    /// プールからオブジェクトを取得する際に呼び出されるメソッド _objectPool.Get()するときに呼ばれる？
+    /// プールからオブジェクトを取得する際に呼び出されるメソッド _objectPool.Get()するときに呼ばれる
     /// </summary>
     protected virtual void OnGetFromPool(T pooledObject)
     {
@@ -86,7 +89,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     /// </summary>
     protected virtual void OnDestroyPooledObject(T pooledObject)
     {
-        pooledObject.Deactivate();
+        pooledObject.ReturnToPool();
         Destroy(pooledObject.gameObject);
     }
 }

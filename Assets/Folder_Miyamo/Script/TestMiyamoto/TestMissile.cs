@@ -5,11 +5,11 @@ using UnityEngine.Pool;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 {
-
-    [Header("目標ターゲット")]
-    public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
+    #region 変数
 
     
+    [Header("目標ターゲット")]
+    public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
 
     [Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
@@ -36,7 +36,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
 
     private float _delay = 0.02f;
-
     private new Rigidbody rigidbody;
     private float OFFtimeValue; //ミサイルの時間計算用
     private float OFFtimeRandomValue; //ミサイルの時間計算用
@@ -44,11 +43,12 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
     private const float oneG = 9.81f;  //1Gの加速度
 
-
-
     public IObjectPool<TestMissile> ObjectPool { get; set; }
 
+    #endregion
 
+    #region メソッド
+    //-------------------------------objectpoolインターフェイスの処理--------------------------------
     /// <summary>
     /// 初期化
     /// </summary>
@@ -57,17 +57,19 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
         OFFtimeValue = _timer;
         OFFtimeRandomValue = _randomTimer;
     }
-    public void Deactivate()
+
+    /// <summary>
+    /// プールに戻す処理
+    /// </summary>
+    public void  ReturnToPool()
+
     {
         ObjectPool.Release(this);
 
     }
 
 
-
-
-
-
+    //-------------------------------ミサイルの処理--------------------------------
 
     void Awake()
     {
@@ -84,7 +86,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
         if (_enemyTarget.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
         {
-            Deactivate();
+            ReturnToPool();
 
         }
 
@@ -92,12 +94,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
         if (OFFtimeValue == 0)
         {
-            Deactivate();
+            ReturnToPool();
 
         }
-
-
-
 
         CalculationFlying();
 
@@ -144,20 +143,12 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
         print("衝突");
         if (other.gameObject.CompareTag(_enemyTag))
         {
-            print("敵と衝突");
-
-            StartCoroutine(DeactivateAfterDelay());
-            Deactivate();
-
-
+            print("敵と衝突");          
+            ReturnToPool();
         }
     }
-    private IEnumerator DeactivateAfterDelay()
-    {
-        yield return new WaitForSeconds(_delay);
-
-    }
-
+    
+    #endregion
 
 
 }
