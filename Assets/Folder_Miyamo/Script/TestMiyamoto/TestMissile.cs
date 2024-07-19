@@ -3,36 +3,36 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Pool;
 
-public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
+public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 {
 
     [Header("目標ターゲット")]
-    public Transform target;                //あとでset = value get privateに変えるかも
+    public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
 
-    [Header("必中の場合チェック")]
-    public bool hissatsu = true;
+    
 
     [Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
-    public float lerpT = 0.1f;
+    public float _lerpT = 0.1f;
 
     [Header("スピード")]
-    public float speed;
+    public float _speed;
 
     [Header("飛行時間")]
-    public float timer = 10f;
+    public float _timer = 10f;
 
     [Header("ランダムの範囲、力")]
-    public float randomPower = 5f;
+    public float _randomPower = 5f;
 
     [Header("ランダムが適用される時間")]
-    public float randomTimer = 10f;
+    public float _randomTimer = 10f;
 
     [Header("Gforceの最大値")]
-    public float maxAcceleration = 10f;
+    public float _maxAcceleration = 10f;
 
-    //private IObjectPool<Missile> objectPool;
-    //public IObjectPool<Missile> ObjectPool { set => objectPool = value; }  //外部から値を変えた場合、上のobjectpoolに代入される
+
+    [Header("敵のタグ"), Tag]
+    public string _enemyTag;
 
 
     private float _delay = 0.02f;
@@ -47,15 +47,15 @@ public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
 
 
     public IObjectPool<TestMissile> ObjectPool { get; set; }
-    
-    
+
+
     /// <summary>
     /// 初期化
     /// </summary>
     public void Initialize()
     {
-        OFFtimeValue = timer;
-        OFFtimeRandomValue = randomTimer;   
+        OFFtimeValue = _timer;
+        OFFtimeRandomValue = _randomTimer;
     }
     public void Deactivate()
     {
@@ -76,13 +76,13 @@ public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
 
     void FixedUpdate()
     {
-        if (target == null)
+        if (_enemyTarget == null)
         {
             Debug.LogError("アタッチされてないよ");
             return;
         }
 
-        if (target.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
+        if (_enemyTarget.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
         {
             Deactivate();
 
@@ -93,7 +93,7 @@ public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
         if (OFFtimeValue == 0)
         {
             Deactivate();
-           
+
         }
 
 
@@ -109,7 +109,7 @@ public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
     {
 
         // 前進する
-        rigidbody.velocity = transform.forward * speed;
+        rigidbody.velocity = transform.forward * _speed;
 
         Vector3 currentVelocity = rigidbody.velocity;
         //(今の加速度 - 前の加速度)/ 時間
@@ -122,30 +122,30 @@ public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
 
 
         //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
-        if (gForce > maxAcceleration && !hissatsu) return;
+        if (gForce > _maxAcceleration ) return;
 
-        Vector3 diff = target.position - transform.position;
+        Vector3 diff = _enemyTarget.position - transform.position;
 
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
 
         // 球面線形補間を使って回転を徐々にターゲットに向ける
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lerpT);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
 
 
     }
 
 
 
-   
+
 
     private void OnTriggerEnter(Collider other)
     {
         print("衝突");
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag(_enemyTag))
         {
             print("敵と衝突");
-            //other.gameObject.SetActive(false);
+
             StartCoroutine(DeactivateAfterDelay());
             Deactivate();
 
@@ -155,9 +155,9 @@ public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
     private IEnumerator DeactivateAfterDelay()
     {
         yield return new WaitForSeconds(_delay);
-        
+
     }
 
-  
+
 
 }

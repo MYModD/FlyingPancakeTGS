@@ -239,11 +239,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd350a3ff3afae4d83a3181c71e348d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  hissatsu: 0
-  lerpT: 0.811
-  speed: 2800
-  timer: 10
-  randomPower: 5
-  randomTimer: 10
-  maxAcceleration: 10
+  _enemyTarget: {fileID: 0}
+  _lerpT: 0.1
+  _speed: 0
+  _timer: 10
+  _randomPower: 5
+  _randomTimer: 10
+  _maxAcceleration: 10
+  _enemyTag: Enemy

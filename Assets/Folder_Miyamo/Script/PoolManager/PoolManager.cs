@@ -24,6 +24,12 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     /// <summary>
     /// プールマネージャーの初期化 _defaultCapacity分最初に生成する 重すぎたらコルーチンをいれる
     /// </summary>
+
+
+    private void Awake()
+    {
+        Initialize();
+    }
     public virtual void Initialize()
     {
        

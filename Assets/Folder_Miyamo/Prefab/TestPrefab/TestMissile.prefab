@@ -139,13 +139,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       insertIndex: 1
+      addedObject: {fileID: 208671761858203891}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
+      insertIndex: 2
       addedObject: {fileID: 7146728466934504123}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 169565340506469073}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 208671761858203891}
   m_SourcePrefab: {fileID: 100100000, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
 --- !u!4 &8566236942606111949 stripped
 Transform:
@@ -157,6 +157,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
   m_PrefabInstance: {fileID: 8172866056648454950}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &208671761858203891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055247576045833847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd350a3ff3afae4d83a3181c71e348d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyTarget: {fileID: 0}
+  _lerpT: 0.1
+  _speed: 0
+  _timer: 10
+  _randomPower: 5
+  _randomTimer: 10
+  _maxAcceleration: 10
+  _enemyTag: Enemy
 --- !u!54 &7146728466934504123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,23 +227,3 @@ CapsuleCollider:
   m_Height: 6.15
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -1.89}
---- !u!114 &208671761858203891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9055247576045833847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd350a3ff3afae4d83a3181c71e348d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  hissatsu: 0
-  lerpT: 0.811
-  speed: 124.99
-  timer: 10
-  randomPower: 5
-  randomTimer: 10
-  maxAcceleration: 10
