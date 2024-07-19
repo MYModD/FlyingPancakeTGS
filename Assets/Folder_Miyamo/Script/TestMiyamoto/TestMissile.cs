@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Pool;
 
-public class TestMissile : MonoBehaviour
+public class TestMissile : MonoBehaviour ,IPooledObject<TestMissile>
 {
 
     [Header("目標ターゲット")]
@@ -43,6 +43,32 @@ public class TestMissile : MonoBehaviour
     private Vector3 previousVelocity; //前の加速度
 
     private const float oneG = 9.81f;  //1Gの加速度
+
+
+
+    public IObjectPool<TestMissile> ObjectPool { get; set; }
+    
+    
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Initialize()
+    {
+        OFFtimeValue = timer;
+        OFFtimeRandomValue = randomTimer;   
+    }
+    public void Deactivate()
+    {
+        ObjectPool.Release(this);
+
+    }
+
+
+
+
+
+
+
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -56,22 +82,21 @@ public class TestMissile : MonoBehaviour
             return;
         }
 
-
         if (target.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
         {
-            //PoolReurn();
-            Destroy(this.gameObject);
+            Deactivate();
+
         }
 
         OFFtimeValue = Mathf.Max(0, OFFtimeValue - Time.fixedDeltaTime);
 
         if (OFFtimeValue == 0)
         {
-            //PoolReurn();
-            Destroy(this.gameObject);
+            Deactivate();
+           
+        }
 
-            
-        }//時間切れになったら返す
+
 
 
         CalculationFlying();
@@ -112,15 +137,7 @@ public class TestMissile : MonoBehaviour
 
 
 
-    //private void PoolReurn()
-    //{
-
-    //    rigidbody.velocity = Vector3.zero;
-    //    rigidbody.angularVelocity = Vector3.zero;  //オブジェクトをfalseにする直前までここに付け足すかも
-    //    transform.rotation = new Quaternion(0, 0, 0, 0);
-    //    objectPool.Release(this);
-
-    //}
+   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -130,21 +147,17 @@ public class TestMissile : MonoBehaviour
             print("敵と衝突");
             //other.gameObject.SetActive(false);
             StartCoroutine(DeactivateAfterDelay());
-            Destroy(this.gameObject);
-            
+            Deactivate();
+
+
         }
     }
     private IEnumerator DeactivateAfterDelay()
     {
         yield return new WaitForSeconds(_delay);
-        gameObject.SetActive(false);
+        
     }
 
-    private void OnEnable()
-    {
-        OFFtimeValue = timer;
-        OFFtimeRandomValue = randomTimer;   //オンになったらタイマーの値を初期化
-    }
-
+  
 
 }

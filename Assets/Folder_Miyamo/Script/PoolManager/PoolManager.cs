@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 /// <summary>
-/// 汎用プールマネージャークラス。オブジェクトプールを管理します。
+/// 汎用プールマネージャークラス オブジェクトプールを管理
 /// </summary>
-/// <typeparam name="T">プールされるオブジェクトの型。MonoBehaviourを継承し、IPooledObjectインターフェースを実装する必要があります。</typeparam>
+/// <typeparam name="T">プールされるオブジェクトの型。MonoBehaviourを継承し、IPooledObjectインターフェースを実装する必要がある</typeparam>
 public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IPooledObject<T>
 {
     
@@ -15,10 +15,11 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 
     [Header("プールの初期生成数")]
     [SerializeField] private int _defaultCapacity = 32; 
+
     [Header("プールの最大値")]
     [SerializeField] private int _maxSize = 100; 
 
-    private const bool _collectionCheck = true; // コレクションチェックのフラグ。特に考える意味がないのでtrue
+    private const bool _collectionCheck = true; // コレクションチェックのフラグ。特に意味がないのでtrue
 
     /// <summary>
     /// プールマネージャーの初期化 _defaultCapacity分最初に生成する 重すぎたらコルーチンをいれる
@@ -57,7 +58,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 
 
     /// <summary>
-    /// オブジェクトをプールに戻す際に呼び出されるメソッド _objectPool.Release()
+    /// オブジェクトをプールに戻す際に呼び出されるメソッド _objectPool.Release()するときに呼ばれる？
     /// </summary>
     protected virtual void OnReleaseToPool(T pooledObject)
     {
@@ -65,7 +66,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     }
 
     /// <summary>
-    /// プールからオブジェクトを取得する際に呼び出されるメソッド _objectPool.Get()
+    /// プールからオブジェクトを取得する際に呼び出されるメソッド _objectPool.Get()するときに呼ばれる？
     /// </summary>
     protected virtual void OnGetFromPool(T pooledObject)
     {

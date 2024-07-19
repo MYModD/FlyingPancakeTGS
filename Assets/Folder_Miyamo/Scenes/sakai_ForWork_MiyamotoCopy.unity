@@ -12370,7 +12370,7 @@ MonoBehaviour:
   targetsInCone: []
   _camera: {fileID: 1675280106}
   _searchRadius: 5000
-  _coneAngle: 84
+  _coneAngle: 33
   _coneRange: 4000
 --- !u!1 &1687705953
 GameObject:
