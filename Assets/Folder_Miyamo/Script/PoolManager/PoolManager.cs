@@ -9,7 +9,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 {
     
     [Header("プールされるオブジェクト")]
-    [SerializeField] private T pooledPrefab; 
+    [SerializeField] private T _pooledPrefab; 
 
     protected IObjectPool<T> _objectPool; // オブジェクトプールの管理インスタンス
 
@@ -19,7 +19,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     [Header("プールの最大値")]
     [SerializeField] private int _maxSize = 100; 
 
-    private const bool _collectionCheck = true; // コレクションチェックのフラグ。特に意味がないのでtrue
+    private const bool COLLECTION_CHECK = true; // コレクションチェックのフラグ。特に意味がないのでtrue
 
   
     
@@ -41,7 +41,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
             OnGetFromPool,
             OnReleaseToPool,
             OnDestroyPooledObject,
-            _collectionCheck,
+            COLLECTION_CHECK,
             _defaultCapacity,
             _maxSize
         );
@@ -50,7 +50,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
         // 初期分オブジェクトを生成、プールに追加
         for (int i = 0; i < _defaultCapacity; i++)
         {
-            var game = Create();
+            T game = Create();
             _objectPool.Release(game);
         }
     }
@@ -60,7 +60,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     /// </summary>   
     protected virtual T Create()
     {
-        T instance = Instantiate(pooledPrefab, transform.position, Quaternion.identity, transform);
+        var instance = Instantiate(_pooledPrefab, transform.position, Quaternion.identity, transform);
         instance.ObjectPool = _objectPool;
         return instance;
     }

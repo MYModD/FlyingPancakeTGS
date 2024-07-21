@@ -1,11 +1,12 @@
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class GameController : MonoBehaviour
 {
 
 
-
+    
     [Foldout("ミサイル係")]
     [SerializeField,Header("発射位置")]
     private Transform _firePostion;

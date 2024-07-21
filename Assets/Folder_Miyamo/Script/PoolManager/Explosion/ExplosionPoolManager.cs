@@ -3,23 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class ExplosionPoolManger : PoolManager<Explosion>
+public class ExplosionPoolManager : PoolManager<Explosion>
 {
-    private void Start()
-    {
-        Debug.Log(_objectPool);
-        if(_objectPool == null)
-        {
-            Debug.Log(_objectPool.ToString()+"ぬるだよ");
-        }
-        else
-        {
-            Debug.Log("あるよ");
-        }
-    }
 
-
-
+    
     /// <summary>
     /// 指定された位置で爆発を開始
     /// </summary>
@@ -31,7 +18,7 @@ public class ExplosionPoolManger : PoolManager<Explosion>
             Debug.LogError("_objectPool is not initialized.");
             return;
         }
-        var explosion = _objectPool.Get();  
+        Explosion explosion = _objectPool.Get();  
         explosion.Initialize(); // 初期化
         explosion.transform.position = startPosition.position;
     }
