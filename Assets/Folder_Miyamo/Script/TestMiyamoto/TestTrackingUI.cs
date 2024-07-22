@@ -11,13 +11,13 @@ public class TestTrackingUI : MonoBehaviour
     [SerializeField] private GameObject[] _enemyIncameraUI; // 視錐台内の敵のImage
     [SerializeField] private GameObject[] _enemyInCone; // 円錐内の敵のImage
 
-    public TestLockOnManager lockOnManager;
+    public TestLockOnManager _lockOnManager;
 
     private Image[] _enemyInCameraImages;               //キャッシュ用の
                                                         //Imageコンポーネント
     private Image[] _enemyInConeImages;
 
-    [SerializeField, Header("子のスケール変更の値")] private float _childrenScale = default;
+    [SerializeField, Header("子のスケール変更の値")] private float _childrenScale = 1f;
     [SerializeField, Button,]
     private void ChengeChildrenScale()
     {
@@ -41,8 +41,8 @@ public class TestTrackingUI : MonoBehaviour
 
     void Update()
     {
-        UpdateUIPositions(lockOnManager.targetsInCamera, _enemyInCameraImages);
-        UpdateUIPositions(lockOnManager.targetsInCone, _enemyInConeImages);
+        UpdateUIPositions(_lockOnManager._targetsInCamera, _enemyInCameraImages);
+        UpdateUIPositions(_lockOnManager._targetsInCone, _enemyInConeImages);
     }
 
     /// <summary>
