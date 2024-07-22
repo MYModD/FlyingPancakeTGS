@@ -247,4 +247,3 @@ MonoBehaviour:
   _randomTimer: 10
   _maxAcceleration: 10
   _enemyTag: Enemy
-  _explosionPoolManger: {fileID: 5813317973969150107, guid: 9dc710c56c23eb64c8ee285a4c05899d, type: 3}

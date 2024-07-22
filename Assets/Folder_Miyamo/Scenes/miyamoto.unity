@@ -2193,12 +2193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc6fffe6a940fb42a44a3e408283a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetsInCamera: []
-  targetsInCone: []
+  _targetsInCamera: []
+  _targetsInCone: []
   _camera: {fileID: 1849877410}
   _searchRadius: 95
   _coneAngle: 70
   _coneRange: 45.33
+  _testEnemy: {fileID: 0}
 --- !u!114 &1849877413
 MonoBehaviour:
   m_ObjectHideFlags: 0

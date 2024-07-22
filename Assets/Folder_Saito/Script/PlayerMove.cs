@@ -61,9 +61,10 @@ public class PlayerMove : MonoBehaviour {
 
             //動きと角度
             MovePosition();
-            //速度
-            ChangeSpeed();
+            
         }
+        //速度
+        ChangeSpeed();
     }
     /// <summary>
     /// 動き管理プロセスを実行

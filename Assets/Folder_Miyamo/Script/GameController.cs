@@ -4,9 +4,6 @@ using UnityEngine.Splines;
 
 public class GameController : MonoBehaviour
 {
-
-
-    
     [Foldout("ミサイル係")]
     [SerializeField,Header("発射位置")]
     private Transform _firePostion;
@@ -23,7 +20,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))     //ここをinputsystemに移行するとき直す
         {
-            var enemy = _testLockOnManager.targetsInCone;
+            var enemy = _testLockOnManager._targetsInCone;
 
             foreach (Transform item in enemy)
             {

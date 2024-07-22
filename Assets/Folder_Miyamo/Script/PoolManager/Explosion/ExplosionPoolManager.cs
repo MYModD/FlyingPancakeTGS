@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ExplosionPoolManager : PoolManager<Explosion>
 {
+   
 
-    
     /// <summary>
     /// 指定された位置で爆発を開始
     /// </summary>

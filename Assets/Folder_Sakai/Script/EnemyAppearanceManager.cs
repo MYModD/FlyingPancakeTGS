@@ -7,9 +7,9 @@ public class EnemyAppearanceManager : MonoBehaviour
     [SerializeField] private GameObject[] _enemies = default;
     private int _enemyAppearanceManagementValue = default;
 
-    public void GetEnemyAppearanceManagementValue(int Index)
+    public void GetEnemyAppearanceManagementValue(int index)
     {
-        _enemyAppearanceManagementValue = Index;
+        _enemyAppearanceManagementValue = index;
         print(_enemyAppearanceManagementValue);
         EnemyAppears();
     }
