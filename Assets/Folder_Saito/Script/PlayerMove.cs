@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.Splines;
+using UnityEngine.UIElements;
 public class PlayerMove : MonoBehaviour {
     #region 変数
     [SerializeField, Header("プレイヤーの上下移動最大値")] private float _maxHeight;
@@ -15,51 +16,65 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField, Header("プレイヤーの移動速度値")] private float _moveSpeed;
     [SerializeField, Header("角度戻すスピード")] private float _resetSpeed;
 
+    [SerializeField, Header("左右角度の最小値")] private float _minimumAngle = -45f;
+    [SerializeField, Header("左右角度の最大値")] private float _maximumAngle = 45;
 
     [SerializeField, Header("スピード調整倍率")] private float _speedMagnification;
-    private float _maxSpeed;
-    private float _minSpeed;
-
-
+    [SerializeField, Header("プレイヤーの角度倍率")] private float _rotateSpeed = 10;
 
     [SerializeField, Header("プレイヤーの移動角度値")] private float _moveAngle;
 
     [SerializeField, Header("カメラが見ているオブジェクト")] private GameObject _lookAtObj;
     [SerializeField, Header("カメラ入れて")] private Camera _camera;
     [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate;
+
+    private float _stopTime;
+    private float _nowTime;
+    private bool _isStop = false;
     #endregion
     #region プロパティ
     #endregion
     #region メソッド
-    /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-    }
-    /// <summary>
-    /// 更新前処理
-    /// </summary>
-    void Start() {
-        float devide = 1.2f;
-        _maxSpeed = _splineAnimate.MaxSpeed*devide;
-        _minSpeed = _splineAnimate.MaxSpeed / 0.8f;
-    }
+
     /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
-        MovePosition();
-        ChangeSpeed();
+        StopOrMoving();
+        //if (Input.GetKeyDown(KeyCode.Space)) {
+        //    StopMoving(5f);
+        //}
+    }
+    /// <summary>
+    /// 動いているか止まっているかの分岐
+    /// </summary>
+    private void StopOrMoving() {
+        if (_isStop) {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * _resetSpeed);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.deltaTime * _resetSpeed);
+            _nowTime += Time.deltaTime;
+            if (_nowTime >= _stopTime) {
+                _isStop = false;
+                _nowTime = 0;
+            }
+        } else {
+
+            //動きと角度
+            MovePosition();
+            //速度
+            ChangeSpeed();
+        }
     }
     /// <summary>
     /// 動き管理プロセスを実行
     /// </summary>
     private void MovePosition() {
+        //InputはUpdateでまとめて取りたい
         //縦方向の入力値保存
         float inputVertical = Input.GetAxis("Vertical");
         //横方向の入力値保存
         float inputHorizontal = Input.GetAxis("Horizontal");
-        
+
         //カメラが見ているオブジェクトの位置の調整
         //プレイヤーの１/２のX座標、Y座標の位置に移動させる
         _lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
@@ -70,13 +85,13 @@ public class PlayerMove : MonoBehaviour {
             ResetRotation();
             return;
         }
-        VerticalProcess(inputVertical,inputHorizontal);
+        VerticalProcess(inputVertical, inputHorizontal);
         HorizontalProcess(inputHorizontal);
     }
     /// <summary>
-    /// 縦の動き
+    /// 縦の動き 上下の処理分け
     /// </summary>
-    private void VerticalProcess(float inputVertical,float inputHorizontal) {
+    private void VerticalProcess(float inputVertical, float inputHorizontal) {
         //縦の動き
         if (inputVertical < 0)//下の処理
         {
@@ -84,7 +99,7 @@ public class PlayerMove : MonoBehaviour {
             if (this.transform.localPosition.y < -_maxHeight) {
                 //角度を０に戻す処理
                 ResetRotation();
-                //動かなくなってしまわないように
+                //縦の入力中に動かなくなってしまわないように
                 HorizontalProcess(inputHorizontal);
                 return;
             }
@@ -96,7 +111,7 @@ public class PlayerMove : MonoBehaviour {
             if (this.transform.localPosition.y > _maxHeight) {
                 //角度を０に戻す処理
                 ResetRotation();
-                //動かなくなってしまわないように
+                //縦の入力中に動かなくなってしまわないように
                 HorizontalProcess(inputHorizontal);
                 return;
             }
@@ -105,7 +120,7 @@ public class PlayerMove : MonoBehaviour {
         }
     }
     /// <summary>
-    /// 横の動き
+    /// 横の動き　左右の処理分け
     /// </summary>
     private void HorizontalProcess(float inputHorizontal) {
         //横の動き
@@ -128,13 +143,16 @@ public class PlayerMove : MonoBehaviour {
             }
             Horizontal_RotateMove(inputHorizontal);
         }
-    }
+    }/// <summary>
+     /// プレイヤーの速度変化
+     /// </summary>
     private void ChangeSpeed() {
+        //インプットはUpdateでまとめて取りたい
         float inputRStick = Input.GetAxis("RStickV");
-        print(inputRStick);
+        //速度計算した値
         float speed = CalculateSpeed(inputRStick);
+        //スプラインを通り終わる時間の設定値を変えて加減速
         _splineAnimate.ElapsedTime += speed;
-        _splineAnimate.enabled = true;
     }
     #region 動きに関するメソッド
     /// <summary>
@@ -150,7 +168,25 @@ public class PlayerMove : MonoBehaviour {
     /// </summary>
     /// <param name="horizontal">Horizontalの入力値</param>
     private void Horizontal_RotateMove(float horizontal) {
-        transform.Rotate(RotateHorizontal(horizontal));
+        // 回転の差分を計算
+        Vector3 rotateIndex = RotateHorizontal(horizontal);
+
+        // 現在のZ軸の回転角度を取得し、-180度から180度の範囲に変換
+        float currentZRotation = transform.localEulerAngles.z;
+        float semicircularAngle = 180f;
+        float circularAngle = 360f;
+        if (currentZRotation > semicircularAngle) {
+            currentZRotation -= circularAngle;
+        }
+
+        // 新しい回転角度を計算し、設定した最小値から最大値の範囲に制限
+        float newZRotation = currentZRotation + rotateIndex.z;
+        newZRotation = Mathf.Clamp(newZRotation, _minimumAngle, _maximumAngle);
+
+        // 新しい回転角度の適用
+        transform.localRotation = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y, newZRotation);
+
+        // 位置を更新
         transform.localPosition += MoveHorizontal(horizontal);
     }
     /// <summary>
@@ -213,7 +249,7 @@ public class PlayerMove : MonoBehaviour {
     /// <returns>１フレームで加算、減算される角度</returns>
     private Vector3 RotateHorizontal(float horizontal) {
         //角度計算
-        Vector3 rotateIndex = (Vector3.forward * _moveAngle  * Time.deltaTime);
+        Vector3 rotateIndex = (Vector3.forward * _moveAngle * Time.deltaTime * _rotateSpeed);
         //入力値によって正負を変える
         if (horizontal > 0) {
             return rotateIndex;
@@ -221,11 +257,26 @@ public class PlayerMove : MonoBehaviour {
         return -rotateIndex;
     }
     #endregion
+    /// <summary>
+    /// Rスティックで速度変化
+    /// </summary>
+    /// <param name="input">Rスティックの入力値　-1～1</param>
+    /// <returns>速度量の変化した値</returns>
     private float CalculateSpeed(float input) {
-        input +=2;
-        float changePower =Time.deltaTime*input;
+        //０をなくすために加算
+        input += 2;
+        //速度変化させる値の決定
+        float changePower = Time.deltaTime * input * _speedMagnification;
         return changePower;
     }
-
+    //-------------------------ここからパブリックメソッド---------------------------------------
+    /// <summary>
+    /// 指定の秒数停止メソッド
+    /// </summary>
+    /// <param name="seconds">止めたい秒数</param>
+    public void StopMoving(float seconds) {
+        _stopTime = seconds;
+        _isStop = true;
+    }
     #endregion
 }
