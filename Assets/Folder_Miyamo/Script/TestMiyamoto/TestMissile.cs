@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -7,7 +8,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
     [Header("目標ターゲット")]
-    public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
+    public Transform _enemyTarget;                // あとでset = value get privateに変えるかも
 
     [Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
@@ -30,7 +31,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
     [Header("敵のタグ"), Tag]
-    public string _enemyTag;
+    [SerializeField]
+    private  string _enemyTag;
+    
 
     
     public ExplosionPoolManager _explosionPoolManager{
@@ -66,9 +69,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     /// プールに戻す処理
     /// </summary>
     public void ReturnToPool() {
-        ObjectPool.Release(this);
-        
 
+        ObjectPool.Release(this);      
     }
 
 
@@ -85,18 +87,19 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             return;
         }
 
-        if (_enemyTarget.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
+        if (_enemyTarget.gameObject.activeSelf == false)  // ターゲットのアクティブがfalseのとき返す
         {
             ReturnToPool();
 
         }
 
+        // タイマー offtimeValueが0になったらプールに返す
         _offtimeValue = Mathf.Max(0, _offtimeValue - Time.fixedDeltaTime);
-
         if (_offtimeValue == 0) {
-            ReturnToPool();
 
+            ReturnToPool();
         }
+
 
         CalculationFlying();
 
@@ -115,11 +118,11 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         _previousVelocity = currentVelocity;
 
 
-        //加速度の大きさ          1G=9.81 m/s2で割ってる
+        // 加速度の大きさ          1G=9.81 m/s2で割ってる
         float gForce = acceleration.magnitude / ONEG;
 
 
-        //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
+        // GforceがmaxAcceleration超えているときreturn
         if (gForce > _maxAcceleration) {
             return;
         }
@@ -142,10 +145,11 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     private void OnTriggerEnter(Collider other) {
         print("衝突");
         if (other.gameObject.CompareTag(_enemyTag)) {
-            print("敵と衝突");
-            other.gameObject.SetActive(false);
-            _explosionPoolManager.StartExplosion(other.transform);
-            ReturnToPool();
+
+            print($"{other.gameObject.name}に衝突");
+            other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
+            _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
+            ReturnToPool();                                              // ミサイルをプールに変換
         }
     }
 
