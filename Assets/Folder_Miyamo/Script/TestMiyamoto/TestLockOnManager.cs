@@ -15,7 +15,7 @@ public class TestLockOnManager : MonoBehaviour {
     [SerializeField, Range(0f, 180f)] private float _coneAngle = 45f;
     [SerializeField] private float _coneRange;
 
-    public Transform _testEnemy;
+    public Transform _playerObject;
 
     private const float UPDATE_INTERVAL = 0.1f;
 
@@ -147,7 +147,7 @@ public class TestLockOnManager : MonoBehaviour {
 
         if (distanceToObject <= _coneRange) {
             Vector3 toObjectNormalized = toObject.normalized;
-            Vector3 coneDirection = (_testEnemy.position - cameraPosition).normalized;
+            Vector3 coneDirection = (_playerObject.position - cameraPosition).normalized;
             float angle = Vector3.Angle(coneDirection, toObjectNormalized);
             return angle <= _coneAngle / 2;
         }
@@ -169,7 +169,7 @@ public class TestLockOnManager : MonoBehaviour {
             Gizmos.color = Color.yellow;
             float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
 
-            Vector3 coneBaseCenter = _camera.transform.position + ((_testEnemy.position - _camera.transform.position).normalized * _coneRange);
+            Vector3 coneBaseCenter = _camera.transform.position + ((_playerObject.position - _camera.transform.position).normalized * _coneRange);
 
             Vector3 hoge = DRAWORIGIN + transform.rotation.eulerAngles;
             hoge.z = 0;
@@ -178,7 +178,7 @@ public class TestLockOnManager : MonoBehaviour {
 
             // ƒR[ƒ“‚Ì”ÍˆÍ‚ð•`‰æ
             Gizmos.color = Color.red;
-            Vector3 forward = (_testEnemy.position - _camera.transform.position).normalized * _coneRange;
+            Vector3 forward = (_playerObject.position - _camera.transform.position).normalized * _coneRange;
             Vector3 rightBoundary = Quaternion.Euler(0, _coneAngle / 2, 0) * forward;
             Vector3 leftBoundary = Quaternion.Euler(0, -_coneAngle / 2, 0) * forward;
 
