@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13497,12 +13497,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc6fffe6a940fb42a44a3e408283a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetsInCamera: []
-  targetsInCone: []
+  _targetsInCamera: []
+  _targetsInCone: []
   _camera: {fileID: 1675280106}
   _searchRadius: 5000
   _coneAngle: 84
   _coneRange: 4000
+  _testEnemy: {fileID: 0}
 --- !u!1 &1687705953
 GameObject:
   m_ObjectHideFlags: 0
@@ -13751,12 +13752,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc6fffe6a940fb42a44a3e408283a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetsInCamera: []
-  targetsInCone: []
+  _targetsInCamera: []
+  _targetsInCone: []
   _camera: {fileID: 1739338531}
   _searchRadius: 5000
   _coneAngle: 84
   _coneRange: 4000
+  _testEnemy: {fileID: 0}
 --- !u!114 &1739338528
 MonoBehaviour:
   m_ObjectHideFlags: 0

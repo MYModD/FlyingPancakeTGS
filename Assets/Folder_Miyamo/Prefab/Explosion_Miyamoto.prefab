@@ -9818,7 +9818,7 @@ GameObject:
   - component: {fileID: 8166019623919378787}
   - component: {fileID: 9005987237970811802}
   m_Layer: 0
-  m_Name: Explosion_MY
+  m_Name: Explosion_Miyamoto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29431,7 +29431,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
