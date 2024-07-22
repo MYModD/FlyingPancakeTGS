@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4839349007172080654}
   - component: {fileID: 5813317973969150107}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: ExplosionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0418e302c687ab14983ca547c8beb024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledPrefab: {fileID: 9005987237970811802, guid: e210651c7f245cc499ceb9f1024f0a08, type: 3}
+  _pooledPrefab: {fileID: 9005987237970811802, guid: e210651c7f245cc499ceb9f1024f0a08, type: 3}
   _defaultCapacity: 10
   _maxSize: 100

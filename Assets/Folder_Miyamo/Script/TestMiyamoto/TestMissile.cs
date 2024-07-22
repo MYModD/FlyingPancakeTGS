@@ -1,13 +1,11 @@
 using System;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.Pool;
 
-public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
-{
+public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数
 
-    
+
     [Header("目標ターゲット")]
     public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
 
@@ -34,18 +32,23 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     [Header("敵のタグ"), Tag]
     public string _enemyTag;
 
-    [Header("effectのプール"), Tag]
-    public ExplosionPoolManger _explosionPoolManger;
+    
+    public ExplosionPoolManager _explosionPoolManager{
+        set; private get;
+    }
+
 
     private float _delay = 0.02f;
-    private  Rigidbody _rigidbody;
+    private Rigidbody _rigidbody;
     private float _offtimeValue; //ミサイルの時間計算用
     private float _offtimeRandomValue; //ミサイルの時間計算用
     private Vector3 _previousVelocity; //前の加速度
 
     private const float ONEG = 9.81f;  //1Gの加速度
 
-    public IObjectPool<TestMissile> ObjectPool { get; set; }
+    public IObjectPool<TestMissile> ObjectPool {
+        get; set;
+    }
 
     #endregion
 
@@ -54,8 +57,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     /// <summary>
     /// 初期化
     /// </summary>
-    public void Initialize()
-    {
+    public void Initialize() {
         _offtimeValue = _timer;
         _offtimeRandomValue = _randomTimer;
     }
@@ -63,25 +65,22 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
     /// <summary>
     /// プールに戻す処理
     /// </summary>
-    public void  ReturnToPool()
-
-    {
+    public void ReturnToPool() {
         ObjectPool.Release(this);
+        
 
     }
 
 
     //-------------------------------ミサイルの処理--------------------------------
 
-    void Awake()
-    {
+    void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
+
     }
 
-    void FixedUpdate()
-    {
-        if (_enemyTarget == null)
-        {
+    void FixedUpdate() {
+        if (_enemyTarget == null) {
             Debug.LogError("アタッチされてないよ");
             return;
         }
@@ -94,8 +93,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
         _offtimeValue = Mathf.Max(0, _offtimeValue - Time.fixedDeltaTime);
 
-        if (_offtimeValue == 0)
-        {
+        if (_offtimeValue == 0) {
             ReturnToPool();
 
         }
@@ -106,8 +104,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
 
 
-    private void CalculationFlying()
-    {
+    private void CalculationFlying() {
 
         // 前進する
         _rigidbody.velocity = transform.forward * _speed;
@@ -123,7 +120,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
 
         //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
-        if (gForce > _maxAcceleration ) return;
+        if (gForce > _maxAcceleration) {
+            return;
+        }
 
         Vector3 diff = _enemyTarget.position - transform.position;
 
@@ -140,18 +139,16 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile>
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         print("衝突");
-        if (other.gameObject.CompareTag(_enemyTag))
-        {
+        if (other.gameObject.CompareTag(_enemyTag)) {
             print("敵と衝突");
-            
-            _explosionPoolManger.StartExplosion(other.transform);
+            other.gameObject.SetActive(false);
+            _explosionPoolManager.StartExplosion(other.transform);
             ReturnToPool();
         }
     }
-    
+
     #endregion
 
 

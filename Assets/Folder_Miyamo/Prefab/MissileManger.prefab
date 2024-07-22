@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8800914800470843884}
   - component: {fileID: 5674654897716932046}
   m_Layer: 0
-  m_Name: FireMissile
+  m_Name: MissileManger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
