@@ -22,7 +22,8 @@ public class SpeedChangeValueRetention : MonoBehaviour
             _enemyMove.ChangeSpeed(_changeValue);
             if (_isItOnStandby) {
 
-                _eliteEnemyManager.Adsd(_index, _stopTime);
+                _eliteEnemyManager.SetStoppedAircraftAndTime(_index, _stopTime);
+                _isItOnStandby = false;
             }
         }
     }
