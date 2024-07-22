@@ -1831,9 +1831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc13f40ad49a0345b4a830ba7dc7a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledPrefab: {fileID: 1657689748}
-  _defaultCapacity: 32
-  _maxSize: 100
 --- !u!114 &1364321992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,7 +1843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43baed8117e93049b7568153288e57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timedegerreeee: 0
 --- !u!4 &1364321993
 Transform:
   m_ObjectHideFlags: 0
@@ -1894,7 +1890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43baed8117e93049b7568153288e57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timedegerreeee: 0
 --- !u!4 &1657689749
 Transform:
   m_ObjectHideFlags: 0
