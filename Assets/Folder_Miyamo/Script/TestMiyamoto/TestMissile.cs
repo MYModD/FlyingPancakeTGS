@@ -143,6 +143,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         print("è’ìÀ");
         if (other.gameObject.CompareTag(_enemyTag)) {
             print("ìGÇ∆è’ìÀ");
+            other.gameObject.SetActive(false);
             _explosionPoolManager.StartExplosion(other.transform);
             ReturnToPool();
         }
