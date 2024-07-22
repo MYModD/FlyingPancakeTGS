@@ -1,78 +1,102 @@
 using System;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.Pool;
 
-public class TestMissile : MonoBehaviour
-{
+public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
+    #region 変数
+
 
     [Header("目標ターゲット")]
-    public Transform target;                //あとでset = value get privateに変えるかも
-
-    [Header("必中の場合チェック")]
-    public bool hissatsu = true;
+    public Transform _enemyTarget;                //あとでset = value get privateに変えるかも
 
     [Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
-    public float lerpT = 0.1f;
+    public float _lerpT = 0.1f;
 
     [Header("スピード")]
-    public float speed;
+    public float _speed;
 
     [Header("飛行時間")]
-    public float timer = 10f;
+    public float _timer = 10f;
 
     [Header("ランダムの範囲、力")]
-    public float randomPower = 5f;
+    public float _randomPower = 5f;
 
     [Header("ランダムが適用される時間")]
-    public float randomTimer = 10f;
+    public float _randomTimer = 10f;
 
     [Header("Gforceの最大値")]
-    public float maxAcceleration = 10f;
+    public float _maxAcceleration = 10f;
 
-    //private IObjectPool<Missile> objectPool;
-    //public IObjectPool<Missile> ObjectPool { set => objectPool = value; }  //外部から値を変えた場合、上のobjectpoolに代入される
+
+    [Header("敵のタグ"), Tag]
+    public string _enemyTag;
+
+    
+    public ExplosionPoolManager _explosionPoolManager{
+        set; private get;
+    }
 
 
     private float _delay = 0.02f;
+    private Rigidbody _rigidbody;
+    private float _offtimeValue; //ミサイルの時間計算用
+    private float _offtimeRandomValue; //ミサイルの時間計算用
+    private Vector3 _previousVelocity; //前の加速度
 
-    private new Rigidbody rigidbody;
-    private float OFFtimeValue; //ミサイルの時間計算用
-    private float OFFtimeRandomValue; //ミサイルの時間計算用
-    private Vector3 previousVelocity; //前の加速度
+    private const float ONEG = 9.81f;  //1Gの加速度
 
-    private const float oneG = 9.81f;  //1Gの加速度
-    void Awake()
-    {
-        rigidbody = GetComponent<Rigidbody>();
+    public IObjectPool<TestMissile> ObjectPool {
+        get; set;
     }
 
-    void FixedUpdate()
-    {
-        if (target == null)
-        {
+    #endregion
+
+    #region メソッド
+    //-------------------------------objectpoolインターフェイスの処理--------------------------------
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Initialize() {
+        _offtimeValue = _timer;
+        _offtimeRandomValue = _randomTimer;
+    }
+
+    /// <summary>
+    /// プールに戻す処理
+    /// </summary>
+    public void ReturnToPool() {
+        ObjectPool.Release(this);
+        
+
+    }
+
+
+    //-------------------------------ミサイルの処理--------------------------------
+
+    void Awake() {
+        _rigidbody = GetComponent<Rigidbody>();
+
+    }
+
+    void FixedUpdate() {
+        if (_enemyTarget == null) {
             Debug.LogError("アタッチされてないよ");
             return;
         }
 
-
-        if (target.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
+        if (_enemyTarget.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
         {
-            //PoolReurn();
-            Destroy(this.gameObject);
+            ReturnToPool();
+
         }
 
-        OFFtimeValue = Mathf.Max(0, OFFtimeValue - Time.fixedDeltaTime);
+        _offtimeValue = Mathf.Max(0, _offtimeValue - Time.fixedDeltaTime);
 
-        if (OFFtimeValue == 0)
-        {
-            //PoolReurn();
-            Destroy(this.gameObject);
+        if (_offtimeValue == 0) {
+            ReturnToPool();
 
-            
-        }//時間切れになったら返す
-
+        }
 
         CalculationFlying();
 
@@ -80,71 +104,52 @@ public class TestMissile : MonoBehaviour
 
 
 
-    private void CalculationFlying()
-    {
+    private void CalculationFlying() {
 
         // 前進する
-        rigidbody.velocity = transform.forward * speed;
+        _rigidbody.velocity = transform.forward * _speed;
 
-        Vector3 currentVelocity = rigidbody.velocity;
+        Vector3 currentVelocity = _rigidbody.velocity;
         //(今の加速度 - 前の加速度)/ 時間
-        Vector3 acceleration = (currentVelocity - previousVelocity) / Time.fixedDeltaTime;
-        previousVelocity = currentVelocity;
+        Vector3 acceleration = (currentVelocity - _previousVelocity) / Time.fixedDeltaTime;
+        _previousVelocity = currentVelocity;
 
 
         //加速度の大きさ          1G=9.81 m/s2で割ってる
-        float gForce = acceleration.magnitude / oneG;
+        float gForce = acceleration.magnitude / ONEG;
 
 
         //GforceがmaxAcceleration超えている かつhissatsuがfalseのとき return 処理なくす
-        if (gForce > maxAcceleration && !hissatsu) return;
+        if (gForce > _maxAcceleration) {
+            return;
+        }
 
-        Vector3 diff = target.position - transform.position;
+        Vector3 diff = _enemyTarget.position - transform.position;
 
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
 
         // 球面線形補間を使って回転を徐々にターゲットに向ける
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lerpT);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
 
 
     }
 
 
 
-    //private void PoolReurn()
-    //{
 
-    //    rigidbody.velocity = Vector3.zero;
-    //    rigidbody.angularVelocity = Vector3.zero;  //オブジェクトをfalseにする直前までここに付け足すかも
-    //    transform.rotation = new Quaternion(0, 0, 0, 0);
-    //    objectPool.Release(this);
 
-    //}
-
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         print("衝突");
-        if (other.gameObject.CompareTag("Enemy"))
-        {
+        if (other.gameObject.CompareTag(_enemyTag)) {
             print("敵と衝突");
-            //other.gameObject.SetActive(false);
-            StartCoroutine(DeactivateAfterDelay());
-            Destroy(this.gameObject);
-            
+            other.gameObject.SetActive(false);
+            _explosionPoolManager.StartExplosion(other.transform);
+            ReturnToPool();
         }
     }
-    private IEnumerator DeactivateAfterDelay()
-    {
-        yield return new WaitForSeconds(_delay);
-        gameObject.SetActive(false);
-    }
 
-    private void OnEnable()
-    {
-        OFFtimeValue = timer;
-        OFFtimeRandomValue = randomTimer;   //オンになったらタイマーの値を初期化
-    }
+    #endregion
 
 
 }

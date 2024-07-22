@@ -76,7 +76,13 @@ public class TestLockOnManager : MonoBehaviour
         targetsInCone.Clear();
 
 
-        Collider[] hits = GetSphereOverlapHits();    //colliderが返り値
+        Collider[] hits = Physics.OverlapSphere  //重いので軽いやつに置き換える
+            (
+            _camera.transform.position,
+            _searchRadius,
+            LayerMask.GetMask("Enemy")
+            
+            );   
 
         foreach (Collider hit in hits)
         {
@@ -86,17 +92,7 @@ public class TestLockOnManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 球状の範囲内のヒットしたコライダーを取得するメソッド
-    /// </summary>
-    private Collider[] GetSphereOverlapHits()
-    {
-        return Physics.OverlapSphere(
-            _camera.transform.position,
-            _searchRadius,
-            LayerMask.GetMask("Enemy")                        //レイヤーマスクがenemyかつtagがenemyのとき
-        );
-    }
+
 
 
 
@@ -120,7 +116,7 @@ public class TestLockOnManager : MonoBehaviour
 
                 if (IsInCone(target) && hit.gameObject.activeSelf == true)
                 {
-                    if (!targetsInCone.Contains(target) )
+                    if (!targetsInCone.Contains(target))
 
                         targetsInCone.Add(target);            //コーン内のリストにいれる
                 }
