@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPassingByManager : MonoBehaviour {
-
     [SerializeField] private GameObject _enemyPassingByRight;
     [SerializeField] private GameObject _enemyPassingByLeft;
     [SerializeField] private float[] _timeToPopEnemy;
@@ -15,7 +14,6 @@ public class EnemyPassingByManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-
         _enemiesPassingThroughMoveSplineRight = _enemyPassingByRight.GetComponent<EnemiesPassingThroughMoveSpline>();
         _enemiesPassingThroughMoveSplineLeft = _enemyPassingByLeft.GetComponent<EnemiesPassingThroughMoveSpline>();
     }
@@ -25,6 +23,13 @@ public class EnemyPassingByManager : MonoBehaviour {
         _coutTime += Time.deltaTime;
 
         if (_index < _timeToPopEnemy.Length && _coutTime >= _timeToPopEnemy[_index]) {
+            if (!_enemyPassingByRight.activeSelf) {
+                _enemyPassingByRight.SetActive(true);
+            }
+
+            if (!_enemyPassingByLeft.activeSelf) {
+                _enemyPassingByLeft.SetActive(true);
+            }
 
             _enemiesPassingThroughMoveSplineRight.StartMoving();
             _enemiesPassingThroughMoveSplineLeft.StartMoving();

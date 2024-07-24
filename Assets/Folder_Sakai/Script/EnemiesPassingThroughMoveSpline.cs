@@ -43,7 +43,7 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
 
     //’âŽ~’†
     private bool _isStop = true;
-    #endregion 
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +98,7 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
 
     public void StartMoving() {
 
+        _percentage = STARTSPLINE;
         _isStop = false;
     }
 
