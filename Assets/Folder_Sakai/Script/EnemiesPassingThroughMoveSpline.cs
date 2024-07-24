@@ -39,10 +39,10 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
     private const int ENDSPLINE = 1;
 
     //スプラインの開始
-    private const int STASPLINE = 0;
+    private const int STARTSPLINE = 0;
 
     //停止中
-    private bool _isStop = false;
+    private bool _isStop = true;
     #endregion 
 
     // Start is called before the first frame update
@@ -59,6 +59,8 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_isStop) {return;}
+
         //割合を時間で加算
         _percentage += Time.deltaTime * _moveSpeed;
 
@@ -66,6 +68,12 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
     }
 
     private void MovePosRotate() {
+
+        if (_percentage >= ENDSPLINE) {
+
+            _percentage = STARTSPLINE;
+            _isStop = true;
+        }
 
         // 計算した位置（ワールド座標）をターゲットに代入
         _moveTarget.position = _spline.EvaluatePosition(_percentage);
@@ -86,8 +94,11 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
 
         // 進行方向に角度を変更
         _moveTarget.rotation = Quaternion.LookRotation(moveVolume, Vector3.up);
-
     }
 
-    //public void 
+    public void StartMoving() {
+
+        _isStop = false;
+    }
+
 }
