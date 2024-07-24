@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 public class Explosion : MonoBehaviour, IPooledObject<Explosion>
 {
     [SerializeField, Header("継続時間")]
-    private float _duration; // 名前を_timerから_durationに変更
+    private float _duration; // 名前を__timerから_durationに変更
 
     public IObjectPool<Explosion> ObjectPool { get; set; }
 

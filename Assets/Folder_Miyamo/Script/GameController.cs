@@ -5,8 +5,8 @@ using UnityEngine.Splines;
 public class GameController : MonoBehaviour
 {
     [Foldout("ミサイル係")]
-    [SerializeField,Header("発射位置")]
-    private Transform _firePostion;
+    [SerializeField,Header("ミサイル発射位置")]
+    private Transform _fireMissilePostion;
 
     [Foldout("ミサイル係")]
     [SerializeField] 
@@ -16,6 +16,17 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private  TestLockOnManager _testLockOnManager;
 
+    [Foldout("弾丸")]
+    [SerializeField]
+    private BulletPoolManager _bulletPoolManager;
+    [Foldout("弾丸")]
+    [SerializeField, Header("弾丸発射位置")]
+    private Transform _fireBulletPostion;
+    [Foldout("弾丸")]
+    [SerializeField, Header("弾丸の速度")]
+    private float _bulletMultiply;
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))     //ここをinputsystemに移行するとき直す
@@ -24,15 +35,15 @@ public class GameController : MonoBehaviour
 
             foreach (Transform item in enemy)
             {
-                _missilePoolManger.FireMissile(item, _firePostion);
+                _missilePoolManger.FireMissile(item, _fireMissilePostion);
             }
 
         }
 
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKey(KeyCode.K))
         {
-
+            _bulletPoolManager.FireBullet(_fireBulletPostion,_bulletMultiply);
         }
     }
 }

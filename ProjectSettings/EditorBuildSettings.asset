@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Folder_Miyamo/Scenes/sakai_ForWork_MiyamotoCopy.unity
+    guid: 5f499a42ae76ce148a97208499395cf6
   m_configObjects: {}
