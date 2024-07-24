@@ -1290,7 +1290,7 @@ MonoBehaviour:
   - {fileID: 9171263903697340596}
   - {fileID: 8097952288247506583}
   - {fileID: 806838131397411773}
-  lockOnManager: {fileID: 0}
+  _lockOnManager: {fileID: 0}
   _childrenScale: 0
 --- !u!1 &7689488377192507594
 GameObject:
