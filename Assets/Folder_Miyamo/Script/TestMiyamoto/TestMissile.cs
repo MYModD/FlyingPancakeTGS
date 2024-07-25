@@ -33,9 +33,13 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [Header("敵のタグ"), Tag]
     [SerializeField]
     private  string _enemyTag;
-    
 
-    
+    [Header("敵のタグ"), Tag]
+    [SerializeField]
+    private string _eliteMissile;
+
+
+
     public ExplosionPoolManager _explosionPoolManager{
         set; private get;
     }
@@ -143,6 +147,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     private void OnTriggerEnter(Collider other) {
         print("衝突");
+
+        // 敵のタグがが普通の敵だったとき
         if (other.gameObject.CompareTag(_enemyTag)) {
 
             print($"{other.gameObject.name}に衝突");
@@ -150,6 +156,16 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
             ReturnToPool();                                              // ミサイルをプールに変換
         }
+
+
+        // 敵のタグがエリートミサイルだったとき
+        if (other.gameObject.CompareTag(_eliteMissile)) {
+            
+
+            
+        
+        }
+
     }
 
     #endregion
