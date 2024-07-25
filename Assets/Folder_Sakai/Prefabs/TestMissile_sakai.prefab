@@ -169,6 +169,7 @@ MonoBehaviour:
   _random_timer: 10
   _maxAcceleration: 10
   _enemyTag: Enemy
+  _eliteMissile: Enemy
 --- !u!1001 &8732369208738077942
 PrefabInstance:
   m_ObjectHideFlags: 0
