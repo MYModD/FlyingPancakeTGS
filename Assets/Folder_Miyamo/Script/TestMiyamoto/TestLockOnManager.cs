@@ -81,7 +81,7 @@ public class TestLockOnManager : MonoBehaviour {
     /// 検出されたコライダーを処理し、適切なリストに追加する
     /// </summary>
     private void ProcessHit(Collider hit, Plane[] planes, HashSet<Transform> newTargetsInCamera, HashSet<Transform> newTargetsInCone) {
-        if (hit.CompareTag("Enemy")) {
+        if (hit.CompareTag("Enemy") || hit.CompareTag("EliteMissile")) {
             Transform target = hit.transform;
             Renderer renderer = GetCachedRenderer(target);
 
