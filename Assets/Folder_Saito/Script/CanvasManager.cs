@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
 using UnityEngine.InputSystem;
+using UnityEngine.Splines;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
@@ -23,6 +24,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("リザルトのオブジェクト")] private GameObject[] _resultObjs;
     [SerializeField, Header("設定画面のオブジェクト")] private GameObject[] _settingObjs;
     [SerializeField, Header("ゲームプレイ中に使うオブジェクト")] private GameObject[] _gameObjs;
+    [SerializeField] private SplineAnimate _spAnime;
 
     [SerializeField, Header("タイトルに行かせたいタグ"),Tag] private string _tagTitle;
     [SerializeField, Header("ゲームに行かせたいタグ"), Tag] private string _tagGame;
@@ -50,7 +52,7 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
-      
+        _canMove = false;
     }
     /// <summary>
     /// 更新前処理
@@ -58,6 +60,7 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
         _state = UIState.title;
+
     }
     /// <summary>
     /// 更新処理
@@ -146,6 +149,8 @@ public class CanvasManager : MonoBehaviour
     private void PlayToMenu()
     {
         GameObjTrueFalse(_menuObjs,_gamePlayObjs);
+        GameObjTrueFalse(_menuObjs,_gameObjs);
+        _spAnime.enabled = false;
         _state = UIState.menu;
     }
     /// <summary>
@@ -155,6 +160,8 @@ public class CanvasManager : MonoBehaviour
     {
         print("menuから戻るよ");
         GameObjTrueFalse(_gamePlayObjs,_menuObjs);
+        GameObjTrueFalse(_gameObjs,_menuObjs);
+        _spAnime.enabled = true;
         _state=UIState.gamePlay;
     }
     /// <summary>

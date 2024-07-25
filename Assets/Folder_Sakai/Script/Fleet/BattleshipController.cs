@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleshipController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5.0f;
+    [SerializeField] private float __speed = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,11 +15,6 @@ public class BattleshipController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-    }
-
-    public void ChageSpeed(float chageSpeed) {
-
-        _speed = chageSpeed;
+        transform.Translate(Vector3.forward * __speed * Time.deltaTime);
     }
 }
