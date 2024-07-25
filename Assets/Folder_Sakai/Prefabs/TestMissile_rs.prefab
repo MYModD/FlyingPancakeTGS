@@ -231,4 +231,4 @@ MonoBehaviour:
   _random_timer: 10
   _maxAcceleration: 10
   _enemyTag: Enemy
-  _eliteMissile: Bullet
+  _eliteMissile: EliteMissile
