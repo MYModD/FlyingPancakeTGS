@@ -48,10 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43baed8117e93049b7568153288e57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __timer: 1
+  _timer: 1
   _gravity: 1000
   _enemyTag: Enemy
-  _offtimeValue: 0
 --- !u!135 &2131206579056466656
 SphereCollider:
   m_ObjectHideFlags: 0
