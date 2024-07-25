@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
   _lerpT: 0.1
-  _speed: 20000
+  _speed: 4000
   _timer: 10
   _randomPower: 5
   _random_timer: 10
