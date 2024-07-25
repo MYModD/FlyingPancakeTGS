@@ -9,6 +9,7 @@ public class CountTheNumberOfDefeats : MonoBehaviour
     public void AdditionOfNumberOfDefeats() {
 
         _countTheNumberOfDefeats++;
+        print(_countTheNumberOfDefeats);
     }
 
     public int NumberOfDefeats() {
