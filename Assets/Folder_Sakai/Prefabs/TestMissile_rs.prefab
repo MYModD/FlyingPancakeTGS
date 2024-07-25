@@ -72,15 +72,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 116.399994
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 116.399994
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 116.399994
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4aee279f7faa1894186afc6e3012dc3d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -224,10 +224,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
-  _lerpT: 0.1
-  _speed: 0
+  _lerpT: 0.922
+  _speed: 4000
   _timer: 10
   _randomPower: 5
-  _randomTimer: 10
+  _random_timer: 10
   _maxAcceleration: 10
-  _enemyTag: 
+  _enemyTag: Enemy
+  _eliteMissile: EliteMissile
