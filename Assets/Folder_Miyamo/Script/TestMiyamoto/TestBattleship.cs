@@ -4,28 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TestBattleship : MonoBehaviour {
-    public Transform _testTransform1;
-    [MinMaxSlider(0, 360f)] public Vector2 _testTransform1Range;
-    public Transform _testTransform2;
-    [MinMaxSlider(-50, 50)] public Vector2 _testTransform2Range;
-    public Transform _enemyTransform;
+    [Foldout("‘å–C")]
+    [SerializeField, Header("‘å–C01")]
+    private Transform _largeTurret01;
+    [Foldout("‘å–C")]
+    [SerializeField, Header("‘å–C01‚Ì‰ñ“]”ÍˆÍ")]
+    [MinMaxSlider(-360, 360f)] private Vector2 _largeTurret01Range;
 
-    // Start is called before the first frame update
-    void Start() {
+    [Foldout("‘å–C")]
+    [SerializeField, Header("‘å–C02")]
+    private Transform _largeTurret02;
+    [Foldout("‘å–C")]
+    [SerializeField, Header("‘å–C02‚Ì‰ñ“]”ÍˆÍ")]
+    [MinMaxSlider(-50, 50)] private Vector2 _largeTurret02Range;
 
-    }
+    [Foldout("“G")]
+    [SerializeField, Header("“G‚Ìƒgƒ‰ƒ“ƒXƒtƒH[ƒ€")]
+    private Transform _enemyTransform;
 
     // Update is called once per frame
     void FixedUpdate() {
-        // _testTransform1‚Ì‰ñ“]
-        RotateTransformY(_testTransform1, _testTransform1Range, _enemyTransform);
+        // _largeTurret01‚Ì‰ñ“]
+        RotateTurretY(_largeTurret01, _largeTurret01Range, _enemyTransform);
 
-        // _testTransform2‚Ì‰ñ“]
-        RotateTransform2(_testTransform1, _testTransform2, _testTransform2Range, _enemyTransform);
+        // _largeTurret02‚Ì‰ñ“]
+        RotateTurretX(_largeTurret01, _largeTurret02, _largeTurret02Range, _enemyTransform);
     }
 
-    private void RotateTransformY(Transform targetTransform, Vector2 rotationRange, Transform target) {
-        Vector3 direction = target.position - targetTransform.position;
+    private void RotateTurretY(Transform turretTransform, Vector2 rotationRange, Transform target) {
+        Vector3 direction = target.position - turretTransform.position;
         direction.y = 0; // Y²‚Ì‰ñ“]‚¾‚¯‚ğl—¶‚·‚é‚½‚ß‚ÉAY¬•ª‚ğ0‚É‚·‚é
 
         if (direction != Vector3.zero) {
@@ -41,25 +48,27 @@ public class TestBattleship : MonoBehaviour {
             Quaternion limitedRotation = Quaternion.Euler(0, targetYRotation, 0);
 
             // ‹…–ÊüŒ`•âŠÔ‚ğg‚Á‚Ä‰ñ“]‚ğ™X‚Éƒ^[ƒQƒbƒg‚ÉŒü‚¯‚é
-            targetTransform.rotation = Quaternion.Lerp(targetTransform.rotation, limitedRotation, 0.05f);
+            turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, limitedRotation, 0.05f);
         }
     }
 
-    private void RotateTransform2(Transform parentTransform, Transform targetTransform, Vector2 rotationRange, Transform enemyTransform) {
-        Vector3 direction = enemyTransform.position - targetTransform.position;
+    private void RotateTurretX(Transform parentTransform, Transform turretTransform, Vector2 rotationRange, Transform target) {
+        Vector3 direction = target.position - parentTransform.position;
 
         if (direction != Vector3.zero) {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
             // Œ»İ‚ÌX²‰ñ“]Šp“x‚ğ§ŒÀ
             float targetXRotation = targetRotation.eulerAngles.x;
+            if (targetXRotation > 180)
+                targetXRotation -= 360; // X²‰ñ“]Šp“x‚Ì³‹K‰»
             targetXRotation = Mathf.Clamp(targetXRotation, rotationRange.x, rotationRange.y);
 
             // V‚µ‚¢‰ñ“]Šp“x‚ğİ’è
             Quaternion limitedRotation = Quaternion.Euler(targetXRotation, parentTransform.eulerAngles.y, 0);
 
             // ‹…–ÊüŒ`•âŠÔ‚ğg‚Á‚Ä‰ñ“]‚ğ™X‚Éƒ^[ƒQƒbƒg‚ÉŒü‚¯‚é
-            targetTransform.rotation = Quaternion.Lerp(targetTransform.rotation, limitedRotation, 0.05f);
+            turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, limitedRotation, 0.05f);
         }
     }
 }

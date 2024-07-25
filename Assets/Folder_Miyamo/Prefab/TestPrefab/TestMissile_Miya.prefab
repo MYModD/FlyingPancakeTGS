@@ -240,10 +240,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
-  _lerpT: 0.837
-  _speed: 6000
-  _timer: 10
-  _randomPower: 5
-  _randomTimer: 10
-  _maxAcceleration: 10
+  __lerpT: 0.82
+  __speed: 7000
+  __timer: 10
+  __randomPower: 5
+  _random_timer: 10
+  __maxAcceleration: 10
   _enemyTag: Enemy
