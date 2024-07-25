@@ -16,8 +16,7 @@ public class EnemyStartAppearingTriggerPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag(_player))
         {
-            print("col");
-            print(_occurrenceManagementIndex);
+
             _enemyAppearanceManager.GetEnemyAppearanceManagementValue(_occurrenceManagementIndex);
         }
     }
