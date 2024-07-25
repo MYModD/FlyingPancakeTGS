@@ -19,9 +19,10 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField, Header("タイトルのオブジェクト")] private GameObject[] _titleObjs;
     [SerializeField, Header("一時停止のオブジェクト")] private GameObject[] _menuObjs;
-    [SerializeField, Header("ゲーム中のオブジェクト")] private GameObject[] _gamePlayObjs;
+    [SerializeField, Header("ゲームUIのオブジェクト")] private GameObject[] _gamePlayObjs;
     [SerializeField, Header("リザルトのオブジェクト")] private GameObject[] _resultObjs;
     [SerializeField, Header("設定画面のオブジェクト")] private GameObject[] _settingObjs;
+    [SerializeField, Header("ゲームプレイ中に使うオブジェクト")] private GameObject[] _gameObjs;
 
     [SerializeField, Header("タイトルに行かせたいタグ"),Tag] private string _tagTitle;
     [SerializeField, Header("ゲームに行かせたいタグ"), Tag] private string _tagGame;
@@ -39,6 +40,7 @@ public class CanvasManager : MonoBehaviour
     }
     private UIState _state;
     private UIState _prevState;
+    private bool _canMove = true;
     #endregion
     #region プロパティ
     #endregion
@@ -69,17 +71,26 @@ public class CanvasManager : MonoBehaviour
                 PlayToMenu();
                 _isStartPush = false;
             }
+            if (Input.GetKeyUp("joystick button 7")) {
+                _isStartPush = true;
+            }
+            _canMove = true;
         }
         if (_state == UIState.result) {
             if (Input.anyKeyDown&&_isStartPush) {
                 MenuOrResultToStart();
             }
+            _canMove= false;
         }
         if (_state == UIState.menu) {
             if (Input.GetKeyDown("joystick button 7") && _isStartPush) {
                 MenuToPlay();
                 _isStartPush=false;
             }
+            if (Input.GetKeyUp("joystick button 7")) {
+                _isStartPush = true;
+            }
+            _canMove=_isStartPush;
         }
         if (_state == UIState.setting) {
             if (Input.GetButtonDown("Cancel")) {
@@ -113,6 +124,7 @@ public class CanvasManager : MonoBehaviour
     private void TitleToGamePlay()
     {
         GameObjTrueFalse(_gamePlayObjs, _titleObjs);
+        GameObjTrueFalse(_gameObjs, _titleObjs);
         _state = UIState.gamePlay;
     }
     /// <summary>
@@ -168,8 +180,9 @@ public class CanvasManager : MonoBehaviour
         }
         _state = _prevState;
     }
-    private void PlayToResult() {
+    public void PlayToResult() {
         GameObjTrueFalse(_resultObjs, _gamePlayObjs);
+        GameObjTrueFalse(_resultObjs, _gameObjs);
         _state = UIState.result;
     }
     /// <summary>
@@ -198,6 +211,9 @@ public class CanvasManager : MonoBehaviour
     }
     public string StateSet() {
         return _state.ToString();
+    }
+    public bool CanMove() {
+        return _canMove;
     }
     #endregion
 }
