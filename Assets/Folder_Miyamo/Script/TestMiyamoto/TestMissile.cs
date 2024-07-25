@@ -12,30 +12,34 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     [Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
-    public float __lerpT = 0.1f;
+    public float _lerpT = 0.1f;
 
     [Header("スピード")]
-    public float __speed;
+    public float _speed;
 
     [Header("飛行時間")]
-    public float __timer = 10f;
+    public float _timer = 10f;
 
     [Header("ランダムの範囲、力")]
-    public float __randomPower = 5f;
+    public float _randomPower = 5f;
 
     [Header("ランダムが適用される時間")]
     public float _random_timer = 10f;
 
     [Header("Gforceの最大値")]
-    public float __maxAcceleration = 10f;
+    public float _maxAcceleration = 10f;
 
 
     [Header("敵のタグ"), Tag]
     [SerializeField]
     private  string _enemyTag;
-    
 
-    
+    [Header("敵のタグ"), Tag]
+    [SerializeField]
+    private string _eliteMissile;
+
+
+
     public ExplosionPoolManager _explosionPoolManager{
         set; private get;
     }
@@ -61,7 +65,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     /// 初期化
     /// </summary>
     public void Initialize() {
-        _offtimeValue = __timer;
+        _offtimeValue = _timer;
     }
 
     /// <summary>
@@ -109,7 +113,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     private void CalculationFlying() {
 
         // 前進する
-        _rigidbody.velocity = transform.forward * __speed;
+        _rigidbody.velocity = transform.forward * _speed;
 
         Vector3 currentVelocity = _rigidbody.velocity;
         //(今の加速度 - 前の加速度)/ 時間
@@ -122,7 +126,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
         // Gforceが_maxAcceleration超えているときreturn
-        if (gForce > __maxAcceleration) {
+        if (gForce > _maxAcceleration) {
             return;
         }
 
@@ -132,7 +136,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
         // 球面線形補間を使って回転を徐々にターゲットに向ける
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, __lerpT);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
 
 
     }
@@ -143,6 +147,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     private void OnTriggerEnter(Collider other) {
         print("衝突");
+
+        // 敵のタグがが普通の敵だったとき
         if (other.gameObject.CompareTag(_enemyTag)) {
 
             print($"{other.gameObject.name}に衝突");
@@ -150,6 +156,16 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
             ReturnToPool();                                              // ミサイルをプールに変換
         }
+
+
+        // 敵のタグがエリートミサイルだったとき
+        if (other.gameObject.CompareTag(_eliteMissile)) {
+            
+
+            
+        
+        }
+
     }
 
     #endregion

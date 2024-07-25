@@ -11,6 +11,8 @@ TagManager:
   - GoSetting
   - GameFinish
   - Missile
+  - Bullet
+  - EliteMissile
   layers:
   - Default
   - TransparentFX
