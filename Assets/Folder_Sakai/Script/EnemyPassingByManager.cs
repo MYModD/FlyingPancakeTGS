@@ -6,16 +6,16 @@ public class EnemyPassingByManager : MonoBehaviour {
     [SerializeField] private GameObject _enemyPassingByRight;
     [SerializeField] private GameObject _enemyPassingByLeft;
     [SerializeField] private float[] _timeToPopEnemy;
-    private EnemiesPassingThroughMoveSpline _enemiesPassingThroughMoveSplineRight;
-    private EnemiesPassingThroughMoveSpline _enemiesPassingThroughMoveSplineLeft;
+    private EnemyMoveSpline _enemyMoveSplineRigft;
+    private EnemyMoveSpline _enemyMoveSplineLeft;
 
     private int _index = 0;
     private float _coutTime = 0f;
 
     // Start is called before the first frame update
     void Start() {
-        _enemiesPassingThroughMoveSplineRight = _enemyPassingByRight.GetComponent<EnemiesPassingThroughMoveSpline>();
-        _enemiesPassingThroughMoveSplineLeft = _enemyPassingByLeft.GetComponent<EnemiesPassingThroughMoveSpline>();
+        _enemyMoveSplineRigft = _enemyPassingByRight.GetComponent<EnemyMoveSpline>();
+        _enemyMoveSplineLeft = _enemyPassingByLeft.GetComponent<EnemyMoveSpline>();
     }
 
     // Update is called once per frame
@@ -31,8 +31,8 @@ public class EnemyPassingByManager : MonoBehaviour {
                 _enemyPassingByLeft.SetActive(true);
             }
 
-            _enemiesPassingThroughMoveSplineRight.StartMoving();
-            _enemiesPassingThroughMoveSplineLeft.StartMoving();
+            _enemyMoveSplineRigft.StartMoving();
+            _enemyMoveSplineLeft.StartMoving();
             _index++;
         }
     }

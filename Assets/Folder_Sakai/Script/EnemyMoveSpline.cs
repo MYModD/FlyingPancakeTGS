@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class EnemiesPassingThroughMoveSpline : MonoBehaviour
+public class EnemyMoveSpline : MonoBehaviour
 {
     #region •Ï”
 
@@ -46,8 +46,7 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         //ƒXƒvƒ‰ƒCƒ“‚É‰ˆ‚Á‚ÄˆÚ“®‚³‚¹‚é‘ÎÛ
         _moveTarget = this.gameObject.transform;
 
@@ -57,9 +56,10 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (_isStop) {return;}
+    void Update() {
+        if (_isStop) {
+            return;
+        }
 
         //Š„‡‚ğŠÔ‚Å‰ÁZ
         _percentage += Time.deltaTime * _moveSpeed;
@@ -101,5 +101,4 @@ public class EnemiesPassingThroughMoveSpline : MonoBehaviour
         _percentage = STARTSPLINE;
         _isStop = false;
     }
-
 }
