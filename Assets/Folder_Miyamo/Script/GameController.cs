@@ -56,7 +56,11 @@ public class GameController : MonoBehaviour {
         // ミサイル発射のクールタイム計算
         _missileCooldownTimer -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space) && _missileCooldownTimer <= 0) //ここをInput Systemに移行するとき直す
+        bool hoge = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
+             && (_missileCooldownTimer <= 0);
+
+
+        if (hoge)       
         {
             var enemies = _testLockOnManager._targetsInCone;
 
