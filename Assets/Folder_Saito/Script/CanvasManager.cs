@@ -30,7 +30,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
 
     private bool _isStartPush=true;
-    public enum UIState {
+    private enum UIState {
         title = 0,
         gamePlay,
         result,
