@@ -28,9 +28,16 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField, Header("カメラ入れて")] private Camera _camera;
     [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate;
 
+    [SerializeField, Header("CanvasManagerのオブジェクトをいれ")] private CanvasManager _canvas;
+    [SerializeField] private ControllerSelectButton _selectButton;
+
     private float _stopTime;
     private float _nowTime;
     private bool _isStop = false;
+    private bool _isVerticalInversion=false;
+    private bool _ishorizontalInversion= false;
+    private int _verticalIndex = 1;
+    private int _horizontalIndex = 1;
     #endregion
     #region プロパティ
     #endregion
@@ -40,6 +47,10 @@ public class PlayerMove : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
+        if (!_canvas.CanMove())
+        {
+            return;
+        }
         StopOrMoving();
         //if (Input.GetKeyDown(KeyCode.Space)) {
         //    StopMoving(5f);
@@ -49,7 +60,12 @@ public class PlayerMove : MonoBehaviour {
     /// 動いているか止まっているかの分岐
     /// </summary>
     private void StopOrMoving() {
+        _isVerticalInversion = _selectButton.VerticalInversionCheak();
+        _verticalIndex = _isVerticalInversion ? -1 : 1;
+        _ishorizontalInversion = _selectButton.HorizontalInversionCheak();
+        _horizontalIndex = _ishorizontalInversion ? -1 : 1;
         if (_isStop) {
+            
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * _resetSpeed);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.deltaTime * _resetSpeed);
             _nowTime += Time.deltaTime;
@@ -266,8 +282,9 @@ public class PlayerMove : MonoBehaviour {
     private float CalculateSpeed(float input) {
         //０をなくすために加算
         input += 2;
+        int index = _canvas.CanMove() ? 1 : 0;
         //速度変化させる値の決定
-        float changePower = Time.deltaTime * input * _speedMagnification;
+        float changePower = Time.deltaTime * input * _speedMagnification*index;
         return changePower;
     }
     //-------------------------ここからパブリックメソッド---------------------------------------
