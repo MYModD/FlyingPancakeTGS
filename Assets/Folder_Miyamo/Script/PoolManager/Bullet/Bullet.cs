@@ -7,13 +7,13 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
 {
 
     [SerializeField, Header("消滅時間")]
-    private float __timer = default;
+    private float _timer = default;
     [SerializeField, Header("重力")]
     private float _gravity = default;
     [SerializeField, Tag]
     private string _enemyTag;
 
-    public float _offtimeValue;        // 時間計算用
+    private  float _offtimeValue;        // 時間計算用
     private Rigidbody _rigidbody;
 
 
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
 
     public void Initialize() {
 
-        _offtimeValue = __timer;
+        _offtimeValue = _timer;
 
     }
 
