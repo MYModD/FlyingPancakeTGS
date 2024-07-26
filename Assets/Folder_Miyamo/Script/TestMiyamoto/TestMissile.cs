@@ -4,40 +4,39 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
-    #region 変数
+    #region 変数 + プロパティ  
 
 
-    [Header("目標ターゲット")]
+    [SerializeField, Header("目標ターゲット")]
     public Transform _enemyTarget;                // あとでset = value get privateに変えるかも
 
-    [Header("あたりやすさ 0.1デフォ")]
+    [SerializeField, Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
-    public float _lerpT = 0.1f;
+    private  float _lerpT = 0.1f;
 
-    [Header("スピード")]
-    public float _speed;
+    [SerializeField, Header("スピード")]
+    private  float _speed;
 
-    [Header("飛行時間")]
-    public float _timer = 10f;
+    [SerializeField, Header("飛行時間")]
+    private  float _timer = 10f;
 
-    [Header("ランダムの範囲、力")]
-    public float _randomPower = 5f;
+    [SerializeField, Header("ランダムの範囲、力")]
+    private float _randomPower = 5f;
 
-    [Header("ランダムが適用される時間")]
-    public float _random_timer = 10f;
+    [SerializeField, Header("ランダムが適用される時間")]
+    private  float _random_timer = 10f;
 
-    [Header("Gforceの最大値")]
-    public float _maxAcceleration = 10f;
+    [SerializeField, Header("Gforceの最大値")]
+    private  float _maxAcceleration = 10f;
 
 
-    [Header("敵のタグ"), Tag]
-    [SerializeField]
-    private  string _enemyTag;
+    [SerializeField,Header("敵のタグ")]
+    [Tag]
+    private string _enemyTag;
 
-    [Header("敵のタグ"), Tag]
-    [SerializeField]
+    [SerializeField,Header("敵のタグ")]
+    [Tag]
     private string _eliteMissile;
-
 
 
     public ExplosionPoolManager _explosionPoolManager{
@@ -45,7 +44,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     }
 
 
-    private float _delay = 0.02f;
     private Rigidbody _rigidbody;
     private float _offtimeValue; //ミサイルの時間計算用
     private float _off_timerandomValue; //ミサイルの時間計算用
@@ -160,8 +158,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
         // 敵のタグがエリートミサイルだったとき
         if (other.gameObject.CompareTag(_eliteMissile)) {
-            
 
+            other.GetComponent<EliteEnemyHP>().DecreaseHP();
+            Debug.Log("エリートミサイルにあっったよ");
             
         
         }

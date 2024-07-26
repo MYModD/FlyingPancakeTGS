@@ -5,26 +5,35 @@ using Utils;
 public class TestLockOnManager : MonoBehaviour {
     #region 変数
 
-    [Header("Target Lists")]
+    [Header("ターゲットのリスト")]
     public List<Transform> _targetsInCamera = new List<Transform>();
     public List<Transform> _targetsInCone = new List<Transform>();
 
-    [Header("Camera Settings")]
-    [SerializeField] private Camera _camera;
-    [SerializeField] private float _searchRadius = 95f;
-    [SerializeField, Range(0f, 180f)] private float _coneAngle = 45f;
-    [SerializeField] private float _coneRange;
+    [SerializeField, Header("カメラ設定")] private Camera _camera;
 
-    public Transform _playerObject;
+    [SerializeField,Header("ロックオンの範囲")] private float _searchRadius = 5000f;
+    
+    [SerializeField, Header("コーンの角度")]
+    [Range(0f, 180f)]private float _coneAngle = 45f;
 
-    private const float UPDATE_INTERVAL = 0.1f;
+    [SerializeField,Header("コーンの長さ")] private float _coneRange;
+
+    [SerializeField, Header("プレイヤーのtransfrom")]
+    private  Transform _playerObject;
+
+
+
+    private const float UPDATE_INTERVAL = 0.1f;     // ここ自由に変えてもいいからconstじゃなくてもいい
 
 #pragma warning disable IDE1006 // uruasai
     private readonly Vector3 DRAWORIGIN = new(90, 0, 0);
 #pragma warning restore IDE1006 // 命名スタイル
 
-    private Plane[] _cameraPlanes;
-    private float _lastUpdate = 0f;
+
+
+    private Plane[] _cameraPlanes;        // カメラの六面体をキャッシュする変数
+
+    private float _lastUpdate = 0f;       // 一定間隔にするための変数
     private Collider[] _hitsBuffer = new Collider[100];
 
     // HashSetを使用して高速な検索と重複チェックを実現
@@ -81,7 +90,7 @@ public class TestLockOnManager : MonoBehaviour {
     /// 検出されたコライダーを処理し、適切なリストに追加する
     /// </summary>
     private void ProcessHit(Collider hit, Plane[] planes, HashSet<Transform> newTargetsInCamera, HashSet<Transform> newTargetsInCone) {
-        if (hit.CompareTag("Enemy") || hit.CompareTag("EliteMissile")) {
+        if (hit.CompareTag("Enemy") || hit.CompareTag("EliteMissile")) { //あとで書き直したい
             Transform target = hit.transform;
             Renderer renderer = GetCachedRenderer(target);
 
