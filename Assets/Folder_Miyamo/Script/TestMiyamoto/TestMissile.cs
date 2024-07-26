@@ -160,8 +160,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
         // 敵のタグがエリートミサイルだったとき
         if (other.gameObject.CompareTag(_eliteMissile)) {
-            
 
+            other.GetComponent<EliteEnemyHP>().DecreaseHP();
+            Debug.Log("エリートミサイルにあっったよ");
             
         
         }
