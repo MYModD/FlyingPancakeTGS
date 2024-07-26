@@ -100,7 +100,7 @@ public class CanvasManager : MonoBehaviour
             if (Input.GetKeyUp("joystick button 7")) {
                 _isStartPush = true;
             }
-            _canMove=_isStartPush;
+            _canMove=false;
         }
         if (_state == UIState.setting) {
             if (Input.GetButtonDown("Cancel")) {

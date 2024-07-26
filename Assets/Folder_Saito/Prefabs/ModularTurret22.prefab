@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6653195791563557812}
-  m_Layer: 0
+  - component: {fileID: 6339174861460644124}
+  - component: {fileID: 7281832881728650693}
+  m_Layer: 9
   m_Name: ModularTurret22
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +35,69 @@ Transform:
   - {fileID: 720985677328544264}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &6339174861460644124
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184975612142864208}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7281832881728650693
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184975612142864208}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.76, y: 6.75, z: 9.66}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5660133530242556065
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,9 +107,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 720985677328544264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animate1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,9 +140,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8257597918408235538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animate3-1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,9 +180,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771299488940451613}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animate3-2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,9 +220,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6648885437565016363}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animate2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,9 +262,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1138959128764512, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138959128764512, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423369980602672, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423369980602672, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579133720714976, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579133720714976, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1896200609552832, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Breech4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896200609552832, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896200609552832, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4653644879746314, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
       propertyPath: m_RootOrder
@@ -261,7 +358,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65944898931475016, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+    - {fileID: 65804808325529642, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -279,9 +378,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -343,7 +466,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -361,9 +485,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -425,7 +573,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -443,9 +592,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -507,7 +680,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -525,9 +699,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 720985677328544264}
     m_Modifications:
+    - target: {fileID: 1013408853079426, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013408853079426, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143214962119420, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143214962119420, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178967876880352, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178967876880352, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1438868018881788, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Swivel2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438868018881788, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438868018881788, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4780460839139152, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
       propertyPath: m_RootOrder
@@ -586,10 +792,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23705110013193624, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23705110013193624, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65024522935256898, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
+    - {fileID: 65955671371312452, guid: 4c8649fbb9c52cd43a3d84063bcfa600, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -607,9 +819,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1550689869521148, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550689869521148, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1950687834010342, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Details1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950687834010342, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950687834010342, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966265180624362, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966265180624362, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4509412519092138, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
       propertyPath: m_RootOrder
@@ -659,7 +895,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65434270981703394, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -680,6 +917,38 @@ PrefabInstance:
     - target: {fileID: 1026707726983766, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Breech3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026707726983766, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026707726983766, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182839384335962, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182839384335962, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504302349091956, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504302349091956, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647398254471264, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647398254471264, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4504532722190498, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
       propertyPath: m_RootOrder
@@ -729,7 +998,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65601150424348504, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+    - {fileID: 65666091063099804, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -747,9 +1018,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1550689869521148, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550689869521148, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1950687834010342, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Details1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950687834010342, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950687834010342, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966265180624362, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966265180624362, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4509412519092138, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
       propertyPath: m_RootOrder
@@ -799,7 +1094,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65434270981703394, guid: c66f4d684c8a79847a10c4faccbb0610, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -817,9 +1113,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -881,7 +1201,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -899,9 +1220,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -963,7 +1308,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -981,9 +1327,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1138959128764512, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138959128764512, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423369980602672, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423369980602672, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579133720714976, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579133720714976, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1896200609552832, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Breech4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896200609552832, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896200609552832, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4653644879746314, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
       propertyPath: m_RootOrder
@@ -1045,7 +1423,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65944898931475016, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
+    - {fileID: 65804808325529642, guid: 9ca4127f29fc6194d8781032d0fef14d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1063,9 +1443,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Missile2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4459354239990474, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_RootOrder
@@ -1127,7 +1531,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65896079387768186, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1145,9 +1550,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -1209,7 +1638,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1227,9 +1657,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284263224944446, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284263224944446, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386369390694950, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386369390694950, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1939356696907234, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_BarrelDetail2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939356696907234, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939356696907234, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4501490254297778, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
       propertyPath: m_RootOrder
@@ -1291,7 +1745,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65940047519594888, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1309,9 +1764,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6653195791563557812}
     m_Modifications:
+    - target: {fileID: 1581128157709504, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581128157709504, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1914838570228954, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Base3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914838570228954, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914838570228954, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996902493978080, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996902493978080, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4450549521990522, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
       propertyPath: m_RootOrder
@@ -1361,7 +1840,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65201582651436552, guid: 6b1d9495580006b4cadb9f144900b229, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1379,9 +1859,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 6953676766890621932, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953676766890621932, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955107695040830416, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955107695040830416, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955440765295721626, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955440765295721626, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6955581970908177416, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Details6_Mirrored
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955581970908177416, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955581970908177416, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6958790859113966134, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
       propertyPath: m_RootOrder
@@ -1431,7 +1943,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6945766269925453294, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
+    - {fileID: 6947674910066468222, guid: adba0d0a3e97e314fb725d92bb97b02d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1449,9 +1963,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -1513,7 +2051,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1531,9 +2070,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Missile2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4459354239990474, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_RootOrder
@@ -1595,7 +2158,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65896079387768186, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1616,6 +2180,38 @@ PrefabInstance:
     - target: {fileID: 1026707726983766, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Breech3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026707726983766, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026707726983766, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182839384335962, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182839384335962, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504302349091956, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504302349091956, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647398254471264, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647398254471264, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4504532722190498, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
       propertyPath: m_RootOrder
@@ -1665,7 +2261,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65601150424348504, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
+    - {fileID: 65666091063099804, guid: 9ebb44a66ff226b4297c7f6895c85666, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1683,9 +2281,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -1747,7 +2369,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1765,9 +2388,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -1829,7 +2476,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1847,9 +2495,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -1911,7 +2583,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1929,9 +2602,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284263224944446, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284263224944446, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386369390694950, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386369390694950, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1939356696907234, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_BarrelDetail2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939356696907234, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939356696907234, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4501490254297778, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
       propertyPath: m_RootOrder
@@ -1993,7 +2690,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65940047519594888, guid: 22f32580781303a469d8dbfeab6c4fa1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2011,9 +2709,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 771299488940451613}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -2075,7 +2797,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2093,9 +2816,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -2157,7 +2904,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2175,9 +2923,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1054175779965004, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054175779965004, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1374502538991528, guid: 9a445915cd950134185eab776612786e, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Details6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1374502538991528, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1374502538991528, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515605076954938, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515605076954938, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780591854692464, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780591854692464, guid: 9a445915cd950134185eab776612786e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4861507007060374, guid: 9a445915cd950134185eab776612786e, type: 3}
       propertyPath: m_RootOrder
@@ -2227,7 +3007,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65165263561580110, guid: 9a445915cd950134185eab776612786e, type: 3}
+    - {fileID: 65525860335376094, guid: 9a445915cd950134185eab776612786e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2245,9 +3027,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -2309,7 +3115,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2327,9 +3134,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Missile2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4459354239990474, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_RootOrder
@@ -2391,7 +3222,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65896079387768186, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2409,9 +3241,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257597918408235538}
     m_Modifications:
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284821914129768, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Barrel4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431030481502252, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871578982965678, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4114209904085292, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
       propertyPath: m_RootOrder
@@ -2473,7 +3329,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65225889896694154, guid: cdd2b2ba9d62a1b48983f07638de193f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2491,9 +3348,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648885437565016363}
     m_Modifications:
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1454573730875406, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_Name
       value: ModularSci-FiWeapons_Missile2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713965623457330, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771669300332624, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4459354239990474, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
       propertyPath: m_RootOrder
@@ -2555,7 +3436,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6fe2c7c6137a9e94eb62f59d8800f6e0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65896079387768186, guid: cdc5d204a30178844abbc8e865ba36e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
