@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 抽象クラスを継承していて、TはIPoolObjectというインターフェースが必要
+/// </summary>
 public class MissilePoolManager : PoolManager<TestMissile> {
 
     [SerializeField,Header("missileにつける爆発プール")]
@@ -13,7 +16,7 @@ public class MissilePoolManager : PoolManager<TestMissile> {
     // エラーが出たためCreate()したときに設定する    
     protected override TestMissile Create() {
         TestMissile missile = base.Create();
-        missile._explosionPoolManager = this._explosionPoolManager;
+        missile._explosionPoolManager = _explosionPoolManager;
         return missile;
     }
 
