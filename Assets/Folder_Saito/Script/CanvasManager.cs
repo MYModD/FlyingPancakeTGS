@@ -31,6 +31,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("ゲームに戻すタグ"), Tag] private string _tagBackGame;
     [SerializeField, Header("設定に行かせたいタグ"),Tag] private string _tagSetting;
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
+    [SerializeField]
+    private ResultManager _resultManager;
+
+    private float _gamePlayTime;
+
 
     private bool _isStartPush=true;
     private enum UIState {
@@ -67,6 +72,7 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     void Update() {
         if (_state == UIState.gamePlay) {
+            _gamePlayTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Z)) {
                 PlayToResult();
             }
@@ -83,6 +89,7 @@ public class CanvasManager : MonoBehaviour
             if (Input.anyKeyDown&&_isStartPush) {
                 MenuOrResultToStart();
             }
+            _resultManager.SetTexts();
             _canMove= false;
         }
         if (_state == UIState.menu) {
@@ -221,6 +228,9 @@ public class CanvasManager : MonoBehaviour
     }
     public bool CanMove() {
         return _canMove;
+    }
+    public float GamePlayTime() {
+        return _gamePlayTime;
     }
     #endregion
 }
