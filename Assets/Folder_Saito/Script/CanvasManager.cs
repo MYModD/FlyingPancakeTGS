@@ -86,7 +86,7 @@ public class CanvasManager : MonoBehaviour
             _canMove = true;
         }
         if (_state == UIState.result) {
-            if (Input.anyKeyDown&&_isStartPush) {
+            if (Input.GetButtonDown("Cancel") &&_isStartPush) {
                 MenuOrResultToStart();
             }
             _resultManager.SetTexts();

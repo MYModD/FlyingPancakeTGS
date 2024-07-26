@@ -12,6 +12,7 @@ public class ResultManager : MonoBehaviour {
     #region 変数
     [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _clearTimeText;
+    [SerializeField] private TextMeshProUGUI _gameTimeText;
     [SerializeField] private TextMeshProUGUI _rankText;
 
     [SerializeField]
@@ -22,6 +23,7 @@ public class ResultManager : MonoBehaviour {
     private int _killCount;
     private float _clearTime;
 
+    
     //private bool _doSetText=false;
     #endregion
     #region プロパティ
@@ -41,6 +43,7 @@ public class ResultManager : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
+        _gameTimeText.text = ChangeTimeText(_canvasManager.GamePlayTime());
         //_killCountText.text = _killCount.ToString();
         //_clearTimeText.text = ChangeTimeText(_clearTime);
         //_rankText.text = "S";
@@ -81,7 +84,7 @@ public class ResultManager : MonoBehaviour {
         return minuteTime.ToString() + ":" + secondText + ":" + millisecondText;
     }
     public void SetTexts() {
-        //SetKillCount();
+        SetKillCount();
         SetClearTime();
     }
     private void SetKillCount() {

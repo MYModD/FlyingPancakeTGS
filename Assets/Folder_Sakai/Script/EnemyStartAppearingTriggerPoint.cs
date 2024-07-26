@@ -16,7 +16,7 @@ public class EnemyStartAppearingTriggerPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag(_player))
         {
-
+            print("dddf");
             _enemyAppearanceManager.GetEnemyAppearanceManagementValue(_occurrenceManagementIndex);
         }
     }
