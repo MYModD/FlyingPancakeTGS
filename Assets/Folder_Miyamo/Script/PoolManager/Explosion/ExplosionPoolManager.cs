@@ -15,12 +15,13 @@ public class ExplosionPoolManager : PoolManager<Explosion>
     {
         if (_objectPool == null)
         {
-            Debug.LogError("_objectPool is not initialized.");
+            Debug.LogError("オブジェクトがアタッチされてないよ");
             return;
         }
-        Explosion explosion = _objectPool.Get();  
-        explosion.Initialize(); // 初期化
-        explosion.transform.position = startPosition.position;
+
+        Explosion explosion = _objectPool.Get();                   // オブジェクトから取得
+        explosion.Initialize();                                    // 初期化
+        explosion.transform.position = startPosition.position;     // 爆発の位置を引数の位置にする
     }
 
 
