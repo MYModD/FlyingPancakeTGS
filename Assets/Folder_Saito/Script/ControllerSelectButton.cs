@@ -56,6 +56,11 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField, Header("設定画面")] private TextMeshProUGUI _settingText;
     [SerializeField, Header("一時停止")] private TextMeshProUGUI _gameStopText;
     [SerializeField, Header("戻る")] private TextMeshProUGUI _goBackText;
+    [SerializeField, Header("撃破数")] private TextMeshProUGUI _killCountText;
+    [SerializeField, Header("撃破数")] private TextMeshProUGUI _killCountResultText;
+    [SerializeField, Header("タイム")] private TextMeshProUGUI _timeText;
+    [SerializeField, Header("タイム")] private TextMeshProUGUI _timeResultText;
+
 
     private string _englishStart = "Game Start";
     private string _englishFinish = "Quit The Game";
@@ -70,6 +75,9 @@ public class ControllerSelectButton : MonoBehaviour {
     private string _englishTextTrue = "Flip On";
     private string _englishTextFalse = "Flip Off";
     private string _englishGoBack = "Go back with B ";
+    private string _englishKill = "Kill Count";
+    private string _englishTime = "Time";
+    private string _englishResultTime = "Clear Time";
 
     private string _japaneceStart = "ゲームスタート";
     private string _japaneceFinish = "ゲーム終了";
@@ -84,6 +92,9 @@ public class ControllerSelectButton : MonoBehaviour {
     private string _japaneceTextTrue = "オン";
     private string _japaneceTextFalse = "オフ";
     private string _japaneceGoBack = "Bボタンで戻る";
+    private string _japaneceKill = "撃破数";
+    private string _japaneceTime = "経過時間";
+    private string _japaneceResultTime = "クリアタイム";
 
 
     private bool _isLanguageEnglish = false;
@@ -363,6 +374,10 @@ public class ControllerSelectButton : MonoBehaviour {
             _settingText.text = _englishSetting;
             _gameStopText.text = _englishGameStop;
         　　_goBackText.text = _englishGoBack;
+            _timeResultText.text = _englishResultTime;
+            _timeText.text = _englishTime;
+            _killCountResultText.text = _englishKill;
+            _killCountText.text = _englishKill;
         }
         //日本語化
         else {
@@ -377,6 +392,10 @@ public class ControllerSelectButton : MonoBehaviour {
             _settingText.text = _japaneceSetting;
             _gameStopText.text = _japaneceGameStop;
             _goBackText.text = _japaneceGoBack;
+            _timeResultText.text = _japaneceResultTime;
+            _timeText.text = _japaneceTime;
+            _killCountResultText.text = _japaneceKill;
+            _killCountText.text = _japaneceKill;
         }
         SetTextOnOff(_textBGM, _verticalInversion);
         SetTextOnOff(_textSE, _horizontalInversion);

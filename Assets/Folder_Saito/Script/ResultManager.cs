@@ -81,7 +81,7 @@ public class ResultManager : MonoBehaviour {
         return minuteTime.ToString() + ":" + secondText + ":" + millisecondText;
     }
     public void SetTexts() {
-        SetKillCount();
+        //SetKillCount();
         SetClearTime();
     }
     private void SetKillCount() {
