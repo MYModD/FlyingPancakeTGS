@@ -553,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &317485288915265265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &973263674027108249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,7 +2310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &2273758295623615945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,7 +2539,6 @@ MonoBehaviour:
   - {fileID: 1408683688054093598}
   - {fileID: 993435435403363674}
   _resultObjs:
-  - {fileID: 0}
   - {fileID: 8202729181092284449}
   - {fileID: 5768989114717232845}
   - {fileID: 8127662428331431058}
@@ -2564,6 +2563,7 @@ MonoBehaviour:
   _tagBackGame: BackGame
   _tagSetting: GoSetting
   _tagFinish: GameFinish
+  _resultManager: {fileID: 8911982367540942950}
 --- !u!224 &2706168606505397980
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4677,7 +4677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5738444085911120086
 GameObject:
   m_ObjectHideFlags: 0
@@ -4711,7 +4711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5769447950231049754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4790,6 +4790,10 @@ MonoBehaviour:
   _settingText: {fileID: 1654043653807580364}
   _gameStopText: {fileID: 7921749454836556289}
   _goBackText: {fileID: 4277492950948569747}
+  _killCountText: {fileID: 672279536529732418}
+  _killCountResultText: {fileID: 1195206715862422631}
+  _timeText: {fileID: 1284365476602020664}
+  _timeResultText: {fileID: 2541578164139231798}
 --- !u!224 &5859818089558973446
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6498,7 +6502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &8140340244437429283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6597,7 +6601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8202729181092284449
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,7 +6619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8232833344477485574
 GameObject:
   m_ObjectHideFlags: 0
@@ -7043,6 +7047,8 @@ MonoBehaviour:
   _killCountText: {fileID: 4153950756822415526}
   _clearTimeText: {fileID: 7335833256436678642}
   _rankText: {fileID: 4346117119999491933}
+  _numDefeats: {fileID: 0}
+  _canvasManager: {fileID: 2646832139400053795}
 --- !u!222 &8943885052000017305
 CanvasRenderer:
   m_ObjectHideFlags: 0
