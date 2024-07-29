@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &102413158
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &120026466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4703804435602058, guid: c3672f9b2e0555e418f7dcc46c6d0d10, type: 3}
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &216931905
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &264364210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &385998372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2830,7 +2830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &489445431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,7 +3668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &572711678
 GameObject:
   m_ObjectHideFlags: 0
@@ -3924,7 +3924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &681521456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4122,7 +4122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &699358363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084037660503964, guid: aea52f5da97018c4aaecffcdfa9035d8, type: 3}
@@ -4289,7 +4289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &766076196
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,7 +4348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &798404986 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1042197431107668, guid: ec5d6bc6e2d4942448a8b3d9eddf3865, type: 3}
@@ -4366,7 +4366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &798404991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4412613268411976, guid: ec5d6bc6e2d4942448a8b3d9eddf3865, type: 3}
@@ -4599,7 +4599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &825730425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4618546184181590, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
@@ -5097,7 +5097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &918398289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5408,7 +5408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &919634183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5546,7 +5546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &939275262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084037660503964, guid: aea52f5da97018c4aaecffcdfa9035d8, type: 3}
@@ -5854,6 +5854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectsManager: {fileID: 0}
+  _countTheNumberOfDefeats: {fileID: 0}
 --- !u!1 &1000406438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 989506424393261293, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
@@ -6300,7 +6301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1027418313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1171684472522874, guid: 74d0740f4abc7e54fab50d33af2582da, type: 3}
@@ -6323,7 +6324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &1034635784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6866,7 +6867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1097642553
 GameObject:
   m_ObjectHideFlags: 0
@@ -7211,7 +7212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &1224962488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7787,7 +7788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1304598259
 GameObject:
   m_ObjectHideFlags: 0
@@ -8002,7 +8003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &1307070209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4412613268411976, guid: ec5d6bc6e2d4942448a8b3d9eddf3865, type: 3}
@@ -8198,7 +8199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1314650593
 GameObject:
   m_ObjectHideFlags: 0
@@ -8248,6 +8249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectsManager: {fileID: 0}
+  _countTheNumberOfDefeats: {fileID: 0}
 --- !u!1 &1335775816
 GameObject:
   m_ObjectHideFlags: 0
@@ -8586,7 +8588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1001 &1349154159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9037,7 +9039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1397630334
 GameObject:
   m_ObjectHideFlags: 0
@@ -9845,7 +9847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &1449282520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084037660503964, guid: aea52f5da97018c4aaecffcdfa9035d8, type: 3}
@@ -10280,7 +10282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1504372572
 GameObject:
   m_ObjectHideFlags: 0
@@ -10802,7 +10804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1560125560
 GameObject:
   m_ObjectHideFlags: 0
@@ -11291,7 +11293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1638543467
 GameObject:
   m_ObjectHideFlags: 0
@@ -11526,7 +11528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &1672036169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6071976402222636135, guid: 362024f0af96ed44b9e1adffd8099508, type: 3}
@@ -13938,7 +13940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!1 &1870720073
 GameObject:
   m_ObjectHideFlags: 0
@@ -13992,7 +13994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &1904854981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084037660503964, guid: aea52f5da97018c4aaecffcdfa9035d8, type: 3}
@@ -14265,6 +14267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectsManager: {fileID: 0}
+  _countTheNumberOfDefeats: {fileID: 0}
 --- !u!1001 &2019141137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14566,7 +14569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &2039543719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084037660503964, guid: aea52f5da97018c4aaecffcdfa9035d8, type: 3}
@@ -14589,7 +14592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!4 &2069087337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4084037660503964, guid: aea52f5da97018c4aaecffcdfa9035d8, type: 3}
@@ -14681,7 +14684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36e650b6dfea6e469c46e04eb050744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __speed: 5
+  _speed: 5
 --- !u!114 &2130820829 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5617473979150903475, guid: c8768c71533f47c4791a2b298ad2b5ba, type: 3}

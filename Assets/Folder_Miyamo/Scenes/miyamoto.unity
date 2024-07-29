@@ -1846,10 +1846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43baed8117e93049b7568153288e57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __timer: 0
+  _timer: 1
   _gravity: 0
   _enemyTag: 
-  _offtimeValue: 0
 --- !u!4 &1364321993
 Transform:
   m_ObjectHideFlags: 0
@@ -1897,10 +1896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43baed8117e93049b7568153288e57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  __timer: 0
+  _timer: 1
   _gravity: 0
   _enemyTag: 
-  _offtimeValue: 0
 --- !u!4 &1657689749
 Transform:
   m_ObjectHideFlags: 0

@@ -253,6 +253,9 @@ MonoBehaviour:
   _lookAtObj: {fileID: 649869442519879985}
   _camera: {fileID: 4414799687743529377}
   _splineAnimate: {fileID: 1216086595531297098}
+  _canvas: {fileID: 0}
+  _selectButton: {fileID: 0}
+  _aa: {fileID: 0}
 --- !u!1 &7872530188046765274
 GameObject:
   m_ObjectHideFlags: 0
