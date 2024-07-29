@@ -146,8 +146,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     private void OnTriggerEnter(Collider other) {
         print("Õ“Ë");
 
-        // “G‚Ìƒ^ƒO‚ª‚ª•’Ê‚Ì“G‚¾‚Á‚½‚Æ‚«
-        if (other.gameObject.CompareTag(_enemyTag)) {
+        // “G‚Ìƒ^ƒO‚ª‚ª•’Ê‚Ì“G‚Å•W“I‚Ì“G‚Æ“¯‚¶‚¾‚Á‚½‚Æ‚«
+        if (other.gameObject.CompareTag(_enemyTag) || other.transform == _enemyTarget) {
 
             print($"{other.gameObject.name}‚ÉÕ“Ë");
             other.gameObject.SetActive(false);                           // “G‚ÌsetActive‚ğfalse
