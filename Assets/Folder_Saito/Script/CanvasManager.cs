@@ -72,6 +72,7 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     void Update() {
         if (_state == UIState.gamePlay) {
+            _spAnime.enabled = true;
             _gamePlayTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Z)) {
                 PlayToResult();

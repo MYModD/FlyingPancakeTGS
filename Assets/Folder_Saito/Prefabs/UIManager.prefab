@@ -6760,11 +6760,13 @@ MonoBehaviour:
   - {fileID: 2287850716535298638}
   - {fileID: 5196072201311594983}
   _gameObjs: []
+  _spAnime: {fileID: 0}
   _tagTitle: 
   _tagGame: GoGame
   _tagBackGame: BackGame
   _tagSetting: GoSetting
   _tagFinish: GameFinish
+  _resultManager: {fileID: 0}
 --- !u!114 &2083306835476152358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6816,3 +6818,7 @@ MonoBehaviour:
   _settingText: {fileID: 6525593692893473754}
   _gameStopText: {fileID: 2419684499117583639}
   _goBackText: {fileID: 8585956832999615877}
+  _killCountText: {fileID: 0}
+  _killCountResultText: {fileID: 0}
+  _timeText: {fileID: 0}
+  _timeResultText: {fileID: 0}
