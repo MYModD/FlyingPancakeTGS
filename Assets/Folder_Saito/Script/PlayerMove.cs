@@ -31,6 +31,8 @@ public class PlayerMove : MonoBehaviour {
     [SerializeField, Header("CanvasManagerのオブジェクトをいれ")] private CanvasManager _canvas;
     [SerializeField] private ControllerSelectButton _selectButton;
 
+    [SerializeField] GameObject _aa;
+    bool _a = true;
     private float _stopTime;
     private float _nowTime;
     private bool _isStop = false;
@@ -47,8 +49,11 @@ public class PlayerMove : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
+
+        
         if (!_canvas.CanMove())
-        {
+        {            
+           
             return;
         }
         StopOrMoving();

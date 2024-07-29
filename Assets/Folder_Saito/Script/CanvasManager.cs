@@ -86,7 +86,7 @@ public class CanvasManager : MonoBehaviour
             _canMove = true;
         }
         if (_state == UIState.result) {
-            if (Input.anyKeyDown&&_isStartPush) {
+            if (Input.GetButtonDown("Cancel") &&_isStartPush) {
                 MenuOrResultToStart();
             }
             _resultManager.SetTexts();
@@ -100,7 +100,7 @@ public class CanvasManager : MonoBehaviour
             if (Input.GetKeyUp("joystick button 7")) {
                 _isStartPush = true;
             }
-            _canMove=_isStartPush;
+            _canMove=false;
         }
         if (_state == UIState.setting) {
             if (Input.GetButtonDown("Cancel")) {
