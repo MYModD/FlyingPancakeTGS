@@ -4,70 +4,48 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
-    #region •Ï” + ƒvƒƒpƒeƒB  
+    #region ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ + ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
+    [SerializeField, Header("ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ")]
+    public Transform _enemyTarget; // æ•µã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 
-    [SerializeField, Header("–Ú•Wƒ^[ƒQƒbƒg")]
-    public Transform _enemyTarget;                // ‚ ‚Æ‚Åset = value get private‚É•Ï‚¦‚é‚©‚à
-
-    [SerializeField, Header("‚ ‚½‚è‚â‚·‚³ 0.1ƒfƒtƒH")]
+    [SerializeField, Header("å›è»¢è£œé–“ 0.1ãƒ‡ãƒ•ã‚©")]
     [Range(0f, 1f)]
-<<<<<<< HEAD
-    private  float _lerpT = 0.1f;
+    private float _lerpT = 0.1f;
 
-    [SerializeField, Header("ƒXƒs[ƒh")]
-    private  float _speed;
+    [SerializeField, Header("ã‚¹ãƒ”ãƒ¼ãƒ‰")]
+    private float _speed;
 
-    [SerializeField, Header("”òsŠÔ")]
-    private  float _timer = 10f;
+    [SerializeField, Header("ç™ºå°„æ™‚é–“")]
+    private float _timer = 10f;
 
-    [SerializeField, Header("ƒ‰ƒ“ƒ_ƒ€‚Ì”ÍˆÍA—Í")]
+    [SerializeField, Header("ãƒ©ãƒ³ãƒ€ãƒ ãªåŠ›ã®ç¯„å›²")]
     private float _randomPower = 5f;
-=======
-    public float _lerpT = 0.1f;
 
-    [Header("ƒXƒs[ƒh")]
-    public float _speed;
+    [SerializeField, Header("ãƒ©ãƒ³ãƒ€ãƒ ãªåŠ›ã®é©ç”¨æ™‚é–“")]
+    private float _random_timer = 10f;
 
-    [Header("”òsŠÔ")]
-    public float _timer = 10f;
+    [SerializeField, Header("Gforceã®æœ€å¤§å€¤")]
+    private float _maxAcceleration = 10f;
 
-    [Header("ƒ‰ƒ“ƒ_ƒ€‚Ì”ÍˆÍA—Í")]
-    public float _randomPower = 5f;
->>>>>>> origin/Sakai
-
-    [SerializeField, Header("ƒ‰ƒ“ƒ_ƒ€‚ª“K—p‚³‚ê‚éŠÔ")]
-    private  float _random_timer = 10f;
-
-<<<<<<< HEAD
-    [SerializeField, Header("Gforce‚ÌÅ‘å’l")]
-    private  float _maxAcceleration = 10f;
-=======
-    [Header("Gforce‚ÌÅ‘å’l")]
-    public float _maxAcceleration = 10f;
->>>>>>> origin/Sakai
-
-
-    [SerializeField,Header("“G‚Ìƒ^ƒO")]
+    [SerializeField, Header("æ•µã®ã‚¿ã‚°")]
     [Tag]
     private string _enemyTag;
 
-    [SerializeField,Header("“G‚Ìƒ^ƒO")]
+    [SerializeField, Header("ã‚¨ãƒªãƒ¼ãƒˆãƒŸã‚µã‚¤ãƒ«ã®ã‚¿ã‚°")]
     [Tag]
     private string _eliteMissile;
 
-
-    public ExplosionPoolManager _explosionPoolManager{
+    public ExplosionPoolManager _explosionPoolManager {
         set; private get;
     }
 
-
     private Rigidbody _rigidbody;
-    private float _offtimeValue; //ƒ~ƒTƒCƒ‹‚ÌŠÔŒvZ—p
-    private float _off_timerandomValue; //ƒ~ƒTƒCƒ‹‚ÌŠÔŒvZ—p
-    private Vector3 _previousVelocity; //‘O‚Ì‰Á‘¬“x
+    private float _offtimeValue; // ãƒŸã‚µã‚¤ãƒ«ã®æ®‹ã‚Šæ™‚é–“
+    private float _off_timerandomValue; // ãƒ©ãƒ³ãƒ€ãƒ åŠ›ã®é©ç”¨æ™‚é–“ã®æ®‹ã‚Š
+    private Vector3 _previousVelocity; // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã®é€Ÿåº¦
 
-    private const float ONEG = 9.81f;  //1G‚Ì‰Á‘¬“x
+    private const float ONEG = 9.81f; // 1Gã®åŠ é€Ÿåº¦
 
     public IObjectPool<TestMissile> ObjectPool {
         get; set;
@@ -75,117 +53,89 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     #endregion
 
-    #region ƒƒ\ƒbƒh
-    //-------------------------------objectpoolƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìˆ—--------------------------------
+    #region ãƒ¡ã‚½ãƒƒãƒ‰
+
+    // -------------------------------ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ—ãƒ¼ãƒ«ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å®Ÿè£…--------------------------------
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     public void Initialize() {
         _offtimeValue = _timer;
     }
 
     /// <summary>
-    /// ƒv[ƒ‹‚É–ß‚·ˆ—
+    /// ãƒ—ãƒ¼ãƒ«ã«æˆ»ã™
     /// </summary>
     public void ReturnToPool() {
-
-        ObjectPool.Release(this);      
+        ObjectPool.Release(this);
     }
 
-
-    //-------------------------------ƒ~ƒTƒCƒ‹‚Ìˆ—--------------------------------
+    // -------------------------------ãƒŸã‚µã‚¤ãƒ«ã®å‡¦ç†--------------------------------
 
     void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
-
     }
 
     void FixedUpdate() {
         if (_enemyTarget == null) {
-            Debug.LogError("ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚È‚¢‚æ");
+            Debug.LogError("ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
             return;
         }
 
-        if (_enemyTarget.gameObject.activeSelf == false)  // ƒ^[ƒQƒbƒg‚ÌƒAƒNƒeƒBƒu‚ªfalse‚Ì‚Æ‚«•Ô‚·
+        if (!_enemyTarget.gameObject.activeSelf) // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒéã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã®å ´åˆ
         {
             ReturnToPool();
-
+            return;
         }
 
-        // ƒ^ƒCƒ}[ offtimeValue‚ª0‚É‚È‚Á‚½‚çƒv[ƒ‹‚É•Ô‚·
+        // ã‚¿ã‚¤ãƒãƒ¼ãŒ0ã«ãªã£ãŸã‚‰ãƒ—ãƒ¼ãƒ«ã«æˆ»ã™
         _offtimeValue = Mathf.Max(0, _offtimeValue - Time.fixedDeltaTime);
         if (_offtimeValue == 0) {
-
             ReturnToPool();
+            return;
         }
 
-
         CalculationFlying();
-
     }
 
-
-
     private void CalculationFlying() {
-
-        // ‘Oi‚·‚é
+        // å‰é€²ã™ã‚‹
         _rigidbody.velocity = transform.forward * _speed;
 
         Vector3 currentVelocity = _rigidbody.velocity;
-        //(¡‚Ì‰Á‘¬“x - ‘O‚Ì‰Á‘¬“x)/ ŠÔ
+        // (ç¾åœ¨ã®é€Ÿåº¦ - å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã®é€Ÿåº¦) / æ™‚é–“
         Vector3 acceleration = (currentVelocity - _previousVelocity) / Time.fixedDeltaTime;
         _previousVelocity = currentVelocity;
 
-
-        // ‰Á‘¬“x‚Ì‘å‚«‚³          1G=9.81 m/s2‚ÅŠ„‚Á‚Ä‚é
+        // åŠ é€Ÿåº¦ã®å¤§ãã•ã‚’1Gã§å‰²ã‚‹
         float gForce = acceleration.magnitude / ONEG;
 
-
-        // Gforce‚ª_maxAcceleration’´‚¦‚Ä‚¢‚é‚Æ‚«return
+        // GforceãŒ_maxAccelerationã‚’è¶…ãˆãŸã‚‰çµ‚äº†
         if (gForce > _maxAcceleration) {
             return;
         }
 
         Vector3 diff = _enemyTarget.position - transform.position;
-
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
-
-        // ‹…–ÊüŒ`•âŠÔ‚ğg‚Á‚Ä‰ñ“]‚ğ™X‚Éƒ^[ƒQƒbƒg‚ÉŒü‚¯‚é
+        // å¾ã€…ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«å‘ã‘ã¦å›è»¢ã™ã‚‹
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
-
-
     }
 
-
-
-
-
     private void OnTriggerEnter(Collider other) {
-        print("Õ“Ë");
-
-        // “G‚Ìƒ^ƒO‚ª‚ª•’Ê‚Ì“G‚¾‚Á‚½‚Æ‚«
+        // æ•µã®ã‚¿ã‚°ã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¡çªã—ãŸå ´åˆ
         if (other.gameObject.CompareTag(_enemyTag)) {
-
-            print($"{other.gameObject.name}‚ÉÕ“Ë");
-            other.gameObject.SetActive(false);                           // “G‚ÌsetActive‚ğfalse
-            _explosionPoolManager.StartExplosion(other.transform);       // ”š”­ŠJn
-            ReturnToPool();                                              // ƒ~ƒTƒCƒ‹‚ğƒv[ƒ‹‚É•ÏŠ·
+            other.gameObject.SetActive(false); // æ•µã‚’éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
+            _explosionPoolManager.StartExplosion(other.transform); // çˆ†ç™ºã‚’é–‹å§‹ã™ã‚‹
+            ReturnToPool(); // ãƒŸã‚µã‚¤ãƒ«ã‚’ãƒ—ãƒ¼ãƒ«ã«æˆ»ã™
         }
 
-
-        // “G‚Ìƒ^ƒO‚ªƒGƒŠ[ƒgƒ~ƒTƒCƒ‹‚¾‚Á‚½‚Æ‚«
+        // ã‚¨ãƒªãƒ¼ãƒˆãƒŸã‚µã‚¤ãƒ«ã®ã‚¿ã‚°ã‚’æŒã¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¡çªã—ãŸå ´åˆ
         if (other.gameObject.CompareTag(_eliteMissile)) {
-
             other.GetComponent<EliteEnemyHP>().DecreaseHP();
-            Debug.Log("ƒGƒŠ[ƒgƒ~ƒTƒCƒ‹‚É‚ ‚Á‚Á‚½‚æ");
-            
-        
+            Debug.Log("ã‚¨ãƒªãƒ¼ãƒˆãƒŸã‚µã‚¤ãƒ«ã«å‘½ä¸­ã—ã¾ã—ãŸ");
         }
-
     }
 
     #endregion
-
-
 }
