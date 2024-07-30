@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Folder_Miyamo/Script/EliteEnemyHP.cs.meta
 guid: 376cbd4f184f53947ba6a617ee416c4f
+========
+guid: 76376ca8228d0f3418b2c9a1de3de561
+>>>>>>>> origin/Sakai:Assets/Folder_Sakai/Script/EnemyMoveSpline.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -12,6 +12,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     [SerializeField, Header("あたりやすさ 0.1デフォ")]
     [Range(0f, 1f)]
+<<<<<<< HEAD
     private  float _lerpT = 0.1f;
 
     [SerializeField, Header("スピード")]
@@ -22,12 +23,29 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     [SerializeField, Header("ランダムの範囲、力")]
     private float _randomPower = 5f;
+=======
+    public float _lerpT = 0.1f;
+
+    [Header("スピード")]
+    public float _speed;
+
+    [Header("飛行時間")]
+    public float _timer = 10f;
+
+    [Header("ランダムの範囲、力")]
+    public float _randomPower = 5f;
+>>>>>>> origin/Sakai
 
     [SerializeField, Header("ランダムが適用される時間")]
     private  float _random_timer = 10f;
 
+<<<<<<< HEAD
     [SerializeField, Header("Gforceの最大値")]
     private  float _maxAcceleration = 10f;
+=======
+    [Header("Gforceの最大値")]
+    public float _maxAcceleration = 10f;
+>>>>>>> origin/Sakai
 
 
     [SerializeField,Header("敵のタグ")]

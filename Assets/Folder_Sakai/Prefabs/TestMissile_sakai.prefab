@@ -162,8 +162,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
+<<<<<<< HEAD:Assets/Folder_Sakai/Prefabs/TestMissile_sakai.prefab
   _lerpT: 0.9
   _speed: 3000
+=======
+  _lerpT: 0.1
+  _speed: 4000
+>>>>>>> origin/Sakai:Assets/Folder_Miyamo/Prefab/TestPrefab/TestMissile_Miya.prefab
   _timer: 10
   _randomPower: 5
   _random_timer: 10

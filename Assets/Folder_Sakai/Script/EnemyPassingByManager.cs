@@ -6,8 +6,11 @@ public class EnemyPassingByManager : MonoBehaviour {
     [SerializeField] private GameObject _enemyPassingByRight;
     [SerializeField] private GameObject _enemyPassingByLeft;
     [SerializeField] private float[] _timeToPopEnemy;
+<<<<<<< HEAD
     //private EnemiesPassingThroughMoveSpline _enemiesPassingThroughMoveSplineRight;
     //private EnemiesPassingThroughMoveSpline _enemiesPassingThroughMoveSplineLeft;
+=======
+>>>>>>> origin/Sakai
     private EnemyMoveSpline _enemyMoveSplineRigft;
     private EnemyMoveSpline _enemyMoveSplineLeft;
 
