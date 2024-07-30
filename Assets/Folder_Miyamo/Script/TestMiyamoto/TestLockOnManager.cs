@@ -7,7 +7,7 @@ public class TestLockOnManager : MonoBehaviour {
 
     [Header("ターゲットのリスト")]
     public List<Transform> _targetsInCamera = new List<Transform>();
-    public List<Transform> _targetsInCone = new List<Transform>();
+    public MissileStuck[] _missileStucks;
 
     [SerializeField, Header("カメラ設定")] private Camera _camera;
 
@@ -47,12 +47,19 @@ public class TestLockOnManager : MonoBehaviour {
 
     #region メソッド
 
+    private void Start() {
+        foreach (var item in _missileStucks) {
+            Debug.Log(item.transform);
+        }
+    }
+
     private void Update() {
         // 一定間隔でターゲットを更新
         if (Time.time - _lastUpdate >= UPDATE_INTERVAL) {
             UpdateTargets();
             _lastUpdate = Time.time;
         }
+
     }
 
     #endregion
@@ -63,6 +70,7 @@ public class TestLockOnManager : MonoBehaviour {
     /// ターゲットリストを更新する
     /// </summary>
     private void UpdateTargets() {
+        // Planeにカメラの六面体の形をキャッシュする
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
 
         HashSet<Transform> newTargetsInCamera = new HashSet<Transform>();
@@ -83,7 +91,7 @@ public class TestLockOnManager : MonoBehaviour {
 
         // ターゲットリストを更新
         UpdateTargetList(_targetsInCamera, _targetsInCameraSet, newTargetsInCamera);
-        UpdateTargetList(_targetsInCone, _targetsInConeSet, newTargetsInCone);
+        //UpdateTargetList(_targetsInCone, _targetsInConeSet, newTargetsInCone);
     }
 
     /// <summary>

@@ -42,7 +42,7 @@ public class TestTrackingUI : MonoBehaviour
     void Update()
     {
         UpdateUIPositions(_lockOnManager._targetsInCamera, _enemyInCameraImages);
-        UpdateUIPositions(_lockOnManager._targetsInCone, _enemyInConeImages);
+        //UpdateUIPositions(_lockOnManager._targetsInCone, _enemyInConeImages);
     }
 
     /// <summary>

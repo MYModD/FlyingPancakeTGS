@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour {
 
     #region メソッド
 
+
     
     void Update() {
 
@@ -62,15 +63,15 @@ public class GameController : MonoBehaviour {
 
         if (hoge)       
         {
-            var enemies = _testLockOnManager._targetsInCone;
+            //var enemies = _testLockOnManager._targetsInCone;
 
-            foreach (Transform enemy in enemies) {
+            //foreach (Transform enemy in enemies) {
 
-                _missilePoolManager.FireMissile(enemy, _fireMissilePosition);
-            }
+            //    _missilePoolManager.FireMissile(enemy, _fireMissilePosition);
+            //}
 
-            // クールタイムをリセット
-            _missileCooldownTimer = _missileCoolTime;
+            //// クールタイムをリセット
+            //_missileCooldownTimer = _missileCoolTime;
         }
 
         if (Input.GetKey(KeyCode.K)) {
