@@ -47,12 +47,6 @@ public class TestLockOnManager : MonoBehaviour {
 
     #region メソッド
 
-    private void Start() {
-        foreach (var item in _missileStucks) {
-            Debug.Log(item.transform);
-        }
-    }
-
     private void Update() {
         // 一定間隔でターゲットを更新
         if (Time.time - _lastUpdate >= UPDATE_INTERVAL) {
@@ -91,7 +85,7 @@ public class TestLockOnManager : MonoBehaviour {
 
         // ターゲットリストを更新
         UpdateTargetList(_targetsInCamera, _targetsInCameraSet, newTargetsInCamera);
-        //UpdateTargetList(_targetsInCone, _targetsInConeSet, newTargetsInCone);
+        UpdateTargetList(_targetsInCone, _targetsInConeSet, newTargetsInCone);
     }
 
     /// <summary>
@@ -143,6 +137,8 @@ public class TestLockOnManager : MonoBehaviour {
     private Renderer GetCachedRenderer(Transform target) {
         if (!_rendererCache.TryGetValue(target, out Renderer renderer)) {
             renderer = target.GetComponent<Renderer>();
+            
+            // 
             if (renderer != null) {
                 _rendererCache[target] = renderer;
             }
