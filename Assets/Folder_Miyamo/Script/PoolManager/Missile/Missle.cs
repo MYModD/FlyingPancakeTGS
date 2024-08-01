@@ -7,7 +7,7 @@ public class Missile : MonoBehaviour
 {
 
     [Header("目標ターゲット")]
-    public Transform target;                //あとでset = value get privateに変えるかも
+    public Transform _target;                //あとでset = value get privateに変えるかも
 
     [Header("必中の場合チェック")]
     public bool _hissatsu = true;
@@ -50,14 +50,14 @@ public class Missile : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target == null)
+        if (_target == null)
         {
             Debug.LogError("アタッチされてないよ"); 
             return;
         }
 
 
-        if (target.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
+        if (_target.gameObject.activeSelf == false)  //ターゲットのアクティブがfalseのとき返す
         {
             PoolReurn();
         }
@@ -97,7 +97,7 @@ public class Missile : MonoBehaviour
             return;
         }
 
-        Vector3 diff = target.position - transform.position;
+        Vector3 diff = _target.position - transform.position;
 
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 

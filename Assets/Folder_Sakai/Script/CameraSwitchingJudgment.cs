@@ -12,10 +12,11 @@ public class CameraSwitchingJudgment : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other) {
+
         if (other.gameObject.CompareTag(_player)) {
  
             _cameraManager.GetCameraSwitchingValue(_switchiCameraManagementIndex,_stopTime);
             _playerMove.StopMoving(_stopTime);
-        }
+         }
     }
 }
