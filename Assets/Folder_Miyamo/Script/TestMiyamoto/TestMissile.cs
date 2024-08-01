@@ -7,7 +7,10 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
 
 
-    [SerializeField, Header("目標ターゲット")]
+    [Header("ミサイルスタック（仮)")]
+    public MissileStuck _missileStuck;
+
+    [Header("目標ターゲット")]
     public Transform _enemyTarget;                // あとでset = value get privateに変えるかも
 
     [SerializeField, Header("あたりやすさ 0.1デフォ")]
@@ -152,6 +155,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             print($"{other.gameObject.name}に衝突");
             other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
             _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
+            _missileStuck.Initialize();
             ReturnToPool();                                              // ミサイルをプールに変換
         }
 
@@ -160,6 +164,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         if (other.gameObject.CompareTag(_eliteMissile)) {
 
             other.GetComponent<EliteEnemyHP>().DecreaseHP();
+            _missileStuck.Initialize();
             Debug.Log("エリートミサイルにあっったよ");
             
         

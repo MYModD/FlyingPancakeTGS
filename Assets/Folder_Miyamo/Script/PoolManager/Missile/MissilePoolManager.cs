@@ -10,7 +10,8 @@ public class MissilePoolManager : PoolManager<TestMissile> {
     [SerializeField,Header("missileにつける爆発プール")]
     public ExplosionPoolManager _explosionPoolManager;
 
-
+    [SerializeField, Header("ミサイルスタックの配列")]
+    private MissileStuck[] _missileStucks;
     
     // testmissileでExplosionPoolManager設定すると
     // エラーが出たためCreate()したときに設定する    
@@ -20,7 +21,27 @@ public class MissilePoolManager : PoolManager<TestMissile> {
         return missile;
     }
 
+    public void FireMissiles(Transform firePosition) {
 
+        foreach (MissileStuck item in _missileStucks) {
+
+            bool canFire = item._enemyTarget != null && item._canFire == true && item._isFired == false;
+            if (canFire) {
+
+                TestMissile missile = _objectPool.Get();
+                missile.Initialize();                       //初期化
+                missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
+                missile._enemyTarget = item._enemyTarget;
+
+            }
+
+        }
+    }
+
+
+
+
+    /*  gamepad側でforeachするよりこっちでforeachしたかったためコメント化
     /// <summary>
     /// 外部から実行される オブジェクトプールから取得する
     /// </summary>
@@ -30,4 +51,9 @@ public class MissilePoolManager : PoolManager<TestMissile> {
         missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
         missile._enemyTarget = enemyTarget;
     }
+    */
+
+
+
+
 }

@@ -16,7 +16,7 @@ public class MissileStuckManager : MonoBehaviour
     private void Start() {
         for (int i = 0; i < _missileStucks.Length; i++) {
 
-            _missileStucks[i]._isFire = true;
+            _missileStucks[i]._isFired= true;
 
         }
     }
@@ -33,9 +33,9 @@ public class MissileStuckManager : MonoBehaviour
 
         for (int i = 0; i < _testNum; i++) {
 
-            if (_missileStucks[i]._isFire) {
+            if (_missileStucks[i]._isFired) {
 
-                _missileStucks[i].Hit();
+                //_missileStucks[i].Hit();
             }
 
         }

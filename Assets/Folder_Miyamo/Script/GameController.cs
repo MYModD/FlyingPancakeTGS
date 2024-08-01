@@ -48,8 +48,6 @@ public class GameController : MonoBehaviour {
 
 
     #region メソッド
-
-
     
     void Update() {
 
@@ -57,21 +55,14 @@ public class GameController : MonoBehaviour {
         // ミサイル発射のクールタイム計算
         _missileCooldownTimer -= Time.deltaTime;
 
-        bool hoge = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
+        // スペースもしくはGamePadの下ボタンを押していてかつクールタイムが0以下のとき
+        bool canFire = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
              && (_missileCooldownTimer <= 0);
 
 
-        if (hoge)       
+        if (canFire)       
         {
-            //var enemies = _testLockOnManager._targetsInCone;
-
-            //foreach (Transform enemy in enemies) {
-
-            //    _missilePoolManager.FireMissile(enemy, _fireMissilePosition);
-            //}
-
-            //// クールタイムをリセット
-            //_missileCooldownTimer = _missileCoolTime;
+            _missilePoolManager.FireMissiles(_fireMissilePosition);
         }
 
         if (Input.GetKey(KeyCode.K)) {

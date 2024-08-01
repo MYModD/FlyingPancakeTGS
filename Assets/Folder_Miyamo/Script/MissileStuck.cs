@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class MissileStuck : MonoBehaviour
 {
-    [SerializeField,Header("ターゲット目標")]
-    private  Transform _enemyTarget;
+    
+    public Transform _enemyTarget {get;private set;
+    }
 
-    [Header("クールタイム")]
-    public float _coolTime = 0.3f;
+    [Header("ロックオンできる時間")]
+    public float _timer = 5f;
 
     [Header("発射可能か")]
     public bool _canFire = true;
@@ -19,17 +20,51 @@ public class MissileStuck : MonoBehaviour
 
 
     private void Start() {
-        _canFire = true;
+        // 初期化
+        Initialize();
     }
 
-    public void LockOnReady(Transform targetEnemy) {
+
+
+
+    public void TargetLockOn(Transform targetEnemy) {
         _canFire = false;
         _enemyTarget = targetEnemy;
+
+        StartCoroutine(nameof(StartTimer));
+    }
+
+
+    IEnumerator StartTimer() {
+        yield return new WaitForSeconds(_timer);
+        Initialize();
     }
 
 
 
-    
+
+
+    public void FireMissile() {
+         _isFired = true;
+
+
+    }
+
+
+
+
+
+
+    /// <summary>
+    /// 初期化、
+    /// </summary>
+    public void Initialize() {
+        _canFire = true;
+        _isFired = false;
+        _enemyTarget = null;
+
+    }
+
 
 
 }

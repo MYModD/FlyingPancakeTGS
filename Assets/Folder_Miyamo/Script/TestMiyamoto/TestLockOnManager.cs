@@ -1,158 +1,110 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
 public class TestLockOnManager : MonoBehaviour {
-    #region 変数
 
-    [Header("ターゲットのリスト")]
+    [Header("カメラの視界に入っているターゲットのリスト")]
     public List<Transform> _targetsInCamera = new List<Transform>();
+
+    [Header("錐体内に入っているターゲットのリスト")]
+    public List<Transform> _targetsInCone = new List<Transform>();
+
     public MissileStuck[] _missileStucks;
 
-    [SerializeField, Header("カメラ設定")] private Camera _camera;
+    [Header("プレイヤーのTransformを指定")]
+    [SerializeField, Header("プレイヤーのTransform")]
+    private Transform _player;
 
-    [SerializeField,Header("ロックオンの範囲")] private float _searchRadius = 5000f;
-    
-    [SerializeField, Header("コーンの角度")]
-    [Range(0f, 180f)]private float _coneAngle = 45f;
+    [SerializeField, Header("カメラ指定")]
+    private Camera _camera;
 
-    [SerializeField,Header("コーンの長さ")] private float _coneRange;
+    [SerializeField, Header("spherecastの半径")]
+    private float _searchRadius = 95f;
 
-    [SerializeField, Header("プレイヤーのtransfrom")]
-    private  Transform _playerObject;
+    [SerializeField, Range(0f, 180f)]
+    [Header("コーンの角度")]
+    private float _coneAngle = 45f;
 
+    [SerializeField]
+    [Header("コーンの長さ、半径")]
+    private float _coneRange;
 
-
-    private const float UPDATE_INTERVAL = 0.1f;     // ここ自由に変えてもいいからconstじゃなくてもいい
-
-#pragma warning disable IDE1006 // uruasai
-    private readonly Vector3 DRAWORIGIN = new(90, 0, 0);
-#pragma warning restore IDE1006 // 命名スタイル
-
+    public bool _canAdd = true;
+    public float _coolTime;
 
 
-    private Plane[] _cameraPlanes;        // カメラの六面体をキャッシュする変数
+    public  Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
-    private float _lastUpdate = 0f;       // 一定間隔にするための変数
-    private Collider[] _hitsBuffer = new Collider[100];
+    private Plane[] _cameraPlanes;
+    private float _updateInterval = 0.1f;
+    private float _lastUpdate = 0f;
 
-    // HashSetを使用して高速な検索と重複チェックを実現
-    private HashSet<Transform> _targetsInCameraSet = new HashSet<Transform>();
-    private HashSet<Transform> _targetsInConeSet = new HashSet<Transform>();
-
-    // Renderer コンポーネントをキャッシュするための Dictionary
-    private Dictionary<Transform, Renderer> _rendererCache = new Dictionary<Transform, Renderer>();
-
-    #endregion
-
-    #region メソッド
-
-    private void Update() {
-        // 一定間隔でターゲットを更新
-        if (Time.time - _lastUpdate >= UPDATE_INTERVAL) {
+    void Update() {
+        if (Time.time - _lastUpdate > _updateInterval) {
             UpdateTargets();
+            RemoveTargetInCone();
             _lastUpdate = Time.time;
         }
-
     }
 
-    #endregion
-
-    #region Target Management
-
-    /// <summary>
-    /// ターゲットリストを更新する
-    /// </summary>
     private void UpdateTargets() {
-        // Planeにカメラの六面体の形をキャッシュする
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
+        _targetsInCamera.Clear();
+        _targetsInCone.Clear();
 
-        HashSet<Transform> newTargetsInCamera = new HashSet<Transform>();
-        HashSet<Transform> newTargetsInCone = new HashSet<Transform>();
+        Collider[] hits = GetSphereOverlapHits();
 
-        // 球体内のコライダーを検出
-        int hitCount = Physics.OverlapSphereNonAlloc(
+        foreach (Collider hit in hits) {
+            ProcessHit(hit, _cameraPlanes);
+        }
+    }
+
+    private Collider[] GetSphereOverlapHits() {
+        return Physics.OverlapSphere(
             _camera.transform.position,
             _searchRadius,
-            _hitsBuffer,
             LayerMask.GetMask("Enemy")
         );
-
-        // 検出されたコライダーを処理
-        for (int i = 0; i < hitCount; i++) {
-            ProcessHit(_hitsBuffer[i], _cameraPlanes, newTargetsInCamera, newTargetsInCone);
-        }
-
-        // ターゲットリストを更新
-        UpdateTargetList(_targetsInCamera, _targetsInCameraSet, newTargetsInCamera);
-        UpdateTargetList(_targetsInCone, _targetsInConeSet, newTargetsInCone);
     }
 
-    /// <summary>
-    /// 検出されたコライダーを処理し、適切なリストに追加する
-    /// </summary>
-    private void ProcessHit(Collider hit, Plane[] planes, HashSet<Transform> newTargetsInCamera, HashSet<Transform> newTargetsInCone) {
-        if (hit.CompareTag("Enemy") || hit.CompareTag("EliteMissile")) { //あとで書き直したい
+    private void ProcessHit(Collider hit, Plane[] planes) {
+        if (hit.CompareTag("Enemy")) {
             Transform target = hit.transform;
-            Renderer renderer = GetCachedRenderer(target);
+            Renderer renderer = target.GetComponent<Renderer>();
 
-            // カメラの視錐台内にあり、アクティブな敵のみを処理
-            if (renderer != null && GeometryUtility.TestPlanesAABB(planes, renderer.bounds) && hit.gameObject.activeSelf) {
-                newTargetsInCamera.Add(target);
+            if (renderer != null && IsInFrustum(renderer, planes) && hit.gameObject.activeSelf) {
+                _targetsInCamera.Add(target);
 
-                // コーン内にある場合は、コーンのリストにも追加
-                if (IsInCone(target)) {
-                    newTargetsInCone.Add(target);
+                if (IsInCone(target) && hit.gameObject.activeSelf && _canAdd) {
+                    if (!_targetsInCone.Contains(target)) {
+
+
+
+                        _targetsInCone.Add(target);
+
+
+                        StartCoroutine(nameof(CanBoolTimer));
+
+                    }
                 }
             }
         }
     }
 
-    /// <summary>
-    /// ターゲットリストを効率的に更新する
-    /// </summary>
-    private void UpdateTargetList(List<Transform> targetList, HashSet<Transform> targetSet, HashSet<Transform> newTargets) {
-        // 古いターゲットを削除
-        targetList.RemoveAll(t => {
-            if (!newTargets.Contains(t)) {
-                targetSet.Remove(t);
-                _rendererCache.Remove(t);  // キャッシュからも削除
-                return true;
-            }
-            return false;
-        });
+    IEnumerator CanBoolTimer() {
 
-        // 新しいターゲットを追加
-        foreach (Transform newTarget in newTargets) {
-            if (!targetSet.Contains(newTarget)) {
-                targetList.Add(newTarget);
-                targetSet.Add(newTarget);
-            }
-        }
+        _canAdd = false;
+        yield return new WaitForSeconds(_coolTime);
+        _canAdd = true;
+
     }
 
-    /// <summary>
-    /// Renderer コンポーネントをキャッシュから取得、または新たに取得してキャッシュする
-    /// </summary>
-    private Renderer GetCachedRenderer(Transform target) {
-        if (!_rendererCache.TryGetValue(target, out Renderer renderer)) {
-            renderer = target.GetComponent<Renderer>();
-            
-            // 
-            if (renderer != null) {
-                _rendererCache[target] = renderer;
-            }
-        }
-        return renderer;
+    private bool IsInFrustum(Renderer renderer, Plane[] planes) {
+        return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
 
-    #endregion
-
-    #region Helper Methods
-
-    /// <summary>
-    /// ターゲットがコーン内にあるかどうかを判定する
-    /// </summary>
     private bool IsInCone(Transform target) {
         Vector3 cameraPosition = _camera.transform.position;
         Vector3 toObject = target.position - cameraPosition;
@@ -160,19 +112,26 @@ public class TestLockOnManager : MonoBehaviour {
 
         if (distanceToObject <= _coneRange) {
             Vector3 toObjectNormalized = toObject.normalized;
-            Vector3 coneDirection = (_playerObject.position - cameraPosition).normalized;
+            Vector3 coneDirection = (_player.position - cameraPosition).normalized;
             float angle = Vector3.Angle(coneDirection, toObjectNormalized);
             return angle <= _coneAngle / 2;
         }
         return false;
     }
 
-#if UNITY_EDITOR
+    private void RemoveTargetInCone() {
+        List<Transform> targetsToRemove = new List<Transform>();
+        foreach (Transform target in _targetsInCone) {
+            if (!GeometryUtility.TestPlanesAABB(_cameraPlanes, target.GetComponent<Collider>().bounds)) {
+                targetsToRemove.Add(target);
+            }
+        }
+        foreach (Transform target in targetsToRemove) {
+            _targetsInCone.Remove(target);
+        }
+    }
 
-    /// <summary>
-    /// デバッグ用のギズモを描画する
-    /// </summary>
-    private void OnDrawGizmos() {
+    void OnDrawGizmos() {
         if (_camera != null) {
             // 球状の範囲を描画
             Gizmos.color = Color.blue;
@@ -182,16 +141,16 @@ public class TestLockOnManager : MonoBehaviour {
             Gizmos.color = Color.yellow;
             float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
 
-            Vector3 coneBaseCenter = _camera.transform.position + ((_playerObject.position - _camera.transform.position).normalized * _coneRange);
+            Vector3 coneBaseCenter = _camera.transform.position + ((_player.position - _camera.transform.position).normalized * _coneRange);
 
-            Vector3 hoge = DRAWORIGIN + transform.rotation.eulerAngles;
+            Vector3 hoge = _drawOrigin + _player.transform.rotation.eulerAngles;
             hoge.z = 0;
 
             GizmosExtensions.DrawWireCircle(coneBaseCenter, _coneRange * Mathf.Tan(coneAngleRad), 20, Quaternion.Euler(hoge));
 
             // コーンの範囲を描画
             Gizmos.color = Color.red;
-            Vector3 forward = (_playerObject.position - _camera.transform.position).normalized * _coneRange;
+            Vector3 forward = (_player.position - _camera.transform.position).normalized * _coneRange;
             Vector3 rightBoundary = Quaternion.Euler(0, _coneAngle / 2, 0) * forward;
             Vector3 leftBoundary = Quaternion.Euler(0, -_coneAngle / 2, 0) * forward;
 
@@ -201,14 +160,10 @@ public class TestLockOnManager : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// coneRangeをsearchRadius以下にする制御スクリプト
-    /// </summary>
+
     private void OnValidate() {
         if (_coneRange > _searchRadius) {
             _coneRange = _searchRadius;
         }
     }
-#endif
-    #endregion
 }
