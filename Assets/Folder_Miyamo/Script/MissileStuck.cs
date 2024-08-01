@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class MissileStuck : MonoBehaviour
 {
-    
-    public Transform _enemyTarget {get;private set;
-    }
+    [ReadOnly]
+    public Transform _enemyTarget;
 
     [Header("ƒƒbƒNƒIƒ“‚Å‚«‚éŠÔ")]
     public float _timer = 5f;

@@ -46,6 +46,8 @@ public class TestLockOnManager : MonoBehaviour {
             UpdateTargets();
             _lastUpdate = Time.time;
         }
+
+        Debug.Log(_canAdd);
     }
 
     private void UpdateTargets() {
@@ -73,7 +75,7 @@ public class TestLockOnManager : MonoBehaviour {
             Renderer renderer = target.GetComponent<Renderer>();
 
             if (renderer == null) {
-                Debug.LogError("meshrenderがついていないよ");
+                Debug.LogError("meshrendererがついていないよ");
                 return;
             }
 
@@ -93,10 +95,14 @@ public class TestLockOnManager : MonoBehaviour {
 
             }
         }
-
         if (minDistanceTarget != null && _canAdd) {
 
             for (int i = 0; i < _missileStucks.Length; i++) {
+                if (minDistanceTarget == _missileStucks[i]._enemyTarget) {
+
+                    break;          
+                }
+                
                 if (_missileStucks[i]._enemyTarget == null) {
 
                     _missileStucks[i].TargetLockOn(minDistanceTarget);
@@ -107,7 +113,7 @@ public class TestLockOnManager : MonoBehaviour {
             }
         }
 
-
+        // あくまでデバック用 おかしい部分もあります itanai
         _targetsInCone.Clear();
         for (int i = 0; i < _missileStucks.Length; i++) {
             if (_missileStucks[i]._enemyTarget != null) {
@@ -121,12 +127,6 @@ public class TestLockOnManager : MonoBehaviour {
     }
 
 
-
-    private void ProcessHit(Collider hit, Plane[] planes) {
-
-
-    }
-
     IEnumerator CanBoolTimer() {
 
         _canAdd = false;
@@ -134,11 +134,10 @@ public class TestLockOnManager : MonoBehaviour {
         yield return new WaitForSeconds(_coolTime);
         _canAdd = true;
         Debug.Log(_canAdd);
-
-
-
     }
-
+    /// <summary>
+    /// カメラとrenderが交差しているか 若干の誤差あり
+    /// </summary>
     private bool IsInFrustum(Renderer renderer, Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
