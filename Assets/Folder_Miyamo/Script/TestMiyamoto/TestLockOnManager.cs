@@ -35,7 +35,7 @@ public class TestLockOnManager : MonoBehaviour {
     public float _coolTime;
 
 
-    public  Vector3 _drawOrigin = new Vector3(90, 0, 0);
+    public Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
     private Plane[] _cameraPlanes;
     private float _updateInterval = 0.1f;
@@ -44,7 +44,6 @@ public class TestLockOnManager : MonoBehaviour {
     void Update() {
         if (Time.time - _lastUpdate > _updateInterval) {
             UpdateTargets();
-            RemoveTargetInCone();
             _lastUpdate = Time.time;
         }
     }
@@ -54,43 +53,57 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsInCamera.Clear();
         _targetsInCone.Clear();
 
-        Collider[] hits = GetSphereOverlapHits();
+        Collider[] hits = Physics.OverlapSphere(
 
-        foreach (Collider hit in hits) {
-            ProcessHit(hit, _cameraPlanes);
-        }
-    }
-
-    private Collider[] GetSphereOverlapHits() {
-        return Physics.OverlapSphere(
             _camera.transform.position,
             _searchRadius,
             LayerMask.GetMask("Enemy")
-        );
-    }
 
-    private void ProcessHit(Collider hit, Plane[] planes) {
-        if (hit.CompareTag("Enemy")) {
+        );
+
+
+
+        foreach (Collider hit in hits) {
+            if (!hit.CompareTag("Enemy")) {
+                return;
+            }
+
             Transform target = hit.transform;
             Renderer renderer = target.GetComponent<Renderer>();
 
-            if (renderer != null && IsInFrustum(renderer, planes) && hit.gameObject.activeSelf) {
+            if (renderer == null) {
+                Debug.LogError("meshrender‚ª‚Â‚¢‚Ä‚¢‚È‚¢‚æ");
+                return;
+            }
+
+
+            if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
                 _targetsInCamera.Add(target);
+            } else {
+                return;
+            }
 
-                if (IsInCone(target) && hit.gameObject.activeSelf && _canAdd) {
-                    if (!_targetsInCone.Contains(target)) {
+            if (IsInCone(target) && hit.gameObject.activeSelf && _canAdd) {
+                if (!_targetsInCone.Contains(target)) {
+
+                    //ƒ}ƒW‚Å‚ß‚ñ‚Ç‚­‚³‚¢
+
+                    _targetsInCone.Add(target);
 
 
+                    StartCoroutine(nameof(CanBoolTimer));
 
-                        _targetsInCone.Add(target);
-
-
-                        StartCoroutine(nameof(CanBoolTimer));
-
-                    }
                 }
             }
+
         }
+    }
+
+
+
+    private void ProcessHit(Collider hit, Plane[] planes) {
+
+
     }
 
     IEnumerator CanBoolTimer() {
@@ -119,17 +132,7 @@ public class TestLockOnManager : MonoBehaviour {
         return false;
     }
 
-    private void RemoveTargetInCone() {
-        List<Transform> targetsToRemove = new List<Transform>();
-        foreach (Transform target in _targetsInCone) {
-            if (!GeometryUtility.TestPlanesAABB(_cameraPlanes, target.GetComponent<Collider>().bounds)) {
-                targetsToRemove.Add(target);
-            }
-        }
-        foreach (Transform target in targetsToRemove) {
-            _targetsInCone.Remove(target);
-        }
-    }
+
 
     void OnDrawGizmos() {
         if (_camera != null) {
