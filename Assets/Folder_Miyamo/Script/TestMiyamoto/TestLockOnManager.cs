@@ -51,7 +51,6 @@ public class TestLockOnManager : MonoBehaviour {
     private void UpdateTargets() {
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
         _targetsInCamera.Clear();
-        _targetsInCone.Clear();
 
         Collider[] hits = Physics.OverlapSphere(
 
@@ -62,6 +61,8 @@ public class TestLockOnManager : MonoBehaviour {
         );
 
 
+        Transform minDistanceTarget = null;
+        float minDistance = float.MaxValue;
 
         foreach (Collider hit in hits) {
             if (!hit.CompareTag("Enemy")) {
@@ -83,20 +84,40 @@ public class TestLockOnManager : MonoBehaviour {
                 return;
             }
 
-            if (IsInCone(target) && hit.gameObject.activeSelf && _canAdd) {
-                if (!_targetsInCone.Contains(target)) {
+            if (IsInCone(target) && hit.gameObject.activeSelf ) {
+                float distance = Vector3.Distance(target.position , _camera.transform.position);
+                if (distance < minDistance) {
 
-                    //ƒ}ƒW‚Å‚ß‚ñ‚Ç‚­‚³‚¢
-
-                    _targetsInCone.Add(target);
-
-
-                    StartCoroutine(nameof(CanBoolTimer));
-
+                    minDistanceTarget = target;
                 }
+
+            }
+        }
+
+        if (minDistanceTarget != null && _canAdd) {
+
+            for (int i = 0; i < _missileStucks.Length; i++) {
+                if (_missileStucks[i]._enemyTarget == null) {
+
+                    _missileStucks[i].TargetLockOn(minDistanceTarget);
+                    StartCoroutine(nameof(CanBoolTimer));
+                    break;
+                }
+
+            }
+        }
+
+
+        _targetsInCone.Clear();
+        for (int i = 0; i < _missileStucks.Length; i++) {
+            if (_missileStucks[i]._enemyTarget != null) {
+
+                _targetsInCone.Add(_missileStucks[i]._enemyTarget);           
             }
 
         }
+
+
     }
 
 
@@ -109,8 +130,12 @@ public class TestLockOnManager : MonoBehaviour {
     IEnumerator CanBoolTimer() {
 
         _canAdd = false;
+        Debug.Log(_canAdd);
         yield return new WaitForSeconds(_coolTime);
         _canAdd = true;
+        Debug.Log(_canAdd);
+
+
 
     }
 
