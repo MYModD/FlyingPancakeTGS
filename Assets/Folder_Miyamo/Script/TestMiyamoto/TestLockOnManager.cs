@@ -98,6 +98,7 @@ public class TestLockOnManager : MonoBehaviour {
         if (minDistanceTarget != null && _canAdd) {
 
             for (int i = 0; i < _missileStucks.Length; i++) {
+
                 if (minDistanceTarget == _missileStucks[i]._enemyTarget) {
 
                     break;          
