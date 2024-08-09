@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour {
         if (canFire)       
         {
             _missilePoolManager.FireMissiles(_fireMissilePosition);
+            Debug.Log("ƒ{ƒ^ƒ“‰Ÿ‚µ‚½");
         }
 
         if (Input.GetKey(KeyCode.K)) {

@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class MissileStuck : MonoBehaviour
 {
-    [ReadOnly,Header("Editor上だけ視認できる")]
+    [ReadOnly,Header("書き換え不可")]
     public Transform _enemyTarget;
 
     [Header("ロックオンできる時間")]
     public float _timer = 5f;
 
     [Header("発射可能か")]
-    public bool _canFire = true;
+    public bool _canFire = false;
 
     [Header("撃ったか")]
     public bool _isFired = false;
@@ -25,10 +25,10 @@ public class MissileStuck : MonoBehaviour
     }
 
 
-
+    //ロックオンできるかと値を代入できるかの2つのbool値が必要なので改善する必要がある
 
     public void TargetLockOn(Transform targetEnemy) {
-        _canFire = false;
+        _canFire = true;
         _enemyTarget = targetEnemy;
 
         StartCoroutine(nameof(StartTimer));
@@ -59,7 +59,7 @@ public class MissileStuck : MonoBehaviour
     /// 初期化、
     /// </summary>
     public void Initialize() {
-        _canFire = true;
+        _canFire = false;
         _isFired = false;
         _enemyTarget = null;
 
