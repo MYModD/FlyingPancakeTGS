@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MissileStuck : MonoBehaviour
 {
-    [ReadOnly]
+    [ReadOnly,Header("Editor上だけ視認できる")]
     public Transform _enemyTarget;
 
     [Header("ロックオンできる時間")]

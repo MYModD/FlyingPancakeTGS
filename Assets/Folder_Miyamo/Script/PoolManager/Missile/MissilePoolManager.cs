@@ -23,10 +23,13 @@ public class MissilePoolManager : PoolManager<TestMissile> {
 
     public void FireMissiles(Transform firePosition) {
 
+        Debug.Log("fire");
         foreach (MissileStuck item in _missileStucks) {
 
-            bool canFire = item._enemyTarget != null && item._canFire == true && item._isFired == false;
+            bool canFire = item._enemyTarget != null && item._canFire == true;
             if (canFire) {
+                Debug.Log("í Ç¡ÇΩ");
+
 
                 TestMissile missile = _objectPool.Get();
                 missile.Initialize();                       //èâä˙âª
