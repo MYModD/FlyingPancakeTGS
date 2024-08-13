@@ -29,6 +29,7 @@ public class EliteEnemyHP : MonoBehaviour {
     /// </summary>
     public void DecreaseHP() {
         _HP--;
+        print(_HP);
         if (_HP == 0) {
             _explosionPoolManager.StartExplosion(this.transform);
             gameObject.SetActive(false);
