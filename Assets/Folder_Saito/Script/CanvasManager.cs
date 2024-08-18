@@ -23,6 +23,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Header("ゲームUIのオブジェクト")] private GameObject[] _gamePlayObjs;
     [SerializeField, Header("リザルトのオブジェクト")] private GameObject[] _resultObjs;
     [SerializeField, Header("設定画面のオブジェクト")] private GameObject[] _settingObjs;
+    [SerializeField, Header("オープニングのオブジェクト")] private GameObject[] _openingObjs;
+    [SerializeField, Header("エンディングのオブジェクト")] private GameObject[] _endingObjs;
     [SerializeField, Header("ゲームプレイ中に使うオブジェクト")] private GameObject[] _gameObjs;
     [SerializeField] private SplineAnimate _spAnime;
 
@@ -43,7 +45,9 @@ public class CanvasManager : MonoBehaviour
         gamePlay,
         result,
         menu,
-        setting
+        setting,
+        OP,
+        ED,
     }
     private UIState _state;
     private UIState _prevState;
@@ -115,7 +119,7 @@ public class CanvasManager : MonoBehaviour
     public void OnClickSw(string tagname) {
         //タイトルからゲームへ
         if (tagname==_tagGame) {
-            TitleToGamePlay();
+            TitleToOP();
         } else if (tagname==_tagSetting) {
             TitleOrMenuToSetting();
         } else if (tagname==_tagFinish) {
@@ -136,6 +140,22 @@ public class CanvasManager : MonoBehaviour
     {
         GameObjTrueFalse(_gamePlayObjs, _titleObjs);
         GameObjTrueFalse(_gameObjs, _titleObjs);
+        _state = UIState.gamePlay;
+    }
+    /// <summary>
+    /// タイトルからオープニングへ
+    /// </summary>
+    private void TitleToOP()
+    {
+        GameObjTrueFalse(_openingObjs, _titleObjs);
+        _state = UIState.OP;
+    }
+    /// <summary>
+    /// オープニングからゲーム画面へ
+    /// </summary>
+    public void OPToGamePlay() {
+        GameObjTrueFalse(_gamePlayObjs, _openingObjs);
+        GameObjTrueFalse(_gameObjs, _openingObjs);
         _state = UIState.gamePlay;
     }
     /// <summary>
