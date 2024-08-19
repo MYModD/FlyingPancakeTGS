@@ -19,6 +19,10 @@ public class TestTrackingUI : MonoBehaviour
 
     [SerializeField, Header("子のスケール変更の値")] private float _childrenScale = 1f;
     [SerializeField, Button,]
+
+    /// <summary>
+    /// uiのスケール変更
+    /// </summary>
     private void ChengeChildrenScale()
     {
 
@@ -33,6 +37,9 @@ public class TestTrackingUI : MonoBehaviour
 
     }
     #endregion
+
+
+
     void Start()
     {
         _enemyInCameraImages = InitializeUIElements(_enemyIncameraUI);
