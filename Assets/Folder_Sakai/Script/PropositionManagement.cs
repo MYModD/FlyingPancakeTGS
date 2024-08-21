@@ -5,6 +5,10 @@ using UnityEngine;
 public class PropositionManagement : MonoBehaviour
 {
     #region 変数
+    #endregion
+    #region　メソッド
+    #endregion
+    #region 変数
     /// <summary>
     /// お題を表す列挙型
     /// </summary>
@@ -21,6 +25,7 @@ public class PropositionManagement : MonoBehaviour
     private Proposition _proposition;
 
     [SerializeField] private OvertakeManager _overtakeManager;
+    [SerializeField] private DefeatTheEnemyManager _defeatTheEnemyManager;
     #endregion
     #region メソッド
 

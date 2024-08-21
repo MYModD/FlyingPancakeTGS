@@ -5,9 +5,7 @@ using UnityEngine;
 public class SpeedChangeValueRetention : MonoBehaviour
 {
     [SerializeField, Tag] private string _eliteEnemy;
-    //[SerializeField] private EnemyMove _enemyMove;
     [SerializeField] private float _changeSpeedValue;
-    //[SerializeField] private bool _isItOnStandby;
     [SerializeField] private EliteEnemyMoveSpline _eliteEnemyMoveSpline;
     [SerializeField] private float _stopTime;
 
