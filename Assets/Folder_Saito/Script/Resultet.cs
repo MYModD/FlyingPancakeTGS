@@ -17,6 +17,6 @@ public class Resultet : MonoBehaviour
         
     }
     private void OnTriggerEnter(Collider other) {
-        _canvas.PlayToResult();
+        _canvas.PlayToED();
     }
 }
