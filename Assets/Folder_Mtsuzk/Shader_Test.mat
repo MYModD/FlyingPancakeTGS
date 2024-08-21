@@ -8,9 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader_Test
-  m_Shader: {fileID: -6465566751694194690, guid: 414204a6bdfe32841ae29ff0967ee4a5, type: 3}
-  m_Parent: {fileID: 2100000, guid: c6c0101adeb8abb4c93f94e0f0aa0c59, type: 2}
-  m_ModifiedSerializedProperties: 2
+  m_Shader: {fileID: -6465566751694194690, guid: 8dc66feb645d5fb43bfa2359e0f2bcc4,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -23,32 +24,33 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_052a8c9b35f64015bd542ba17f87d4c4:
-        m_Texture: {fileID: 2800000, guid: e64a4e267728eaa46bc4fa75f4d0d130, type: 3}
+    - _SampleTexture2D_90d77674d7e54177a795fed17d9cb94d_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 7f279d1f5fe3238488c36d035582281d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_6dfa5da2aa93462fa98dccde8c7580bb:
-        m_Texture: {fileID: 2800000, guid: cca4fc195be10f94e8db11133fe701f7, type: 3}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_170510ef6fcf40f2a410a59d4b5768d5: 0.452
-    - Vector1_19749a6f73314b7bae1959b48b9eea4b: 0
-    - Vector1_1da9f13ca22e44aaa9951f6e0da78e6f: 0.5
-    - Vector1_1fd7e2f834504c9c91e364a64d7f474a: 1.17
-    - Vector1_57e14a47e77241fc9ee59306800b0317: 0.05
-    - Vector1_9fbe216bca08489d939815612e948ccd: 0
-    - Vector1_b0f4a3a1070342289deaa84ba74d0d6f: 1.97
-    - Vector1_d56f7a20908b4bb28f22608b0d000e6d: 2
-    - Vector1_dd63cd078ee749d9a918330fede2da28: 1
-    - Vector1_e10dbfff86934b2b8b0e5245c4e7c788: 4.38
+    - _Hansya: 80
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Speed: 20
+    - _Yugami: 100
     m_Colors:
-    - Color_a037b9429bcd451bb908ebe8e38ca139: {r: 0, g: 0, b: 0, a: 0}
-    - Color_ddd60aca6e124af7bd419f1c5d8a9d42: {r: 0.37107116, g: 0.06289297, b: 1, a: 0}
-    - Color_f6617ec173c14b41bdbc152f692097d8: {r: 1, g: 1, b: 1, a: 0}
-    - Vector2_2dc42c400db04079b7458fe2c4b7764c: {r: 1, g: 1, b: 0, a: 0}
-    - Vector2_9279eb5d4e6f44a192a248aa77de90a5: {r: 0, g: 0, b: 0, a: 0}
+    - _Move: {r: 2, g: 2, b: 0, a: 0}
+    - _MoveSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _WaterColor: {r: 0, g: 0.037754297, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7183868698254742747
 MonoBehaviour:

@@ -79,7 +79,7 @@ public class CanvasManager : MonoBehaviour
             _spAnime.enabled = true;
             _gamePlayTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Z)) {
-                PlayToResult();
+                PlayToED();
             }
             if (Input.GetKeyDown("joystick button 7")&&_isStartPush) {
                 PlayToMenu();
@@ -215,9 +215,13 @@ public class CanvasManager : MonoBehaviour
         }
         _state = _prevState;
     }
-    public void PlayToResult() {
-        GameObjTrueFalse(_resultObjs, _gamePlayObjs);
-        GameObjTrueFalse(_resultObjs, _gameObjs);
+    public void PlayToED() {
+        GameObjTrueFalse(_endingObjs, _gamePlayObjs);
+        GameObjTrueFalse(_endingObjs, _gameObjs);
+        _state = UIState.ED;
+    }
+    public void EDToResult() {
+        GameObjTrueFalse(_resultObjs, _endingObjs);
         _state = UIState.result;
     }
     /// <summary>

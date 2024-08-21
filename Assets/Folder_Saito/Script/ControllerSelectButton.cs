@@ -53,6 +53,7 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField] private string[] _edText;
     [SerializeField] private AudioClip[] _edClip;
     private int _indexED = 0;
+    private int _checkIndexEd = -1;
 
     private string _settingTextEnglish = "English";
     private string _settingTextJapanece = "日本語";
@@ -196,6 +197,9 @@ public class ControllerSelectButton : MonoBehaviour {
         }
         if (_stateName == _op) {
             OPStartProcess();
+        }
+        if (_stateName == _ed) {
+            EDStartProcess();
         }
         //EnglishSwitchJapanece();
     }
@@ -489,6 +493,7 @@ public class ControllerSelectButton : MonoBehaviour {
         if (_checkIndexOp != _indexOP) {
             _audioBGM.Stop();
             _textOp[_indexOP].enabled = true;
+            _audioSE.Stop();
             _audioSE.PlayOneShot(_opClip[_indexOP]);
             _checkIndexOp = _indexOP;
         }
@@ -497,6 +502,22 @@ public class ControllerSelectButton : MonoBehaviour {
             if (_indexOP >= _textOp.Length) {
                 _audioBGM.Play();
                 _canvasManager.OPToGamePlay();
+            }
+        }
+    }
+    private void EDStartProcess() {
+        print(_audioSE.volume);
+        if (_checkIndexEd != _indexED) {
+            _audioBGM.Stop();
+            _textEd[_indexED].enabled = true;
+            _audioSE.Stop();
+            _audioSE.PlayOneShot(_edClip[_indexED]);
+            _checkIndexEd = _indexED;
+        }
+        if (Input.GetButtonDown("Submit")) {
+            _indexED++;
+            if (_indexED >= _textEd.Length) {
+                _canvasManager.EDToResult();
             }
         }
     }
