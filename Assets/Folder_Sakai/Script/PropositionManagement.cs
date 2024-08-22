@@ -26,6 +26,7 @@ public class PropositionManagement : MonoBehaviour
 
     [SerializeField] private OvertakeManager _overtakeManager;
     [SerializeField] private DefeatTheEnemyManager _defeatTheEnemyManager;
+    [SerializeField] private GoThroughTheGateManager _goThroughTheGateManager;
     #endregion
     #region ÉÅÉ\ÉbÉh
 
@@ -36,8 +37,10 @@ public class PropositionManagement : MonoBehaviour
         switch (_proposition) {
 
             case Proposition.DefeatTheEnemy1:
+                _defeatTheEnemyManager.FirstGroupStartMoving();
                 break;
             case Proposition.GoThroughTheGate2:
+                _goThroughTheGateManager.GateActivation();
                 break;
             case Proposition.DodgeTheMonsterTruck3:
                 break;

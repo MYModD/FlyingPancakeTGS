@@ -144,7 +144,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         if (other.gameObject.CompareTag(_eliteMissile)) {
             _hasCollided = true; // 衝突フラグをセット
             other.GetComponent<EliteEnemyHP>().DecreaseHP();
-            _explosionPoolManager.StartExplosion(other.transform);
             ReturnToPool();
             Debug.Log("エリートミサイルにあっったよ");
         }
