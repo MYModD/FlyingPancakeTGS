@@ -401,8 +401,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 200
-      minScalar: 100
+      scalar: 20
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5290,7 +5290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
   _lerpT: 0.9
-  _speed: 3000
+  _speed: 2000
   _timer: 10
   _randomPower: 5
   _random_timer: 10
