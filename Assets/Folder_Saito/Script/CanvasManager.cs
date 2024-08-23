@@ -156,6 +156,7 @@ public class CanvasManager : MonoBehaviour
     public void OPToGamePlay() {
         GameObjTrueFalse(_gamePlayObjs, _openingObjs);
         GameObjTrueFalse(_gameObjs, _openingObjs);
+        _spAnime.enabled = true;
         _state = UIState.gamePlay;
     }
     /// <summary>
@@ -178,6 +179,7 @@ public class CanvasManager : MonoBehaviour
     {
         GameObjTrueFalse(_menuObjs,_gamePlayObjs);
         GameObjTrueFalse(_menuObjs,_gameObjs);
+        _spAnime.enabled=false;
         _spAnime.enabled = false;
         _state = UIState.menu;
     }
@@ -189,6 +191,7 @@ public class CanvasManager : MonoBehaviour
         print("menuから戻るよ");
         GameObjTrueFalse(_gamePlayObjs,_menuObjs);
         GameObjTrueFalse(_gameObjs,_menuObjs);
+        _spAnime.enabled=true;
         _spAnime.enabled = true;
         _state=UIState.gamePlay;
     }
@@ -218,6 +221,7 @@ public class CanvasManager : MonoBehaviour
     public void PlayToED() {
         GameObjTrueFalse(_endingObjs, _gamePlayObjs);
         GameObjTrueFalse(_endingObjs, _gameObjs);
+        _spAnime.enabled=false;
         _state = UIState.ED;
     }
     public void EDToResult() {
