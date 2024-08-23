@@ -141,23 +141,24 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         if (other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget) {
 
 
-        // 敵のタグが普通の敵だったとき
-        if (other.gameObject.CompareTag(_enemyTag)) {
-            _hasCollided = true; // 衝突フラグをセット
-            print($"{other.gameObject.name}に衝突");
-            other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
-            _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
-            ReturnToPool();                                              // ミサイルをプールに変換
-        }
+            // 敵のタグが普通の敵だったとき
+            if (other.gameObject.CompareTag(_enemyTag)) {
+                _hasCollided = true; // 衝突フラグをセット
+                print($"{other.gameObject.name}に衝突");
+                other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
+                _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
+                ReturnToPool();                                              // ミサイルをプールに変換
+            }
 
-        // 敵のタグがエリートミサイルだったとき
-        if (other.gameObject.CompareTag(_eliteMissile)) {
-            _hasCollided = true; // 衝突フラグをセット
-            other.GetComponent<EliteEnemyHP>().DecreaseHP();
-            ReturnToPool();
-            Debug.Log("エリートミサイルにあっったよ");
+            // 敵のタグがエリートミサイルだったとき
+            if (other.gameObject.CompareTag(_eliteMissile)) {
+                _hasCollided = true; // 衝突フラグをセット
+                other.GetComponent<EliteEnemyHP>().DecreaseHP();
+                ReturnToPool();
+                Debug.Log("エリートミサイルにあっったよ");
+            }
         }
+        #endregion
+
     }
-    #endregion
-
 }
