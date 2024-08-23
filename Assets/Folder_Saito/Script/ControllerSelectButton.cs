@@ -491,6 +491,9 @@ public class ControllerSelectButton : MonoBehaviour {
     }
     private void OPStartProcess() {
         if (_checkIndexOp != _indexOP) {
+            if (_checkIndexOp >= 0) {
+                _textOp[_indexOP-1].enabled = false;
+            }
             _audioBGM.Stop();
             _textOp[_indexOP].enabled = true;
             _audioSE.Stop();
@@ -508,6 +511,9 @@ public class ControllerSelectButton : MonoBehaviour {
     private void EDStartProcess() {
         print(_audioSE.volume);
         if (_checkIndexEd != _indexED) {
+            if (_checkIndexEd >= 0) {
+                _textEd[_indexED-1].enabled = false;
+            }
             _audioBGM.Stop();
             _textEd[_indexED].enabled = true;
             _audioSE.Stop();
