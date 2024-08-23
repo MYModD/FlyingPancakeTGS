@@ -8,6 +8,9 @@ public class TriggerGate : MonoBehaviour
 
     [SerializeField,Tag] private string _playerTag;
     [SerializeField] GoThroughTheGateManager _goThroughTheGateManager;
+    [SerializeField] private ParticleSystem _particleSystem;
+
+    private bool _justOne = true;
     #endregion
     #region ÉÅÉ\ÉbÉh
 
@@ -15,7 +18,14 @@ public class TriggerGate : MonoBehaviour
 
         if (other.gameObject.CompareTag(_playerTag)) {
 
-            _goThroughTheGateManager.ScoreAddition();
+            if (_justOne) {
+
+                print("cil");
+                _particleSystem.Play();
+                _goThroughTheGateManager.ScoreAddition();
+                _justOne = false;
+            }
+            
         }
     }
     #endregion
