@@ -12,6 +12,7 @@ public class TestTrackingUI : MonoBehaviour
     [SerializeField] private GameObject[] _enemyInCone; // 円錐内の敵のImage
 
     public TestLockOnManager _lockOnManager;
+    public MissileStuck[] _missileStuck;
 
     private Image[] _enemyInCameraImages;               //キャッシュ用の
                                                         //Imageコンポーネント
@@ -19,6 +20,10 @@ public class TestTrackingUI : MonoBehaviour
 
     [SerializeField, Header("子のスケール変更の値")] private float _childrenScale = 1f;
     [SerializeField, Button,]
+
+    /// <summary>
+    /// uiのスケール変更
+    /// </summary>
     private void ChengeChildrenScale()
     {
 
@@ -33,6 +38,9 @@ public class TestTrackingUI : MonoBehaviour
 
     }
     #endregion
+
+
+
     void Start()
     {
         _enemyInCameraImages = InitializeUIElements(_enemyIncameraUI);
@@ -67,6 +75,7 @@ public class TestTrackingUI : MonoBehaviour
     {
         for (int i = 0; i < targets.Count; i++)
         {
+            
             if (i < uiElements.Length)
             {
                 Vector3 enemyScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, targets[i].position);
