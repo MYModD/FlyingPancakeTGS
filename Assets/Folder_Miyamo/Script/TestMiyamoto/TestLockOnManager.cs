@@ -1,154 +1,171 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
 public class TestLockOnManager : MonoBehaviour {
-    #region 変数
 
-    [Header("ターゲットのリスト")]
+    [Header("カメラの視界に入っているターゲットのリスト")]
     public List<Transform> _targetsInCamera = new List<Transform>();
+
+    [Header("錐体内に入っているターゲットのdebug用リスト")]
     public List<Transform> _targetsInCone = new List<Transform>();
 
-    [SerializeField, Header("カメラ設定")] private Camera _camera;
+    public MissileStuck[] _missileStucks;
 
-    [SerializeField,Header("ロックオンの範囲")] private float _searchRadius = 5000f;
+    [Header("プレイヤーのTransformを指定")]
+    [SerializeField, Header("プレイヤーのTransform")]
+    private Transform _player;
+
+    [SerializeField, Header("カメラ指定")]
+    private Camera _camera;
+
+    [SerializeField, Header("spherecastの半径")]
+    private float _searchRadius = 95f;
+
+    [SerializeField, Range(0f, 180f)]
+    [Header("コーンの角度")]
+    private float _coneAngle = 45f;
+
+    [SerializeField]
+    [Header("コーンの長さ、半径")]
+    private float _coneRange;
+
+    public bool _canAdd = true;
+    public float _coolTime;
+
+
+    readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0);
+
+    private Plane[] _cameraPlanes;
     
-    [SerializeField, Header("コーンの角度")]
-    [Range(0f, 180f)]private float _coneAngle = 45f;
 
-    [SerializeField,Header("コーンの長さ")] private float _coneRange;
-
-    [SerializeField, Header("プレイヤーのtransfrom")]
-    private  Transform _playerObject;
+    void Update() {
+        UpdateTargets();
 
 
 
-    private const float UPDATE_INTERVAL = 0.1f;     // ここ自由に変えてもいいからconstじゃなくてもいい
+        // 見やすくするデバッグ用
+        for (int i = 0; i < _missileStucks.Length; i++) {
+            if (_missileStucks[i]._enemyTarget != null && _missileStucks[i]._isValueAssignable == false) {
 
-#pragma warning disable IDE1006 // uruasai
-    private readonly Vector3 DRAWORIGIN = new(90, 0, 0);
-#pragma warning restore IDE1006 // 命名スタイル
-
-
-
-    private Plane[] _cameraPlanes;        // カメラの六面体をキャッシュする変数
-
-    private float _lastUpdate = 0f;       // 一定間隔にするための変数
-    private Collider[] _hitsBuffer = new Collider[100];
-
-    // HashSetを使用して高速な検索と重複チェックを実現
-    private HashSet<Transform> _targetsInCameraSet = new HashSet<Transform>();
-    private HashSet<Transform> _targetsInConeSet = new HashSet<Transform>();
-
-    // Renderer コンポーネントをキャッシュするための Dictionary
-    private Dictionary<Transform, Renderer> _rendererCache = new Dictionary<Transform, Renderer>();
-
-    #endregion
-
-    #region メソッド
-
-    private void Update() {
-        // 一定間隔でターゲットを更新
-        if (Time.time - _lastUpdate >= UPDATE_INTERVAL) {
-            UpdateTargets();
-            _lastUpdate = Time.time;
+                _targetsInCone.Add(_missileStucks[i]._enemyTarget);
+            }
         }
     }
 
-    #endregion
-
-    #region Target Management
-
-    /// <summary>
-    /// ターゲットリストを更新する
-    /// </summary>
     private void UpdateTargets() {
+
+        // Plane型の変数にカメラの情報をいれる+カメラのリストを削除する
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
+        _targetsInCamera.Clear();
+        _targetsInCone.Clear();
 
-        HashSet<Transform> newTargetsInCamera = new HashSet<Transform>();
-        HashSet<Transform> newTargetsInCone = new HashSet<Transform>();
 
-        // 球体内のコライダーを検出
-        int hitCount = Physics.OverlapSphereNonAlloc(
+
+        // カメラの位置から一定の半径の球状のコライダーの配列を取得する
+        Collider[] hits = Physics.OverlapSphere(
+
             _camera.transform.position,
             _searchRadius,
-            _hitsBuffer,
             LayerMask.GetMask("Enemy")
+
         );
 
-        // 検出されたコライダーを処理
-        for (int i = 0; i < hitCount; i++) {
-            ProcessHit(_hitsBuffer[i], _cameraPlanes, newTargetsInCamera, newTargetsInCone);
-        }
+        // 一番近い敵を探すためにnullとfloat.MaxValueを使用
+        Transform minDistanceTarget = null;
+        float minDistance = float.MaxValue;
 
-        // ターゲットリストを更新
-        UpdateTargetList(_targetsInCamera, _targetsInCameraSet, newTargetsInCamera);
-        UpdateTargetList(_targetsInCone, _targetsInConeSet, newTargetsInCone);
-    }
 
-    /// <summary>
-    /// 検出されたコライダーを処理し、適切なリストに追加する
-    /// </summary>
-    private void ProcessHit(Collider hit, Plane[] planes, HashSet<Transform> newTargetsInCamera, HashSet<Transform> newTargetsInCone) {
-        if (hit.CompareTag("Enemy") || hit.CompareTag("EliteMissile")) { //あとで書き直したい
+        // コライダーの配列Foreach
+        foreach (Collider hit in hits) {
+            if (!hit.CompareTag("Enemy")) {
+                continue;
+            }
+
+            //ターゲットをcoliderのtransform,レンダーを取得
             Transform target = hit.transform;
-            Renderer renderer = GetCachedRenderer(target);
+            Renderer renderer = target.GetComponent<Renderer>();
+            if (renderer == null) {
+                Debug.LogError("meshrendererがついていないよ");
+                continue;
+            }
 
-            // カメラの視錐台内にあり、アクティブな敵のみを処理
-            if (renderer != null && GeometryUtility.TestPlanesAABB(planes, renderer.bounds) && hit.gameObject.activeSelf) {
-                newTargetsInCamera.Add(target);
+            // カメラ内に敵がいる かつ 敵のactiveがTrueのとき それ以外はreturn
+            if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
+                _targetsInCamera.Add(target);
+            } else {
+                continue;
+            }
 
-                // コーン内にある場合は、コーンのリストにも追加
-                if (IsInCone(target)) {
-                    newTargetsInCone.Add(target);
+
+            // コーン内に敵がいる かつ 敵のactiveがTrue
+            if (IsInCone(target) && target.gameObject.activeSelf &&hit.gameObject.activeSelf) {
+
+                // コーン内に複数の敵がいる場合一番近い敵を探す
+                float distance = Vector3.Distance(target.position, _camera.transform.position);
+                if (distance < minDistance) {
+
+                    minDistanceTarget = target;
                 }
+
             }
         }
+
+
+        // ターゲットがnullではなく かつ canAddがtrueのとき
+        if (minDistanceTarget != null && _canAdd) {
+
+            for (int i = 0; i < _missileStucks.Length; i++) {
+
+                // minDistanceTargetがmissileStucksの配列内にあるときBreak
+                if (minDistanceTarget == _missileStucks[i]._enemyTarget) {
+
+                    break;
+                }
+
+                // 0から初めて_enemyTargetがnullのとき代入するための
+                // メソッドを呼び出しクールタイムのコルーチンを呼ぶ
+                if (_missileStucks[i]._enemyTarget == null) {
+
+                    _missileStucks[i].TargetLockOn(minDistanceTarget);
+                    StartCoroutine(nameof(CanBoolTimer));
+                    break;
+                }
+
+            }
+        }
+
+
+
+       
+
     }
 
     /// <summary>
-    /// ターゲットリストを効率的に更新する
+    /// falseにし一定時間後にtrueにする
     /// </summary>
-    private void UpdateTargetList(List<Transform> targetList, HashSet<Transform> targetSet, HashSet<Transform> newTargets) {
-        // 古いターゲットを削除
-        targetList.RemoveAll(t => {
-            if (!newTargets.Contains(t)) {
-                targetSet.Remove(t);
-                _rendererCache.Remove(t);  // キャッシュからも削除
-                return true;
-            }
-            return false;
-        });
+    IEnumerator CanBoolTimer() {
 
-        // 新しいターゲットを追加
-        foreach (Transform newTarget in newTargets) {
-            if (!targetSet.Contains(newTarget)) {
-                targetList.Add(newTarget);
-                targetSet.Add(newTarget);
-            }
-        }
+        _canAdd = false;
+        Debug.Log(_canAdd);
+        yield return new WaitForSeconds(_coolTime);
+        _canAdd = true;
+        Debug.Log(_canAdd);
     }
 
+
     /// <summary>
-    /// Renderer コンポーネントをキャッシュから取得、または新たに取得してキャッシュする
+    /// カメラとrenderが交差しているか renderのサイズで計測しているので若干の誤差あり
     /// </summary>
-    private Renderer GetCachedRenderer(Transform target) {
-        if (!_rendererCache.TryGetValue(target, out Renderer renderer)) {
-            renderer = target.GetComponent<Renderer>();
-            if (renderer != null) {
-                _rendererCache[target] = renderer;
-            }
-        }
-        return renderer;
+    private bool IsInFrustum(Renderer renderer, Plane[] planes) {
+        return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
 
-    #endregion
-
-    #region Helper Methods
 
     /// <summary>
-    /// ターゲットがコーン内にあるかどうかを判定する
-    /// </summary>
+    /// targetがコーン内にいるか ベクトルを正規化して角度が合っているか判別
+    /// </summary>  
     private bool IsInCone(Transform target) {
         Vector3 cameraPosition = _camera.transform.position;
         Vector3 toObject = target.position - cameraPosition;
@@ -156,55 +173,56 @@ public class TestLockOnManager : MonoBehaviour {
 
         if (distanceToObject <= _coneRange) {
             Vector3 toObjectNormalized = toObject.normalized;
-            Vector3 coneDirection = (_playerObject.position - cameraPosition).normalized;
+            Vector3 coneDirection = (_player.position - cameraPosition).normalized;
             float angle = Vector3.Angle(coneDirection, toObjectNormalized);
             return angle <= _coneAngle / 2;
         }
         return false;
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR    
 
-    /// <summary>
-    /// デバッグ用のギズモを描画する
-    /// </summary>
-    private void OnDrawGizmos() {
-        if (_camera != null) {
-            // 球状の範囲を描画
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(_camera.transform.position, _searchRadius);
+    void OnDrawGizmos() {
 
-            // コーン上の円周を描画
-            Gizmos.color = Color.yellow;
-            float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
-
-            Vector3 coneBaseCenter = _camera.transform.position + ((_playerObject.position - _camera.transform.position).normalized * _coneRange);
-
-            Vector3 hoge = DRAWORIGIN + transform.rotation.eulerAngles;
-            hoge.z = 0;
-
-            GizmosExtensions.DrawWireCircle(coneBaseCenter, _coneRange * Mathf.Tan(coneAngleRad), 20, Quaternion.Euler(hoge));
-
-            // コーンの範囲を描画
-            Gizmos.color = Color.red;
-            Vector3 forward = (_playerObject.position - _camera.transform.position).normalized * _coneRange;
-            Vector3 rightBoundary = Quaternion.Euler(0, _coneAngle / 2, 0) * forward;
-            Vector3 leftBoundary = Quaternion.Euler(0, -_coneAngle / 2, 0) * forward;
-
-            Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + forward);
-            Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + rightBoundary);
-            Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + leftBoundary);
+        if (_camera == null || _player == null) {
+            Debug.Log("カメラかプレイヤーつけてないよ");
+            return;
         }
+        // 球状の範囲を描画
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(_camera.transform.position, _searchRadius);
+
+        // コーンの方向と回転を計算
+        Vector3 coneDirection = (_player.position - _camera.transform.position).normalized;
+        Quaternion coneRotation = Quaternion.LookRotation(coneDirection);
+
+
+        // コーン上の円周を描画
+        Gizmos.color = Color.yellow;
+        float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
+        Vector3 coneBaseCenter = _camera.transform.position + (coneDirection * _coneRange);
+
+        Vector3 hoge = coneRotation.eulerAngles + _drawOrigin;
+        hoge.z = 0;
+
+        GizmosExtensions.DrawWireCircle(coneBaseCenter, _coneRange * Mathf.Tan(coneAngleRad), 20, Quaternion.Euler(hoge));
+
+        // コーンの範囲を描画
+        Gizmos.color = Color.red;
+        Vector3 forward = coneDirection * _coneRange;
+        Vector3 rightBoundary = coneRotation * Quaternion.Euler(0, _coneAngle / 2, 0) * Vector3.forward * _coneRange;
+        Vector3 leftBoundary = coneRotation * Quaternion.Euler(0, -_coneAngle / 2, 0) * Vector3.forward * _coneRange;
+
+        Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + forward);
+        Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + rightBoundary);
+        Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + leftBoundary);
+
     }
 
-    /// <summary>
-    /// coneRangeをsearchRadius以下にする制御スクリプト
-    /// </summary>
     private void OnValidate() {
         if (_coneRange > _searchRadius) {
             _coneRange = _searchRadius;
         }
     }
 #endif
-    #endregion
 }
