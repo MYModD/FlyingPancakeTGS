@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour {
         if (canFire)       
         {
             _missilePoolManager.FireMissiles(_fireMissilePosition);
+            _missileCooldownTimer = _missileCoolTime;
             Debug.Log("ƒ{ƒ^ƒ“‰Ÿ‚µ‚½");
         }
 

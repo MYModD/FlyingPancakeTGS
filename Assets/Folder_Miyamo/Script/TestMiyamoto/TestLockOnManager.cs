@@ -35,20 +35,23 @@ public class TestLockOnManager : MonoBehaviour {
     public float _coolTime;
 
 
-    readonly private  Vector3 _drawOrigin = new Vector3(90, 0, 0);
+    readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
     private Plane[] _cameraPlanes;
-    private float _updateInterval = 0.1f;
-    private float _lastUpdate = 0f;
+    
 
     void Update() {
+        UpdateTargets();
 
-        // 割と思い処理なので一定時間ごとに処理を実行する
-        if (Time.time - _lastUpdate > _updateInterval) {
-            UpdateTargets();
-            _lastUpdate = Time.time;
+
+
+        // 見やすくするデバッグ用
+        for (int i = 0; i < _missileStucks.Length; i++) {
+            if (_missileStucks[i]._enemyTarget != null && _missileStucks[i]._isValueAssignable == false) {
+
+                _targetsInCone.Add(_missileStucks[i]._enemyTarget);
+            }
         }
-
     }
 
     private void UpdateTargets() {
@@ -56,6 +59,8 @@ public class TestLockOnManager : MonoBehaviour {
         // Plane型の変数にカメラの情報をいれる+カメラのリストを削除する
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
         _targetsInCamera.Clear();
+        _targetsInCone.Clear();
+
 
 
         // カメラの位置から一定の半径の球状のコライダーの配列を取得する
@@ -75,7 +80,7 @@ public class TestLockOnManager : MonoBehaviour {
         // コライダーの配列Foreach
         foreach (Collider hit in hits) {
             if (!hit.CompareTag("Enemy")) {
-                return;
+                continue;
             }
 
             //ターゲットをcoliderのtransform,レンダーを取得
@@ -83,21 +88,21 @@ public class TestLockOnManager : MonoBehaviour {
             Renderer renderer = target.GetComponent<Renderer>();
             if (renderer == null) {
                 Debug.LogError("meshrendererがついていないよ");
-                return;
+                continue;
             }
 
             // カメラ内に敵がいる かつ 敵のactiveがTrueのとき それ以外はreturn
             if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
                 _targetsInCamera.Add(target);
             } else {
-                return;
+                continue;
             }
 
 
             // コーン内に敵がいる かつ 敵のactiveがTrue
-            if (IsInCone(target) && hit.gameObject.activeSelf) {
+            if (IsInCone(target) && target.gameObject.activeSelf &&hit.gameObject.activeSelf) {
 
-                // 一番近い敵をを探すためにDistanceをもとめて最小値を探す
+                // コーン内に複数の敵がいる場合一番近い敵を探す
                 float distance = Vector3.Distance(target.position, _camera.transform.position);
                 if (distance < minDistance) {
 
@@ -112,7 +117,6 @@ public class TestLockOnManager : MonoBehaviour {
         if (minDistanceTarget != null && _canAdd) {
 
             for (int i = 0; i < _missileStucks.Length; i++) {
-
 
                 // minDistanceTargetがmissileStucksの配列内にあるときBreak
                 if (minDistanceTarget == _missileStucks[i]._enemyTarget) {
@@ -132,14 +136,10 @@ public class TestLockOnManager : MonoBehaviour {
             }
         }
 
-        // あくまでデバック用 おかしい部分もあります itanai
-        _targetsInCone.Clear();
-        for (int i = 0; i < _missileStucks.Length; i++) {
-            if (_missileStucks[i]._enemyTarget != null) {
 
-                _targetsInCone.Add(_missileStucks[i]._enemyTarget);
-            }
-        }
+
+       
+
     }
 
     /// <summary>
@@ -195,7 +195,7 @@ public class TestLockOnManager : MonoBehaviour {
         // コーンの方向と回転を計算
         Vector3 coneDirection = (_player.position - _camera.transform.position).normalized;
         Quaternion coneRotation = Quaternion.LookRotation(coneDirection);
-        
+
 
         // コーン上の円周を描画
         Gizmos.color = Color.yellow;

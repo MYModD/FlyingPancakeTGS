@@ -7,9 +7,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
 
 
-    [Header("ミサイルスタック（仮)")]
-    public MissileStuck _missileStuck;
-
     [Header("目標ターゲット")]
     public Transform _enemyTarget;                // あとでset = value get privateに変えるかも
 
@@ -110,7 +107,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     }
 
 
-
+    /// <summary>
+    /// 対象物に飛翔するメソッド
+    /// </summary>  
     private void CalculationFlying() {
 
         // 前進する
@@ -144,18 +143,16 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
 
-
-
     private void OnTriggerEnter(Collider other) {
         print("衝突");
+        Debug.LogError(other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget);
 
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
-        if (other.gameObject.CompareTag(_enemyTag) || other.transform == _enemyTarget) {
+        if (other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget) {
 
             print($"{other.gameObject.name}に衝突");
             other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
             _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
-            _missileStuck.Initialize();
             ReturnToPool();                                              // ミサイルをプールに変換
         }
 
@@ -164,7 +161,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         if (other.gameObject.CompareTag(_eliteMissile)) {
 
             other.GetComponent<EliteEnemyHP>().DecreaseHP();
-            _missileStuck.Initialize();
             Debug.Log("エリートミサイルにあっったよ");
             
         
@@ -173,6 +169,5 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     }
 
     #endregion
-
 
 }

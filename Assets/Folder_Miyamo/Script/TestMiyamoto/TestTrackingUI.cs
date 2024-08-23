@@ -12,6 +12,7 @@ public class TestTrackingUI : MonoBehaviour
     [SerializeField] private GameObject[] _enemyInCone; // 円錐内の敵のImage
 
     public TestLockOnManager _lockOnManager;
+    public MissileStuck[] _missileStuck;
 
     private Image[] _enemyInCameraImages;               //キャッシュ用の
                                                         //Imageコンポーネント
@@ -74,6 +75,7 @@ public class TestTrackingUI : MonoBehaviour
     {
         for (int i = 0; i < targets.Count; i++)
         {
+            
             if (i < uiElements.Length)
             {
                 Vector3 enemyScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, targets[i].position);
