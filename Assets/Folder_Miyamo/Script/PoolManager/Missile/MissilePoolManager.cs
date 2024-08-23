@@ -42,7 +42,6 @@ public class MissilePoolManager : PoolManager<TestMissile> {
                 missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
                 missile._enemyTarget = item._enemyTarget;
 
-                item._enemyTarget = null;
 
             }
 
