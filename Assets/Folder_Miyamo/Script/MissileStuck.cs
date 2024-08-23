@@ -23,7 +23,7 @@ public class MissileStuck : MonoBehaviour
 
 
     //ロックオンできるかと値を代入できるかの2つのbool値が必要なので改善する必要がある
-    //撃ったあとに再び撃てるようにするプログラムが必要
+    //撃ったあとに再び撃てるようにするプログラムが必要なのだ
     public void TargetLockOn(Transform targetEnemy) {
         _isValueAssignable = false;
         _enemyTarget = targetEnemy;
