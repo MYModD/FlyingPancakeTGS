@@ -10,7 +10,6 @@ public class EnemyAppearanceManager : MonoBehaviour
     public void GetEnemyAppearanceManagementValue(int index)
     {
         _enemyAppearanceManagementValue = index;
-        print(_enemyAppearanceManagementValue);
         EnemyAppears();
     }
 
