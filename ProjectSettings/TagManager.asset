@@ -13,6 +13,8 @@ TagManager:
   - Missile
   - Bullet
   - EliteMissile
+  - RankCheckpoint
+  - Gate
   layers:
   - Default
   - TransparentFX

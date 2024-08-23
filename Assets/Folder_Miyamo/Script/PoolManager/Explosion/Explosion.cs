@@ -11,6 +11,7 @@ using UnityEngine.Pool;
             get; set;
         }
 
+
         /// <summary>
         /// ‰Šú‰»
         /// </summary>
