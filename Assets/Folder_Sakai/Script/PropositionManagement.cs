@@ -40,7 +40,7 @@ public class PropositionManagement : MonoBehaviour
                 _defeatTheEnemyManager.FirstGroupStartMoving();
                 break;
             case Proposition.GoThroughTheGate2:
-                _goThroughTheGateManager.GateActivation();
+                //_goThroughTheGateManager.GateActivation();
                 break;
             case Proposition.DodgeTheMonsterTruck3:
                 break;
