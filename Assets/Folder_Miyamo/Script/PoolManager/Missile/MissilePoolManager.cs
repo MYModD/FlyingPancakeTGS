@@ -38,7 +38,7 @@ public class MissilePoolManager : PoolManager<TestMissile> {
 
                 TestMissile missile = _objectPool.Get();
                 missile.Initialize();                       //èâä˙âª
-                
+                missile._missileStuck = item;
                 missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
                 missile._enemyTarget = item._enemyTarget;
 
