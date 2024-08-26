@@ -49,7 +49,6 @@ public class PlayerMove : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
-
         
         if (!_canvas.CanMove())
         {            
