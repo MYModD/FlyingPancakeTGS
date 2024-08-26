@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -670,6 +670,42 @@ PrefabInstance:
       propertyPath: _lockOnManager
       value: 
       objectReference: {fileID: 1849877414}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[0]
+      value: 
+      objectReference: {fileID: 1309121450}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[1]
+      value: 
+      objectReference: {fileID: 628750234}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[2]
+      value: 
+      objectReference: {fileID: 1961635651}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[3]
+      value: 
+      objectReference: {fileID: 343834020}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[4]
+      value: 
+      objectReference: {fileID: 947547620}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[5]
+      value: 
+      objectReference: {fileID: 1154659016}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[6]
+      value: 
+      objectReference: {fileID: 1122255584}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _missileStuck.Array.data[7]
+      value: 
+      objectReference: {fileID: 894644065}
     - target: {fileID: 8126835320675905404, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.65

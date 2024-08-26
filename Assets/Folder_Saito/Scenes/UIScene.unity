@@ -2556,6 +2556,8 @@ MonoBehaviour:
   - {fileID: 7315223276694382294}
   - {fileID: 6033648165082944856}
   - {fileID: 317485288915265265}
+  _openingObjs: []
+  _endingObjs: []
   _gameObjs: []
   _spAnime: {fileID: 0}
   _tagTitle: 
@@ -4779,6 +4781,14 @@ MonoBehaviour:
   _textBGM: {fileID: 5648304796104863751}
   _textSE: {fileID: 4041507010394857974}
   _textLanguage: {fileID: 5253793486528540047}
+  _op: 
+  _textOp: []
+  _opText: []
+  _opClip: []
+  _ed: 
+  _textEd: []
+  _edText: []
+  _edClip: []
   _startButton: {fileID: 5713944205541352180}
   _finishButton: {fileID: 804117438488384175}
   _backTitleButton: {fileID: 8963305720285364421}
@@ -4794,6 +4804,8 @@ MonoBehaviour:
   _killCountResultText: {fileID: 1195206715862422631}
   _timeText: {fileID: 1284365476602020664}
   _timeResultText: {fileID: 2541578164139231798}
+  _englishFont: {fileID: 0}
+  _japaneceFont: {fileID: 0}
 --- !u!224 &5859818089558973446
 RectTransform:
   m_ObjectHideFlags: 0
