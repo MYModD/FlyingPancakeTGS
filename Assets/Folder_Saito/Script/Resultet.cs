@@ -44,15 +44,6 @@ public class Resultet : MonoBehaviour {
     void Update() {
 
     }
-    private void GameObjTrueFalse(GameObject[] trueObjects, GameObject[] falseObjects) {
-        foreach (GameObject obj in falseObjects) {
-            obj.SetActive(false);
-        }
-        foreach (GameObject obj in trueObjects) {
-            obj.SetActive(true);
-        }
-
-    }
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(_tag1st) && _isGame1st) {
 
