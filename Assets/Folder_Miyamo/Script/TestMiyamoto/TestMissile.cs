@@ -140,7 +140,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     private void OnTriggerEnter(Collider other) {
         print("衝突");
-        Debug.LogError(other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget);
 
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
         if (other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget) {
