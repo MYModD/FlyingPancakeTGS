@@ -178,7 +178,6 @@ public class CanvasManager : MonoBehaviour
     {
         GameObjTrueFalse(_menuObjs,_gamePlayObjs);
         GameObjTrueFalse(_menuObjs,_gameObjs);
-        _spAnime.enabled=false;
         _state = UIState.menu;
     }
     /// <summary>
@@ -189,7 +188,6 @@ public class CanvasManager : MonoBehaviour
         print("menuから戻るよ");
         GameObjTrueFalse(_gamePlayObjs,_menuObjs);
         GameObjTrueFalse(_gameObjs,_menuObjs);
-        _spAnime.enabled=true;
         _state=UIState.gamePlay;
     }
     /// <summary>
