@@ -53,6 +53,14 @@ public class MissileStuck : MonoBehaviour
 
     }
 
+    public void TargetNull() {
+
+        _enemyTarget = null;
+    
+    
+    
+    }
+
 
 
 }
