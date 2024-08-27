@@ -4,14 +4,16 @@ using UnityEngine;
 using NaughtyAttributes;
 
 public class TestWayPointsCount : MonoBehaviour {
-    [SerializeField, Tag]
+    [SerializeField, Header("waypointのタグ")]
+    [Tag]
     private string _wayPoint;
 
-    [Header("waypointを通った回数"),HideInInspector]
-    public int _wayPointsCount;
+    [Header("waypointを通った回数"),ReadOnly]
+    [SerializeField]
+    private  int _wayPointsCount;
 
-    [SerializeField, Header("")]
-    TestWaypointsRank _testWaypointsRank;
+    [SerializeField, Header("WayPointクラス")]
+    private TestWaypointsRank _testWaypointsRank;
 
     // Start is called before the first frame update
     void Start() {
