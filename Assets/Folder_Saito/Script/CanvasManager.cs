@@ -13,12 +13,14 @@ using UnityEngine.Splines;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
+    [SerializeField, Header("ControllerSelectButton")] private ControllerSelectButton _button;
     [Header("タイトルのボタン")]
     [SerializeField, Header("スタートボタン")] private Button _titleStart;
     [SerializeField, Header("ゲーム終了ボタン")] private Button _titleGameEnd;
     [SerializeField, Header("設定ボタン")] private Button _titleSetting;
 
     [SerializeField, Header("タイトルのオブジェクト")] private GameObject[] _titleObjs;
+    [SerializeField, Header("カウントダウンのオブジェクト")] private GameObject[] _countObjs;
     [SerializeField, Header("一時停止のオブジェクト")] private GameObject[] _menuObjs;
     [SerializeField, Header("ゲームUIのオブジェクト")] private GameObject[] _gamePlayObjs;
     [SerializeField, Header("リザルトのオブジェクト")] private GameObject[] _resultObjs;
@@ -111,6 +113,12 @@ public class CanvasManager : MonoBehaviour
                 SettingToTitleOrMenu();
             }
         }
+    }
+    public void OPtoCount() {
+        _button.StartBGM();
+        print("スタート！！");
+        GameObjTrueFalse(_countObjs,_openingObjs);
+        
     }
     /// <summary>
     /// 押された時の処理を決める

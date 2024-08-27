@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 
 public class ControllerSelectButton : MonoBehaviour {
     #region 変数
+    [SerializeField, Header("CountdownUI")] private CountDownUI _countDown;
+    [SerializeField, Header("OPのカメラ")] private GameObject _opCamera;
     [SerializeField, Header("キャンバスマネージャー")] private CanvasManager _canvasManager;
     private string _stateName;
     [SerializeField, Header("選ばれているときのスプライト")] private Sprite _nowSprites;
@@ -46,6 +48,7 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField] private AudioClip[] _opClip;
     private int _indexOP = 0;
     private int _checkIndexOp = -1;
+    private bool _checkedOP = true;
 
     [Header("ED")]
     [SerializeField, Header("EDと入れてね")] private string _ed;
@@ -56,11 +59,11 @@ public class ControllerSelectButton : MonoBehaviour {
     private int _checkIndexEd = -1;
 
     private string _settingTextEnglish = "English";
-    private string _settingTextJapanece = "日本語";
+    private string _settingTextJapanece = "Japanese";
     private Image[] _settingImages;
     private GameObject _settingNowSelect;
     private int _settingIndex = 0;
-
+    /*
     #region ゲーム内のテキスト
     [SerializeField, Header("スタートボタンの中のテキスト")] private TextMeshProUGUI _startButton;
     [SerializeField, Header("ゲーム終了ボタンの中のテキスト")] private TextMeshProUGUI _finishButton;
@@ -89,8 +92,10 @@ public class ControllerSelectButton : MonoBehaviour {
     private string _englishSetting = "Game Setting";
     private string _englishGameStop = "Pause";
     private string _englishLanguage = "Language";
+    */
     private string _englishTextTrue = "Flip On";
     private string _englishTextFalse = "Flip Off";
+    /*
     private string _englishGoBack = "Go back with B ";
     private string _englishKill = "Kill Count";
     private string _englishTime = "Time";
@@ -114,7 +119,7 @@ public class ControllerSelectButton : MonoBehaviour {
     private string _japaneceTime = "経過時間";
     private string _japaneceResultTime = "クリアタイム";
     #endregion
-
+    */
     [SerializeField] private TMP_FontAsset _englishFont;
     [SerializeField] private TMP_FontAsset _japaneceFont;
 
@@ -387,6 +392,7 @@ public class ControllerSelectButton : MonoBehaviour {
         _settingImages[(int)SettingState.horizontalInversion].sprite = _notSprites;
         _settingImages[(int)SettingState.language].sprite = _notSprites;
     }
+    /*
     private void EnglishSwitchJapanece() {
         if (!_isChangeLanguage) {
             return;
@@ -461,6 +467,7 @@ public class ControllerSelectButton : MonoBehaviour {
         SetTextOnOff(_textSE, _horizontalInversion);
         _isChangeLanguage = false;
     }
+    */
     /// <summary>
     /// BGMの大きさ調整
     /// </summary>
@@ -490,6 +497,9 @@ public class ControllerSelectButton : MonoBehaviour {
         _sliderSE.value = volumeSE;
     }
     private void OPStartProcess() {
+        if (!_checkedOP) {
+            return;
+        }
         if (_checkIndexOp != _indexOP) {
             if (_checkIndexOp >= 0) {
                 _textOp[_indexOP-1].enabled = false;
@@ -503,8 +513,11 @@ public class ControllerSelectButton : MonoBehaviour {
         if (Input.GetButtonDown("Submit")) {
             _indexOP++;
             if (_indexOP >= _textOp.Length) {
-                _audioBGM.Play();
-                _canvasManager.OPToGamePlay();
+                _countDown.PublicStart();
+                _opCamera.SetActive(false);
+                _canvasManager.OPtoCount();
+                _indexOP = 0;
+                _checkedOP = false;
             }
         }
     }
@@ -554,19 +567,19 @@ public class ControllerSelectButton : MonoBehaviour {
     /// <param name="text">セットしたいテキストコンポーネント</param>
     /// <param name="check">判断材料にしたいbool</param>
     private void SetTextOnOff(TextMeshProUGUI text, bool check) {
-        if (_isLanguageEnglish) {
+        //if (_isLanguageEnglish) {
             text.text = check ? _englishTextTrue : _englishTextFalse;
-        } else {
-            text.text = check ? _japaneceTextTrue : _japaneceTextFalse;
-        }
+        //} else {
+        //    text.text = check ? _japaneceTextTrue : _japaneceTextFalse;
+        //}
 
     }
-    /// <summary>
-    /// boolがtrueはEnglish、falseは日本語
-    /// </summary>
-    /// <param name="text">セットしたいテキストコンポーネント</param>
-    /// <param name="check">判断材料にしたいbool</param>
-    private void SetTextEnglish(TextMeshProUGUI text, bool check) {
+        /// <summary>
+        /// boolがtrueはEnglish、falseは日本語
+        /// </summary>
+        /// <param name="text">セットしたいテキストコンポーネント</param>
+        /// <param name="check">判断材料にしたいbool</param>
+        private void SetTextEnglish(TextMeshProUGUI text, bool check) {
         text.text = check ? _settingTextEnglish : _settingTextJapanece;
     }
     /// <summary>
@@ -604,6 +617,9 @@ public class ControllerSelectButton : MonoBehaviour {
     /// <returns>言語スイッチ</returns>
     public bool LanguageInversionCheak() {
         return _isLanguageEnglish;
+    }
+    public void StartBGM() {
+        _audioBGM.Play();
     }
     #endregion
 }
