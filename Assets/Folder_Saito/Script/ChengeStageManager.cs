@@ -5,8 +5,6 @@
 // 作成者:
 // ---------------------------------------------------------
 using UnityEngine;
-using System.Collections;
-using UnityEditor.SceneManagement;
 using UnityEngine.Splines;
 public class ChengeStageManager : MonoBehaviour {
     #region 変数
