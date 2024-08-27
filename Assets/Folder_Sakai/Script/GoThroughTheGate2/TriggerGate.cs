@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerGate : MonoBehaviour
-{
-    [SerializeField, Tag] private string _gate;
-    [SerializeField] private GoThroughTheGateManager _goThroughTheGateManager;
 
-    private void OnTriggerEnter(Collider other) {
+namespace SakaiScript {
 
-        if (other.gameObject.CompareTag(_gate)) {
+    public class TriggerGate : MonoBehaviour {
+        [SerializeField, Tag] private string _gate;
+        [SerializeField] private GoThroughTheGateManager _goThroughTheGateManager;
 
-            _goThroughTheGateManager.ScoreAddition();
+        private void OnTriggerEnter(Collider other) {
+
+            if (other.gameObject.CompareTag(_gate)) {
+
+                _goThroughTheGateManager.ScoreAddition();
+            }
         }
     }
+
 }
+

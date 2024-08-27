@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoThroughTheGateManager : MonoBehaviour
-{
-    #region 変数
-    
-    [SerializeField] private List<GameObject> _gates;
+namespace SakaiScript {
+    public class GoThroughTheGateManager : MonoBehaviour {
+        #region 変数
 
-    private int _score = 0;
-    #endregion
-    #region　メソッド
+        [SerializeField] private List<GameObject> _gates;
 
-    public void GateActivation() {
+        private int _score = 0;
+        #endregion
+        #region　メソッド
 
-        foreach (GameObject gate in _gates) {
+        public void GateActivation() {
 
-            // 機体をアクティブ化
-            gate.SetActive(true);
+            foreach (GameObject gate in _gates) {
+
+                // 機体をアクティブ化
+                gate.SetActive(true);
+            }
         }
+
+        public void ScoreAddition() {
+
+            _score++;
+        }
+        #endregion
     }
 
-    public void ScoreAddition() {
-
-        _score++;
-    }
-    #endregion
 }
+
+
