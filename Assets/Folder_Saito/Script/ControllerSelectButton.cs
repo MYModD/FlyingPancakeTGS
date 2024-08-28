@@ -404,7 +404,6 @@ public class ControllerSelectButton : MonoBehaviour {
             if (_checkIndexOp >= 0) {
                 _textOp[_indexOP - 1].enabled = false;
             }
-            _audioBGM.Stop();
             _textOp[_indexOP].enabled = true;
             _audioSE.Stop();
             _audioSE.PlayOneShot(_opClip[_indexOP]);
