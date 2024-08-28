@@ -115,7 +115,6 @@ public class CanvasManager : MonoBehaviour
         }
     }
     public void OPtoCount() {
-        _button.StartBGM();
         print("スタート！！");
         GameObjTrueFalse(_countObjs,_openingObjs);
         
@@ -224,6 +223,7 @@ public class CanvasManager : MonoBehaviour
     public void PlayToED() {
         GameObjTrueFalse(_endingObjs, _gamePlayObjs);
         GameObjTrueFalse(_endingObjs, _gameObjs);
+        _button.StartBGM();
         _spAnime.enabled=false;
         _state = UIState.ED;
     }

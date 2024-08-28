@@ -15,6 +15,8 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField, Header("BGMスピーカー")] private AudioSource _audioBGM;
     [SerializeField, Header("BGMスライダー")] private Slider _sliderBGM;
     [SerializeField, Header("BGMの丸")] private Image _imageBGM;
+    [SerializeField, Header("ゲームプレイBGM")] private AudioClip _audioGamePlay;
+    [SerializeField, Header("エンディングBGM")]private AudioClip _audioEnding;
 
     [SerializeField, Header("SEスピーカー")] private AudioSource _audioSE;
     [SerializeField, Header("SEスライダー")] private Slider _sliderSE;
@@ -414,6 +416,8 @@ public class ControllerSelectButton : MonoBehaviour {
                 _countDown.PublicStart();
                 _opCamera.SetActive(false);
                 _canvasManager.OPtoCount();
+                _audioBGM.clip = _audioGamePlay;
+                _audioBGM.Play();
                 _indexOP = 0;
                 _checkedOP = false;
             }
@@ -425,7 +429,6 @@ public class ControllerSelectButton : MonoBehaviour {
             if (_checkIndexEd >= 0) {
                 _textEd[_indexED - 1].enabled = false;
             }
-            _audioBGM.Stop();
             _textEd[_indexED].enabled = true;
             _audioSE.Stop();
             _audioSE.PlayOneShot(_edClip[_indexED]);
@@ -519,6 +522,7 @@ public class ControllerSelectButton : MonoBehaviour {
         return _isLanguageEnglish;
     }
     public void StartBGM() {
+        _audioBGM.clip = _audioEnding;
         _audioBGM.Play();
     }
     #endregion
