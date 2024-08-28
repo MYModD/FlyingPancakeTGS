@@ -92,9 +92,9 @@ public class CanvasManager : MonoBehaviour
             _canMove = true;
         }
         if (_state == UIState.result) {
-            if (Input.GetButtonDown("Cancel") &&_isStartPush) {
-                MenuOrResultToStart();
-            }
+            //if (Input.GetButtonDown("Cancel") &&_isStartPush) {
+            //    MenuOrResultToStart();
+            //}
             _resultManager.SetTexts();
             _canMove= false;
         }
@@ -250,7 +250,7 @@ public class CanvasManager : MonoBehaviour
     /// <summary>
     /// リザルトからタイトルへ
     /// </summary>
-    private void MenuOrResultToStart()
+    public void MenuOrResultToStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         _state = UIState.title;

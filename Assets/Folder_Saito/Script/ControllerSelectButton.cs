@@ -44,7 +44,6 @@ public class ControllerSelectButton : MonoBehaviour {
     [Header("OP")]
     [SerializeField, Header("OPと入れてね")] private string _op;
     [SerializeField] private TextMeshProUGUI[] _textOp;
-    [SerializeField] private string[] _opText;
     [SerializeField] private AudioClip[] _opClip;
     private int _indexOP = 0;
     private int _checkIndexOp = -1;
@@ -53,73 +52,25 @@ public class ControllerSelectButton : MonoBehaviour {
     [Header("ED")]
     [SerializeField, Header("EDと入れてね")] private string _ed;
     [SerializeField] private TextMeshProUGUI[] _textEd;
-    [SerializeField] private string[] _edText;
     [SerializeField] private AudioClip[] _edClip;
     private int _indexED = 0;
     private int _checkIndexEd = -1;
+
+    [Header("リザルト")]
+    [SerializeField, Header("resultと入れてね")] private string _result;
+    [SerializeField] private TextMeshProUGUI[] _textResult;
+    private int _indexResult = 0;
+    private int _checkIndexResult = -1;
 
     private string _settingTextEnglish = "English";
     private string _settingTextJapanece = "Japanese";
     private Image[] _settingImages;
     private GameObject _settingNowSelect;
     private int _settingIndex = 0;
-    /*
-    #region ゲーム内のテキスト
-    [SerializeField, Header("スタートボタンの中のテキスト")] private TextMeshProUGUI _startButton;
-    [SerializeField, Header("ゲーム終了ボタンの中のテキスト")] private TextMeshProUGUI _finishButton;
-    [SerializeField, Header("タイトルに戻るボタンの中のテキスト")] private TextMeshProUGUI _backTitleButton;
-    [SerializeField, Header("BGM項目の表示")] private TextMeshProUGUI _mainVomuleText;
-    [SerializeField, Header("SE項目の表示")] private TextMeshProUGUI _subVolumeText;
-    [SerializeField, Header("上下反転の項目の表示")] private TextMeshProUGUI _verticalInversionText;
-    [SerializeField, Header("左右反転の項目の表示")] private TextMeshProUGUI _horizontalInversionText;
-    [SerializeField, Header("言語項目の表示")] private TextMeshProUGUI _languageText;
-    [SerializeField, Header("設定画面")] private TextMeshProUGUI _settingText;
-    [SerializeField, Header("一時停止")] private TextMeshProUGUI _gameStopText;
-    [SerializeField, Header("戻る")] private TextMeshProUGUI _goBackText;
-    [SerializeField, Header("撃破数")] private TextMeshProUGUI _killCountText;
-    [SerializeField, Header("撃破数")] private TextMeshProUGUI _killCountResultText;
-    [SerializeField, Header("タイム")] private TextMeshProUGUI _timeText;
-    [SerializeField, Header("タイム")] private TextMeshProUGUI _timeResultText;
-    #endregion
-    #region 英語文字
-    private string _englishStart = "Game Start";
-    private string _englishFinish = "Quit The Game";
-    private string _englishBackTitle = "Return To Title";
-    private string _englishBGM = "BGM Volume";
-    private string _englishSE = "SE Volume";
-    private string _englishVerticalFlip = "Flip Vertical";
-    private string _englishHorizontalFlip = "Flip Horizontal";
-    private string _englishSetting = "Game Setting";
-    private string _englishGameStop = "Pause";
-    private string _englishLanguage = "Language";
-    */
+
     private string _englishTextTrue = "Flip On";
     private string _englishTextFalse = "Flip Off";
-    /*
-    private string _englishGoBack = "Go back with B ";
-    private string _englishKill = "Kill Count";
-    private string _englishTime = "Time";
-    private string _englishResultTime = "Clear Time";
-    #endregion
-    #region 日本語文字
-    private string _japaneceStart = "ゲームスタート";
-    private string _japaneceFinish = "ゲーム終了";
-    private string _japaneceBackTitle = "タイトルに戻る";
-    private string _japaneceBGM = "BGM音量";
-    private string _japaneceSE = "SE音量";
-    private string _japaneceVerticalFlip = "上下反転";
-    private string _japaneceHorizontalFlip = "左右反転";
-    private string _japaneceLanguage = "言語";
-    private string _japaneceSetting = "設 定 画 面";
-    private string _japaneceGameStop = "一 時 停 止";
-    private string _japaneceTextTrue = "オン";
-    private string _japaneceTextFalse = "オフ";
-    private string _japaneceGoBack = "Bボタンで戻る";
-    private string _japaneceKill = "撃破数";
-    private string _japaneceTime = "経過時間";
-    private string _japaneceResultTime = "クリアタイム";
-    #endregion
-    */
+
     [SerializeField] private TMP_FontAsset _englishFont;
     [SerializeField] private TMP_FontAsset _japaneceFont;
 
@@ -206,9 +157,12 @@ public class ControllerSelectButton : MonoBehaviour {
         if (_stateName == _ed) {
             EDStartProcess();
         }
+        if(_stateName == _result) {
+            ResultProcess();
+        }
         //EnglishSwitchJapanece();
     }
-
+    #region タイトル
     /// <summary>
     /// Titleでの処理
     /// </summary>
@@ -251,6 +205,8 @@ public class ControllerSelectButton : MonoBehaviour {
         //リセット
         SetNotImage(_titleImages);
     }
+    #endregion
+    #region メニュー
     /// <summary>
     /// Menuでの処理
     /// </summary>
@@ -292,6 +248,8 @@ public class ControllerSelectButton : MonoBehaviour {
         //リセット処理
         SetNotImage(_menuImages);
     }
+    #endregion
+    #region 設定画面
     /// <summary>
     /// 設定画面での処理
     /// </summary>
@@ -373,15 +331,8 @@ public class ControllerSelectButton : MonoBehaviour {
         ResetSettings();
 
     }
-    /// <summary>
-    /// すべてを選んでいない画像にする
-    /// </summary>
-    /// <param name="imgs">処理を行わせたい配列</param>
-    private void SetNotImage(Image[] imgs) {
-        foreach (Image img in imgs) {
-            img.sprite = _notSprites;
-        }
-    }
+    #endregion
+    #region 設定画面の動き働き
     /// <summary>
     /// 設定でのリセット処理
     /// </summary>
@@ -392,82 +343,6 @@ public class ControllerSelectButton : MonoBehaviour {
         _settingImages[(int)SettingState.horizontalInversion].sprite = _notSprites;
         _settingImages[(int)SettingState.language].sprite = _notSprites;
     }
-    /*
-    private void EnglishSwitchJapanece() {
-        if (!_isChangeLanguage) {
-            return;
-        }
-        //英語化
-        if (_isLanguageEnglish) {
-            _startButton.text = _englishStart;
-            _finishButton.text = _englishFinish;
-            _backTitleButton.text = _englishBackTitle;
-            _mainVomuleText.text = _englishBGM;
-            _subVolumeText.text = _englishSE;
-            _verticalInversionText.text = _englishVerticalFlip;
-            _horizontalInversionText.text = _englishHorizontalFlip;
-            _languageText.text = _englishLanguage;
-            _settingText.text = _englishSetting;
-            _gameStopText.text = _englishGameStop;
-            _goBackText.text = _englishGoBack;
-            _timeResultText.text = _englishResultTime;
-            _timeText.text = _englishTime;
-            _killCountResultText.text = _englishKill;
-            _killCountText.text = _englishKill;
-            _startButton.font = _englishFont;
-            _finishButton.font = _englishFont;
-            _backTitleButton.font = _englishFont;
-            _mainVomuleText.font = _englishFont;
-            _subVolumeText.font = _englishFont;
-            _verticalInversionText.font = _englishFont;
-            _horizontalInversionText.font = _englishFont;
-            _languageText.font = _englishFont;
-            _settingText.font = _englishFont;
-            _gameStopText.font = _englishFont;
-            _goBackText.font = _englishFont;
-            _timeResultText.font = _englishFont;
-            _timeText.font = _englishFont;
-            _killCountResultText.font = _englishFont;
-            _killCountText.font = _englishFont;
-        }
-        //日本語化
-        else {
-            _startButton.text = _japaneceStart;
-            _finishButton.text = _japaneceFinish;
-            _backTitleButton.text = _japaneceBackTitle;
-            _mainVomuleText.text = _japaneceBGM;
-            _subVolumeText.text = _japaneceSE;
-            _verticalInversionText.text = _japaneceVerticalFlip;
-            _horizontalInversionText.text = _japaneceHorizontalFlip;
-            _languageText.text = _japaneceLanguage;
-            _settingText.text = _japaneceSetting;
-            _gameStopText.text = _japaneceGameStop;
-            _goBackText.text = _japaneceGoBack;
-            _timeResultText.text = _japaneceResultTime;
-            _timeText.text = _japaneceTime;
-            _killCountResultText.text = _japaneceKill;
-            _killCountText.text = _japaneceKill;
-            _startButton.font = _japaneceFont;
-            _finishButton.font = _japaneceFont;
-            _backTitleButton.font = _japaneceFont;
-            _mainVomuleText.font = _japaneceFont;
-            _subVolumeText.font = _japaneceFont;
-            _verticalInversionText.font = _japaneceFont;
-            _horizontalInversionText.font = _japaneceFont;
-            _languageText.font = _japaneceFont;
-            _settingText.font = _japaneceFont;
-            _gameStopText.font = _japaneceFont;
-            _goBackText.font = _japaneceFont;
-            _timeResultText.font = _japaneceFont;
-            _timeText.font = _japaneceFont;
-            _killCountResultText.font = _japaneceFont;
-            _killCountText.font = _japaneceFont;
-        }
-        SetTextOnOff(_textBGM, _verticalInversion);
-        SetTextOnOff(_textSE, _horizontalInversion);
-        _isChangeLanguage = false;
-    }
-    */
     /// <summary>
     /// BGMの大きさ調整
     /// </summary>
@@ -496,13 +371,36 @@ public class ControllerSelectButton : MonoBehaviour {
         //ボリュームを設定
         _sliderSE.value = volumeSE;
     }
+    /// <summary>
+    /// 上下反転スイッチにカーソルがある時の画像
+    /// </summary>
+    private void VerticalInversionSetting() {
+        //選択中を表現
+        _settingImages[(int)SettingState.verticalInversion].sprite = _nowSprites;
+    }
+    /// <summary>
+    /// 左右反転スイッチにカーソルがある時の画像
+    /// </summary>
+    private void HorizontalInversionSetting() {
+        //選択中を表現
+        _settingImages[(int)SettingState.horizontalInversion].sprite = _nowSprites;
+    }
+    /// <summary>
+    /// 言語スイッチにカーソルがある時の画像
+    /// </summary>
+    private void LanguageSetting() {
+        //選択中を表現
+        _settingImages[(int)SettingState.language].sprite = _nowSprites;
+    }
+    #endregion
+    #region OPED
     private void OPStartProcess() {
         if (!_checkedOP) {
             return;
         }
         if (_checkIndexOp != _indexOP) {
             if (_checkIndexOp >= 0) {
-                _textOp[_indexOP-1].enabled = false;
+                _textOp[_indexOP - 1].enabled = false;
             }
             _audioBGM.Stop();
             _textOp[_indexOP].enabled = true;
@@ -525,7 +423,7 @@ public class ControllerSelectButton : MonoBehaviour {
         print(_audioSE.volume);
         if (_checkIndexEd != _indexED) {
             if (_checkIndexEd >= 0) {
-                _textEd[_indexED-1].enabled = false;
+                _textEd[_indexED - 1].enabled = false;
             }
             _audioBGM.Stop();
             _textEd[_indexED].enabled = true;
@@ -540,26 +438,27 @@ public class ControllerSelectButton : MonoBehaviour {
             }
         }
     }
-    /// <summary>
-    /// 上下反転スイッチにカーソルがある時の画像
-    /// </summary>
-    private void VerticalInversionSetting() {
-        //選択中を表現
-        _settingImages[(int)SettingState.verticalInversion].sprite = _nowSprites;
+    #endregion
+    private void ResultProcess() {
+        if (_checkIndexResult != _indexResult) {
+            _textResult[_indexResult].enabled = true;
+            _checkIndexResult = _indexResult;
+        }
+        if (Input.GetButtonDown("Submit")) {
+            _indexResult++;
+            if (_indexResult >= _textResult.Length) {
+                _canvasManager.MenuOrResultToStart();
+            }
+        }
     }
     /// <summary>
-    /// 左右反転スイッチにカーソルがある時の画像
+    /// すべてを選んでいない画像にする
     /// </summary>
-    private void HorizontalInversionSetting() {
-        //選択中を表現
-        _settingImages[(int)SettingState.horizontalInversion].sprite = _nowSprites;
-    }
-    /// <summary>
-    /// 言語スイッチにカーソルがある時の画像
-    /// </summary>
-    private void LanguageSetting() {
-        //選択中を表現
-        _settingImages[(int)SettingState.language].sprite = _nowSprites;
+    /// <param name="imgs">処理を行わせたい配列</param>
+    private void SetNotImage(Image[] imgs) {
+        foreach (Image img in imgs) {
+            img.sprite = _notSprites;
+        }
     }
     /// <summary>
     /// boolがtrueはオン、falseはオフ
@@ -568,18 +467,19 @@ public class ControllerSelectButton : MonoBehaviour {
     /// <param name="check">判断材料にしたいbool</param>
     private void SetTextOnOff(TextMeshProUGUI text, bool check) {
         //if (_isLanguageEnglish) {
-            text.text = check ? _englishTextTrue : _englishTextFalse;
+        text.text = check ? _englishTextTrue : _englishTextFalse;
         //} else {
         //    text.text = check ? _japaneceTextTrue : _japaneceTextFalse;
         //}
 
     }
-        /// <summary>
-        /// boolがtrueはEnglish、falseは日本語
-        /// </summary>
-        /// <param name="text">セットしたいテキストコンポーネント</param>
-        /// <param name="check">判断材料にしたいbool</param>
-        private void SetTextEnglish(TextMeshProUGUI text, bool check) {
+
+    /// <summary>
+    /// boolがtrueはEnglish、falseは日本語
+    /// </summary>
+    /// <param name="text">セットしたいテキストコンポーネント</param>
+    /// <param name="check">判断材料にしたいbool</param>
+    private void SetTextEnglish(TextMeshProUGUI text, bool check) {
         text.text = check ? _settingTextEnglish : _settingTextJapanece;
     }
     /// <summary>
