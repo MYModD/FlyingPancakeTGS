@@ -8,7 +8,7 @@ public class TestWaypointsRank : MonoBehaviour {
     [SerializeField, Header("ランクをつけたいオブジェクト")]
     private GameObject[] _playersRankObject;
 
-    [SerializeField, Header("プレイヤーがいくつ通ったか")]
+    [SerializeField, Header("プレイヤーがいくつ通ったかの管理")]
     private int[] _playerWaypointsInt;
 
     [SerializeField, Header("ランクの管理")]
@@ -39,39 +39,40 @@ public class TestWaypointsRank : MonoBehaviour {
 
         _playerWaypointsInt[i] = points;
 
-
         Goge();
     }
 
 
     public void Goge() {
         // 全プレイヤーの配列の中で自分が何番目にいるか
-        int i = Array.IndexOf(_playersRankObject, _gamePlayObject);
+        int correctMe = Array.IndexOf(_playersRankObject, _gamePlayObject);
         int[] hoge = _playerWaypointsInt;
 
-        // ランクを計算
-        _playersRank = _playerWaypointsInt
-            .Select((score, index) => new { Score = score, Index = index })
-            .OrderByDescending(x => x.Score)
-            .Select((x, rank) => new { x.Index, Rank = rank + 1 })
-            .OrderBy(x => x.Index)
-            .Select(x => x.Rank)
-            .ToArray();
+        for (int i = 0; i < _playerWaypointsInt.Length; i++) {
+            int maxPoint = _playerWaypointsInt[i];
+            int maxPointNum = default;
 
-        // 現在のプレイヤーのランクを取得
-        _rankCurrent = _playersRank[i];
+            for (int j = i + 1; i < _playerWaypointsInt.Length; j++) {
 
-        
+                if (_playerWaypointsInt[j] > maxPoint) {
+                    maxPoint = _playerWaypointsInt[j];
+                    maxPointNum = j;
+
+                }
+
+            }
+
+            if (maxPoint != _playerWaypointsInt[i]) {
+            
+            //ここから書くよじゃあね
+            
+            }
+
+
+        }
+
+
     }
-
-
-
-
-
-
-
-
-
 
 
 
