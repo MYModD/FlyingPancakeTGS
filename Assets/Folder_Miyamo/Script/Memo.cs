@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Memo : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class Memo : MonoBehaviour {
+    [TextArea(10, 30)]
+    public string _note;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
