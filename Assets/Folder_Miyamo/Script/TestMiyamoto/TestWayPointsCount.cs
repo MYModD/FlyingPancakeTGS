@@ -43,8 +43,6 @@ public class TestWayPointsCount : MonoBehaviour {
             _explosion.StartExplosion(this.transform);
             this.gameObject.SetActive(false) ;
 
-
-
         }
 
     }

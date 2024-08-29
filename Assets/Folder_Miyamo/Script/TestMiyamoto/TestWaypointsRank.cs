@@ -96,6 +96,10 @@ public class PlayerRankManager : MonoBehaviour {
 
     private bool IsFirstPlaceEnemyDefeated() {
 
+        if (_currentPlayerRank == 1) {
+            return true;
+        }
+
         if (_currentPlayerRank <= 2) {
 
             // 1ˆÊ‚Ìplayer‚ð’T‚·
