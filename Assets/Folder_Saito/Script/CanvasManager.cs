@@ -13,12 +13,15 @@ using UnityEngine.Splines;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
+    [SerializeField, Header("ControllerSelectButton")] private ChengeStageManager _staChange;
+    [SerializeField, Header("ControllerSelectButton")] private ControllerSelectButton _button;
     [Header("タイトルのボタン")]
     [SerializeField, Header("スタートボタン")] private Button _titleStart;
     [SerializeField, Header("ゲーム終了ボタン")] private Button _titleGameEnd;
     [SerializeField, Header("設定ボタン")] private Button _titleSetting;
 
     [SerializeField, Header("タイトルのオブジェクト")] private GameObject[] _titleObjs;
+    [SerializeField, Header("カウントダウンのオブジェクト")] private GameObject[] _countObjs;
     [SerializeField, Header("一時停止のオブジェクト")] private GameObject[] _menuObjs;
     [SerializeField, Header("ゲームUIのオブジェクト")] private GameObject[] _gamePlayObjs;
     [SerializeField, Header("リザルトのオブジェクト")] private GameObject[] _resultObjs;
@@ -76,7 +79,6 @@ public class CanvasManager : MonoBehaviour
     /// </summary>
     void Update() {
         if (_state == UIState.gamePlay) {
-            _spAnime.enabled = true;
             _gamePlayTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Z)) {
                 PlayToED();
@@ -91,9 +93,9 @@ public class CanvasManager : MonoBehaviour
             _canMove = true;
         }
         if (_state == UIState.result) {
-            if (Input.GetButtonDown("Cancel") &&_isStartPush) {
-                MenuOrResultToStart();
-            }
+            //if (Input.GetButtonDown("Cancel") &&_isStartPush) {
+            //    MenuOrResultToStart();
+            //}
             _resultManager.SetTexts();
             _canMove= false;
         }
@@ -112,6 +114,11 @@ public class CanvasManager : MonoBehaviour
                 SettingToTitleOrMenu();
             }
         }
+    }
+    public void OPtoCount() {
+        print("スタート！！");
+        GameObjTrueFalse(_countObjs,_openingObjs);
+        
     }
     /// <summary>
     /// 押された時の処理を決める
@@ -158,6 +165,7 @@ public class CanvasManager : MonoBehaviour
         GameObjTrueFalse(_gameObjs, _openingObjs);
         _spAnime.enabled = true;
         _state = UIState.gamePlay;
+        _staChange.GameStartVoice();
     }
     /// <summary>
     /// ゲーム終了
@@ -179,8 +187,6 @@ public class CanvasManager : MonoBehaviour
     {
         GameObjTrueFalse(_menuObjs,_gamePlayObjs);
         GameObjTrueFalse(_menuObjs,_gameObjs);
-        _spAnime.enabled=false;
-        _spAnime.enabled = false;
         _state = UIState.menu;
     }
     /// <summary>
@@ -191,8 +197,6 @@ public class CanvasManager : MonoBehaviour
         print("menuから戻るよ");
         GameObjTrueFalse(_gamePlayObjs,_menuObjs);
         GameObjTrueFalse(_gameObjs,_menuObjs);
-        _spAnime.enabled=true;
-        _spAnime.enabled = true;
         _state=UIState.gamePlay;
     }
     /// <summary>
@@ -221,6 +225,7 @@ public class CanvasManager : MonoBehaviour
     public void PlayToED() {
         GameObjTrueFalse(_endingObjs, _gamePlayObjs);
         GameObjTrueFalse(_endingObjs, _gameObjs);
+        _button.StartBGM();
         _spAnime.enabled=false;
         _state = UIState.ED;
     }
@@ -247,7 +252,7 @@ public class CanvasManager : MonoBehaviour
     /// <summary>
     /// リザルトからタイトルへ
     /// </summary>
-    private void MenuOrResultToStart()
+    public void MenuOrResultToStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         _state = UIState.title;

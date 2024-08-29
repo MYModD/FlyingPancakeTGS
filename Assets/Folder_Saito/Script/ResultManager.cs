@@ -10,17 +10,13 @@ using TMPro;
 using System.Data.SqlTypes;
 public class ResultManager : MonoBehaviour {
     #region 変数
-    [SerializeField] private TextMeshProUGUI _killCountText;
     [SerializeField] private TextMeshProUGUI _clearTimeText;
     [SerializeField] private TextMeshProUGUI _gameTimeText;
-    [SerializeField] private TextMeshProUGUI _rankText;
+    [SerializeField] private CanvasManager _canvasManager;
+    [SerializeField,Header("ScoreManagerこのゲームオブジェクト")]private ScoreManager _scoreManager;
 
-    [SerializeField]
-    private CountTheNumberOfDefeats _numDefeats;
-    [SerializeField]
-    private CanvasManager _canvasManager;
+    [SerializeField, Header("クリア時間のしきい値")] private float _limitTime = 240f;
 
-    private int _killCount;
     private float _clearTime;
 
     
@@ -84,16 +80,11 @@ public class ResultManager : MonoBehaviour {
         return minuteTime.ToString() + ":" + secondText + ":" + millisecondText;
     }
     public void SetTexts() {
-        SetKillCount();
         SetClearTime();
-    }
-    private void SetKillCount() {
-        _killCount = _numDefeats.NumberOfDefeats();
-        _killCountText.text = _killCount.ToString();
     }
     private void SetClearTime() {
         _clearTime = _canvasManager.GamePlayTime();
-        _clearTimeText.text = ChangeTimeText(_clearTime);
+        _scoreManager.InputTimeScore(_clearTime, _limitTime, ChangeTimeText(_clearTime));
     }
-#endregion
+    #endregion
 }

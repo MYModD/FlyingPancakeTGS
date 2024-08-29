@@ -15,6 +15,7 @@ TagManager:
   - EliteMissile
   - RankCheckpoint
   - Gate
+  - Waypoint
   layers:
   - Default
   - TransparentFX

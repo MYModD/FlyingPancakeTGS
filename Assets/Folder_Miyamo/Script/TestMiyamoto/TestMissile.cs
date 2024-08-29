@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Splines;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
@@ -38,6 +39,11 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [Tag]
     private string _eliteMissile;
 
+    public MissileStuck _missileStuck;
+
+
+
+
     public ExplosionPoolManager _explosionPoolManager {
         set; private get;
     }
@@ -64,6 +70,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     public void Initialize() {
         _offtimeValue = _timer;
         _hasCollided = false; // フラグをリセット
+
+        
     }
 
     /// <summary>
@@ -135,7 +143,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     private void OnTriggerEnter(Collider other) {
         print("衝突");
-        Debug.LogError(other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget);
 
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
         if (other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget) {
@@ -147,6 +154,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
                 print($"{other.gameObject.name}に衝突");
                 other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
                 _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
+                _missileStuck.TargetNull();
                 ReturnToPool();                                              // ミサイルをプールに変換
             }
 
