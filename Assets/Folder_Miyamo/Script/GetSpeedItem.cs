@@ -38,8 +38,11 @@ public class GetSpeedItem : MonoBehaviour
 
         if (other.CompareTag(_speedItemTag)) {
 
+            Debug.Log("sppedItme‚¤‚¯‚Æ‚è‚Ü‚µ‚½");  
+
             _splineAnimate.ElapsedTime += _addSpeedValue;
             _currentSpeed = _splineAnimate.ElapsedTime;
+            other.gameObject.SetActive(false);
 
         }
 

@@ -23,7 +23,7 @@ public class VacumeToPlayer : MonoBehaviour
         
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _vacumeSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, _vacumeSpeed * Time.deltaTime);
 
 
 

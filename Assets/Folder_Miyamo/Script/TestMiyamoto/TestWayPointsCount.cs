@@ -46,7 +46,16 @@ public class TestWayPointsCount : MonoBehaviour {
             _wayPointsCount++;
             _playerRankManager.UpdatePlayerWaypointCount(this.gameObject, _wayPointsCount);
 
-        } else if (other.CompareTag(_buildingTag)) {
+        }
+
+        if (this.gameObject.tag == null) {
+
+            return;
+        
+        }
+        
+        
+        if (other.CompareTag(_buildingTag)) {
 
             _explosion.StartExplosion(this.transform);
             this.gameObject.SetActive(false);
