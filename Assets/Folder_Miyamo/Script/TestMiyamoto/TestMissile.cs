@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Splines;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
@@ -69,6 +70,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     public void Initialize() {
         _offtimeValue = _timer;
         _hasCollided = false; // フラグをリセット
+
+        
     }
 
     /// <summary>
@@ -140,7 +143,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
     private void OnTriggerEnter(Collider other) {
         print("衝突");
-        Debug.LogError(other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget);
 
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
         if (other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget) {
