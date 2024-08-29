@@ -4,11 +4,14 @@
 // 作成日:
 // 作成者:
 // ---------------------------------------------------------
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Splines;
 public class ChengeStageManager : MonoBehaviour {
     #region 変数
-    private int _indexStage = 1;
+    [SerializeField] private AudioSource _audioSE;
+    [SerializeField] private AudioClip[] _stageVoice;
+    private int _indexStage = 0;
 
     [Header("1stStage")]
     [SerializeField, Header("1stのプレイヤー")] private GameObject _player1st;
@@ -79,27 +82,37 @@ public class ChengeStageManager : MonoBehaviour {
             _game5st.SetActive(false);
             _canvasManager.PlayToED();
         }
-        _indexStage++;
+        
     }
+    
     public void StageStart() {
-        if (_indexStage == 2) {
+        if (_indexStage == 1) {
             print("ステチェン");
             _splineAnimate1st.enabled = false;
             _splineAnimate2st.enabled = true;
         }
-        if (_indexStage == 3) {
+        if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
             _splineAnimate3st.enabled = true;
         }
-        if (_indexStage == 4) {
+        if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
             _splineAnimate4st.enabled = true;
         }
-        if (_indexStage == 5) {
+        if (_indexStage == 4) {
             _splineAnimate4st.enabled = false;
             _splineAnimate5st.enabled = true;
         }
+        StartCoroutine(StartVoice());
+    }
 
+    IEnumerator StartVoice() {
+        yield return new WaitForSeconds(0.75f);
+        _audioSE.PlayOneShot(_stageVoice[_indexStage]);
+        _indexStage++;
+    }
+    public void GameStartVoice() {
+        StartCoroutine(StartVoice());
     }
     #endregion
 }
