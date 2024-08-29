@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Splines;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
@@ -69,6 +70,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     public void Initialize() {
         _offtimeValue = _timer;
         _hasCollided = false; // フラグをリセット
+
+        
     }
 
     /// <summary>
