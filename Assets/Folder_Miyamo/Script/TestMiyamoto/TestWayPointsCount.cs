@@ -4,16 +4,16 @@ using UnityEngine;
 using NaughtyAttributes;
 
 public class TestWayPointsCount : MonoBehaviour {
-    [SerializeField, Header("waypointのタグ")]
-    [Tag]
+    [Tag, Header("waypointのタグ")]
+    [SerializeField]
     private string _wayPoint;
 
     [Header("waypointを通った回数"),ReadOnly]
     [SerializeField]
     private  int _wayPointsCount;
 
-    [SerializeField, Header("WayPointクラス")]
-    private TestWaypointsRank _testWaypointsRank;
+    [SerializeField, Header("順位クラスマネージャー")]
+    private PlayerRankManager _playerRankManager;
 
     // Start is called before the first frame update
     void Start() {
@@ -30,7 +30,7 @@ public class TestWayPointsCount : MonoBehaviour {
         if (other.CompareTag(_wayPoint)) {
 
             _wayPointsCount++;
-            _testWaypointsRank.UpdatePlayerRank(this.gameObject, _wayPointsCount);
+            _playerRankManager.UpdatePlayerWaypointCount(this.gameObject, _wayPointsCount);
 
         }
 

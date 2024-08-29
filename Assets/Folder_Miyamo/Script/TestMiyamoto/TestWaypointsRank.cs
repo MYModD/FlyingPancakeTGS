@@ -5,62 +5,116 @@ using UnityEngine;
 using System.Linq;
 using NaughtyAttributes;
 
-public class TestWaypointsRank : MonoBehaviour {
+public class PlayerRankManager : MonoBehaviour {
     [SerializeField, Header("ランクをつけたいオブジェクト")]
-    private GameObject[] _playersRankObject;
+    private GameObject[] _playerObjects;
 
-    [SerializeField, Header("プレイヤーがいくつ通ったかの管理")]
-    [ReadOnly]
-    private int[] _playerWaypointsInt;
+    [ReadOnly, Header("プレイヤーがいくつ通ったかの管理")]
+    [SerializeField]
+    private int[] _playerWaypointCounts;
 
-    [SerializeField, Header("ランクの管理")]
-    [ReadOnly]
-    private int[] _playersRank;
+    [ReadOnly, Header("ランクの管理")]
+    [SerializeField]
+    private int[] _playerRanks;
 
     [SerializeField, Header("プレイヤーのオブジェクト")]
-    private GameObject _gamePlayObject;
+    private GameObject _currentPlayerObject;
 
     [SerializeField, Header("プレイヤーが今何位か")]
-    private int _rankCurrent;
+    private int _currentPlayerRank;
 
-    private void Start() {
+    [Range(0f, 0.1f), Header("ランク処理の頻度")]
+    [SerializeField]
+    private float _repeatTime;
 
-        // _playersRankの長さを_playersRankObjectと同じにする
-        _playersRank = new int[_playersRankObject.Length];
-        // _playerWaypointsIntも同じ長さで初期化
-        _playerWaypointsInt = new int[_playersRankObject.Length];
+    [SerializeField, Header("1位が撃破されたときに実行する処理")]
+    private TimeLimit _timeLimit;
 
-    }
 
     /// <summary>
-    /// 全プレイヤーがwaypointを通過したときに処理するメソッド
+    /// Startじゃなくてもいいです、改修予定
     /// </summary>
-    public void UpdatePlayerRank(GameObject gameobj, int points) {
-        int i = Array.IndexOf(_playersRankObject, gameobj);
-        _playerWaypointsInt[i] = points;
-        Goge();
+    private void Start() {
+        
+        _playerRanks = new int[_playerObjects.Length];
+        _playerWaypointCounts = new int[_playerObjects.Length];
+
+        // 第二引数:これが実行されてから何秒後に実行するか
+        // 第三引数:何秒ごとに実行するか
+        InvokeRepeating(nameof(UpdateRanks), 0.001f, _repeatTime);
     }
 
-    public void Goge() {
-        // 全プレイヤーの配列の中で自分が何番目にいるか
-        int correctMe = Array.IndexOf(_playersRankObject, _gamePlayObject);
 
-        // ランクを計算
-        int[] sortedIndices = Enumerable.Range(0, _playerWaypointsInt.Length)
-            .OrderByDescending(i => _playerWaypointsInt[i])
+
+
+
+
+    public void UpdatePlayerWaypointCount(GameObject playerObject, int waypointCount) {
+        int playerIndex = Array.IndexOf(_playerObjects, playerObject);
+
+        if (playerIndex != -1) {
+            _playerWaypointCounts[playerIndex] = waypointCount;
+        }
+
+    }
+
+  
+
+    private void UpdateRanks() {
+
+
+        if (IsFirstPlaceEnemyDefeated() == true) {
+
+            //ここにタイマーストップのスクリプト
+            _timeLimit.End3rdGame();
+
+
+        }
+
+
+        // -------------------------------------ここから本編-----------------------------------
+
+        int currentPlayerIndex = Array.IndexOf(_playerObjects, _currentPlayerObject);
+
+        int[] sortedIndices = Enumerable.Range(0, _playerWaypointCounts.Length)
+            .OrderByDescending(i => _playerWaypointCounts[i])
             .ToArray();
 
         for (int i = 0; i < sortedIndices.Length; i++) {
-            _playersRank[sortedIndices[i]] = i + 1;
+            _playerRanks[sortedIndices[i]] = i + 1;
         }
 
-        // 現在のプレイヤーのランクを更新
-        _rankCurrent = _playersRank[correctMe];
-
+        _currentPlayerRank = _playerRanks[currentPlayerIndex];
+        
         // デバッグ用：ランクを表示
-        for (int i = 0; i < _playersRank.Length; i++) {
-            Debug.Log($"Player {i}: Score {_playerWaypointsInt[i]}, Rank {_playersRank[i]}");
+        for (int i = 0; i < _playerRanks.Length; i++) {
+            Debug.Log($"Player {i}: Score {_playerWaypointCounts[i]}, Rank {_playerRanks[i]}");
         }
-        Debug.Log($"Current player rank: {_rankCurrent}");
+        Debug.Log($"Current player rank: {_currentPlayerRank}");
+    }
+
+    private bool IsFirstPlaceEnemyDefeated() {
+
+        if (_currentPlayerRank <= 2) {
+
+            // 1位のplayerを探す
+            GameObject firstRankObject = default;
+            for (int i = 0; i < _playerRanks.Length; i++) {
+                if (_playerRanks[i] == 1) {
+
+                    firstRankObject = _playerObjects[i];
+                    break;
+                }
+            }
+
+            // もし1位の敵が撃破されていてfalseならばtrueを返す
+            if (firstRankObject.activeSelf == false) {
+            
+                return true;
+            }
+        }
+        //それ以外はfalse
+        return false;
+
     }
 }
