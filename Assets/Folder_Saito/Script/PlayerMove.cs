@@ -9,6 +9,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.Splines;
 using UnityEngine.UIElements;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class PlayerMove : MonoBehaviour {
     #region 変数
     [SerializeField, Header("プレイヤーの上下移動最大値")] private float _maxHeight;
@@ -18,6 +19,8 @@ public class PlayerMove : MonoBehaviour {
 
     [SerializeField, Header("左右角度の最小値")] private float _minimumAngle = -45f;
     [SerializeField, Header("左右角度の最大値")] private float _maximumAngle = 45;
+    [SerializeField, Header("上下角度の最小値")] private float _minimumAngleUp = -45f;
+    [SerializeField, Header("上下角度の最大値")] private float _maximumAngleUp = 45;
 
     [SerializeField, Header("スピード調整倍率")] private float _speedMagnification;
     [SerializeField, Header("プレイヤーの角度倍率")] private float _rotateSpeed = 10;
@@ -99,50 +102,53 @@ public class PlayerMove : MonoBehaviour {
         //横方向の入力値保存
         float inputHorizontal = Input.GetAxis("Horizontal");
 
+        // ここで反転処理を行う
+        if (_isVerticalInversion) {
+            inputVertical *= -1;
+        }
+
+        if (_ishorizontalInversion) {
+            inputHorizontal *= -1;
+        }
+
         //カメラが見ているオブジェクトの位置の調整
-        //プレイヤーの１/２のX座標、Y座標の位置に移動させる
         _lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
 
         //入力値が０だったら何もさせない
         if (inputHorizontal == 0 && inputVertical == 0) {
-            //角度を０に戻す処理
             ResetRotation();
             return;
         }
+
         VerticalProcess(inputVertical, inputHorizontal);
         HorizontalProcess(inputHorizontal);
     }
+
     /// <summary>
     /// 縦の動き 上下の処理分け
     /// </summary>
     private void VerticalProcess(float inputVertical, float inputHorizontal) {
-        //縦の動き
-        if (inputVertical < 0)//下の処理
+
+        // 縦の動き
+        if (inputVertical < 0) // 下の処理
         {
-            //制限値以上に動かさない
             if (this.transform.localPosition.y < -_maxHeight) {
-                //角度を０に戻す処理
                 ResetRotation();
-                //縦の入力中に動かなくなってしまわないように
                 HorizontalProcess(inputHorizontal);
                 return;
             }
-            //動きまとめたメソッド
             Vertical_RotateMove(inputVertical);
-        } else if (inputVertical > 0)//上の処理
-        {
-            //制限値以上に動かさない
+        } else if (inputVertical > 0) // 上の処理
+          {
             if (this.transform.localPosition.y > _maxHeight) {
-                //角度を０に戻す処理
                 ResetRotation();
-                //縦の入力中に動かなくなってしまわないように
                 HorizontalProcess(inputHorizontal);
                 return;
             }
-            //動きまとめたメソッド
             Vertical_RotateMove(inputVertical);
         }
     }
+
     /// <summary>
     /// 横の動き　左右の処理分け
     /// </summary>
@@ -178,11 +184,11 @@ public class PlayerMove : MonoBehaviour {
         //スプラインを通り終わる時間の設定値を変えて加減速
         if (_splineAnimate1.enabled) {
             _splineAnimate1.ElapsedTime += speed;
-        } else if(_splineAnimate2.enabled) {
+        } else if (_splineAnimate2.enabled) {
             _splineAnimate2.ElapsedTime += speed;
-        } else if(_splineAnimate3.enabled) {
+        } else if (_splineAnimate3.enabled) {
             _splineAnimate3.ElapsedTime += speed;
-        } else if(_splineAnimate4.enabled) {
+        } else if (_splineAnimate4.enabled) {
             _splineAnimate4.ElapsedTime += speed;
         } else {
             _splineAnimate5.ElapsedTime += speed;
@@ -195,7 +201,7 @@ public class PlayerMove : MonoBehaviour {
     /// </summary>
     /// <param name="vertical">Verticalの入力値</param>
     private void Vertical_RotateMove(float vertical) {
-        transform.Rotate(RotateVertical(vertical));
+        //transform.Rotate(RotateVertical(vertical));
         transform.localPosition += MoveVertical(vertical);
     }
     /// <summary>
