@@ -24,6 +24,7 @@ public class CountDownUI : MonoBehaviour {
     [Header("0が下、１が上")]
     [SerializeField] private Image[] _images;
     [SerializeField] private GameObject[] _gameObject;
+    private int _count = 0;
     #endregion
 
     #region プロパティ
@@ -40,7 +41,7 @@ public class CountDownUI : MonoBehaviour {
             _canvasManager.OPToGamePlay();
             foreach (Camera camera in _cameras) {
                 camera.gameObject.SetActive(false);
-                _audioSource.PlayOneShot(_audioClip[1]);
+                _audioSource.PlayOneShot(_audioClip[_count]);
             }
             //foreach (GameObject obj in _gameObject) {
             //    obj.gameObject.SetActive(true);
@@ -49,6 +50,7 @@ public class CountDownUI : MonoBehaviour {
             _images[2].enabled = false;
             _images[3].enabled = false;
             _isActive = false;
+            _count++;
         }
     }
 
@@ -57,7 +59,8 @@ public class CountDownUI : MonoBehaviour {
             yield return new WaitForSeconds(_startTime / _startTime); // 1秒待機
             _cameras[i].gameObject.SetActive(true); // カメラを有効にする
             SetupCameraViewport(_cameras[i], i); // カメラのビューポートを設定
-            _audioSource.PlayOneShot(_audioClip[0]);
+            _audioSource.PlayOneShot(_audioClip[_count]);
+            _count++;
         }
         yield return new WaitForSeconds(_startTime / _startTime); // 1秒待機
         StartCountDown();

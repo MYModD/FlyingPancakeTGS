@@ -13,6 +13,7 @@ using UnityEngine.Splines;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
+    [SerializeField, Header("ControllerSelectButton")] private ChengeStageManager _staChange;
     [SerializeField, Header("ControllerSelectButton")] private ControllerSelectButton _button;
     [Header("タイトルのボタン")]
     [SerializeField, Header("スタートボタン")] private Button _titleStart;
@@ -164,6 +165,7 @@ public class CanvasManager : MonoBehaviour
         GameObjTrueFalse(_gameObjs, _openingObjs);
         _spAnime.enabled = true;
         _state = UIState.gamePlay;
+        _staChange.GameStartVoice();
     }
     /// <summary>
     /// ゲーム終了
