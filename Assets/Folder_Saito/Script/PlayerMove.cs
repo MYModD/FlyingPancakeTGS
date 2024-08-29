@@ -26,7 +26,11 @@ public class PlayerMove : MonoBehaviour {
 
     [SerializeField, Header("カメラが見ているオブジェクト")] private GameObject _lookAtObj;
     [SerializeField, Header("カメラ入れて")] private Camera _camera;
-    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate;
+    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate1;
+    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate2;
+    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate3;
+    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate4;
+    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate5;
 
     [SerializeField, Header("CanvasManagerのオブジェクトをいれ")] private CanvasManager _canvas;
     [SerializeField] private ControllerSelectButton _selectButton;
@@ -36,8 +40,8 @@ public class PlayerMove : MonoBehaviour {
     private float _stopTime;
     private float _nowTime;
     private bool _isStop = false;
-    private bool _isVerticalInversion=false;
-    private bool _ishorizontalInversion= false;
+    private bool _isVerticalInversion = false;
+    private bool _ishorizontalInversion = false;
     private int _verticalIndex = 1;
     private int _horizontalIndex = 1;
     #endregion
@@ -50,10 +54,8 @@ public class PlayerMove : MonoBehaviour {
     /// </summary>
     void Update() {
 
-        
-        if (!_canvas.CanMove())
-        {            
-           
+        if (!_canvas.CanMove()) {
+
             return;
         }
         StopOrMoving();
@@ -70,7 +72,7 @@ public class PlayerMove : MonoBehaviour {
         _ishorizontalInversion = _selectButton.HorizontalInversionCheak();
         _horizontalIndex = _ishorizontalInversion ? -1 : 1;
         if (_isStop) {
-            
+
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * _resetSpeed);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.deltaTime * _resetSpeed);
             _nowTime += Time.deltaTime;
@@ -82,7 +84,7 @@ public class PlayerMove : MonoBehaviour {
 
             //動きと角度
             MovePosition();
-            
+
         }
         //速度
         ChangeSpeed();
@@ -174,7 +176,18 @@ public class PlayerMove : MonoBehaviour {
         //速度計算した値
         float speed = CalculateSpeed(inputRStick);
         //スプラインを通り終わる時間の設定値を変えて加減速
-        _splineAnimate.ElapsedTime += speed;
+        if (_splineAnimate1.enabled) {
+            _splineAnimate1.ElapsedTime += speed;
+        } else if(_splineAnimate2.enabled) {
+            _splineAnimate2.ElapsedTime += speed;
+        } else if(_splineAnimate3.enabled) {
+            _splineAnimate3.ElapsedTime += speed;
+        } else if(_splineAnimate4.enabled) {
+            _splineAnimate4.ElapsedTime += speed;
+        } else {
+            _splineAnimate5.ElapsedTime += speed;
+        }
+
     }
     #region 動きに関するメソッド
     /// <summary>
@@ -289,7 +302,7 @@ public class PlayerMove : MonoBehaviour {
         input += 2;
         int index = _canvas.CanMove() ? 1 : 0;
         //速度変化させる値の決定
-        float changePower = Time.deltaTime * input * _speedMagnification*index;
+        float changePower = Time.deltaTime * input * _speedMagnification * index;
         return changePower;
     }
     //-------------------------ここからパブリックメソッド---------------------------------------
