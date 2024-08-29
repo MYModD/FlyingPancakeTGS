@@ -21,6 +21,14 @@ public class TestWayPointsCount : MonoBehaviour {
     [SerializeField, Tag]
     private string _buildingTag;
 
+    [SerializeField, Tag]
+    private string _missileTag;
+
+    [SerializeField]
+    private GameObject _vacumeObject;
+
+    
+
     // Start is called before the first frame update
     void Start() {
 
@@ -41,9 +49,20 @@ public class TestWayPointsCount : MonoBehaviour {
         } else if (other.CompareTag(_buildingTag)) {
 
             _explosion.StartExplosion(this.transform);
-            this.gameObject.SetActive(false) ;
+            this.gameObject.SetActive(false);
 
+        } else if (other.CompareTag(_missileTag)) {
+
+
+            GameObject game = Instantiate(_vacumeObject);
+            game.GetComponent<VacumeToPlayer>()._player = GameObject.Find("Player(MovingObj)");//‚±‚±–¼‘O•Ï‚¦‚½‚çŽ€‚Ê
+            Debug.Log("‚¿‚á‚ñ‚Æplayer");
+
+        
+        
         }
+
+
 
     }
 }
