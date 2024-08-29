@@ -9,6 +9,7 @@ public class TimeLimit : MonoBehaviour
     [Header("§ŒÀŠÔ")]
     public float _limitTime = 60f;
 
+    [SerializeField,Header("‚Å‚«‚½‚çreadonly‚É‚µ‚½‚¢")]
     public bool _isStart = false;
 
 
