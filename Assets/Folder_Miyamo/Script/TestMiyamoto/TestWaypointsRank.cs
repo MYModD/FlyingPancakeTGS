@@ -10,6 +10,7 @@ public class TestWaypointsRank : MonoBehaviour {
     private GameObject[] _playersRankObject;
 
     [SerializeField, Header("プレイヤーがいくつ通ったかの管理")]
+    [ReadOnly]
     private int[] _playerWaypointsInt;
 
     [SerializeField, Header("ランクの管理")]
@@ -23,9 +24,12 @@ public class TestWaypointsRank : MonoBehaviour {
     private int _rankCurrent;
 
     private void Start() {
+
         // _playersRankの長さを_playersRankObjectと同じにする
         _playersRank = new int[_playersRankObject.Length];
-        
+        // _playerWaypointsIntも同じ長さで初期化
+        _playerWaypointsInt = new int[_playersRankObject.Length];
+
     }
 
     /// <summary>
