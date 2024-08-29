@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyDeathProcessing : MonoBehaviour
 {
-    [SerializeField] EffectsManager _effectsManager;
     [SerializeField] CountTheNumberOfDefeats _countTheNumberOfDefeats;
 
     // Start is called before the first frame update
