@@ -182,6 +182,7 @@ MonoBehaviour:
   _maxAcceleration: 10
   _enemyTag: Enemy
   _eliteMissile: EliteMissile
+  _buildingTag: Building
   _missileStuck: {fileID: 0}
 --- !u!54 &7146728466934504123
 Rigidbody:

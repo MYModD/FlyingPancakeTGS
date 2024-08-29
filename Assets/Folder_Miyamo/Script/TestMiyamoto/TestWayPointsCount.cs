@@ -15,6 +15,12 @@ public class TestWayPointsCount : MonoBehaviour {
     [SerializeField, Header("順位クラスマネージャー")]
     private PlayerRankManager _playerRankManager;
 
+    [SerializeField]
+    private ExplosionPoolManager _explosion;
+
+    [SerializeField, Tag]
+    private string _buildingTag;
+
     // Start is called before the first frame update
     void Start() {
 
@@ -31,6 +37,13 @@ public class TestWayPointsCount : MonoBehaviour {
 
             _wayPointsCount++;
             _playerRankManager.UpdatePlayerWaypointCount(this.gameObject, _wayPointsCount);
+
+        } else if (other.CompareTag(_buildingTag)) {
+
+            _explosion.StartExplosion(this.transform);
+            this.gameObject.SetActive(false) ;
+
+
 
         }
 
