@@ -16,7 +16,7 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField, Header("BGMスライダー")] private Slider _sliderBGM;
     [SerializeField, Header("BGMの丸")] private Image _imageBGM;
     [SerializeField, Header("ゲームプレイBGM")] private AudioClip _audioGamePlay;
-    [SerializeField, Header("エンディングBGM")]private AudioClip _audioEnding;
+    [SerializeField, Header("エンディングBGM")] private AudioClip _audioEnding;
 
     [SerializeField, Header("SEスピーカー")] private AudioSource _audioSE;
     [SerializeField, Header("SEスライダー")] private Slider _sliderSE;
@@ -64,8 +64,8 @@ public class ControllerSelectButton : MonoBehaviour {
     private int _indexResult = 0;
     private int _checkIndexResult = -1;
 
-    private string _settingTextEnglish = "English";
-    private string _settingTextJapanece = "Japanese";
+    private string _settingTextEnglish = "Not available"/*"English"*/;
+    private string _settingTextJapanece = "Not available"/*"Japanese"*/;
     private Image[] _settingImages;
     private GameObject _settingNowSelect;
     private int _settingIndex = 0;
@@ -78,8 +78,8 @@ public class ControllerSelectButton : MonoBehaviour {
 
 
     private bool _isLanguageEnglish = false;
-    private bool _horizontalInversion = true;
-    private bool _verticalInversion = true;
+    private bool _horizontalInversion = false;
+    private bool _verticalInversion = false;
 
     private bool _isChangeLanguage = false;
 
@@ -159,7 +159,7 @@ public class ControllerSelectButton : MonoBehaviour {
         if (_stateName == _ed) {
             EDStartProcess();
         }
-        if(_stateName == _result) {
+        if (_stateName == _result) {
             ResultProcess();
         }
         //EnglishSwitchJapanece();
@@ -353,11 +353,16 @@ public class ControllerSelectButton : MonoBehaviour {
         //黄色にして選択中を表現
         _settingImages[(int)SettingState.mainVolume].color = Color.yellow;
         //音量を足し引き
-        volumeBGM += Time.deltaTime * Input.GetAxisRaw("RStickH");
+        if (volumeBGM <= 0.25f) {
+            volumeBGM += Time.deltaTime * Input.GetAxisRaw("RStickH");
+        }
+        else {
+            volumeBGM = 0.25f;
+        }
         //ボリュームを設定
         _audioBGM.volume = volumeBGM;
         //ボリュームを設定
-        _sliderBGM.value = volumeBGM;
+        _sliderBGM.value = volumeBGM*4;
     }
     /// <summary>
     /// SEの大きさ調整
