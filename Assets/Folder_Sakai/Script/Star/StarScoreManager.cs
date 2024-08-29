@@ -15,7 +15,7 @@ public class StarScoreManager : MonoBehaviour {
     public void ScoreAddition(int score) {
 
         _score += score;
-        _scoreManager.InputRingScore(_score, _maxStarUSA);
+        _scoreManager.InputGetStarScore(_score, _maxStarUSA);
         _textTitle.text = "Star Count";
         _textScore.text = _score.ToString();
     }

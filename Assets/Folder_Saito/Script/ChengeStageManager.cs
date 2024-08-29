@@ -29,6 +29,8 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
     [SerializeField] private SplineAnimate _splineAnimate3st;
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
+    [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
+    [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
 
     [Header("4stStage")]
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
@@ -70,7 +72,7 @@ public class ChengeStageManager : MonoBehaviour {
         }
         if (_indexStage == 2) {
             _game2st.SetActive(false);
-            _game4st.SetActive(true);
+            _game3st.SetActive(true);
         }
         if (_indexStage == 3) {
             _game3st.SetActive(false);
@@ -100,11 +102,14 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate2st.enabled = false;
             _splineAnimate3st.enabled = true;
             _numberOfDefeats.enabled = false;
-            _star.enabled = true;
+            _3rdTime.LimitTimerStart();
+            _3rdRank.enabled = true;
         }
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
             _splineAnimate4st.enabled = true;
+            _3rdRank.enabled = false;
+            _star.enabled = true;
         }
         if (_indexStage == 4) {
             _splineAnimate4st.enabled = false;
