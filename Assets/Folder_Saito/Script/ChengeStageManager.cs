@@ -34,6 +34,7 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
     [SerializeField] private SplineAnimate _splineAnimate4st;
     [SerializeField, Header("4stのステージ")] private GameObject _game4st;
+    [SerializeField, Header("killを集計するスクリプト")] private StarScoreManager _star;
 
     [Header("5stStage")]
     [SerializeField, Header("5stのプレイヤー")] private GameObject _player5st;
@@ -99,6 +100,7 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate2st.enabled = false;
             _splineAnimate3st.enabled = true;
             _numberOfDefeats.enabled = false;
+            _star.enabled = true;
         }
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
