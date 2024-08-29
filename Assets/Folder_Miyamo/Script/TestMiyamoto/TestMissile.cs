@@ -39,6 +39,10 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [Tag]
     private string _eliteMissile;
 
+    [SerializeField, Header("ビルのタグ")]
+    [Tag]
+    private string _buildingTag;
+
     public MissileStuck _missileStuck;
 
 
@@ -71,7 +75,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         _offtimeValue = _timer;
         _hasCollided = false; // フラグをリセット
 
-        
+
     }
 
     /// <summary>
@@ -165,6 +169,12 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
                 ReturnToPool();
                 Debug.Log("エリートミサイルにあっったよ");
             }
+        } else if (other.gameObject.CompareTag(_buildingTag)) {
+
+            _explosionPoolManager.StartExplosion(other.transform);       // ビルにあたっときの処理
+            _missileStuck.TargetNull();
+            ReturnToPool();
+
         }
         #endregion
 

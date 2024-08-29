@@ -77,11 +77,7 @@ public class PlayerRankManager : MonoBehaviour {
 
         _currentPlayerRank = _playerRanks[currentPlayerIndex];
         
-        // デバッグ用：ランクを表示
-        for (int i = 0; i < _playerRanks.Length; i++) {
-            Debug.Log($"Player {i}: Score {_playerWaypointCounts[i]}, Rank {_playerRanks[i]}");
-        }
-        Debug.Log($"Current player rank: {_currentPlayerRank}");
+        
 
         // -------------------------------------ここから本編-----------------------------------
 
@@ -99,6 +95,10 @@ public class PlayerRankManager : MonoBehaviour {
     }
 
     private bool IsFirstPlaceEnemyDefeated() {
+
+        if (_currentPlayerRank == 1) {
+            return true;
+        }
 
         if (_currentPlayerRank <= 2) {
 
