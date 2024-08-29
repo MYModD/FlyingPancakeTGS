@@ -41,7 +41,7 @@ public class PlayerRankManager : MonoBehaviour {
 
         // 第二引数:これが実行されてから何秒後に実行するか
         // 第三引数:何秒ごとに実行するか
-        InvokeRepeating(nameof(UpdateRanks), 0.001f, _repeatTime);
+        InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
     }
 
 
@@ -61,18 +61,9 @@ public class PlayerRankManager : MonoBehaviour {
   
 
     private void UpdateRanks() {
+        
 
 
-        if (IsFirstPlaceEnemyDefeated() == true) {
-
-            //ここにタイマーストップのスクリプト
-            _timeLimit.End3rdGame();
-
-
-        }
-
-
-        // -------------------------------------ここから本編-----------------------------------
 
         int currentPlayerIndex = Array.IndexOf(_playerObjects, _currentPlayerObject);
 
@@ -91,6 +82,20 @@ public class PlayerRankManager : MonoBehaviour {
             Debug.Log($"Player {i}: Score {_playerWaypointCounts[i]}, Rank {_playerRanks[i]}");
         }
         Debug.Log($"Current player rank: {_currentPlayerRank}");
+
+        // -------------------------------------ここから本編-----------------------------------
+
+
+        Debug.Log("なんかいも実行されてる");
+
+        if (IsFirstPlaceEnemyDefeated() == true) {
+            Debug.Log("trueなったよぉ");
+            //ここにタイマーストップのスクリプト
+            _timeLimit.End3rdGame();
+
+        } else {
+            Debug.Log("falseになったよぉ");
+        }
     }
 
     private bool IsFirstPlaceEnemyDefeated() {
