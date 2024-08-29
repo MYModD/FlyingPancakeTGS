@@ -22,21 +22,7 @@ public class GameController : MonoBehaviour {
     [SerializeField]
     private TestLockOnManager _testLockOnManager;
 
-    [Foldout("íeä€")]
-    [SerializeField]
-    private BulletPoolManager _bulletPoolManager;
-
-    [Foldout("íeä€")]
-    [SerializeField, Header("ÉvÉåÉCÉÑÅ[")]
-    private Transform _playerPostion;
-
-    [Foldout("íeä€")]
-    [SerializeField, Header("íeä€î≠éÀà íu")]
-    private Transform _fireBulletPosition;
-
-    [Foldout("íeä€")]
-    [SerializeField, Header("íeä€ÇÃë¨ìx")]
-    private float _bulletSpeedMultiplier;
+    
     
     
 
@@ -67,9 +53,7 @@ public class GameController : MonoBehaviour {
             Debug.Log("É{É^ÉìâüÇµÇΩ");
         }
 
-        if (Input.GetKey(KeyCode.K)) {
-            _bulletPoolManager.FireBullet(_playerPostion,_fireBulletPosition, _bulletSpeedMultiplier);
-        }
+        
     }
     #endregion
 }

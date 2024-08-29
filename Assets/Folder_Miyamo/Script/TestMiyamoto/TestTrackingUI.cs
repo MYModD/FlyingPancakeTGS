@@ -95,17 +95,9 @@ public class TestTrackingUI : MonoBehaviour {
 
                 uiElements[i].enabled = false;
 
-
             }
 
-
-
-
-
         }
-
-
-
 
     }
 
