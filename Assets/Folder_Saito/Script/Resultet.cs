@@ -14,7 +14,9 @@ public class Resultet : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if (Input.GetKeyDown(KeyCode.F) && Input.GetKey(KeyCode.P)) {
+            _animator.Play("CutIN");
+        }
     }
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(_playerTag)) {
