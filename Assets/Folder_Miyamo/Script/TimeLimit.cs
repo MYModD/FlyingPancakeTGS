@@ -58,7 +58,6 @@ public class TimeLimit : MonoBehaviour
         scoreMangerObject.GetComponent<ScoreManager>().InputToBeTheTopScore(cashTime, _firstMaxtime,floatTostring);
 
 
-
     }
 
 
