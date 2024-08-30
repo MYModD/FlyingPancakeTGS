@@ -25,4 +25,14 @@ public class DrawConeCircle : MonoBehaviour
         transform.position = _testLockOnManager._circleCenterPostion;
 
     }
+
+    private void OnDrawGizmos() {
+
+        Quaternion hoge = _testLockOnManager._circleRotation;
+
+        transform.rotation = hoge;
+        transform.position = _testLockOnManager._circleCenterPostion;
+
+
+    }
 }
