@@ -45,12 +45,10 @@ public class PlayerRankManager : MonoBehaviour {
 
         // 第二引数:これが実行されてから何秒後に実行するか
         // 第三引数:何秒ごとに実行するか
-        //InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
+        InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
     }
 
-    private void Update() {
-        UpdateRanks();
-    }
+
 
 
 
