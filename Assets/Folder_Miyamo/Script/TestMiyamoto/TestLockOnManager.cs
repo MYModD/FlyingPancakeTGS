@@ -22,15 +22,15 @@ public class TestLockOnManager : MonoBehaviour {
     private Camera _camera;
 
     [SerializeField, Header("spherecastの半径")]
-    private float _searchRadius = 95f;
+    public float _searchRadius = 95f;
 
     [SerializeField, Range(0f, 180f)]
     [Header("コーンの角度")]
-    private float _coneAngle = 45f;
+    public  float _coneAngle = 45f;
 
     [SerializeField]
     [Header("コーンの長さ、半径")]
-    private float _coneRange;
+    public  float _coneRange;
 
 
     [HideInInspector]
@@ -40,14 +40,25 @@ public class TestLockOnManager : MonoBehaviour {
 
     public bool _canAdd = true;
     public float _coolTime;
-
+    public RectTransform _rectTransform;
 
 
     
     readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
     private Plane[] _cameraPlanes;
-    
+
+    private void Start() {
+
+        // UI用
+        _rectTransform.sizeDelta = new Vector2(_coneAngle * 13.75f, _coneAngle * 13.75f);
+
+
+    }
+
+
+
+
 
     void Update() {
         UpdateTargets();
@@ -145,9 +156,6 @@ public class TestLockOnManager : MonoBehaviour {
             }
         }
 
-
-
-       
 
     }
 
