@@ -57,6 +57,7 @@ public class TimeLimit : MonoBehaviour
         _scoreManger.InputToBeTheTopScore(cashTime, _firstMaxtime,floatTostring);
         _cutIN.Play("CutIN");
 
+
     }
 
 
