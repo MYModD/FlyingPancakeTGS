@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using NaughtyAttributes;
+using TMPro;
 
 public class PlayerRankManager : MonoBehaviour {
+    [SerializeField] private TextMeshProUGUI _textTitle;
+    [SerializeField] private TextMeshProUGUI _textScore;
+
     [SerializeField, Header("ランクをつけたいオブジェクト")]
     private GameObject[] _playerObjects;
 
@@ -61,7 +65,8 @@ public class PlayerRankManager : MonoBehaviour {
   
 
     private void UpdateRanks() {
-        
+        _textTitle.text = "ToBeTheTop";
+        _textScore.text = _currentPlayerRank.ToString()+"/"+"9";
 
 
 
