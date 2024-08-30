@@ -32,10 +32,18 @@ public class TestLockOnManager : MonoBehaviour {
     [Header("コーンの長さ、半径")]
     private float _coneRange;
 
+
+    [HideInInspector]
+    public Vector3 _circleCenterPostion;
+    [HideInInspector]
+    public Quaternion  _circleRotation;
+
     public bool _canAdd = true;
     public float _coolTime;
 
 
+
+    
     readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
     private Plane[] _cameraPlanes;
@@ -203,8 +211,14 @@ public class TestLockOnManager : MonoBehaviour {
         float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
         Vector3 coneBaseCenter = _camera.transform.position + (coneDirection * _coneRange);
 
+        //UI用にキャッシュ
+        _circleCenterPostion = coneBaseCenter;
+
         Vector3 hoge = coneRotation.eulerAngles + _drawOrigin;
         hoge.z = 0;
+
+        //UI用にキャッシュ
+        _circleRotation = Quaternion.Euler(hoge);
 
         GizmosExtensions.DrawWireCircle(coneBaseCenter, _coneRange * Mathf.Tan(coneAngleRad), 20, Quaternion.Euler(hoge));
 

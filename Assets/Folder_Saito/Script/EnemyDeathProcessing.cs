@@ -4,27 +4,14 @@ using UnityEngine;
 
 public class EnemyDeathProcessing : MonoBehaviour
 {
-    [SerializeField] CountTheNumberOfDefeats _countTheNumberOfDefeats;
+    [SerializeField] private CountTheNumberOfDefeats _countTheNumberOfDefeats;
+    [SerializeField, Tag] private string _missileTag;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private void OnTriggerEnter2D(Collider2D collision) {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        if (collision.gameObject.CompareTag(_missileTag)) {
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
-    private void OnDisable() {
-
-        _countTheNumberOfDefeats.AdditionOfNumberOfDefeats();
+            _countTheNumberOfDefeats.AdditionOfNumberOfDefeats();
+        }
     }
 }
