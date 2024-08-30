@@ -24,6 +24,9 @@ public class TestWayPointsCount : MonoBehaviour {
     [SerializeField, Tag]
     private string _missileTag;
 
+    [SerializeField, Tag]
+    private string _enemyTag;
+
     [SerializeField]
     private GameObject _vacumeObject;
 
@@ -55,7 +58,7 @@ public class TestWayPointsCount : MonoBehaviour {
         }
         
         
-        if (other.CompareTag(_buildingTag)) {
+        if (other.CompareTag(_buildingTag) && this.gameObject.CompareTag(_enemyTag)) {
 
             _explosion.StartExplosion(this.transform);
             this.gameObject.SetActive(false);
@@ -64,6 +67,7 @@ public class TestWayPointsCount : MonoBehaviour {
 
 
             GameObject game = Instantiate(_vacumeObject);
+            game.transform.position = this.transform.position;
             game.GetComponent<VacumeToPlayer>()._player = GameObject.Find("Player(MovingObj)");//‚±‚±–¼‘O•Ï‚¦‚½‚çŽ€‚Ê
             Debug.Log("‚¿‚á‚ñ‚Æplayer");
 
