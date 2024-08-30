@@ -23,10 +23,7 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("2stのプレイヤー")] private GameObject _player2st;
     [SerializeField] private SplineAnimate _splineAnimate2st;
     [SerializeField, Header("2stのステージ")] private GameObject _game2st;
-    [SerializeField, Header("killを集計するスクリプト")] private CountTheNumberOfDefeats _numberOfDefeats;
-    [SerializeField, Header("2ndのGamePad")] private GameObject _2ndGamePad;
-    [SerializeField, Header("2ndのミサイルマネージャ")] private GameObject _2rdJet;
-    [SerializeField, Header("2ndのUI表示")] private GameObject _2rdTank;
+    [SerializeField,Header("killを集計するスクリプト")]private CountTheNumberOfDefeats _numberOfDefeats;
 
     [Header("3stStage")]
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
@@ -34,9 +31,6 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
     [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
-    [SerializeField, Header("3rdのGamePad")] private GameObject _3rdGamePad;
-    [SerializeField, Header("3rdのミサイルマネージャ")] private GameObject _3rdJet;
-    [SerializeField, Header("3rdのUI表示")] private GameObject _3rdTank;
 
     [Header("4stStage")]
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
@@ -50,9 +44,7 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("5stのステージ")] private GameObject _game5st;
 
     [SerializeField, Header("EDのCamera")] private GameObject _camera;
-    [SerializeField, Header("CanvasManager")] private CanvasManager _canvasManager;
-
-    private bool _isFinish = false;
+    [SerializeField,Header("CanvasManager")] private CanvasManager _canvasManager;
     #endregion
     #region プロパティ
     #endregion
@@ -74,50 +66,30 @@ public class ChengeStageManager : MonoBehaviour {
     }
     public void StageChange() {
         if (_indexStage == 1) {
+            
             _game1st.SetActive(false);
-            if (_game2st != null) {
-                _game2st.SetActive(true);
-            } else {
-                _isFinish = true;
-                _canvasManager.PlayToED();
-            }
+            _game2st.SetActive(true);
         }
         if (_indexStage == 2) {
             _game2st.SetActive(false);
-            if (_game3st != null) {
-                _game3st.SetActive(true);
-            } else {
-                _isFinish = true;
-                _canvasManager.PlayToED();
-            }
+            _game3st.SetActive(true);
         }
         if (_indexStage == 3) {
             _game3st.SetActive(false);
-            if (_game4st != null) {
-                _game4st.SetActive(true);
-            } else {
-                _isFinish = true;
-                _canvasManager.PlayToED();
-            }
+            _game4st.SetActive(true);
         }
         if (_indexStage == 4) {
             _game4st.SetActive(false);
-            if (_game5st != null) {
-                _game5st.SetActive(true);
-            } else {
-                _isFinish = true;
-                _canvasManager.PlayToED();
-            }
+            _game5st.SetActive(true);
         }
         if (_indexStage == 5) {
             _camera.SetActive(true);
             _game5st.SetActive(false);
-            _isFinish = true;
             _canvasManager.PlayToED();
         }
-
+        
     }
-
+    
     public void StageStart() {
         if (_indexStage == 1) {
             print("ステチェン");
@@ -131,6 +103,7 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate3st.enabled = true;
             _numberOfDefeats.enabled = false;
             _3rdTime.LimitTimerStart();
+            _3rdRank.enabled = true;
         }
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
@@ -147,12 +120,8 @@ public class ChengeStageManager : MonoBehaviour {
 
     IEnumerator StartVoice() {
         yield return new WaitForSeconds(0.75f);
-       
-        if (!_isFinish) {
-            _audioSE.PlayOneShot(_stageVoice[_indexStage]);
-            _indexStage++;
-        }
-        
+        _audioSE.PlayOneShot(_stageVoice[_indexStage]);
+        _indexStage++;
     }
     public void GameStartVoice() {
         StartCoroutine(StartVoice());

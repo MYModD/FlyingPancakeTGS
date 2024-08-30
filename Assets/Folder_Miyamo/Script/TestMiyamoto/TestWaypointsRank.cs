@@ -34,13 +34,12 @@ public class PlayerRankManager : MonoBehaviour {
     [SerializeField, Header("1位が撃破されたときに実行する処理")]
     private TimeLimit _timeLimit;
 
-    private bool _isRankSet = true;
 
     /// <summary>
     /// Startじゃなくてもいいです、改修予定
     /// </summary>
     private void Start() {
-
+        
         _playerRanks = new int[_playerObjects.Length];
         _playerWaypointCounts = new int[_playerObjects.Length];
 
@@ -63,15 +62,11 @@ public class PlayerRankManager : MonoBehaviour {
 
     }
 
-
+  
 
     private void UpdateRanks() {
-        if (!_isRankSet) {
-            return;
-        }
-        print("4thステージでもこんにちわ");
         _textTitle.text = "ToBeTheTop";
-        _textScore.text = _currentPlayerRank.ToString() + "/" + "9";
+        _textScore.text = _currentPlayerRank.ToString()+"/"+"9";
 
 
 
@@ -86,21 +81,19 @@ public class PlayerRankManager : MonoBehaviour {
         }
 
         _currentPlayerRank = _playerRanks[currentPlayerIndex];
-
-
+        
+        
 
         // -------------------------------------ここから本編-----------------------------------
 
 
         Debug.Log("なんかいも実行されてる");
 
-        if (IsFirstPlaceEnemyDefeated() == true&& _isRankSet) {
+        if (IsFirstPlaceEnemyDefeated() == true) {
             Debug.Log("trueなったよぉ");
             //ここにタイマーストップのスクリプト
-                _timeLimit.End3rdGame();
-                _isRankSet = false;
-            _textTitle.text = "StarCount";
-            _textScore.text = "0";
+            _timeLimit.End3rdGame();
+
         } else {
             Debug.Log("falseになったよぉ");
         }
@@ -126,7 +119,7 @@ public class PlayerRankManager : MonoBehaviour {
 
             // もし1位の敵が撃破されていてfalseならばtrueを返す
             if (firstRankObject.activeSelf == false) {
-
+            
                 return true;
             }
         }
