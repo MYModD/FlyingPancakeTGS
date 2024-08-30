@@ -1,7 +1,3 @@
-// ---------------------------------------------------------
-// ChengeStageManager.cs
-//
-// 作成日:
 // 作成者:
 // ---------------------------------------------------------
 using System.Collections;
@@ -27,7 +23,6 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("2ndのGamePad")] private GameObject _2ndGamePad;
     [SerializeField, Header("2ndのミサイルマネージャ")] private GameObject _2rdJet;
     [SerializeField, Header("2ndのUI表示")] private GameObject _2rdTank;
-
     [Header("3stStage")]
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
     [SerializeField] private SplineAnimate _splineAnimate3st;
@@ -74,6 +69,7 @@ public class ChengeStageManager : MonoBehaviour {
     }
     public void StageChange() {
         if (_indexStage == 1) {
+
             _game1st.SetActive(false);
             if (_game2st != null) {
                 _game2st.SetActive(true);
@@ -131,6 +127,7 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate3st.enabled = true;
             _numberOfDefeats.enabled = false;
             _3rdTime.LimitTimerStart();
+            _3rdRank.enabled = true;
         }
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
@@ -147,12 +144,12 @@ public class ChengeStageManager : MonoBehaviour {
 
     IEnumerator StartVoice() {
         yield return new WaitForSeconds(0.75f);
-       
+
         if (!_isFinish) {
             _audioSE.PlayOneShot(_stageVoice[_indexStage]);
             _indexStage++;
         }
-        
+
     }
     public void GameStartVoice() {
         StartCoroutine(StartVoice());

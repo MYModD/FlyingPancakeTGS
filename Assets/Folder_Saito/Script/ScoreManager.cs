@@ -54,12 +54,11 @@ public class ScoreManager : MonoBehaviour {
 
     private int _lastGetPizza;
     private int _maxPizza;
-
     private float _allStageClearTime;
     private float _limitTime; // 全ステージの制限時間
     private string _clearTimeString;
 
-    private string _sorryText= "Sorry I can't do it yet";
+    private string _sorryText = "Sorry I can't do it yet";
 
     private bool _doRing = false;
     private bool _doKill = false;
@@ -93,23 +92,22 @@ public class ScoreManager : MonoBehaviour {
         }
         if (_doTop) {
             _3rdStage.text = _3rdTimeString;
-        }else {
+        } else {
             _3rdStage.text = _sorryText;
         }
         if (_doStar) {
             _4thStage.text = ResultTextSet(_getStarCount.ToString(), _starNumUSA.ToString());
-        }else {
+        } else {
             _4thStage.text = _sorryText;
         }
         if (_doPizza) {
             _5thStage.text = ResultTextSet(_lastGetPizza.ToString(), _maxPizza.ToString());
-        }else {
+        } else {
             _5thStage.text = _sorryText;
         }
         _gameClearTime.text = _clearTimeString;
         _rank.text = RankSettingProcess(_resultScore);
     }
-
     #region セットスコア情報
     /// <summary>
     /// リングのスコア情報をセットするメソッド
@@ -208,6 +206,7 @@ public class ScoreManager : MonoBehaviour {
         }
         return average;
     }
+
     /// <summary>
     /// プレイヤーの得点をもとにパーセントを計算するメソッド
     /// </summary>
@@ -253,5 +252,5 @@ public class ScoreManager : MonoBehaviour {
         return rank;
     }
     #endregion
-    #endregion
+#endregion
 }
