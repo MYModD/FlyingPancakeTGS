@@ -21,15 +21,15 @@ public class TestLockOnManager : MonoBehaviour {
     private Camera _camera;
 
     [SerializeField, Header("spherecastの半径")]
-    private float _searchRadius = 95f;
+    public  float _searchRadius = 95f;
 
     [SerializeField, Range(0f, 180f)]
     [Header("コーンの角度")]
-    private float _coneAngle = 45f;
+    public  float _coneAngle = 45f;
 
     [SerializeField]
     [Header("コーンの長さ、半径")]
-    private float _coneRange;
+    public  float _coneRange;
 
 
     [HideInInspector]
