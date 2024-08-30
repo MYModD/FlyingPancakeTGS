@@ -131,12 +131,6 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate3st.enabled = true;
             _numberOfDefeats.enabled = false;
             _3rdTime.LimitTimerStart();
-            _2rdTank.SetActive(false);
-            _2ndGamePad.SetActive(false);
-            _3rdGamePad.SetActive(true);
-            _3rdJet.SetActive(true);
-            _3rdTank.SetActive(true);
-            _3rdRank.enabled = true;
         }
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
