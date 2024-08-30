@@ -16,6 +16,8 @@ TagManager:
   - RankCheckpoint
   - Gate
   - Waypoint
+  - Building
+  - SpeedItem
   layers:
   - Default
   - TransparentFX

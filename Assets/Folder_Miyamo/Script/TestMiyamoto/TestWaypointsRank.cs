@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using NaughtyAttributes;
+using TMPro;
 
 public class PlayerRankManager : MonoBehaviour {
+    [SerializeField] private TextMeshProUGUI _textTitle;
+    [SerializeField] private TextMeshProUGUI _textScore;
+
     [SerializeField, Header("ランクをつけたいオブジェクト")]
     private GameObject[] _playerObjects;
 
@@ -41,7 +45,7 @@ public class PlayerRankManager : MonoBehaviour {
 
         // 第二引数:これが実行されてから何秒後に実行するか
         // 第三引数:何秒ごとに実行するか
-        InvokeRepeating(nameof(UpdateRanks), 0.001f, _repeatTime);
+        InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
     }
 
 
@@ -61,18 +65,10 @@ public class PlayerRankManager : MonoBehaviour {
   
 
     private void UpdateRanks() {
+        _textTitle.text = "ToBeTheTop";
+        _textScore.text = _currentPlayerRank.ToString()+"/"+"9";
 
 
-        if (IsFirstPlaceEnemyDefeated() == true) {
-
-            //ここにタイマーストップのスクリプト
-            _timeLimit.End3rdGame();
-
-
-        }
-
-
-        // -------------------------------------ここから本編-----------------------------------
 
         int currentPlayerIndex = Array.IndexOf(_playerObjects, _currentPlayerObject);
 
@@ -86,14 +82,28 @@ public class PlayerRankManager : MonoBehaviour {
 
         _currentPlayerRank = _playerRanks[currentPlayerIndex];
         
-        // デバッグ用：ランクを表示
-        for (int i = 0; i < _playerRanks.Length; i++) {
-            Debug.Log($"Player {i}: Score {_playerWaypointCounts[i]}, Rank {_playerRanks[i]}");
+        
+
+        // -------------------------------------ここから本編-----------------------------------
+
+
+        Debug.Log("なんかいも実行されてる");
+
+        if (IsFirstPlaceEnemyDefeated() == true) {
+            Debug.Log("trueなったよぉ");
+            //ここにタイマーストップのスクリプト
+            _timeLimit.End3rdGame();
+
+        } else {
+            Debug.Log("falseになったよぉ");
         }
-        Debug.Log($"Current player rank: {_currentPlayerRank}");
     }
 
     private bool IsFirstPlaceEnemyDefeated() {
+
+        if (_currentPlayerRank == 1) {
+            return true;
+        }
 
         if (_currentPlayerRank <= 2) {
 

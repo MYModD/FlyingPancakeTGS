@@ -17,21 +17,26 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("1stのプレイヤー")] private GameObject _player1st;
     [SerializeField] private SplineAnimate _splineAnimate1st;
     [SerializeField, Header("1stのステージ")] private GameObject _game1st;
+    [SerializeField, Header("ringを集計するスクリプト")] private GoThroughTheGateManager _ringCount;
 
     [Header("2stStage")]
     [SerializeField, Header("2stのプレイヤー")] private GameObject _player2st;
     [SerializeField] private SplineAnimate _splineAnimate2st;
     [SerializeField, Header("2stのステージ")] private GameObject _game2st;
+    [SerializeField,Header("killを集計するスクリプト")]private CountTheNumberOfDefeats _numberOfDefeats;
 
     [Header("3stStage")]
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
     [SerializeField] private SplineAnimate _splineAnimate3st;
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
+    [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
+    [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
 
     [Header("4stStage")]
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
     [SerializeField] private SplineAnimate _splineAnimate4st;
     [SerializeField, Header("4stのステージ")] private GameObject _game4st;
+    [SerializeField, Header("killを集計するスクリプト")] private StarScoreManager _star;
 
     [Header("5stStage")]
     [SerializeField, Header("5stのプレイヤー")] private GameObject _player5st;
@@ -67,7 +72,7 @@ public class ChengeStageManager : MonoBehaviour {
         }
         if (_indexStage == 2) {
             _game2st.SetActive(false);
-            _game4st.SetActive(true);
+            _game3st.SetActive(true);
         }
         if (_indexStage == 3) {
             _game3st.SetActive(false);
@@ -90,14 +95,21 @@ public class ChengeStageManager : MonoBehaviour {
             print("ステチェン");
             _splineAnimate1st.enabled = false;
             _splineAnimate2st.enabled = true;
+            _ringCount.enabled = false;
+            _numberOfDefeats.enabled = true;
         }
         if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
             _splineAnimate3st.enabled = true;
+            _numberOfDefeats.enabled = false;
+            _3rdTime.LimitTimerStart();
+            _3rdRank.enabled = true;
         }
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
             _splineAnimate4st.enabled = true;
+            _3rdRank.enabled = false;
+            _star.enabled = true;
         }
         if (_indexStage == 4) {
             _splineAnimate4st.enabled = false;
