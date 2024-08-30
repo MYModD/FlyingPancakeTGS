@@ -8,8 +8,6 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.Splines;
-using UnityEngine.UIElements;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class PlayerMove : MonoBehaviour {
     #region 変数
     [SerializeField, Header("プレイヤーの上下移動最大値")] private float _maxHeight;
