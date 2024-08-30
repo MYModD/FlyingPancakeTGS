@@ -26,7 +26,7 @@ public class testscript : MonoBehaviour
         foreach (Camera camera in allCameras) {
 
 
-            _textMeshProUGUI.text += $"{camera.name}aaaaaaaaaaaaaa";
+            _textMeshProUGUI.text += $"{camera.name}";
 
         }
     }

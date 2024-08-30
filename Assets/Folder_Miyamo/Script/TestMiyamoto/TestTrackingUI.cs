@@ -42,7 +42,8 @@ public class TestTrackingUI : MonoBehaviour {
         _enemyInConeImages = InitializeUIElements(_enemyInCone);
     }
 
-    void Update() {
+    
+    private void LateUpdate() {
         UpdateUIOutSidePositions(_lockOnManager._targetsInCamera, _enemyInCameraImages);
         UpdateUIInsidePositions(_missileStuck, _enemyInConeImages);
     }
