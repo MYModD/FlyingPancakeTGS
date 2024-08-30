@@ -156,8 +156,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             if (other.gameObject.CompareTag(_enemyTag)) {
                 _hasCollided = true; // 衝突フラグをセット
                 print($"{other.gameObject.name}に衝突");
-                other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
-                _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
+                //other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
+                //_explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
                 _missileStuck.TargetNull();
                 ReturnToPool();                                              // ミサイルをプールに変換
             }

@@ -13,7 +13,6 @@ public class TestLockOnManager : MonoBehaviour {
 
     public MissileStuck[] _missileStucks;
 
-
     [Header("プレイヤーのTransformを指定")]
     [SerializeField, Header("プレイヤーのTransform")]
     private Transform _player;
@@ -35,21 +34,17 @@ public class TestLockOnManager : MonoBehaviour {
     public bool _canAdd = true;
     public float _coolTime;
 
-
     readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
-    private Plane[] _cameraPlanes;
-    
+    // Plane[] 型に修正
+    private UnityEngine.Plane[] _cameraPlanes;
 
     void Update() {
         UpdateTargets();
 
-
-
         // 見やすくするデバッグ用
         for (int i = 0; i < _missileStucks.Length; i++) {
             if (_missileStucks[i]._enemyTarget != null && _missileStucks[i]._isValueAssignable == false) {
-
                 _targetsInCone.Add(_missileStucks[i]._enemyTarget);
             }
         }
@@ -62,21 +57,16 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsInCamera.Clear();
         _targetsInCone.Clear();
 
-
-
         // カメラの位置から一定の半径の球状のコライダーの配列を取得する
         Collider[] hits = Physics.OverlapSphere(
-
             _camera.transform.position,
             _searchRadius,
             LayerMask.GetMask("Enemy")
-
         );
 
         // 一番近い敵を探すためにnullとfloat.MaxValueを使用
         Transform minDistanceTarget = null;
         float minDistance = float.MaxValue;
-
 
         // コライダーの配列Foreach
         foreach (Collider hit in hits) {
@@ -99,20 +89,16 @@ public class TestLockOnManager : MonoBehaviour {
                 continue;
             }
 
-
             // コーン内に敵がいる かつ 敵のactiveがTrue
-            if (IsInCone(target) && target.gameObject.activeSelf &&hit.gameObject.activeSelf) {
+            if (IsInCone(target) && target.gameObject.activeSelf && hit.gameObject.activeSelf) {
 
                 // コーン内に複数の敵がいる場合一番近い敵を探す
                 float distance = Vector3.Distance(target.position, _camera.transform.position);
                 if (distance < minDistance) {
-
                     minDistanceTarget = target;
                 }
-
             }
         }
-
 
         // ターゲットがnullではなく かつ canAddがtrueのとき
         if (minDistanceTarget != null && _canAdd) {
@@ -121,33 +107,24 @@ public class TestLockOnManager : MonoBehaviour {
 
                 // minDistanceTargetがmissileStucksの配列内にあるときBreak
                 if (minDistanceTarget == _missileStucks[i]._enemyTarget) {
-
                     break;
                 }
 
                 // 0から初めて_enemyTargetがnullのとき代入するための
                 // メソッドを呼び出しクールタイムのコルーチンを呼ぶ
                 if (_missileStucks[i]._enemyTarget == null) {
-
                     _missileStucks[i].TargetLockOn(minDistanceTarget);
                     StartCoroutine(nameof(CanBoolTimer));
                     break;
                 }
-
             }
         }
-
-
-
-       
-
     }
 
     /// <summary>
     /// falseにし一定時間後にtrueにする
     /// </summary>
     IEnumerator CanBoolTimer() {
-
         _canAdd = false;
         Debug.Log(_canAdd);
         yield return new WaitForSeconds(_coolTime);
@@ -155,14 +132,12 @@ public class TestLockOnManager : MonoBehaviour {
         Debug.Log(_canAdd);
     }
 
-
     /// <summary>
     /// カメラとrenderが交差しているか renderのサイズで計測しているので若干の誤差あり
     /// </summary>
-    private bool IsInFrustum(Renderer renderer, Plane[] planes) {
+    private bool IsInFrustum(Renderer renderer, UnityEngine.Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
-
 
     /// <summary>
     /// targetがコーン内にいるか ベクトルを正規化して角度が合っているか判別
@@ -182,9 +157,7 @@ public class TestLockOnManager : MonoBehaviour {
     }
 
 #if UNITY_EDITOR    
-
     void OnDrawGizmos() {
-
         if (_camera == null || _player == null) {
             Debug.Log("カメラかプレイヤーつけてないよ");
             return;
@@ -196,7 +169,6 @@ public class TestLockOnManager : MonoBehaviour {
         // コーンの方向と回転を計算
         Vector3 coneDirection = (_player.position - _camera.transform.position).normalized;
         Quaternion coneRotation = Quaternion.LookRotation(coneDirection);
-
 
         // コーン上の円周を描画
         Gizmos.color = Color.yellow;
@@ -217,7 +189,6 @@ public class TestLockOnManager : MonoBehaviour {
         Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + forward);
         Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + rightBoundary);
         Gizmos.DrawLine(_camera.transform.position, _camera.transform.position + leftBoundary);
-
     }
 
     private void OnValidate() {
