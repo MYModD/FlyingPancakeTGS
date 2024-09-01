@@ -44,16 +44,19 @@ public class TestLockOnManager : MonoBehaviour {
 
     public Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
+
     private Plane[] _cameraPlanes;
     private float _updateInterval = 0.1f;
     private float _lastUpdate = 0f;
 
+
     void Update() {
-        if (Time.time - _lastUpdate > _updateInterval) {
+       
+
+
             UpdateTargets();
             RemoveTargetInCone();
-            _lastUpdate = Time.time;
-        }
+          
     }
 
     private void UpdateTargets() {
@@ -66,6 +69,7 @@ public class TestLockOnManager : MonoBehaviour {
         foreach (Collider hit in hits) {
             ProcessHit(hit, _cameraPlanes);
         }
+
     }
 
     private Collider[] GetSphereOverlapHits() {
@@ -85,12 +89,10 @@ public class TestLockOnManager : MonoBehaviour {
                 _targetsInCamera.Add(target);
 
                 if (IsInCone(target) && hit.gameObject.activeSelf && _canAdd) {
+
                     if (!_targetsInCone.Contains(target)) {
 
-
-
                         _targetsInCone.Add(target);
-
 
                         StartCoroutine(nameof(CanBoolTimer));
 
@@ -127,6 +129,7 @@ public class TestLockOnManager : MonoBehaviour {
     }
 
     private void RemoveTargetInCone() {
+
         List<Transform> targetsToRemove = new List<Transform>();
         foreach (Transform target in _targetsInCone) {
             if (!GeometryUtility.TestPlanesAABB(_cameraPlanes, target.GetComponent<Collider>().bounds)) {
