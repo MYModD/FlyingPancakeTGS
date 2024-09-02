@@ -8,17 +8,22 @@ public class EnemyDeathProcessing : MonoBehaviour
     [SerializeField, Tag] private string _missileTag;
     [SerializeField] private Plane _plane;
     [SerializeField] private Rigidbody _rigidbody;
-    private bool _isDeath=true;
 
     private void Update() {
 
-        if (other.gameObject.CompareTag(_missileTag)&&_isDeath) {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            print("-100");
+            _plane.hp = -100;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+
+        if (collision.gameObject.CompareTag(_missileTag)) {
 
             _countTheNumberOfDefeats.AdditionOfNumberOfDefeats();
             _rigidbody.useGravity = true;
             this.gameObject.transform.parent = null;
-            this.GetComponent<BoxCollider>().enabled = false;
-            _isDeath = false;
         }
     }
 }
