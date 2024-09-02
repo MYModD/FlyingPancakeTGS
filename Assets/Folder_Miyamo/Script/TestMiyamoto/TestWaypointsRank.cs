@@ -65,6 +65,9 @@ public class PlayerRankManager : MonoBehaviour {
   
 
     private void Update() {
+        if (!gameObject.activeSelf) {
+            return;
+        }
         _textTitle.text = "ToBeTheTop";
         _textScore.text = _currentPlayerRank.ToString()+"/"+"9";
 
@@ -93,6 +96,7 @@ public class PlayerRankManager : MonoBehaviour {
             Debug.Log("trueなったよぉ");
             //ここにタイマーストップのスクリプト
             _timeLimit.End3rdGame();
+            this.gameObject.SetActive(false);
 
         } else {
             Debug.Log("falseになったよぉ");

@@ -4,20 +4,29 @@ using TMPro;
 using UnityEngine;
 
 public class StarScoreManager : MonoBehaviour {
-    #region ïœêî
+    #region ‚Ä¢√è¬ê‚Äù
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private TextMeshProUGUI _textTitle;
     [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private TextMeshProUGUI _timeText1;
+    [SerializeField] private TextMeshProUGUI _timeText2;
     private int _score;
     private int _maxStarUSA = 50;
     #endregion
-    #region ÉÅÉ\ÉbÉh
+    #region ∆í¬Å∆í\∆íb∆íh
+    private void Update() {
+
+        _textTitle.text = "Star Count";
+        _textScore.text = _score.ToString();
+    }
     public void ScoreAddition(int score) {
 
         _score += score;
         _scoreManager.InputGetStarScore(_score, _maxStarUSA);
-        _textTitle.text = "Star Count";
-        _textScore.text = _score.ToString();
+        _textScore.color = Color.white;
+        _textTitle.color = Color.white;
+        _timeText1.color = Color.white;
+        _timeText2.color = Color.white;
     }
     #endregion
 }

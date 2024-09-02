@@ -23,7 +23,7 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("2stのプレイヤー")] private GameObject _player2st;
     [SerializeField] private SplineAnimate _splineAnimate2st;
     [SerializeField, Header("2stのステージ")] private GameObject _game2st;
-    [SerializeField,Header("killを集計するスクリプト")]private CountTheNumberOfDefeats _numberOfDefeats;
+    [SerializeField, Header("killを集計するスクリプト")] private CountTheNumberOfDefeats _numberOfDefeats;
 
     [Header("3stStage")]
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
@@ -66,30 +66,51 @@ public class ChengeStageManager : MonoBehaviour {
     }
     public void StageChange() {
         if (_indexStage == 1) {
-            
+
             _game1st.SetActive(false);
-            _game2st.SetActive(true);
+            if (_game2st != null) {
+                _game2st.SetActive(true);
+            } else {
+                _isFinish = true;
+                _canvasManager.PlayToED();
+            }
         }
         if (_indexStage == 2) {
             _game2st.SetActive(false);
-            _game3st.SetActive(true);
+            if (_game3st != null) {
+                _game3st.SetActive(true);
+            } else {
+                _isFinish = true;
+                _canvasManager.PlayToED();
+            }
         }
         if (_indexStage == 3) {
             _game3st.SetActive(false);
-            _game4st.SetActive(true);
+            if (_game4st != null) {
+                _game4st.SetActive(true);
+            } else {
+                _isFinish = true;
+                _canvasManager.PlayToED();
+            }
         }
         if (_indexStage == 4) {
             _game4st.SetActive(false);
-            _game5st.SetActive(true);
+            if (_game5st != null) {
+                _game5st.SetActive(true);
+            } else {
+                _isFinish = true;
+                _canvasManager.PlayToED();
+            }
         }
         if (_indexStage == 5) {
             _camera.SetActive(true);
             _game5st.SetActive(false);
+            _isFinish = true;
             _canvasManager.PlayToED();
         }
-        
+
     }
-    
+
     public void StageStart() {
         if (_indexStage == 1) {
             print("ステチェン");
@@ -97,6 +118,12 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate2st.enabled = true;
             _ringCount.enabled = false;
             _numberOfDefeats.enabled = true;
+
+
+            _testLockOnManager._searchRadius = 2500f;
+            _testLockOnManager._coneAngle = 84f * 2f;
+            _testLockOnManager._coneRange = 3000f;
+\
         }
         if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
@@ -110,6 +137,11 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate4st.enabled = true;
             _3rdRank.enabled = false;
             _star.enabled = true;
+
+            // ここから
+
+
+
         }
         if (_indexStage == 4) {
             _splineAnimate4st.enabled = false;
@@ -120,8 +152,10 @@ public class ChengeStageManager : MonoBehaviour {
 
     IEnumerator StartVoice() {
         yield return new WaitForSeconds(0.75f);
-        _audioSE.PlayOneShot(_stageVoice[_indexStage]);
-        _indexStage++;
+        if (!_isFinish) {
+            _audioSE.PlayOneShot(_stageVoice[_indexStage]);
+            _indexStage++;
+        }
     }
     public void GameStartVoice() {
         StartCoroutine(StartVoice());
