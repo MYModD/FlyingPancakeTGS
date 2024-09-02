@@ -27,7 +27,7 @@ public class TestWayPointsCount : MonoBehaviour {
     [SerializeField, Tag]
     private string _enemyTag;
 
-    [SerializeField]
+    [SerializeField]    
     private GameObject _vacumeObject;
 
     

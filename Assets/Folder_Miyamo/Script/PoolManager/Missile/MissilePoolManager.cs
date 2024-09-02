@@ -7,12 +7,12 @@ using UnityEngine;
 /// </summary>
 public class MissilePoolManager : PoolManager<TestMissile> {
 
-    [SerializeField,Header("missileにつける爆発プール")]
+    [SerializeField, Header("missileにつける爆発プール")]
     public ExplosionPoolManager _explosionPoolManager;
 
-    [SerializeField, Header("ミサイルスタックの配列")]
-    private MissileStuck[] _missileStucks;
-    
+    [SerializeField, Header("lockOnManger")]
+    private TestLockOnManager _testLockOnManager;
+
     // testmissileでExplosionPoolManager設定すると
     // エラーが出たためCreate()したときに設定する    
     protected override TestMissile Create() {
@@ -26,24 +26,21 @@ public class MissilePoolManager : PoolManager<TestMissile> {
         int missileNum = 0;
 
         Debug.Log("fire");
-        foreach (MissileStuck item in _missileStucks) {
+        foreach (Transform target in _testLockOnManager._targetsInCone) {
 
             // _isValueAssignableがすでに代入されているものだけ発射してほしいためfalse
-            bool canFire = item._enemyTarget != null && item._isValueAssignable == false;
-            if (canFire) {
 
-                missileNum++;
-                Debug.Log($"{missileNum}発目発射");
+            missileNum++;
+            Debug.Log($"{missileNum}発目発射");
 
+            TestMissile missile = _objectPool.Get();
+            missile.Initialize();                       //初期化
+            missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
+            missile._enemyTarget = target;
 
-                TestMissile missile = _objectPool.Get();
-                missile.Initialize();                       //初期化
-                missile._missileStuck = item;
-                missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
-                missile._enemyTarget = item._enemyTarget;
+            _testLockOnManager.ClearConeTargetAndAddBlackList();
+            missile._testLockOnManager = _testLockOnManager;
 
-
-            }
 
         }
     }
