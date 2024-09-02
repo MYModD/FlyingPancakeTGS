@@ -45,7 +45,7 @@ public class PlayerRankManager : MonoBehaviour {
 
         // 第二引数:これが実行されてから何秒後に実行するか
         // 第三引数:何秒ごとに実行するか
-        InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
+        //InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
     }
 
 
@@ -64,7 +64,10 @@ public class PlayerRankManager : MonoBehaviour {
 
   
 
-    private void UpdateRanks() {
+    private void Update() {
+        if (!gameObject.activeSelf) {
+            return;
+        }
         _textTitle.text = "ToBeTheTop";
         _textScore.text = _currentPlayerRank.ToString()+"/"+"9";
 
@@ -93,6 +96,7 @@ public class PlayerRankManager : MonoBehaviour {
             Debug.Log("trueなったよぉ");
             //ここにタイマーストップのスクリプト
             _timeLimit.End3rdGame();
+            this.gameObject.SetActive(false);
 
         } else {
             Debug.Log("falseになったよぉ");
