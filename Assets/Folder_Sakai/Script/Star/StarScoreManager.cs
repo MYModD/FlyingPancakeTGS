@@ -14,6 +14,11 @@ public class StarScoreManager : MonoBehaviour {
     private int _maxStarUSA = 50;
     #endregion
     #region ÉÅÉ\ÉbÉh
+    private void Update() {
+
+        _textTitle.text = "Star Count";
+        _textScore.text = _score.ToString();
+    }
     public void ScoreAddition(int score) {
 
         _score += score;
@@ -22,8 +27,6 @@ public class StarScoreManager : MonoBehaviour {
         _textTitle.color = Color.white;
         _timeText1.color = Color.white;
         _timeText2.color = Color.white;
-        _textTitle.text = "Star Count";
-        _textScore.text = _score.ToString();
     }
     #endregion
 }
