@@ -8,6 +8,8 @@ public class StarScoreManager : MonoBehaviour {
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private TextMeshProUGUI _textTitle;
     [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private TextMeshProUGUI _timeText1;
+    [SerializeField] private TextMeshProUGUI _timeText2;
     private int _score;
     private int _maxStarUSA = 50;
     #endregion
