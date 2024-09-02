@@ -106,6 +106,8 @@ public class ScoreManager : MonoBehaviour {
         } else {
             _5thStage.text = _sorryText;
         }
+        _gameClearTime.text = _clearTimeString;
+        _rank.text = RankSettingProcess(_resultScore);
     }
 
     #region セットスコア情報
