@@ -41,16 +41,25 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
-        if (_splineAnimate1.enabled && _is1st) {
+        if (_splineAnimate1.enabled ) {
+            if (!_is1st) {
+                return;
+            }
             StartCoroutine(StartBubble(1,0.1f));
             _is1st = false;
         }
         else if (_splineAnimate2.enabled && _is2nd) {
+            if (!_is2nd) {
+                return;
+            }
             _1stBubble.SetActive(false);
             StartCoroutine(StartBubble(2,1.5f));
             _is2nd |= false;
         }
         else if (_splineAnimate3.enabled && _is3rd) {
+            if (!_is3rd) {
+                return;
+            }
             _2ndBubble.SetActive(false);
             StartCoroutine(StartBubble(3,1.5f));
             _is3rd |= false;
