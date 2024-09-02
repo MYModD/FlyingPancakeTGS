@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class TimeLimit : MonoBehaviour
 {
-
+    [SerializeField] private ScoreManager _scoreManger;
+    [SerializeField] private Animator _cutIN;
     [Header("êßå¿éûä‘")]
     public float _limitTime = 60f;
 
@@ -30,7 +31,7 @@ public class TimeLimit : MonoBehaviour
         if (_isStart) {
 
             _limitTime -= Time.deltaTime;
-            if (_limitTime <= 0f) {
+            if (_limitTime <= 0f||(Input.GetKey(KeyCode.P)&&Input.GetKeyDown(KeyCode.F))) {
                 End3rdGame();
             }
         
@@ -53,9 +54,8 @@ public class TimeLimit : MonoBehaviour
 
         string floatTostring = ChangeTimeText(cashTime);
         Debug.LogWarning(floatTostring);
-
-        GameObject scoreMangerObject = GameObject.Find("ScoreManager");
-        scoreMangerObject.GetComponent<ScoreManager>().InputToBeTheTopScore(cashTime, _firstMaxtime,floatTostring);
+        _scoreManger.InputToBeTheTopScore(cashTime, _firstMaxtime,floatTostring);
+        _cutIN.Play("CutIN");
 
 
     }
