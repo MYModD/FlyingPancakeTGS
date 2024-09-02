@@ -5,46 +5,44 @@ using Utils;
 
 public class TestLockOnManager : MonoBehaviour {
 
-    [Header("ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½Eï¿½É“ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½Ìƒï¿½ï¿½Xï¿½g")]
+    [Header("ƒJƒƒ‰‚Ì‹ŠE‚É“ü‚Á‚Ä‚¢‚éƒ^[ƒQƒbƒg‚ÌƒŠƒXƒg")]
     public List<Transform> _targetsInCamera = new List<Transform>();
 
-    [Header("ï¿½ï¿½ï¿½Ì“ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½debugï¿½pï¿½ï¿½ï¿½Xï¿½g")]
+    [Header("‘Ì“à‚É“ü‚Á‚Ä‚¢‚éƒ^[ƒQƒbƒg‚Ìdebug—pƒŠƒXƒg")]
     public List<Transform> _targetsInCone = new List<Transform>();
 
     public MissileStuck[] _missileStucks;
 
-    [Header("ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½Transformï¿½ï¿½ï¿½wï¿½ï¿½")]
-    [SerializeField, Header("ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½Transform")]
+    [Header("ƒvƒŒƒCƒ„[‚ÌTransform‚ğw’è")]
+    [SerializeField, Header("ƒvƒŒƒCƒ„[‚ÌTransform")]
     private Transform _player;
 
-    [SerializeField, Header("ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½")]
+    [SerializeField, Header("ƒJƒƒ‰w’è")]
     private Camera _camera;
 
-
-    [SerializeField, Header("spherecastã®åŠå¾„")]
-    public  float _searchRadius = 95f;
+    [SerializeField, Header("spherecast‚Ì”¼Œa")]
+    private float _searchRadius = 95f;
 
     [SerializeField, Range(0f, 180f)]
-    [Header("ã‚³ãƒ¼ãƒ³ã®è§’åº¦")]
-    public  float _coneAngle = 45f;
+    [Header("ƒR[ƒ“‚ÌŠp“x")]
+    private float _coneAngle = 45f;
 
     [SerializeField]
-    [Header("ã‚³ãƒ¼ãƒ³ã®é•·ã•ã€åŠå¾„")]
-    public  float _coneRange;
-
+    [Header("ƒR[ƒ“‚Ì’·‚³A”¼Œa")]
+    private float _coneRange;
 
     public bool _canAdd = true;
     public float _coolTime;
 
     readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
-    // Plane[] ï¿½^ï¿½ÉCï¿½ï¿½
+    // Plane[] Œ^‚ÉC³
     private UnityEngine.Plane[] _cameraPlanes;
 
     void Update() {
         UpdateTargets();
 
-        // ï¿½ï¿½ï¿½â‚·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fï¿½oï¿½bï¿½Oï¿½p
+        // Œ©‚â‚·‚­‚·‚éƒfƒoƒbƒO—p
         for (int i = 0; i < _missileStucks.Length; i++) {
             if (_missileStucks[i]._enemyTarget != null && _missileStucks[i]._isValueAssignable == false) {
                 _targetsInCone.Add(_missileStucks[i]._enemyTarget);
@@ -54,47 +52,47 @@ public class TestLockOnManager : MonoBehaviour {
 
     private void UpdateTargets() {
 
-        // Planeï¿½^ï¿½Ì•Ïï¿½ï¿½ÉƒJï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½íœï¿½ï¿½ï¿½ï¿½
+        // PlaneŒ^‚Ì•Ï”‚ÉƒJƒƒ‰‚Ìî•ñ‚ğ‚¢‚ê‚é+ƒJƒƒ‰‚ÌƒŠƒXƒg‚ğíœ‚·‚é
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
         _targetsInCamera.Clear();
         _targetsInCone.Clear();
 
-        // ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì”ï¿½ï¿½aï¿½Ì‹ï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½Cï¿½_ï¿½[ï¿½Ì”zï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
+        // ƒJƒƒ‰‚ÌˆÊ’u‚©‚çˆê’è‚Ì”¼Œa‚Ì‹…ó‚ÌƒRƒ‰ƒCƒ_[‚Ì”z—ñ‚ğæ“¾‚·‚é
         Collider[] hits = Physics.OverlapSphere(
             _camera.transform.position,
             _searchRadius,
             LayerMask.GetMask("Enemy")
         );
 
-        // ï¿½ï¿½Ô‹ß‚ï¿½ï¿½Gï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½nullï¿½ï¿½float.MaxValueï¿½ï¿½ï¿½gï¿½p
+        // ˆê”Ô‹ß‚¢“G‚ğ’T‚·‚½‚ß‚Énull‚Æfloat.MaxValue‚ğg—p
         Transform minDistanceTarget = null;
         float minDistance = float.MaxValue;
 
-        // ï¿½Rï¿½ï¿½ï¿½Cï¿½_ï¿½[ï¿½Ì”zï¿½ï¿½Foreach
+        // ƒRƒ‰ƒCƒ_[‚Ì”z—ñForeach
         foreach (Collider hit in hits) {
             if (!hit.CompareTag("Enemy")) {
                 continue;
             }
 
-            //ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½coliderï¿½ï¿½transform,ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½ï¿½ï¿½æ“¾
+            //ƒ^[ƒQƒbƒg‚ğcolider‚Ìtransform,ƒŒƒ“ƒ_[‚ğæ“¾
             Transform target = hit.transform;
             Renderer renderer = target.GetComponent<Renderer>();
             if (renderer == null) {
-                Debug.LogError("meshrendererï¿½ï¿½ï¿½Â‚ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½");
+                Debug.LogError("meshrenderer‚ª‚Â‚¢‚Ä‚¢‚È‚¢‚æ");
                 continue;
             }
 
-            // ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É“Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Gï¿½ï¿½activeï¿½ï¿½Trueï¿½Ì‚Æ‚ï¿½ ï¿½ï¿½ï¿½ï¿½ÈŠOï¿½ï¿½return
+            // ƒJƒƒ‰“à‚É“G‚ª‚¢‚é ‚©‚Â “G‚Ìactive‚ªTrue‚Ì‚Æ‚« ‚»‚êˆÈŠO‚Íreturn
             if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
                 _targetsInCamera.Add(target);
             } else {
                 continue;
             }
 
-            // ï¿½Rï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½É“Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Gï¿½ï¿½activeï¿½ï¿½True
+            // ƒR[ƒ““à‚É“G‚ª‚¢‚é ‚©‚Â “G‚Ìactive‚ªTrue
             if (IsInCone(target) && target.gameObject.activeSelf && hit.gameObject.activeSelf) {
 
-                // ï¿½Rï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½É•ï¿½ï¿½ï¿½ï¿½Ì“Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½Ô‹ß‚ï¿½ï¿½Gï¿½ï¿½Tï¿½ï¿½
+                // ƒR[ƒ““à‚É•¡”‚Ì“G‚ª‚¢‚éê‡ˆê”Ô‹ß‚¢“G‚ğ’T‚·
                 float distance = Vector3.Distance(target.position, _camera.transform.position);
                 if (distance < minDistance) {
                     minDistanceTarget = target;
@@ -102,18 +100,18 @@ public class TestLockOnManager : MonoBehaviour {
             }
         }
 
-        // ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½nullï¿½Å‚Í‚È‚ï¿½ ï¿½ï¿½ï¿½ï¿½ canAddï¿½ï¿½trueï¿½Ì‚Æ‚ï¿½
+        // ƒ^[ƒQƒbƒg‚ªnull‚Å‚Í‚È‚­ ‚©‚Â canAdd‚ªtrue‚Ì‚Æ‚«
         if (minDistanceTarget != null && _canAdd) {
 
             for (int i = 0; i < _missileStucks.Length; i++) {
 
-                // minDistanceTargetï¿½ï¿½missileStucksï¿½Ì”zï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½Æ‚ï¿½Break
+                // minDistanceTarget‚ªmissileStucks‚Ì”z—ñ“à‚É‚ ‚é‚Æ‚«Break
                 if (minDistanceTarget == _missileStucks[i]._enemyTarget) {
                     break;
                 }
 
-                // 0ï¿½ï¿½ï¿½ç‰ï¿½ß‚ï¿½_enemyTargetï¿½ï¿½nullï¿½Ì‚Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚ï¿½
-                // ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½Nï¿½[ï¿½ï¿½ï¿½^ï¿½Cï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½
+                // 0‚©‚ç‰‚ß‚Ä_enemyTarget‚ªnull‚Ì‚Æ‚«‘ã“ü‚·‚é‚½‚ß‚Ì
+                // ƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µƒN[ƒ‹ƒ^ƒCƒ€‚ÌƒRƒ‹[ƒ`ƒ“‚ğŒÄ‚Ô
                 if (_missileStucks[i]._enemyTarget == null) {
                     _missileStucks[i].TargetLockOn(minDistanceTarget);
                     StartCoroutine(nameof(CanBoolTimer));
@@ -124,7 +122,7 @@ public class TestLockOnManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// falseï¿½É‚ï¿½ï¿½ï¿½èï¿½ÔŒï¿½ï¿½trueï¿½É‚ï¿½ï¿½ï¿½
+    /// false‚É‚µˆê’èŠÔŒã‚Étrue‚É‚·‚é
     /// </summary>
     IEnumerator CanBoolTimer() {
         _canAdd = false;
@@ -135,14 +133,14 @@ public class TestLockOnManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½renderï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚© renderï¿½ÌƒTï¿½Cï¿½Yï¿½ÅŒvï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ì‚ÅáŠ±ï¿½ÌŒë·ï¿½ï¿½ï¿½ï¿½
+    /// ƒJƒƒ‰‚Ærender‚ªŒğ·‚µ‚Ä‚¢‚é‚© render‚ÌƒTƒCƒY‚ÅŒv‘ª‚µ‚Ä‚¢‚é‚Ì‚ÅáŠ±‚ÌŒë·‚ ‚è
     /// </summary>
     private bool IsInFrustum(Renderer renderer, UnityEngine.Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
 
     /// <summary>
-    /// targetï¿½ï¿½ï¿½Rï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½é‚© ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ğ³‹Kï¿½ï¿½ï¿½ï¿½ï¿½ÄŠpï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½ï¿½
+    /// target‚ªƒR[ƒ““à‚É‚¢‚é‚© ƒxƒNƒgƒ‹‚ğ³‹K‰»‚µ‚ÄŠp“x‚ª‡‚Á‚Ä‚¢‚é‚©”»•Ê
     /// </summary>  
     private bool IsInCone(Transform target) {
         Vector3 cameraPosition = _camera.transform.position;
@@ -161,18 +159,18 @@ public class TestLockOnManager : MonoBehaviour {
 #if UNITY_EDITOR    
     void OnDrawGizmos() {
         if (_camera == null || _player == null) {
-            Debug.Log("ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Â‚ï¿½ï¿½Ä‚È‚ï¿½ï¿½ï¿½");
+            Debug.Log("ƒJƒƒ‰‚©ƒvƒŒƒCƒ„[‚Â‚¯‚Ä‚È‚¢‚æ");
             return;
         }
-        // ï¿½ï¿½ï¿½ï¿½Ì”ÍˆÍ‚ï¿½`ï¿½ï¿½
+        // ‹…ó‚Ì”ÍˆÍ‚ğ•`‰æ
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(_camera.transform.position, _searchRadius);
 
-        // ï¿½Rï¿½[ï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½Æ‰ï¿½]ï¿½ï¿½ï¿½vï¿½Z
+        // ƒR[ƒ“‚Ì•ûŒü‚Æ‰ñ“]‚ğŒvZ
         Vector3 coneDirection = (_player.position - _camera.transform.position).normalized;
         Quaternion coneRotation = Quaternion.LookRotation(coneDirection);
 
-        // ï¿½Rï¿½[ï¿½ï¿½ï¿½ï¿½Ì‰~ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½
+        // ƒR[ƒ“ã‚Ì‰~ü‚ğ•`‰æ
         Gizmos.color = Color.yellow;
         float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
         Vector3 coneBaseCenter = _camera.transform.position + (coneDirection * _coneRange);
@@ -182,7 +180,7 @@ public class TestLockOnManager : MonoBehaviour {
 
         GizmosExtensions.DrawWireCircle(coneBaseCenter, _coneRange * Mathf.Tan(coneAngleRad), 20, Quaternion.Euler(hoge));
 
-        // ï¿½Rï¿½[ï¿½ï¿½ï¿½Ì”ÍˆÍ‚ï¿½`ï¿½ï¿½
+        // ƒR[ƒ“‚Ì”ÍˆÍ‚ğ•`‰æ
         Gizmos.color = Color.red;
         Vector3 forward = coneDirection * _coneRange;
         Vector3 rightBoundary = coneRotation * Quaternion.Euler(0, _coneAngle / 2, 0) * Vector3.forward * _coneRange;
