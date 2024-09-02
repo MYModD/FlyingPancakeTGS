@@ -55,6 +55,7 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
             StartCoroutine(StartBubble(3,1.5f));
             _is3rd |= false;
         }
+        StartCoroutine(StartBubble(0,0f));
     }
     IEnumerator StartBubble(int index,float time) {
         yield return new WaitForSeconds(time);
@@ -69,6 +70,9 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
                 _3rdBubble.SetActive(true);
                 break;
             default:
+                _1stBubble.SetActive(false);
+                _2ndBubble.SetActive(false);
+                _3rdBubble.SetActive(false);
                 break;
         }
     }
