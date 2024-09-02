@@ -9,16 +9,14 @@ public class EnemyDeathProcessing : MonoBehaviour {
     [SerializeField] private Rigidbody _rigidbody;
     private bool _isDeath = true;
 
+
     private void OnTriggerEnter(Collider other) {
 
         if (other.gameObject.CompareTag(_missileTag) && _isDeath) {
-
             _planeee.hp = -100;
             _countTheNumberOfDefeats.AdditionOfNumberOfDefeats();
             _rigidbody.useGravity = true;
             this.gameObject.transform.parent = null;
-            this.GetComponent<BoxCollider>().enabled = false;
-            _isDeath = false;
         }
     }
 }
