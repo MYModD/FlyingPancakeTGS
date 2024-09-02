@@ -11,16 +11,10 @@ public class CountTheNumberOfDefeats : MonoBehaviour
     private int _maxEnemy = 21;
     [SerializeField] private TextMeshProUGUI _killCount;
     [SerializeField] private TextMeshProUGUI _killTitle;
-    [SerializeField] private TextMeshProUGUI _timeText1;
-    [SerializeField] private TextMeshProUGUI _timeText2;
 
 
 
     private void Update() {
-        _killCount.color = Color.black;
-        _killTitle.color = Color.black;
-        _timeText1.color = Color.black;
-        _timeText2.color = Color.black;
         _killTitle.text = "Kill Count";
         _killCount.text = _countTheNumberOfDefeats.ToString();
     }
