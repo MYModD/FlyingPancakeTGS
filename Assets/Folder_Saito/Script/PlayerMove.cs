@@ -47,6 +47,7 @@ public class PlayerMove : MonoBehaviour {
     private bool _ishorizontalInversion = false;
     private int _verticalIndex = 1;
     private int _horizontalIndex = 1;
+    private float _changePower = 0f;
     #endregion
     #region プロパティ
     #endregion
@@ -179,6 +180,10 @@ public class PlayerMove : MonoBehaviour {
     private void ChangeSpeed() {
         //インプットはUpdateでまとめて取りたい
         float inputRStick = Input.GetAxis("RStickV");
+
+        if (_splineAnimate3.enabled) {
+           _splineAnimate3.ElapsedTime += _changePower;
+        }
         //速度計算した値
         float speed = CalculateSpeed(inputRStick);
         //スプラインを通り終わる時間の設定値を変えて加減速
@@ -186,8 +191,6 @@ public class PlayerMove : MonoBehaviour {
             _splineAnimate1.ElapsedTime += speed;
         } else if (_splineAnimate2.enabled) {
             _splineAnimate2.ElapsedTime += speed;
-        } else if (_splineAnimate3.enabled) {
-            _splineAnimate3.ElapsedTime += speed;
         } else if (_splineAnimate4.enabled) {
             _splineAnimate4.ElapsedTime += speed;
         } else {
@@ -310,6 +313,13 @@ public class PlayerMove : MonoBehaviour {
         //速度変化させる値の決定
         float changePower = Time.deltaTime * input * _speedMagnification * index;
         return changePower;
+    }
+
+    public void CalculateSpeed3rd(float input) {
+
+        int index = _canvas.CanMove() ? 1 : 0;
+        //速度変化させる値の決定
+        _changePower = Time.deltaTime * input * _speedMagnification * index;
     }
     //-------------------------ここからパブリックメソッド---------------------------------------
     /// <summary>
