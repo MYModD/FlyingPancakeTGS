@@ -68,7 +68,7 @@ public class TestLockOnManager : MonoBehaviour {
     public Vector3 _drawOrigin = new Vector3(90, 0, 0);
 
 
-    private Plane[] _cameraPlanes;
+    private UnityEngine.Plane[] _cameraPlanes;
     private float _updateInterval = 0.1f;
     private float _lastUpdate = 0f;
 
@@ -188,6 +188,7 @@ public class TestLockOnManager : MonoBehaviour {
             }
 
             Renderer render = minDistanceObject.collider.GetComponent<Renderer>();
+            Debug.Log(render);
             if (!minDistanceObject.collider.CompareTag(_enemyTag) || !IsInFrustum(render, _cameraPlanes) ){
                 _targetsInCone.Remove(minDistanceObject.transform);
             }
@@ -262,7 +263,7 @@ public class TestLockOnManager : MonoBehaviour {
 
 
 
-    private bool IsInFrustum(Renderer renderer, Plane[] planes) {
+    private bool IsInFrustum(Renderer renderer, UnityEngine.Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
 
