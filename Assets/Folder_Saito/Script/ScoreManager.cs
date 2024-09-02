@@ -54,17 +54,10 @@ public class ScoreManager : MonoBehaviour {
 
     private int _lastGetPizza;
     private int _maxPizza;
+
     private float _allStageClearTime;
     private float _limitTime; // 全ステージの制限時間
     private string _clearTimeString;
-
-    private string _sorryText = "Sorry I can't do it yet";
-
-    private bool _doRing = false;
-    private bool _doKill = false;
-    private bool _doTop = false;
-    private bool _doStar = false;
-    private bool _doPizza = false;
     #endregion
 
     #region メソッド
@@ -80,34 +73,15 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     private void ResultSetText() {
         ScoreCalculation();
-        if (_doRing) {
-            _1stStage.text = ResultTextSet(_passedRingCount.ToString(), _maxRing.ToString());
-        } else {
-            _1stStage.text = _sorryText;
-        }
-        if (_doKill) {
-            _2ndStage.text = ResultTextSet(_killCount.ToString(), _maxEnemy.ToString());
-        } else {
-            _2ndStage.text = _sorryText;
-        }
-        if (_doTop) {
-            _3rdStage.text = _3rdTimeString;
-        } else {
-            _3rdStage.text = _sorryText;
-        }
-        if (_doStar) {
-            _4thStage.text = ResultTextSet(_getStarCount.ToString(), _starNumUSA.ToString());
-        } else {
-            _4thStage.text = _sorryText;
-        }
-        if (_doPizza) {
-            _5thStage.text = ResultTextSet(_lastGetPizza.ToString(), _maxPizza.ToString());
-        } else {
-            _5thStage.text = _sorryText;
-        }
+        _1stStage.text = ResultTextSet(_passedRingCount.ToString(),_maxRing.ToString());
+        _2ndStage.text = ResultTextSet(_killCount.ToString(),_maxEnemy.ToString());
+        _3rdStage.text = _3rdTimeString;
+        _4thStage.text = ResultTextSet(_getStarCount.ToString(),_starNumUSA.ToString());
+        _5thStage.text = ResultTextSet(_lastGetPizza.ToString(),_maxPizza.ToString());
         _gameClearTime.text = _clearTimeString;
         _rank.text = RankSettingProcess(_resultScore);
     }
+
     #region セットスコア情報
     /// <summary>
     /// リングのスコア情報をセットするメソッド
@@ -115,7 +89,6 @@ public class ScoreManager : MonoBehaviour {
     public void InputRingScore(int passedRing, int maxRing) {
         _passedRingCount = passedRing;
         _maxRing = maxRing;
-        _doRing = true;
     }
 
     /// <summary>
@@ -124,17 +97,15 @@ public class ScoreManager : MonoBehaviour {
     public void InputEnemyKillScore(int killCount, int maxEnemy) {
         _killCount = killCount;
         _maxEnemy = maxEnemy;
-        _doKill = true;
     }
 
     /// <summary>
     /// 1位になるためのタイムスコア情報をセットするメソッド
     /// </summary>
-    public void InputToBeTheTopScore(float clearTime, float maxTime, string clearTimeText) {
+    public void InputToBeTheTopScore(float clearTime, float maxTime,string clearTimeText) {
         _clearTime = clearTime;
         _maxTime = maxTime;
         _3rdTimeString = clearTimeText;
-        _doTop = true;
     }
 
     /// <summary>
@@ -143,7 +114,6 @@ public class ScoreManager : MonoBehaviour {
     public void InputGetStarScore(int getStar, int starUSA) {
         _getStarCount = getStar;
         _starNumUSA = starUSA;
-        _doStar = true;
     }
 
     /// <summary>
@@ -152,13 +122,12 @@ public class ScoreManager : MonoBehaviour {
     public void InputPizzaScore(int lastPizzaCount, int maxPizza) {
         _lastGetPizza = lastPizzaCount;
         _maxPizza = maxPizza;
-        _doPizza = true;
     }
 
     /// <summary>
     /// 全ステージのクリアタイムをセットするメソッド
     /// </summary>
-    public void InputTimeScore(float clearTime, float limitTimeAll, string timeStr) {
+    public void InputTimeScore(float clearTime, float limitTimeAll,string timeStr) {
         _allStageClearTime = clearTime;
         _limitTime = limitTimeAll;
         _clearTimeString = timeStr;
@@ -182,29 +151,8 @@ public class ScoreManager : MonoBehaviour {
         _pizzaMainScore = PersentResult(_lastGetPizza, _maxPizza);
         // 全ステージクリアタイムのパーセントを計算
         _allStageMainScore = PersentResult(_allStageClearTime, _limitTime);
-        //分母求める
-        int average = FindTheAverage();
         // 平均スコアを計算
-        _resultScore = (_ringMainScore + _killMainScore + _topMainScore + _starMainScore + _pizzaMainScore + _allStageMainScore) / average;
-    }
-    private int FindTheAverage() {
-        int average = 0;
-        if (_doRing) {
-            average++;
-        }
-        if (_doKill) {
-            average++;
-        }
-        if (_doStar) {
-            average++;
-        }
-        if (_doTop) {
-            average++;
-        }
-        if (_doPizza) {
-            average++;
-        }
-        return average;
+        _resultScore = (_ringMainScore + _killMainScore + _topMainScore + _starMainScore + _pizzaMainScore + _allStageMainScore) / 6;
     }
 
     /// <summary>
@@ -222,7 +170,7 @@ public class ScoreManager : MonoBehaviour {
     /// <param name="nowPlayScore">今回のその点数</param>
     /// <param name="maxScore">上限値</param>
     /// <returns>表示されるテキスト</returns>
-    private string ResultTextSet(string nowPlayScore, string maxScore) {
+    private string ResultTextSet(string nowPlayScore,string maxScore) {
         string setResult = nowPlayScore + "/" + maxScore;
         return setResult;
     }
@@ -252,5 +200,5 @@ public class ScoreManager : MonoBehaviour {
         return rank;
     }
     #endregion
-#endregion
+    #endregion
 }
