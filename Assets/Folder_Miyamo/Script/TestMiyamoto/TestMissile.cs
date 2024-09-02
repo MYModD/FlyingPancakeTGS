@@ -7,6 +7,8 @@ using UnityEngine.Splines;
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
 
+    //あとで書き直す
+    public TestLockOnManager _testLockOnManager;
 
     [SerializeField, Header("目標ターゲット")]
 
@@ -43,7 +45,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [Tag]
     private string _buildingTag;
 
-    public MissileStuck _missileStuck;
+
+
 
 
 
@@ -158,7 +161,6 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
                 print($"{other.gameObject.name}に衝突");
                 other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
                 _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
-                _missileStuck.TargetNull();
                 ReturnToPool();                                              // ミサイルをプールに変換
             }
 
@@ -170,9 +172,9 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
                 Debug.Log("エリートミサイルにあっったよ");
             }
         } else if (other.gameObject.CompareTag(_buildingTag)) {
-
+            //ビルにあたっときはブラックリストから削除する
             _explosionPoolManager.StartExplosion(other.transform);       // ビルにあたっときの処理
-            _missileStuck.TargetNull();
+            _testLockOnManager.RemoveBlackList(_enemyTarget);
             ReturnToPool();
 
         }

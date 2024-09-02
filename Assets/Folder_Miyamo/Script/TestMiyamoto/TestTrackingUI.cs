@@ -10,8 +10,7 @@ public class TestTrackingUI : MonoBehaviour {
     [SerializeField] private GameObject[] _enemyIncameraUI; // 視錐台内の敵のImage
     [SerializeField] private GameObject[] _enemyInCone; // 円錐内の敵のImage
 
-    public TestLockOnManager _lockOnManager;
-    public MissileStuck[] _missileStuck;
+    [SerializeField] private TestLockOnManager _lockOnManager;
 
     private Image[] _enemyInCameraImages;               //キャッシュ用の
                                                         //Imageコンポーネント
@@ -45,7 +44,7 @@ public class TestTrackingUI : MonoBehaviour {
     
     private void LateUpdate() {
         UpdateUIOutSidePositions(_lockOnManager._targetsInCamera, _enemyInCameraImages);
-        UpdateUIInsidePositions(_missileStuck, _enemyInConeImages);
+        UpdateUIOutSidePositions(_lockOnManager._targetsInCone, _enemyInConeImages);
     }
 
     /// <summary>

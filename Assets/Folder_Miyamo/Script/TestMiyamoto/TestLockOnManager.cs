@@ -1,15 +1,24 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
+using System.Linq;
 
 public class TestLockOnManager : MonoBehaviour {
+
 
     [Header("カメラの視界に入っているターゲットのリスト")]
     public List<Transform> _targetsInCamera = new List<Transform>();
 
     [Header("錐体内に入っているターゲットのリスト")]
     public List<Transform> _targetsInCone = new List<Transform>();
+
+    [Header("発射したあとのターゲットのリスト")]
+    public List<Transform> _targetsBlackList = new List<Transform>();
+
+
 
     [Header("プレイヤーのTransformを指定")]
     [SerializeField, Header("プレイヤーのTransform")]
@@ -28,6 +37,20 @@ public class TestLockOnManager : MonoBehaviour {
     [SerializeField]
     [Header("コーンの長さ、半径")]
     private float _coneRange;
+
+
+    [SerializeField, Layer]
+    [Header("敵のTag")]
+    private string _enemyTag;
+
+    [SerializeField, Tag]
+    [Header("ビルのタグ")]
+    private string _buildingTag;
+
+
+    //private Dictionary<GameObject,float>
+    //private Dictionary<GameObject, Renderer>   あとでgetcompnentの再利用とfloatによりタイマー処理をする
+
 
 
     [HideInInspector]
@@ -50,67 +73,167 @@ public class TestLockOnManager : MonoBehaviour {
     private float _lastUpdate = 0f;
 
 
-    /// <summary>
-    /// Updateよりカメラの処理が終わったあとの方がいいんじゃない
-    /// </summary>
-    private void LateUpdate() {
 
-        
-    }
+    private void Update() {
+
+        // キャッシュ用、比較用のList
+        List<Transform> cashCameraTargets = new List<Transform>();
 
 
-
-    void Update() {
-       
-
-
-            UpdateTargets();
-            RemoveTargetInCone();
-          
-    }
-
-    private void UpdateTargets() {
-        _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
-        _targetsInCamera.Clear();
-        _targetsInCone.Clear();
-
-        Collider[] hits = GetSphereOverlapHits();
-
-        foreach (Collider hit in hits) {
-            ProcessHit(hit, _cameraPlanes);
-        }
-
-    }
-
-    private Collider[] GetSphereOverlapHits() {
-        return Physics.OverlapSphere(
+        // カメラから一定の半径にいて、レイヤーがEnemyのコライダー情報の配列を保存
+        // 重かったら軽いやつにする
+        Collider[] hits = Physics.OverlapSphere(
             _camera.transform.position,
             _searchRadius,
-            LayerMask.GetMask("Enemy")
+            LayerMask.GetMask(_enemyTag)
         );
-    }
 
-    private void ProcessHit(Collider hit, Plane[] planes) {
-        if (hit.CompareTag("Enemy")) {
-            Transform target = hit.transform;
-            Renderer renderer = target.GetComponent<Renderer>();
+        // カメラの六面体
+        _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
 
-            if (renderer != null && IsInFrustum(renderer, planes) && hit.gameObject.activeSelf) {
-                _targetsInCamera.Add(target);
 
-                if (IsInCone(target) && hit.gameObject.activeSelf && _canAdd) {
+        foreach (Collider hit in hits) {
 
-                    if (!_targetsInCone.Contains(target)) {
 
-                        _targetsInCone.Add(target);
+            Transform target = default;
+            Renderer renderer = default;
 
-                        StartCoroutine(nameof(CanBoolTimer));
+            if (hit.CompareTag("Enemy")) {
+                target = hit.transform;
+                renderer = target.GetComponent<Renderer>();
+            } else {
+                Debug.Log("レンダーコンポーネントがついてない可能性があるよ");
+                continue;
+            }
+
+            if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
+
+                // カメラからターゲットへの方向ベクトルを計算
+                Vector3 directionToTarget = (target.position - _camera.transform.position).normalized;
+
+                // Raycastを実行,Gizmoで描写
+                RaycastHit[] hitsALL;
+                hitsALL = Physics.RaycastAll(_camera.transform.position, directionToTarget, _searchRadius);
+
+                RaycastHit minDistanceObject = default;
+
+
+                // 敵とビルのタグが見つかったらbrake 代入
+                for (int i = 0; i < hitsALL.Length; i++) {
+
+                    if (hitsALL[i].collider.CompareTag(_enemyTag) || hitsALL[i].collider.CompareTag(_buildingTag)) {
+
+                        minDistanceObject = hitsALL[i];
+                        break;
 
                     }
                 }
+
+                foreach (RaycastHit hitOne in hitsALL) {
+                    if (hitOne.collider.CompareTag(_enemyTag) || hitOne.collider.CompareTag(_buildingTag)) {
+
+                        if (hitOne.distance < minDistanceObject.distance) {
+
+                            minDistanceObject = hitOne;
+                        }
+                    }
+                }
+
+
+                if (minDistanceObject.collider.CompareTag(_enemyTag)) {
+                    print(minDistanceObject.collider.CompareTag(_enemyTag));
+                    cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
+                }
+
             }
         }
+
+        // ブラックリストに含まれる敵を除外
+        cashCameraTargets = cashCameraTargets.Except(_targetsBlackList).ToList();
+
+        _targetsInCamera.Clear(); // 既存のリストをクリア
+        _targetsInCamera.AddRange(cashCameraTargets); // 新しいターゲットを追加
+
+
+        foreach (Transform item in _targetsInCone) {
+
+            Vector3 directionToTarget = (item.position - _camera.transform.position).normalized;
+
+            // Raycastを実行,Gizmoで描写
+            RaycastHit[] hitsALL;
+            hitsALL = Physics.RaycastAll(_camera.transform.position, directionToTarget, _coneRange);
+
+            RaycastHit minDistanceObject = default;
+
+
+            // 敵とビルのタグが見つかったらbrake 代入
+            for (int i = 0; i < hitsALL.Length; i++) {
+
+                if (hitsALL[i].collider.CompareTag(_enemyTag) || hitsALL[i].collider.CompareTag(_buildingTag)) {
+
+                    minDistanceObject = hitsALL[i];
+                    break;
+
+                }
+            }
+
+            foreach (RaycastHit hitOne in hitsALL) {
+                if (hitOne.collider.CompareTag(_enemyTag) || hitOne.collider.CompareTag(_buildingTag)) {
+
+                    if (hitOne.distance < minDistanceObject.distance) {
+
+                        minDistanceObject = hitOne;
+                    }
+                }
+            }
+
+            Renderer render = minDistanceObject.collider.GetComponent<Renderer>();
+            if (!minDistanceObject.collider.CompareTag(_enemyTag) || !IsInFrustum(render, _cameraPlanes) ){
+                _targetsInCone.Remove(minDistanceObject.transform);
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+        // キャッシュ用、雑にコピー removeしようめんどくさいから
+        List<Transform> visibleTargetsInCone = new List<Transform>(cashCameraTargets);
+
+        if (_canAdd) {
+            // 一番距離が小さいオブジェクトを代入する
+            Transform closestTarget = null;
+            float minDistance = float.MaxValue;
+
+            foreach (Transform target in visibleTargetsInCone) {
+                float distanceToTarget = Vector3.Distance(_camera.transform.position, target.position);
+                if (distanceToTarget < minDistance) {
+
+                    if (!_targetsInCone.Contains(target)) {
+                        closestTarget = target;
+                        minDistance = distanceToTarget;
+                    }
+                    
+                }
+            }
+            if (closestTarget != null) {
+            
+                _targetsInCone.Add(closestTarget);
+
+            }
+            StartCoroutine(nameof(CanBoolTimer));
+        }
+
+
     }
+
+
+
 
     IEnumerator CanBoolTimer() {
 
@@ -119,6 +242,25 @@ public class TestLockOnManager : MonoBehaviour {
         _canAdd = true;
 
     }
+
+
+    public void ClearConeTargetAndAddBlackList() {
+
+        _targetsBlackList.AddRange(_targetsInCone);
+        _targetsInCone.Clear();
+
+    }
+
+    public void RemoveBlackList(Transform transform) {
+
+        _targetsBlackList.Remove(transform);
+    
+    }
+
+
+
+
+
 
     private bool IsInFrustum(Renderer renderer, Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
@@ -138,17 +280,9 @@ public class TestLockOnManager : MonoBehaviour {
         return false;
     }
 
-    private void RemoveTargetInCone() {
 
-        List<Transform> targetsToRemove = new List<Transform>();
-        foreach (Transform target in _targetsInCone) {
-            if (!GeometryUtility.TestPlanesAABB(_cameraPlanes, target.GetComponent<Collider>().bounds)) {
-                targetsToRemove.Add(target);
-            }
-        }
-        foreach (Transform target in targetsToRemove) {
-            _targetsInCone.Remove(target);
-        }
+    private void OnEnable() {
+        _canAdd = true;
     }
 
     void OnDrawGizmos() {
@@ -191,7 +325,26 @@ public class TestLockOnManager : MonoBehaviour {
 
     private void OnValidate() {
         if (_coneRange > _searchRadius) {
-            _coneRange = _searchRadius;
+            Debug.LogError("_coneRangeが_searchRadiusを超えているよ！速く直してあげて ^^;");
         }
     }
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+

@@ -18,7 +18,6 @@ public class testscript : MonoBehaviour
         Camera[] allCameras = Camera.allCameras;
         foreach (Camera cam in allCameras) {
             if (cam.tag == "MainCamera") {
-                Debug.Log($"Main Camera found: {cam.name} in {cam.gameObject.scene.name}");
                 _textMeshProUGUI.text += $"Main Camera found: {cam.name} in {cam.gameObject.scene.name}";
             }
         }
