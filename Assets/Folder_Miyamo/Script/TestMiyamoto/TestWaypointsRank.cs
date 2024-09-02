@@ -42,9 +42,14 @@ public class PlayerRankManager : MonoBehaviour {
 
         _playerRanks = new int[_playerObjects.Length];
         _playerWaypointCounts = new int[_playerObjects.Length];
-
-        // ランクの更新処理を一定間隔で呼び出す
-        // InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
+        // プレイヤー以外のオブジェクトにランダムなウェイポイント数を割り当てる
+        for (int i = 0; i < _playerWaypointCounts.Length; i++) {
+            if (_playerObjects[i] != _currentPlayerObject) {
+                _playerWaypointCounts[i] = UnityEngine.Random.Range(1, 10); // 1～10のランダムな数値
+            } else {
+                _playerWaypointCounts[i] = 0; // プレイヤーは0に初期化
+            }
+        }
     }
 
     public void UpdatePlayerWaypointCount(GameObject playerObject, int waypointCount) {
@@ -57,9 +62,7 @@ public class PlayerRankManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!gameObject.activeSelf) {
-            return;
-        }
+        
         _textTitle.text = "ToBeTheTop";
         _textScore.text = _currentPlayerRank.ToString() + "/" + "9";
 
@@ -83,7 +86,6 @@ public class PlayerRankManager : MonoBehaviour {
             Debug.Log("1位の敵が倒されました");
             // タイマー停止処理
             _timeLimit.End3rdGame();
-            this.gameObject.SetActive(false);
 
         } else {
             Debug.Log("1位の敵はまだ倒されていません");

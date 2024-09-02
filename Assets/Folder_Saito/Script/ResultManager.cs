@@ -40,9 +40,7 @@ public class ResultManager : MonoBehaviour {
     /// </summary>
     void Update() {
         _gameTimeText.text = ChangeTimeText(_canvasManager.GamePlayTime());
-        //_killCountText.text = _killCount.ToString();
-        //_clearTimeText.text = ChangeTimeText(_clearTime);
-        //_rankText.text = "S";
+        SetClearTime();
     }
     private string ChangeTimeText(float secondTime) {
         // 定数定義
