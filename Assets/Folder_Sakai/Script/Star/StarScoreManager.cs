@@ -4,16 +4,14 @@ using TMPro;
 using UnityEngine;
 
 public class StarScoreManager : MonoBehaviour {
-    #region •Ï”
+    #region â€¢ÃÂâ€
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private TextMeshProUGUI _textTitle;
     [SerializeField] private TextMeshProUGUI _textScore;
-    [SerializeField] private TextMeshProUGUI _timeText1;
-    [SerializeField] private TextMeshProUGUI _timeText2;
     private int _score;
     private int _maxStarUSA = 50;
     #endregion
-    #region ƒƒ\ƒbƒh
+    #region Æ’ÂÆ’\Æ’bÆ’h
     private void Update() {
 
         _textTitle.text = "Star Count";
