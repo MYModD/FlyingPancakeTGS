@@ -54,7 +54,7 @@ public class TimeLimit : MonoBehaviour
 
         string floatTostring = ChangeTimeText(cashTime);
         Debug.LogWarning(floatTostring);
-        //_scoreManger.InputToBeTheTopScore(cashTime, _firstMaxtime,floatTostring);
+        _scoreManger.InputToBeTheTopScore(cashTime, _firstMaxtime,floatTostring);
         _cutIN.Play("CutIN");
 
 

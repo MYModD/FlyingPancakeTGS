@@ -123,7 +123,7 @@ public class ChengeStageManager : MonoBehaviour {
             _testLockOnManager._searchRadius = 2500f;
             _testLockOnManager._coneAngle = 84f * 2f;
             _testLockOnManager._coneRange = 3000f;
-\
+
         }
         if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
