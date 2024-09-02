@@ -4,50 +4,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using NaughtyAttributes;
+using TMPro;
 
 public class PlayerRankManager : MonoBehaviour {
-    [SerializeField, Header("ランクをつけたいオブジェクト")]
+    [SerializeField] private TextMeshProUGUI _textTitle;
+    [SerializeField] private TextMeshProUGUI _textScore;
+
+    [SerializeField, Header("プレイヤーのオブジェクト")]
     private GameObject[] _playerObjects;
 
-    [ReadOnly, Header("プレイヤーがいくつ通ったかの管理")]
+    [ReadOnly, Header("プレイヤーごとのウェイポイント数の管理")]
     [SerializeField]
     private int[] _playerWaypointCounts;
 
-    [ReadOnly, Header("ランクの管理")]
+    [ReadOnly, Header("プレイヤーの順位管理")]
     [SerializeField]
     private int[] _playerRanks;
 
-    [SerializeField, Header("プレイヤーのオブジェクト")]
+    [SerializeField, Header("現在のプレイヤーオブジェクト")]
     private GameObject _currentPlayerObject;
 
-    [SerializeField, Header("プレイヤーが今何位か")]
+    [SerializeField, Header("現在のプレイヤーの順位")]
     private int _currentPlayerRank;
 
-    [Range(0f, 0.1f), Header("ランク処理の頻度")]
+    [Range(0f, 0.1f), Header("順位更新の間隔")]
     [SerializeField]
     private float _repeatTime;
 
-    [SerializeField, Header("1位が撃破されたときに実行する処理")]
+    [SerializeField, Header("1位になった時に発動する時間制限")]
     private TimeLimit _timeLimit;
 
 
     /// <summary>
-    /// Startじゃなくてもいいです、改修予定
+    /// Start関数。初期化処理
     /// </summary>
     private void Start() {
-        
+
         _playerRanks = new int[_playerObjects.Length];
         _playerWaypointCounts = new int[_playerObjects.Length];
 
-        // 第二引数:これが実行されてから何秒後に実行するか
-        // 第三引数:何秒ごとに実行するか
-        InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
+        // ランクの更新処理を一定間隔で呼び出す
+        // InvokeRepeating(nameof(UpdateRanks), 0.1f, _repeatTime);
     }
-
-
-
-
-
 
     public void UpdatePlayerWaypointCount(GameObject playerObject, int waypointCount) {
         int playerIndex = Array.IndexOf(_playerObjects, playerObject);
@@ -58,12 +56,12 @@ public class PlayerRankManager : MonoBehaviour {
 
     }
 
-  
-
-    private void UpdateRanks() {
-        
-
-
+    private void Update() {
+        if (!gameObject.activeSelf) {
+            return;
+        }
+        _textTitle.text = "ToBeTheTop";
+        _textScore.text = _currentPlayerRank.ToString() + "/" + "9";
 
         int currentPlayerIndex = Array.IndexOf(_playerObjects, _currentPlayerObject);
 
@@ -76,21 +74,19 @@ public class PlayerRankManager : MonoBehaviour {
         }
 
         _currentPlayerRank = _playerRanks[currentPlayerIndex];
-        
-        
 
-        // -------------------------------------ここから本編-----------------------------------
+        // -------------------------------------以下デバッグ出力-----------------------------------
 
+        Debug.Log("順位を更新しました");
 
-        Debug.Log("なんかいも実行されてる");
-
-        if (IsFirstPlaceEnemyDefeated() == true) {
-            Debug.Log("trueなったよぉ");
-            //ここにタイマーストップのスクリプト
+        if (IsFirstPlaceEnemyDefeated()) {
+            Debug.Log("1位の敵が倒されました");
+            // タイマー停止処理
             _timeLimit.End3rdGame();
+            this.gameObject.SetActive(false);
 
         } else {
-            Debug.Log("falseになったよぉ");
+            Debug.Log("1位の敵はまだ倒されていません");
         }
     }
 
@@ -102,23 +98,21 @@ public class PlayerRankManager : MonoBehaviour {
 
         if (_currentPlayerRank <= 2) {
 
-            // 1位のplayerを探す
+            // 1位のプレイヤーを探す
             GameObject firstRankObject = default;
             for (int i = 0; i < _playerRanks.Length; i++) {
                 if (_playerRanks[i] == 1) {
-
                     firstRankObject = _playerObjects[i];
                     break;
                 }
             }
 
-            // もし1位の敵が撃破されていてfalseならばtrueを返す
-            if (firstRankObject.activeSelf == false) {
-            
+            // もし1位のオブジェクトが非アクティブならtrueを返す
+            if (!firstRankObject.activeSelf) {
                 return true;
             }
         }
-        //それ以外はfalse
+        // それ以外はfalse
         return false;
 
     }

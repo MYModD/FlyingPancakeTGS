@@ -81,6 +81,7 @@ public class ResultManager : MonoBehaviour {
     }
     public void SetTexts() {
         SetClearTime();
+        _scoreManager.StartResultProcess();
     }
     private void SetClearTime() {
         _clearTime = _canvasManager.GamePlayTime();

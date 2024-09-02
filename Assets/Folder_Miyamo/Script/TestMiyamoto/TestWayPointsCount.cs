@@ -8,7 +8,7 @@ public class TestWayPointsCount : MonoBehaviour {
     [SerializeField]
     private string _wayPoint;
 
-    [Header("waypoint‚ğ’Ê‚Á‚½‰ñ”"),ReadOnly]
+    [Header("waypoint‚ğ’Ê‚Á‚½‰ñ”")]
     [SerializeField]
     private  int _wayPointsCount;
 
@@ -39,13 +39,15 @@ public class TestWayPointsCount : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        
+        print(this.gameObject.name + _wayPointsCount);      
     }
 
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(_wayPoint)) {
 
+            print("Trigger" + this.gameObject.name + other.gameObject.name);
             _wayPointsCount++;
             _playerRankManager.UpdatePlayerWaypointCount(this.gameObject, _wayPointsCount);
 

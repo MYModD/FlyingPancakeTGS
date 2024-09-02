@@ -10,17 +10,14 @@ EditorBuildSettings:
     guid: 5f499a42ae76ce148a97208499395cf6
   - enabled: 0
     path: Assets/Folder_Sakai/Scenes/sakai_ForWork.unity
-    guid: 789e65392f0be324e80c524e7297a25d
+    guid: 552b700f4bca47b46824c078fdc750d5
   - enabled: 0
     path: Assets/Folder_Miyamo/Scenes/sakai_ForWork_CoPy_Secnods.unity
     guid: 4df85fe6d295323478b53077059ef668
   - enabled: 0
     path: Assets/Folder_Miyamo/Scenes/sakai_ForWork_3rd.unity
     guid: 7f784cb7c94250542845a650f34cd394
-  - enabled: 0
-    path: Assets/Folder_Saito/Scenes/sakai_ForWork copy.unity
-    guid: 6f26cd833d2e41448a89c9d1c0c31340
   - enabled: 1
-    path: Assets/Folder_Miyamo/Scenes/sakai_copy/3rdStageByMiyamoto.unity
-    guid: 20fbc2552c7f01440bc7e6498633f3ac
+    path: Assets/Folder_Saito/Scenes/MainGame.unity
+    guid: 6f26cd833d2e41448a89c9d1c0c31340
   m_configObjects: {}

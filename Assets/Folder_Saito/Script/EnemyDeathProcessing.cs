@@ -2,30 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDeathProcessing : MonoBehaviour
-{
-    [SerializeField] EffectsManager _effectsManager;
-    [SerializeField] CountTheNumberOfDefeats _countTheNumberOfDefeats;
+public class EnemyDeathProcessing : MonoBehaviour {
+    [SerializeField] private CountTheNumberOfDefeats _countTheNumberOfDefeats;
+    [SerializeField, Tag] private string _missileTag;
+    [SerializeField] private Planeee _planeee;
+    [SerializeField] private Rigidbody _rigidbody;
+    private bool _isDeath = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private void OnTriggerEnter(Collider other) {
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
-    private void OnDisable() {
-
-        _countTheNumberOfDefeats.AdditionOfNumberOfDefeats();
+        if (other.gameObject.CompareTag(_missileTag) && _isDeath) {
+            _planeee.hp = -100;
+            _countTheNumberOfDefeats.AdditionOfNumberOfDefeats();
+            _rigidbody.useGravity = true;
+            this.gameObject.transform.parent = null;
+        }
     }
 }
