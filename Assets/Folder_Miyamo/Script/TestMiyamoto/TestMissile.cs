@@ -141,6 +141,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         Vector3 diff = _enemyTarget.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
+
         // 球面線形補間を使って回転を徐々にターゲットに向ける
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
     }
