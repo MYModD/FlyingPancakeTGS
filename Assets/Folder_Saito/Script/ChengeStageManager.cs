@@ -45,6 +45,8 @@ public class ChengeStageManager : MonoBehaviour {
 
     [SerializeField, Header("EDのCamera")] private GameObject _camera;
     [SerializeField,Header("CanvasManager")] private CanvasManager _canvasManager;
+
+    private bool _isFinish=false;
     #endregion
     #region プロパティ
     #endregion
@@ -120,10 +122,9 @@ public class ChengeStageManager : MonoBehaviour {
             _numberOfDefeats.enabled = true;
 
 
-            _testLockOnManager._searchRadius = 2500f;
-            _testLockOnManager._coneAngle = 84f * 2f;
-            _testLockOnManager._coneRange = 3000f;
-\
+            //_testLockOnManager._searchRadius = 2500f;
+            //_testLockOnManager._coneAngle = 84f * 2f;
+            //_testLockOnManager._coneRange = 3000f;
         }
         if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
