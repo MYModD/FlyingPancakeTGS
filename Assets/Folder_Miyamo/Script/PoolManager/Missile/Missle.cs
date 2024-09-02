@@ -136,7 +136,5 @@ public class Missile : MonoBehaviour
         _offTimerandomValue = _random_timer;   //オンになったらタイマーの値を初期化
     }
 
-    internal void MissileLaunch() {
-        throw new NotImplementedException();
-    }
+    
 }
