@@ -141,6 +141,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         Vector3 diff = _enemyTarget.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
+
         // 球面線形補間を使って回転を徐々にターゲットに向ける
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
     }
@@ -159,8 +160,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             if (other.gameObject.CompareTag(_enemyTag)) {
                 _hasCollided = true; // 衝突フラグをセット
                 print($"{other.gameObject.name}に衝突");
-                other.gameObject.SetActive(false);                           // 敵のsetActiveをfalse
-                _explosionPoolManager.StartExplosion(other.transform);       // 爆発開始
+                /*other.gameObject.SetActive(false);   */                        // 敵のsetActiveをfalse
+                /*_explosionPoolManager.StartExplosion(other.transform);*/       // 爆発開始
                 ReturnToPool();                                              // ミサイルをプールに変換
             }
 
