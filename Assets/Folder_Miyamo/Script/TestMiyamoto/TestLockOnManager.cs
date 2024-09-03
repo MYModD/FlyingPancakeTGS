@@ -168,7 +168,7 @@ public class TestLockOnManager : MonoBehaviour {
             }
         }
         stopwatch.Stop();
-        Debug.Log($"‚©‚©‚Á‚½ŽžŠÔ  {stopwatch.Elapsed.TotalSeconds}");
+        //Debug.Log($"‚©‚©‚Á‚½ŽžŠÔ  {stopwatch.Elapsed.TotalSeconds}");
     }
 
     public void Hige() {

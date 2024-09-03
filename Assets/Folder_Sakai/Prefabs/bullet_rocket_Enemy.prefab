@@ -5064,8 +5064,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -4475.7715, y: 2408, z: 6816.6504}
-  m_LocalScale: {x: 10, y: 10, z: 10}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 507814245120072570}
   m_Father: {fileID: 0}
@@ -5162,7 +5162,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5189,7 +5189,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 300
+  MaxDistance: 442.93408
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -5290,8 +5290,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
   _lerpT: 1
-  _speed: 300
+  _speed: 700
   _timer: 10
-  _randomPower: 5
+  _randomPower: 2
   _random_timer: 10
-  _maxAcceleration: 10000
+  _maxAcceleration: 100000

@@ -139,7 +139,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         
 
         // ‚±‚±‚ÉÕ“Ë‚Ì”»•Ê‚ğ‘‚­
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("MissileColPos")) {
             print("ƒvƒŒƒCƒ„[‚ÉÕ“Ë");
         }
     }
