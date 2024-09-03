@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Folder_Miyamo/Scenes/sakai_copy/MainGameCopyMiyamoto.unity.meta
+guid: 4eb9fb91ccc3bb445aea2e04084aa940
+========
 guid: a7e95b1bd326d81419831d6c8b8dcc1f
 folderAsset: yes
+>>>>>>>> main:Assets/Folder_Sakai/Prefabs/Map.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

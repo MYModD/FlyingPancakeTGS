@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
 
     [Foldout("ミサイル係")]
     [SerializeField, Header("クールタイム")]
-    private float _missileCoolTime　= 1f;
+    private float _missileFireCoolTime　= 1f;
 
     [Foldout("ロックオン系")]
     [SerializeField]
@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour {
         if (canFire)       
         {
             _missilePoolManager.FireMissiles(_fireMissilePosition);
-            _missileCooldownTimer = _missileCoolTime;
+            _missileCooldownTimer = _missileFireCoolTime;
             Debug.Log("ボタン押した");
         }
 
