@@ -7,10 +7,38 @@ public class BulletPoolManager : PoolManager<Bullet> {
     /// <param name="playerPosition">playerの位置</param>
     /// <param name="firePosition">弾丸発射の位置</param>
     /// <param name="multiplyValue">弾の速度,掛ける</param>
-    public void FireBullet(Transform playerPosition, Transform firePosition, float multiplyValue) {
-        
+
+
+
+
+    public void FireBullet(Transform firePosition, float multiplyValue) {
+
         // オブジェクトプールから弾を取得、初期化
-        var bullet = _objectPool.Get();
+        Bullet bullet = _objectPool.Get();
+        bullet.Initialize();
+
+
+        // 弾の位置と回転を発射位置と同じに設定 こっちのほうが軽いらしい
+        bullet.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
+
+        // 弾に力を加えて発射
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward *  multiplyValue;
+
+    }
+
+
+
+
+
+
+
+
+
+
+    /*public void FireBullet(Transform playerPosition, Transform firePosition, float multiplyValue) {
+
+        // オブジェクトプールから弾を取得、初期化
+        Bullet bullet = _objectPool.Get();
         bullet.Initialize();             
 
 
@@ -24,5 +52,5 @@ public class BulletPoolManager : PoolManager<Bullet> {
 
         // 弾に力を加えて発射
         bullet.GetComponent<Rigidbody>().velocity = firingDirection * multiplyValue;
-    }
+    }*/
 }

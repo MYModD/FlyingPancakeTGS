@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: 1
+  _isGravityON: 0
   _gravity: 1000
   _enemyTag: Enemy
 --- !u!135 &2131206579056466656
