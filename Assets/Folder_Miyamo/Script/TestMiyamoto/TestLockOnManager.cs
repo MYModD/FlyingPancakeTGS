@@ -73,8 +73,8 @@ public class TestLockOnManager : MonoBehaviour {
 
 
     private void Update() {
-        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
+        // System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        // stopwatch.Start();
         InConeTimerDegree();
 
 
@@ -170,8 +170,8 @@ public class TestLockOnManager : MonoBehaviour {
                 StartCoroutine(nameof(CanBoolTimer));
             }
         }
-        stopwatch.Stop();
-        Debug.Log($"‚©‚©‚Á‚½ŽžŠÔ  {stopwatch.Elapsed.TotalSeconds}");
+        // stopwatch.Stop();
+        // Debug.Log($"‚©‚©‚Á‚½ŽžŠÔ  {stopwatch.Elapsed.TotalSeconds}");
     }
 
     public void Hige() {
