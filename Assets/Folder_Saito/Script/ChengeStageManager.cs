@@ -29,8 +29,10 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
     [SerializeField] private SplineAnimate _splineAnimate3st;
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
+    [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
     [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
+    [SerializeField] private FogControl _fogControl;
 
     [Header("4stStage")]
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
@@ -81,6 +83,8 @@ public class ChengeStageManager : MonoBehaviour {
             _game2st.SetActive(false);
             if (_game3st != null) {
                 _game3st.SetActive(true);
+                _map3st.SetActive(true);
+                _fogControl.SetFog(true);
             } else {
                 _isFinish = true;
                 _canvasManager.PlayToED();
@@ -88,6 +92,8 @@ public class ChengeStageManager : MonoBehaviour {
         }
         if (_indexStage == 3) {
             _game3st.SetActive(false);
+            _map3st.SetActive(false);
+            _fogControl.SetFog(false);
             if (_game4st != null) {
                 _game4st.SetActive(true);
             } else {

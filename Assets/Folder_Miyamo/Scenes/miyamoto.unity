@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1796,25 +1796,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetsInCamera: []
   _targetsInCone: []
-  _missileStucks:
-  - {fileID: 1309121450}
-  - {fileID: 628750234}
-  - {fileID: 1961635651}
-  - {fileID: 343834020}
-  - {fileID: 947547620}
-  - {fileID: 1154659016}
-  - {fileID: 1122255584}
-  - {fileID: 894644065}
+  _targetsBlackList: []
   _player: {fileID: 816783733}
   _camera: {fileID: 1849877410}
   _searchRadius: 692.4
   _coneAngle: 30
   _coneRange: 642.5
+  _enemyTag: 
+  _buildingTag: 
   _circleCenterPostion: {x: 183.33926, y: -68.00718, z: 598.05695}
   _circleRotation: {x: 0.73790383, y: 0.093726724, z: -0.10477355, w: 0.6601028}
   _canAdd: 1
   _coolTime: 2
-  _rectTransform: {fileID: 1377813552}
+  _drawOrigin: {x: 90, y: 0, z: 0}
 --- !u!1001 &1899630966
 PrefabInstance:
   m_ObjectHideFlags: 0
