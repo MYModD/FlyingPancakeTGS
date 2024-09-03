@@ -1291,7 +1291,6 @@ MonoBehaviour:
   - {fileID: 8097952288247506583}
   - {fileID: 806838131397411773}
   _lockOnManager: {fileID: 0}
-  _missileStuck: []
   _childrenScale: 0
 --- !u!1 &7689488377192507594
 GameObject:
