@@ -66,14 +66,15 @@ public class TestLockOnManager : MonoBehaviour {
     readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0); //固定
 
     private UnityEngine.Plane[] _cameraPlanes;         // カメラの六面体を保存するもの
-    
+
 
     private Dictionary<Transform, Renderer> _transformKeyGetRender = new Dictionary<Transform, Renderer>();
     private Dictionary<Transform, float> _targetLockOnConeDuration = new Dictionary<Transform, float>();
 
 
     private void Update() {
-
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        stopwatch.Start();
         InConeTimerDegree();
 
 
@@ -125,7 +126,6 @@ public class TestLockOnManager : MonoBehaviour {
                     }
                 }
 
-                Debug.Log($"Rayがあたった敵の名前は  {minDistanceObject.collider.gameObject.name}  で Tagは{minDistanceObject.collider.tag}");
 
                 if (minDistanceObject.collider.CompareTag(_enemyTag)) {
                     cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
@@ -142,25 +142,8 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsInCamera.AddRange(cashCameraTargets);
 
 
+        //Hige();
 
-        // コーン内にいる敵がビルの向こう側にあるときRemoveする
-        if (_targetsInCone != null) {
-            foreach (Transform item in _targetsInCone) {
-                Vector3 directionToTarget = (item.position - _camera.transform.position).normalized;
-
-                // waypointタグ以外の敵またはビルにヒットした最初のRaycastHitを取得
-                RaycastHit hit = Physics.RaycastAll(_camera.transform.position, directionToTarget, _searchRadius)
-                    .FirstOrDefault(hit => hit.collider.CompareTag(_enemyTag) || (hit.collider.CompareTag(_buildingTag) && !hit.collider.CompareTag("waypoint")));
-
-                // ヒットしたオブジェクトが敵タグで、かつ視錐台内にある場合
-                if (hit.collider != null && hit.collider.CompareTag(_enemyTag) && IsInFrustum(hit.collider.GetComponent<Renderer>(), _cameraPlanes)) {
-                    // 処理を継続 (例: ロックオンターゲットとして処理)
-                } else {
-                    // 敵が見つからないか、視錐台内にない場合、リストから削除
-                    _targetsInCone.Remove(item);
-                }
-            }
-        }
 
         List<Transform> visibleTargetsInCone = new List<Transform>(cashCameraTargets);
 
@@ -184,7 +167,31 @@ public class TestLockOnManager : MonoBehaviour {
                 StartCoroutine(nameof(CanBoolTimer));
             }
         }
+        stopwatch.Stop();
+        Debug.Log($"かかった時間  {stopwatch.Elapsed.TotalSeconds}");
     }
+
+    public void Hige() {
+
+        // コーン内にいる敵がビルの向こう側にあるときRemoveする
+        if (_targetsInCone != null) {
+
+            return;
+        }
+        foreach (Transform item in _targetsInCone) {
+            
+
+            // ヒットしたオブジェクトが敵タグで、かつ視錐台内にある場合
+            if (IsInFrustum(_transformKeyGetRender[item], _cameraPlanes)) {
+                // 処理を継続 (例: ロックオンターゲットとして処理)
+            } else {
+                // 敵が見つからないか、視錐台内にない場合、リストから削除
+                _targetsInCone.Remove(item);
+            }
+        }
+
+    }
+
 
     IEnumerator CanBoolTimer() {
         _canAdd = false;
@@ -202,28 +209,40 @@ public class TestLockOnManager : MonoBehaviour {
     }
 
     public void InConeTimerDegree() {
-
         float deltaTime = Time.deltaTime;
 
+        if (_targetLockOnConeDuration == null || _targetLockOnConeDuration.Count == 0) {
+            return;
+        }
+
+        // 削除対象のキーを一時リストに格納
+        List<Transform> keysToRemove = new List<Transform>();
+
         // _targetLockOnConeDuration の値を更新
-        foreach (KeyValuePair<Transform, float> entry in _targetLockOnConeDuration) {
+        foreach (var entry in _targetLockOnConeDuration.ToList()) {
             Transform target = entry.Key;
             float duration = entry.Value;
 
             // 経過時間を減算
             duration -= deltaTime;
 
-            // 時間が0以下になった場合は、辞書から削除
+            // 時間が0以下になった場合は、削除対象としてマーク
             if (duration <= 0f) {
-                _targetLockOnConeDuration.Remove(target);
-                _targetsInCone.Remove(target);
+                keysToRemove.Add(target);
             } else {
                 // 値を更新
                 _targetLockOnConeDuration[target] = duration;
             }
         }
 
+        // 削除対象を辞書から削除
+        foreach (Transform key in keysToRemove) {
+           
+            _targetLockOnConeDuration.Remove(key);
+            _targetsInCone.Remove(key);
+        }
     }
+
     private bool IsInFrustum(Renderer renderer, UnityEngine.Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
