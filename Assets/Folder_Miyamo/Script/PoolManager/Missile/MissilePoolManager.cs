@@ -38,11 +38,12 @@ public class MissilePoolManager : PoolManager<TestMissile> {
             missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
             missile._enemyTarget = target;
 
-            _testLockOnManager.ClearConeTargetAndAddBlackList();
             missile._testLockOnManager = _testLockOnManager;
 
 
         }
+        _testLockOnManager.ClearConeTargetAndAddBlackList();
+
     }
 
 

@@ -126,7 +126,7 @@ public class TestLockOnManager : MonoBehaviour {
                     }
                 }
 
-
+                
                 if (minDistanceObject.collider.CompareTag(_enemyTag)) {
                     cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
                 }
