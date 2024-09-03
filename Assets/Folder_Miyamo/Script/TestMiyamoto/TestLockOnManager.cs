@@ -126,10 +126,13 @@ public class TestLockOnManager : MonoBehaviour {
                     }
                 }
 
-                
-                if (minDistanceObject.collider.CompareTag(_enemyTag)) {
-                    cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
+                if (minDistanceObject.collider != default){
+
+                    if (minDistanceObject.collider.CompareTag(_enemyTag)) {
+                        cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
+                    }
                 }
+                
 
                 // Ray‚ð‰ÂŽ‹‰»
                 Debug.DrawRay(_camera.transform.position, directionToTarget * _searchRadius, Color.green);
