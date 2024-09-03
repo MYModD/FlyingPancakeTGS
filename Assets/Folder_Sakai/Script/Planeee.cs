@@ -1387,10 +1387,10 @@ public class Planeee : MonoBehaviour {
         int dir = d2 == 0 ? -1 : 1;
 
         EjectPilot(100, false);
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         if (planeName == PlaneName.F4E)
             EjectPilot(100, true);
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
         if (type == "hard") {
             Instantiate(explosion, transform.position, Quaternion.identity);

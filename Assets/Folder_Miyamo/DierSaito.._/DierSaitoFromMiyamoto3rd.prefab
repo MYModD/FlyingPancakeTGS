@@ -1901,6 +1901,7 @@ MonoBehaviour:
   _explosion: {fileID: 0}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!114 &1896499670672999846
 MonoBehaviour:
@@ -3056,15 +3057,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetsInCamera: []
   _targetsInCone: []
-  _missileStucks:
-  - {fileID: 7609634678107412448}
+  _targetsBlackList: []
   _player: {fileID: 881874507085058706}
   _camera: {fileID: 7691652195448909531}
   _searchRadius: 642
   _coneAngle: 84
   _coneRange: 341.8
+  _enemyTag: 
+  _buildingTag: 
+  _circleCenterPostion: {x: 0, y: 0, z: 0}
+  _circleRotation: {x: 0, y: 0, z: 0, w: 0}
   _canAdd: 1
   _coolTime: 0
+  _drawOrigin: {x: 90, y: 0, z: 0}
 --- !u!114 &6779207173902716209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3257,6 +3262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36e53ec9d1eaba45b14aaa8560a8886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreManger: {fileID: 0}
+  _cutIN: {fileID: 0}
   _limitTime: 60
   _isStart: 0
 --- !u!1 &3581294354167885638
@@ -5151,6 +5158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0f69f165a646046b26a998362b0770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _textTitle: {fileID: 0}
+  _textScore: {fileID: 0}
   _playerObjects:
   - {fileID: 1255985908701401667}
   - {fileID: 5095636877067227157}
@@ -6212,6 +6221,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!1001 &881619497986115665
 PrefabInstance:
@@ -6552,6 +6562,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!1001 &886181845753745321
 PrefabInstance:
@@ -6892,6 +6903,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!1001 &1138799032231386188
 PrefabInstance:
@@ -8227,6 +8239,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!4 &3028933308789508286 stripped
 Transform:
@@ -8837,6 +8850,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!4 &4534887792916103175 stripped
 Transform:
@@ -9089,6 +9103,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!4 &5095636877067523339 stripped
 Transform:
@@ -9766,6 +9781,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!1001 &6057416904625493664
 PrefabInstance:
@@ -11114,6 +11130,7 @@ MonoBehaviour:
   _explosion: {fileID: 1463841488200349556}
   _buildingTag: Building
   _missileTag: Missile
+  _enemyTag: 
   _vacumeObject: {fileID: 801311725603572181, guid: 0938bd72566ec9541973c7a6f888504b, type: 3}
 --- !u!4 &8179159996652968050 stripped
 Transform:
