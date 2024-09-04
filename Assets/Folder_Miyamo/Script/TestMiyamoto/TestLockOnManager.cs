@@ -7,51 +7,51 @@ using Utils;
 
 public class TestLockOnManager : MonoBehaviour {
 
-    [Header("ƒJƒƒ‰‚Ì‹ŠE‚É“ü‚Á‚Ä‚¢‚éƒ^[ƒQƒbƒg‚ÌƒŠƒXƒg")]
+    [Header("ã‚«ãƒ¡ãƒ©ã®è¦–ç•Œã«å…¥ã£ã¦ã„ã‚‹ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒªã‚¹ãƒˆ")]
     public List<Transform> _targetsInCamera = new List<Transform>();
 
-    [Header("‘Ì“à‚É“ü‚Á‚Ä‚¢‚éƒ^[ƒQƒbƒg‚ÌƒŠƒXƒg")]
+    [Header("éŒä½“å†…ã«å…¥ã£ã¦ã„ã‚‹ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒªã‚¹ãƒˆ")]
     public List<Transform> _targetsInCone = new List<Transform>();
 
-    [Header("”­Ë‚µ‚½‚ ‚Æ‚Ìƒ^[ƒQƒbƒg‚Ìƒuƒ‰ƒbƒNƒŠƒXƒg")]
+    [Header("ç™ºå°„ã—ãŸã‚ã¨ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ–ãƒ©ãƒƒã‚¯ãƒªã‚¹ãƒˆ")]
     public List<Transform> _targetsBlackList = new List<Transform>();
 
-    [Header("ƒvƒŒƒCƒ„[‚ÌTransform‚ğw’è")]
-    [SerializeField, Header("ƒvƒŒƒCƒ„[‚ÌTransform")]
+    [Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transformã‚’æŒ‡å®š")]
+    [SerializeField, Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Transform")]
     private Transform _player;
 
-    [SerializeField, Header("ƒJƒƒ‰w’è")]
+    [SerializeField, Header("ã‚«ãƒ¡ãƒ©æŒ‡å®š")]
     private Camera _camera;
 
-    [SerializeField, Header("spherecast‚Ì”¼Œa")]
+    [SerializeField, Header("spherecastã®åŠå¾„")]
     private float _searchRadius = 95f;
 
     [SerializeField, Range(0f, 180f)]
-    [Header("ƒR[ƒ“‚ÌŠp“x")]
+    [Header("ã‚³ãƒ¼ãƒ³ã®è§’åº¦")]
     private float _coneAngle = 45f;
 
     [SerializeField]
-    [Header("ƒR[ƒ“‚Ì’·‚³A”¼Œa")]
+    [Header("ã‚³ãƒ¼ãƒ³ã®é•·ã•ã€åŠå¾„")]
     private float _coneRange;
 
     [SerializeField, Layer]
-    [Header("“G‚ÌTag")]
+    [Header("æ•µã®Tag")]
     private string _enemyTag;
 
     [SerializeField, Tag]
-    [Header("ƒrƒ‹‚Ìƒ^ƒO")]
+    [Header("ãƒ“ãƒ«ã®ã‚¿ã‚°")]
     private string _buildingTag;
 
 
-    [Header("Cone‚É‘ã“ü‚·‚éŠÔ‚ÌŠÔ")]
+    [Header("Coneã«ä»£å…¥ã™ã‚‹é–“ã®æ™‚é–“")]
     [SerializeField]
     private float _coolTime;
 
-    [Header("Cone‚ªƒƒbƒNƒIƒ“‚Å‚«‚é‚Ü‚Å‚ÌŠÔ")]
+    [Header("ConeãŒãƒ­ãƒƒã‚¯ã‚ªãƒ³ã§ãã‚‹ã¾ã§ã®æ™‚é–“")]
     [SerializeField]
     private float _lockOnDuration;
 
-    [Header("Cone‚É‘ã“ü‰Â”\‚©"), ReadOnly]
+    [Header("Coneã«ä»£å…¥å¯èƒ½ã‹"), ReadOnly]
     [SerializeField]
     private bool _canAdd = true;
 
@@ -63,9 +63,9 @@ public class TestLockOnManager : MonoBehaviour {
     public Quaternion _circleRotation;
 
 
-    readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0); //ŒÅ’è
+    readonly private Vector3 _drawOrigin = new Vector3(90, 0, 0); //å›ºå®š
 
-    private UnityEngine.Plane[] _cameraPlanes;         // ƒJƒƒ‰‚Ì˜Z–Ê‘Ì‚ğ•Û‘¶‚·‚é‚à‚Ì
+    private UnityEngine.Plane[] _cameraPlanes;         // ã‚«ãƒ¡ãƒ©ã®å…­é¢ä½“ã‚’ä¿å­˜ã™ã‚‹ã‚‚ã®
 
 
     private Dictionary<Transform, Renderer> _transformKeyGetRender = new Dictionary<Transform, Renderer>();
@@ -73,8 +73,8 @@ public class TestLockOnManager : MonoBehaviour {
 
 
     private void Update() {
-        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
+        // System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        // stopwatch.Start();
         InConeTimerDegree();
 
 
@@ -101,7 +101,7 @@ public class TestLockOnManager : MonoBehaviour {
                 }
 
             } else {
-                Debug.Log($"{hit.gameObject.name} ‚Ì ƒŒƒ“ƒ_[ƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‚Â‚¢‚Ä‚È‚¢‰Â”\«‚ª‚ ‚é‚æ");
+                Debug.Log($"{hit.gameObject.name} ã® ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã¤ã„ã¦ãªã„å¯èƒ½æ€§ãŒã‚ã‚‹ã‚ˆ");
                 continue;
             }
 
@@ -126,12 +126,15 @@ public class TestLockOnManager : MonoBehaviour {
                     }
                 }
 
-                
-                if (minDistanceObject.collider.CompareTag(_enemyTag)) {
-                    cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
-                }
+                if (minDistanceObject.collider != default){
 
-                // Ray‚ğ‰Â‹‰»
+                    if (minDistanceObject.collider.CompareTag(_enemyTag)) {
+                        cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
+                    }
+                }
+                
+
+                // Rayã‚’å¯è¦–åŒ–
                 Debug.DrawRay(_camera.transform.position, directionToTarget * _searchRadius, Color.green);
             }
         }
@@ -167,13 +170,15 @@ public class TestLockOnManager : MonoBehaviour {
                 StartCoroutine(nameof(CanBoolTimer));
             }
         }
-        stopwatch.Stop();
-        //Debug.Log($"‚©‚©‚Á‚½ŠÔ  {stopwatch.Elapsed.TotalSeconds}");
+
+        // stopwatch.Stop();
+        // Debug.Log($"ã‹ã‹ã£ãŸæ™‚é–“  {stopwatch.Elapsed.TotalSeconds}");
+
     }
 
     public void Hige() {
 
-        // ƒR[ƒ““à‚É‚¢‚é“G‚ªƒrƒ‹‚ÌŒü‚±‚¤‘¤‚É‚ ‚é‚Æ‚«Remove‚·‚é
+        // ã‚³ãƒ¼ãƒ³å†…ã«ã„ã‚‹æ•µãŒãƒ“ãƒ«ã®å‘ã“ã†å´ã«ã‚ã‚‹ã¨ãRemoveã™ã‚‹
         if (_targetsInCone != null) {
 
             return;
@@ -181,11 +186,11 @@ public class TestLockOnManager : MonoBehaviour {
         foreach (Transform item in _targetsInCone) {
             
 
-            // ƒqƒbƒg‚µ‚½ƒIƒuƒWƒFƒNƒg‚ª“Gƒ^ƒO‚ÅA‚©‚Â‹‘ä“à‚É‚ ‚éê‡
+            // ãƒ’ãƒƒãƒˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒæ•µã‚¿ã‚°ã§ã€ã‹ã¤è¦–éŒå°å†…ã«ã‚ã‚‹å ´åˆ
             if (IsInFrustum(_transformKeyGetRender[item], _cameraPlanes)) {
-                // ˆ—‚ğŒp‘± (—á: ƒƒbƒNƒIƒ“ƒ^[ƒQƒbƒg‚Æ‚µ‚Äˆ—)
+                // å‡¦ç†ã‚’ç¶™ç¶š (ä¾‹: ãƒ­ãƒƒã‚¯ã‚ªãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ã—ã¦å‡¦ç†)
             } else {
-                // “G‚ªŒ©‚Â‚©‚ç‚È‚¢‚©A‹‘ä“à‚É‚È‚¢ê‡AƒŠƒXƒg‚©‚çíœ
+                // æ•µãŒè¦‹ã¤ã‹ã‚‰ãªã„ã‹ã€è¦–éŒå°å†…ã«ãªã„å ´åˆã€ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
                 _targetsInCone.Remove(item);
             }
         }
@@ -215,27 +220,27 @@ public class TestLockOnManager : MonoBehaviour {
             return;
         }
 
-        // íœ‘ÎÛ‚ÌƒL[‚ğˆêƒŠƒXƒg‚ÉŠi”[
+        // å‰Šé™¤å¯¾è±¡ã®ã‚­ãƒ¼ã‚’ä¸€æ™‚ãƒªã‚¹ãƒˆã«æ ¼ç´
         List<Transform> keysToRemove = new List<Transform>();
 
-        // _targetLockOnConeDuration ‚Ì’l‚ğXV
+        // _targetLockOnConeDuration ã®å€¤ã‚’æ›´æ–°
         foreach (var entry in _targetLockOnConeDuration.ToList()) {
             Transform target = entry.Key;
             float duration = entry.Value;
 
-            // Œo‰ßŠÔ‚ğŒ¸Z
+            // çµŒéæ™‚é–“ã‚’æ¸›ç®—
             duration -= deltaTime;
 
-            // ŠÔ‚ª0ˆÈ‰º‚É‚È‚Á‚½ê‡‚ÍAíœ‘ÎÛ‚Æ‚µ‚Äƒ}[ƒN
+            // æ™‚é–“ãŒ0ä»¥ä¸‹ã«ãªã£ãŸå ´åˆã¯ã€å‰Šé™¤å¯¾è±¡ã¨ã—ã¦ãƒãƒ¼ã‚¯
             if (duration <= 0f) {
                 keysToRemove.Add(target);
             } else {
-                // ’l‚ğXV
+                // å€¤ã‚’æ›´æ–°
                 _targetLockOnConeDuration[target] = duration;
             }
         }
 
-        // íœ‘ÎÛ‚ğ«‘‚©‚çíœ
+        // å‰Šé™¤å¯¾è±¡ã‚’è¾æ›¸ã‹ã‚‰å‰Šé™¤
         foreach (Transform key in keysToRemove) {
            
             _targetLockOnConeDuration.Remove(key);
@@ -296,7 +301,7 @@ public class TestLockOnManager : MonoBehaviour {
 
     private void OnValidate() {
         if (_coneRange > _searchRadius) {
-            Debug.LogError("_coneRange‚ª_searchRadius‚ğ’´‚¦‚Ä‚¢‚é‚æI‘¬‚­’¼‚µ‚Ä‚ ‚°‚Ä ^^;");
+            Debug.LogError("_coneRangeãŒ_searchRadiusã‚’è¶…ãˆã¦ã„ã‚‹ã‚ˆï¼é€Ÿãç›´ã—ã¦ã‚ã’ã¦ ^^;");
         }
     }
 }
