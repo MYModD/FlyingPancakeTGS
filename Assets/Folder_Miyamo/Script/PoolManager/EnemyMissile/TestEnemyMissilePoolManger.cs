@@ -20,10 +20,17 @@ public class TestEnemyMissilePoolManger : PoolManager<EnemyMissile>
     /// <summary>
     /// 外部から実行される オブジェクトプールから取得する
     /// </summary>
-    public void EnemyFireMissile() {
+    public void EnemyFireMissile(Transform firePodtion) {
+
+        _firePostion = firePodtion;
         EnemyMissile missile = _objectPool.Get();   
         missile.Initialize();                       
         missile.transform.SetPositionAndRotation(_firePostion.position, _firePostion.rotation);
         missile._enemyTarget = _player;
+    }
+
+    public void SetFirePodtion(Transform firePodtion) {
+
+        _firePostion = firePodtion;
     }
 }

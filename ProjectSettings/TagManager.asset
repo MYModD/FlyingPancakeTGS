@@ -18,6 +18,7 @@ TagManager:
   - Waypoint
   - Building
   - SpeedItem
+  - MissileColPos
   layers:
   - Default
   - TransparentFX

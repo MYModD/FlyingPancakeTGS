@@ -3065,11 +3065,11 @@ MonoBehaviour:
   _coneRange: 341.8
   _enemyTag: 
   _buildingTag: 
+  _coolTime: 0
+  _lockOnDuration: 0
+  _canAdd: 1
   _circleCenterPostion: {x: 0, y: 0, z: 0}
   _circleRotation: {x: 0, y: 0, z: 0, w: 0}
-  _canAdd: 1
-  _coolTime: 0
-  _drawOrigin: {x: 90, y: 0, z: 0}
 --- !u!114 &6779207173902716209
 MonoBehaviour:
   m_ObjectHideFlags: 0
