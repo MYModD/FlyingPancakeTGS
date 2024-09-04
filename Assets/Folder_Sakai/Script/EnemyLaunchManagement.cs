@@ -21,10 +21,10 @@ public class EnemyLaunchManagement : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        // ミサイルを発射するための入力チェック
-        if (Input.GetKeyDown(KeyCode.P)) {
-            _testEnemyMissilePoolManger.EnemyFireMissile();
-        }
+        //// ミサイルを発射するための入力チェック
+        //if (Input.GetKeyDown(KeyCode.P)) {
+        //    _testEnemyMissilePoolManger.EnemyFireMissile();
+        //}
 
         // 経過時間を更新
         _elapsedTime2 += Time.deltaTime;

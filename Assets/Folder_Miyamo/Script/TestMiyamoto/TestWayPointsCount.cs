@@ -40,14 +40,14 @@ public class TestWayPointsCount : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         
-        print(this.gameObject.name + _wayPointsCount);      
+        //print(this.gameObject.name + _wayPointsCount);      
     }
 
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(_wayPoint)) {
 
-            print("Trigger" + this.gameObject.name + other.gameObject.name);
+            //print("Trigger" + this.gameObject.name + other.gameObject.name);
             _wayPointsCount++;
             _playerRankManager.UpdatePlayerWaypointCount(this.gameObject, _wayPointsCount);
 
