@@ -7,9 +7,13 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
 {
     #region 変数 + プロパティ
 
-    [SerializeField, Header("消滅時間")]
+    [SerializeField, Header("消滅するまでの時間")]
     private float _timer = 1;
-    [SerializeField, Header("重力、おちやすさ")]
+
+    [SerializeField, Header("重力つける？")]
+    private bool _isGravityON = false;
+
+    [SerializeField, Header("重力、おちやすさ"),EnableIf(nameof(_isGravityON))]
     private float _gravity = 1000f;
     [SerializeField, Tag]
     private string _enemyTag;
@@ -42,10 +46,14 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
     }
 
 
-    private void FixedUpdate() {
+    private void FixedUpdate() { 
 
         //重力の処理
-        _rigidbody.AddForce(new Vector3(0, -1 * _gravity, 0), ForceMode.Acceleration);
+        if (_isGravityON) {
+
+            _rigidbody.AddForce(new Vector3(0, -1 * _gravity, 0), ForceMode.Acceleration);
+        }
+
 
 
         //タイマーの処理 MAXで比較して0がMAXのときReturnPool()
@@ -59,9 +67,7 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
 
     private void OnTriggerEnter(Collider other) {
 
-        print("玉がなにかにあたったよ");
 
-        // ここにエフェクトを入れる
 
         //エネミータグにあたったときSetActiveをFalse
         if (other.CompareTag(_enemyTag)) {
@@ -69,8 +75,9 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
             other.gameObject.SetActive(false); //とりあえずfalse
             ReturnToPool();
 
+            // ここにBulletにあたったらのエフェクトを入れる
         }
-        
+
 
     }
 
