@@ -101,7 +101,7 @@ public class TestLockOnManager : MonoBehaviour {
                 }
 
             } else {
-                Debug.Log($"{hit.gameObject.name} の レンダーコンポーネントがついてない可能性があるよ");
+                //Debug.Log($"{hit.gameObject.name} の レンダーコンポーネントがついてない可能性があるよ");
                 continue;
             }
 

@@ -8,7 +8,7 @@ public class TargetDistanceScaler : MonoBehaviour {
     private EnemyMissile _enemyMissile;
 
 
-    [MinMaxSlider(0, 10000), Header("minは0にしてね")]
+    [MinMaxSlider(0, 10000000), Header("minは0にしてね")]
     [SerializeField]
     private Vector2 _minMaxDistanceRange = new Vector2(0, 10000);
 
@@ -25,7 +25,7 @@ public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField, Header("debugをONにしますか？")]
     private bool _isDubugOn = false;
 
-    [Range(0, 10000), Header("debug用、ゲームスタートすると使えないよ")]
+    [Range(0, 10000000), Header("debug用、ゲームスタートすると使えないよ")]
     [ShowIf(nameof(_isDubugOn))]
     public float _currentDebugtargetDistance;
 
@@ -36,6 +36,7 @@ public class TargetDistanceScaler : MonoBehaviour {
         Transform enemyTarget = _enemyMissile._enemyTarget;
         float enemyTargetDistance = (enemyTarget.position - transform.position).sqrMagnitude;
 
+        //Debug.Log($"ターゲットまでの座標{enemyTargetDistance}");
 
         //debug用とは違い、targetを参照してその距離を求める
         float scale = _targetScaleCurve.Evaluate(enemyTargetDistance / _minMaxDistanceRange.y);

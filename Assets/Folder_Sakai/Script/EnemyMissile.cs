@@ -1,5 +1,7 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -15,18 +17,27 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     private float _lerpT = 0.1f;
 
     [SerializeField, Header("スピード")]
-    private float _speed;
+    public float _speed;
 
     [SerializeField, Header("飛行時間")]
     private float _timer = 10f;
-
-   
 
     [SerializeField, Header("Gforceの最大値")]
     private float _maxAcceleration = 10f;
 
 
+    [Header("プレイヤーの入力状態を記録するフラグ")]
+    [SerializeField, NaughtyAttributes.ReadOnly]
+    private bool _isPlayerInputActive = false;
 
+
+    // 一定時間入力がないとfalseになるワールド変数 (静的変数)
+    public static bool IsPlayerActive { get; private set; } = true;
+
+
+
+    [SerializeField]
+    private float _inputCheckDuration = 1f; // 入力がないと判定する時間
 
 
     public ExplosionPoolManager _explosionPoolManager {
@@ -40,10 +51,17 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     private Vector3 _previousVelocity; //前の加速度
 
     private const float ONEG = 9.81f;  //1Gの加速度
+    private const float MINIMUMALLOWEDVALUE = 0.05f;
+
+
+    private float _inputCheckTimer;   // タイマー計算用
+
 
     public IObjectPool<EnemyMissile> ObjectPool {
         get; set;
     }
+
+
 
     #endregion
 
@@ -78,8 +96,9 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
             return;
         }
 
-        if (_enemyTarget.gameObject.activeSelf == false)  // ターゲットのアクティブがfalseのとき返す
-        {
+
+        // ターゲットのアクティブがfalseのとき返す
+        if (_enemyTarget.gameObject.activeSelf == false) {
             ReturnToPool();
 
         }
@@ -92,7 +111,14 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         }
 
 
+
+
+        PlayerIsMove();
+
+
         CalculationFlying();
+
+
 
     }
 
@@ -129,11 +155,37 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     }
 
 
+    private void PlayerIsMove() {
+
+        float inputHorizontal = Input.GetAxis("Horizontal");
+        float inputVertical = Input.GetAxis("Vertical");
+        Debug.Log($"{inputHorizontal}  :{inputVertical}");
+
+        // 入力が一定時間なかったらboolを変えるスクリプト
+        if (Mathf.Abs(inputHorizontal) > MINIMUMALLOWEDVALUE || Mathf.Abs(inputVertical) > MINIMUMALLOWEDVALUE) {
+
+            _isPlayerInputActive = true;
+            _inputCheckTimer = 0f;
+            IsPlayerActive = true;
+        } else {
+            _inputCheckTimer += Time.deltaTime;
+
+
+            if (_inputCheckTimer >= _inputCheckDuration) {
+                _isPlayerInputActive = false;
+                IsPlayerActive = false;
+            }
+        }
+
+    }
+
+
+
 
 
 
     private void OnTriggerEnter(Collider other) {
-        
+
 
         // ここに衝突の判別を書く
         if (other.gameObject.CompareTag("MissileColPos")) {
