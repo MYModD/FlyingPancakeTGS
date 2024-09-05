@@ -20,11 +20,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     [SerializeField, Header("飛行時間")]
     private float _timer = 10f;
 
-    [SerializeField, Header("ランダムの範囲、力")]
-    private float _randomPower = 5f;
-
-    [SerializeField, Header("ランダムが適用される時間")]
-    private float _random_timer = 10f;
+   
 
     [SerializeField, Header("Gforceの最大値")]
     private float _maxAcceleration = 10f;
@@ -114,9 +110,10 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         // 加速度の大きさ          1G=9.81 m/s2で割ってる
         float gForce = acceleration.magnitude / ONEG;
 
-
+        Debug.Log($"今のGの値は{gForce}");
         // Gforceが_maxAcceleration超えているときreturn
         if (gForce > _maxAcceleration) {
+            Debug.Log("マックス値を超えたよ");
             return;
         }
 

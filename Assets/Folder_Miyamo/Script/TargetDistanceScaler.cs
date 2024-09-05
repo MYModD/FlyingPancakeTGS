@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.iOS;
 
 public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField,Header("’Ç‚¢‚©‚¯‚Ä‚é“G‚ðŽæ“¾‚·‚é‚Ì‚É•K—v")]
-    private TestMissile _testMissile;
+    private EnemyMissile _enemyMissile;
 
 
     [MinMaxSlider(0, 10000), Header("min‚Í0‚É‚µ‚Ä‚Ë")]
@@ -33,7 +33,7 @@ public class TargetDistanceScaler : MonoBehaviour {
 
     private void Update() {
 
-        Transform enemyTarget = _testMissile._enemyTarget;
+        Transform enemyTarget = _enemyMissile._enemyTarget;
         float enemyTargetDistance = (enemyTarget.position - transform.position).sqrMagnitude;
 
 
