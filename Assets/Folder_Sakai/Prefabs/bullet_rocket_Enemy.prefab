@@ -5085,10 +5085,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
-  _lerpT: 1
+  _lerpT: 0.493
   _speed: 1000
-  _timer: 10
-  _maxAcceleration: 100000
+  _timer: 100
+  _maxAcceleration: 10000000
   _isPlayerInputActive: 0
   _inputCheckDuration: 1
 --- !u!114 &6827205295799507626
@@ -5105,7 +5105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyMissile: {fileID: 8669571406545530284}
   _minMaxDistanceRange: {x: 0, y: 8555602}
-  _minMaxScaleRange: {x: 20.57518, y: 92.67873}
+  _minMaxScaleRange: {x: 9.75032, y: 92.67873}
   _targetScaleCurve:
     serializedVersion: 2
     m_Curve:
@@ -5547,7 +5547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 4ab581e06f3b88042b9154887d4c359e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5551014577142218206, guid: 4ab581e06f3b88042b9154887d4c359e, type: 3}
       propertyPath: m_Enabled

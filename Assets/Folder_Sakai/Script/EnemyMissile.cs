@@ -136,10 +136,12 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         // 加速度の大きさ          1G=9.81 m/s2で割ってる
         float gForce = acceleration.magnitude / ONEG;
 
+
+
         Debug.Log($"今のGの値は{gForce}");
         // Gforceが_maxAcceleration超えているときreturn
         if (gForce > _maxAcceleration) {
-            Debug.Log("マックス値を超えたよ");
+            Debug.LogError($"最大値を超えました今のG値は{gForce}");
             return;
         }
 
@@ -188,8 +190,9 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
 
         // ここに衝突の判別を書く
-        if (other.gameObject.CompareTag("MissileColPos")) {
+        if (other.gameObject.CompareTag("Player")) {
             print("プレイヤーに衝突");
+            gameObject.SetActive(false);
         }
     }
 
