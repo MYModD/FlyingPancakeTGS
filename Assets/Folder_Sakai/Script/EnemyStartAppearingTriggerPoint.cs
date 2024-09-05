@@ -7,6 +7,7 @@ public class EnemyStartAppearingTriggerPoint : MonoBehaviour
     #region 変数
     [Header("敵出現管理インデックス"),SerializeField] private int _occurrenceManagementIndex;
     [SerializeField, Tag] string _player = default;
+    [SerializeField] EnemyMoveSpline _enemyMoveSpline;
     [SerializeField] EnemyAppearanceManager _enemyAppearanceManager;
     #endregion
 
@@ -16,8 +17,9 @@ public class EnemyStartAppearingTriggerPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag(_player))
         {
-            print("dddf");
+            
             _enemyAppearanceManager.GetEnemyAppearanceManagementValue(_occurrenceManagementIndex);
+            _enemyMoveSpline.StartMoving();
         }
     }
     #endregion

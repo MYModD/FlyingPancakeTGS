@@ -17,6 +17,8 @@ public class EnemyMoveSpline : MonoBehaviour
     [SerializeField, Tooltip("速度の変更速度")]
     private float _changeingSpeed;
 
+    [SerializeField] private bool _isStop = true; //停止中
+
     //移動速度
     private float _moveSpeed;
 
@@ -41,8 +43,7 @@ public class EnemyMoveSpline : MonoBehaviour
     //スプラインの開始
     private const int STARTSPLINE = 0;
 
-    //停止中
-    private bool _isStop = true;
+    
     #endregion
 
     // Start is called before the first frame update
@@ -52,7 +53,6 @@ public class EnemyMoveSpline : MonoBehaviour
 
         //移動速度をルート速度に設定
         _moveSpeed = _rootSpeed;
-        _changeSpeed = _moveSpeed;
     }
 
     // Update is called once per frame
@@ -100,5 +100,10 @@ public class EnemyMoveSpline : MonoBehaviour
 
         _percentage = STARTSPLINE;
         _isStop = false;
+    }
+
+    public void ChangeSpeed() {
+
+        _moveSpeed = _changeingSpeed;
     }
 }
