@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using NaughtyAttributes;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
+using Unity.VisualScripting;
 public class CanvasManager : MonoBehaviour
 {
     #region 変数
@@ -41,6 +42,15 @@ public class CanvasManager : MonoBehaviour
 
     private float _gamePlayTime;
 
+    [SerializeField,Header("何秒操作がなかったら動画を流すか")]
+    private float _titleTime;
+    private float _nowTitleTime;
+    [SerializeField]
+    private GameObject _videoPlay;
+    [SerializeField]
+    private AudioSource _audioBGM;
+    [SerializeField]
+    private float _videotime;
 
     private bool _isStartPush=true;
     private enum UIState {
@@ -51,6 +61,7 @@ public class CanvasManager : MonoBehaviour
         setting,
         OP,
         ED,
+        Movie,
     }
     private UIState _state;
     private UIState _prevState;
@@ -78,6 +89,15 @@ public class CanvasManager : MonoBehaviour
     /// 更新処理
     /// </summary>
     void Update() {
+        if (_state == UIState.title) {
+            _nowTitleTime += Time.deltaTime;
+            if (_titleTime <= _nowTitleTime) {
+                _state = UIState.Movie;
+                _audioBGM.Stop();
+                _videoPlay.SetActive(true);
+                _nowTitleTime = 0;
+            }
+        }
         if (_state == UIState.gamePlay) {
             _gamePlayTime += Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Z)) {
@@ -113,6 +133,16 @@ public class CanvasManager : MonoBehaviour
             if (Input.GetButtonDown("Cancel")) {
                 SettingToTitleOrMenu();
             }
+        }
+        if (_state == UIState.Movie) {
+            _nowTitleTime += Time.deltaTime;
+            if (_nowTitleTime >= _videotime||Input.anyKeyDown) {
+                _state = UIState.title;
+                _audioBGM.Play();
+                _videoPlay.SetActive(false);
+                _nowTitleTime = 0;
+            }
+
         }
     }
     public void OPtoCount() {
