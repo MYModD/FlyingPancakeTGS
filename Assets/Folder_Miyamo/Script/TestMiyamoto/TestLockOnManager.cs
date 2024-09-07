@@ -14,6 +14,7 @@ public class TestLockOnManager : MonoBehaviour {
     public List<Transform> _targetsInCone = new List<Transform>();
 
     [Header("発射したあとのターゲットのブラックリスト")]
+    [ReadOnly]
     public List<Transform> _targetsBlackList = new List<Transform>();
 
     [Header("プレイヤーのTransformを指定")]
@@ -47,9 +48,7 @@ public class TestLockOnManager : MonoBehaviour {
     [SerializeField]
     private float _coolTime;
 
-    [Header("Coneがロックオンできるまでの時間")]
-    [SerializeField]
-    private float _lockOnDuration;
+   
 
     [Header("Coneに代入可能か"), ReadOnly]
     [SerializeField]
@@ -69,13 +68,12 @@ public class TestLockOnManager : MonoBehaviour {
 
 
     private Dictionary<Transform, Renderer> _transformKeyGetRender = new Dictionary<Transform, Renderer>();
-    private Dictionary<Transform, float> _targetLockOnConeDuration = new Dictionary<Transform, float>();
 
 
     private void Update() {
-        // System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-        // stopwatch.Start();
-        InConeTimerDegree();
+
+        // 最初にロックオンの時間計算をする
+
 
 
         List<Transform> cashCameraTargets = new List<Transform>();
@@ -123,19 +121,31 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsInCamera.AddRange(cashCameraTargets);
 
 
-        //Hige();
+        
 
         //-------------------------------------Cone内にいるかのスクリプト---------------------------------------
-        List<Transform> visibleTargetsInCone = new List<Transform>(cashCameraTargets);
+        List<Transform> visibleTargetsInCone = new List<Transform>();
 
+        foreach (Transform target in _targetsInCamera) {
+
+            // Cone内に入っていたらAddする
+            if (IsInCone(target)) {
+                visibleTargetsInCone.Add(target);
+                   
+            }
+        }
+
+        // 
         if (_canAdd) {
             Transform closestTarget = null;
             float minDistance = float.MaxValue;
 
             foreach (Transform target in visibleTargetsInCone) {
-                float distanceToTarget = Vector3.Distance(_camera.transform.position, target.position);
+
+                // Vector3.Distanceよりこっちのほうが処理軽いらしい
+                float distanceToTarget = (_camera.transform.position - target.position).sqrMagnitude ;
                 if (distanceToTarget < minDistance) {
-                    if (!_targetsInCone.Contains(target)) {
+                    if (_targetsInCone.Contains(target) == false) {
                         closestTarget = target;
                         minDistance = distanceToTarget;
                     }
@@ -144,36 +154,16 @@ public class TestLockOnManager : MonoBehaviour {
 
             if (closestTarget != null) {
                 _targetsInCone.Add(closestTarget);
-                _targetLockOnConeDuration.Add(closestTarget, _lockOnDuration);
                 StartCoroutine(nameof(CanBoolTimer));
             }
         }
 
-        // stopwatch.Stop();
-        // Debug.Log($"かかった時間  {stopwatch.Elapsed.TotalSeconds}");
+        // コーンに入ったターゲットがカメラから見えなくなったとき除く
+        IsConeTargetsInCamera();
 
     }
 
-    public void Hige() {
 
-        // コーン内にいる敵がビルの向こう側にあるときRemoveする
-        if (_targetsInCone != null) {
-
-            return;
-        }
-        foreach (Transform item in _targetsInCone) {
-            
-
-            // ヒットしたオブジェクトが敵タグで、かつ視錐台内にある場合
-            if (IsInFrustum(_transformKeyGetRender[item], _cameraPlanes)) {
-                // 処理を継続 (例: ロックオンターゲットとして処理)
-            } else {
-                // 敵が見つからないか、視錐台内にない場合、リストから削除
-                _targetsInCone.Remove(item);
-            }
-        }
-
-    }
 
 
     IEnumerator CanBoolTimer() {
@@ -191,39 +181,18 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsBlackList.Remove(transform);
     }
 
-    public void InConeTimerDegree() {
-        float deltaTime = Time.deltaTime;
 
-        if (_targetLockOnConeDuration == null || _targetLockOnConeDuration.Count == 0) {
-            return;
-        }
+    private void IsConeTargetsInCamera() {
 
-        // 削除対象のキーを一時リストに格納
-        List<Transform> keysToRemove = new List<Transform>();
+        foreach (Transform coneTarget in _targetsInCone) {
+            Renderer render = _transformKeyGetRender[coneTarget];
+            if (!IsInFrustum(render, _cameraPlanes)) {
 
-        // _targetLockOnConeDuration の値を更新
-        foreach (var entry in _targetLockOnConeDuration.ToList()) {
-            Transform target = entry.Key;
-            float duration = entry.Value;
-
-            // 経過時間を減算
-            duration -= deltaTime;
-
-            // 時間が0以下になった場合は、削除対象としてマーク
-            if (duration <= 0f) {
-                keysToRemove.Add(target);
-            } else {
-                // 値を更新
-                _targetLockOnConeDuration[target] = duration;
+                _targetsInCone.Remove(coneTarget);
             }
-        }
 
-        // 削除対象を辞書から削除
-        foreach (Transform key in keysToRemove) {
-           
-            _targetLockOnConeDuration.Remove(key);
-            _targetsInCone.Remove(key);
         }
+        
     }
 
     /// <summary>
