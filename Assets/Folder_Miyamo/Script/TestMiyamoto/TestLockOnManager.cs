@@ -86,58 +86,36 @@ public class TestLockOnManager : MonoBehaviour {
             LayerMask.GetMask(_enemyTag)
         );
 
+
         _cameraPlanes = GeometryUtility.CalculateFrustumPlanes(_camera);
 
+
+        //--------------------------------カメラにいるかのスクリプト--------------------------------------------
         foreach (Collider hit in hits) {
-            Transform target = default;
+            Transform target = null;
             Renderer renderer = null;
 
             if (hit.CompareTag("Enemy")) {
                 target = hit.transform;
 
-                if (!_transformKeyGetRender.TryGetValue(target, out renderer)) {
+                // TryGetValueでrenderに入力されているので合った場合の処理書く必要なし
+                if (_transformKeyGetRender.TryGetValue(target, out renderer) == false) {
                     renderer = target.GetComponent<Renderer>();
                     _transformKeyGetRender.Add(target, renderer);
                 }
 
             } else {
-                //Debug.Log($"{hit.gameObject.name} の レンダーコンポーネントがついてない可能性があるよ");
+                // Debug.Log($"{hit.gameObject.name} の レンダーコンポーネントがついてない可能性があるよ");
+                // layerがEnemyでtagがenemeyでないときここに通るため EliteEnemyのとき追加の処理書く必要あり
                 continue;
             }
 
             if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
-                Vector3 directionToTarget = (target.position - _camera.transform.position).normalized;
 
-                RaycastHit[] hitsALL = Physics.RaycastAll(_camera.transform.position, directionToTarget, _searchRadius);
-                RaycastHit minDistanceObject = default;
-
-                for (int i = 0; i < hitsALL.Length; i++) {
-                    if (hitsALL[i].collider.CompareTag(_enemyTag) || hitsALL[i].collider.CompareTag(_buildingTag)) {
-                        minDistanceObject = hitsALL[i];
-                        break;
-                    }
-                }
-
-                foreach (RaycastHit hitOne in hitsALL) {
-                    if (hitOne.collider.CompareTag(_enemyTag) || hitOne.collider.CompareTag(_buildingTag)) {
-                        if (hitOne.distance < minDistanceObject.distance) {
-                            minDistanceObject = hitOne;
-                        }
-                    }
-                }
-
-                if (minDistanceObject.collider != default){
-
-                    if (minDistanceObject.collider.CompareTag(_enemyTag)) {
-                        cashCameraTargets.Add(minDistanceObject.collider.gameObject.transform);
-                    }
-                }
-                
-
-                // Rayを可視化
-                Debug.DrawRay(_camera.transform.position, directionToTarget * _searchRadius, Color.green);
+                cashCameraTargets.Add(target);             
             }
         }
+
 
         cashCameraTargets = cashCameraTargets.Except(_targetsBlackList).ToList();
 
@@ -147,7 +125,7 @@ public class TestLockOnManager : MonoBehaviour {
 
         //Hige();
 
-
+        //-------------------------------------Cone内にいるかのスクリプト---------------------------------------
         List<Transform> visibleTargetsInCone = new List<Transform>(cashCameraTargets);
 
         if (_canAdd) {
@@ -248,6 +226,9 @@ public class TestLockOnManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Renderが空だとちょっと遅れてロックオンしている気がするのでロックオンが遅かったら 付ける必要があり
+    /// </summary>
     private bool IsInFrustum(Renderer renderer, UnityEngine.Plane[] planes) {
         return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
