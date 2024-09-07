@@ -31,6 +31,8 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     private bool _isPlayerInputActive = false;
 
 
+    public List<string> _debug;
+
     // ˆê’èŠÔ“ü—Í‚ª‚È‚¢‚Æfalse‚É‚È‚éƒ[ƒ‹ƒh•Ï” (Ã“I•Ï”)
     public static bool IsPlayerActive { get; private set; } = true;
 
@@ -188,6 +190,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
     private void OnTriggerEnter(Collider other) {
 
+        _debug.Add($"{other.gameObject.name}   :    {other.tag}  ");
 
         // ‚±‚±‚ÉÕ“Ë‚Ì”»•Ê‚ğ‘‚­
         if (other.gameObject.CompareTag("Player")) {
