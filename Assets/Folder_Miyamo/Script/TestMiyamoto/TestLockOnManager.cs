@@ -29,7 +29,7 @@ public class TestLockOnManager : MonoBehaviour {
 
     [SerializeField, Range(0f, 180f)]
     [Header("コーンの角度")]
-    private float _coneAngle = 45f;
+    public float _coneAngle = 45f;
 
     [SerializeField]
     [Header("コーンの長さ、半径")]
@@ -58,6 +58,9 @@ public class TestLockOnManager : MonoBehaviour {
 
     [HideInInspector]
     public Vector3 _circleCenterPostion;
+    
+
+    public float _circleRadius;
     [HideInInspector]
     public Quaternion _circleRotation;
 
@@ -239,6 +242,7 @@ public class TestLockOnManager : MonoBehaviour {
             hoge.z = 0;
 
             _circleRotation = Quaternion.Euler(hoge);
+            _circleRadius = _coneRange * Mathf.Tan(coneAngleRad);
 
             GizmosExtensions.DrawWireCircle(coneBaseCenter, _coneRange * Mathf.Tan(coneAngleRad), 20, Quaternion.Euler(hoge));
 
