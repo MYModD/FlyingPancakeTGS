@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Folder_Miyamo/Scenes/sakai_ForWork_3rd.unity
     guid: 7f784cb7c94250542845a650f34cd394
-  - enabled: 0
+  - enabled: 1
     path: Assets/Folder_Saito/Scenes/MainGame.unity
     guid: 6f26cd833d2e41448a89c9d1c0c31340
-  - enabled: 1
+  - enabled: 0
     path: Assets/Folder_Sakai/Scenes/Now/MainGame.copy.3rd.unity
     guid: 1881dbba2355f0c4e84d15a35e8c0599
   - enabled: 0

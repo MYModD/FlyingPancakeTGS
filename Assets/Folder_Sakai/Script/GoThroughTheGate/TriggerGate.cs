@@ -22,8 +22,6 @@ public class TriggerGate : MonoBehaviour
             _particleSystem.Play();
             _audioSE.PlayOneShot(_ringPassedSE);
             if (_justOne) {
-
-                print("cil");
                 _goThroughTheGateManager.ScoreAddition();
                 _justOne = false;
             }
