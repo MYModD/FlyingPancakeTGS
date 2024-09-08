@@ -17,6 +17,10 @@ public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField]
     private Vector2 _minMaxScaleRange = new Vector2(1, 100);
 
+    [MinMaxSlider(1, 1000f), Header("速度の範囲")]
+    [SerializeField]
+    private Vector2 _minMaxSpeedRange = new();
+
 
 
     [SerializeField, Header("カーブで表現できるニョ")]
@@ -39,12 +43,17 @@ public class TargetDistanceScaler : MonoBehaviour {
         //Debug.Log($"ターゲットまでの座標{enemyTargetDistance}");
 
         //debug用とは違い、targetを参照してその距離を求める
-        float scale = _targetScaleCurve.Evaluate(enemyTargetDistance / _minMaxDistanceRange.y);
+        float value = _targetScaleCurve.Evaluate(enemyTargetDistance / _minMaxDistanceRange.y);
 
-        scale = scale * MULTIPLAY;
-        scale = Mathf.Clamp(scale, _minMaxScaleRange.x, _minMaxScaleRange.y);
+        value = value * MULTIPLAY;
+        float scale  = Mathf.Clamp(value, _minMaxScaleRange.x, _minMaxScaleRange.y);
 
         this.transform.localScale = new Vector3(scale, scale, scale);
+
+        float speed = Mathf.Clamp(value, _minMaxSpeedRange.x, _minMaxSpeedRange.y);
+        _enemyMissile._speed = speed;
+
+
 
 
     }

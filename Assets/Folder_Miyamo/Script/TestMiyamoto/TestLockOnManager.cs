@@ -188,18 +188,15 @@ public class TestLockOnManager : MonoBehaviour {
             return;
         }
 
-        List<Transform> targetsToRemove = new List<Transform>();
         foreach (Transform coneTarget in _targetsInCone) {
             Renderer render = _transformKeyGetRender[coneTarget];
             if (!IsInFrustum(render, _cameraPlanes)) {
-                targetsToRemove.Add(coneTarget);
+
+                _targetsInCone.Remove(coneTarget);
             }
-        }
 
-        foreach (Transform target in targetsToRemove) {
-            _targetsInCone.Remove(target);
         }
-
+        
     }
 
     /// <summary>

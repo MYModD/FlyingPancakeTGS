@@ -5085,8 +5085,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
-  _lerpT: 0.55
-  _speed: 700
+  _lerpT: 0.77
+  _speed: 500
   _timer: 100
   _maxAcceleration: 10000000
   _isPlayerInputActive: 0
@@ -5106,7 +5106,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyMissile: {fileID: 8669571406545530284}
   _minMaxDistanceRange: {x: 0, y: 8555602}
-  _minMaxScaleRange: {x: 6, y: 92.67873}
+  _minMaxScaleRange: {x: 12.4453125, y: 92.67873}
+  _minMaxSpeedRange: {x: 410.746, y: 820.4922}
   _targetScaleCurve:
     serializedVersion: 2
     m_Curve:
