@@ -17,10 +17,12 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
     [SerializeField, Header("1stの吹き出し")] private GameObject _1stBubble;
     [SerializeField, Header("2ndの吹き出し")] private GameObject _2ndBubble;
     [SerializeField, Header("3ndの吹き出し")] private GameObject _3rdBubble;
+    [SerializeField, Header("4thの吹き出し")] private GameObject _4thBubble;
 
     private bool _is1st = true;
     private bool _is2nd = true;
     private bool _is3rd = true;
+    private bool _is4th = true;
 
     #region 変数
     #endregion
@@ -63,10 +65,17 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
             _2ndBubble.SetActive(false);
             StartCoroutine(StartBubble(3,1.5f));
             _is3rd |= false;
-        }
-        else {
-            StartCoroutine(StartBubble(0,0f));
-        }
+        }else if (_splineAnimate4.enabled && _is4th) {
+            if (!_is4th) {
+                return;
+            }
+            _3rdBubble.SetActive(false);
+            StartCoroutine(StartBubble(4, 1.5f));
+            _is3rd |= false;
+        } else {
+                StartCoroutine(StartBubble(0, 0f));
+            }
+       
     }
     IEnumerator StartBubble(int index,float time) {
         yield return new WaitForSeconds(time);
@@ -80,10 +89,14 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
             case 3:
                 _3rdBubble.SetActive(true);
                 break;
+            case 4:
+                _4thBubble.SetActive(true);
+                break;
             default:
                 _1stBubble.SetActive(false);
                 _2ndBubble.SetActive(false);
                 _3rdBubble.SetActive(false);
+                _4thBubble.SetActive(false);
                 break;
         }
     }
