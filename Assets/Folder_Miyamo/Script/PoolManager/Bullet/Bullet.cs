@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
     [SerializeField, Header("重力、おちやすさ"),EnableIf(nameof(_isGravityON))]
     private float _gravity = 1000f;
     [SerializeField, Tag]
-    private string _enemyTag;
+    private string _playerTag;
 
     private  float _offtimeValue;        // 時間計算用
     private Rigidbody _rigidbody;
@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
 
 
         //エネミータグにあたったときSetActiveをFalse
-        if (other.CompareTag(_enemyTag)) {
+        if (other.CompareTag(_playerTag)) {
 
             other.gameObject.SetActive(false); //とりあえずfalse
             ReturnToPool();

@@ -17,9 +17,7 @@ public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField]
     private Vector2 _minMaxScaleRange = new Vector2(1, 100);
 
-    [MinMaxSlider(1, 1000f), Header("‘¬“x‚Ì”ÍˆÍ")]
-    [SerializeField]
-    private Vector2 _minMaxSpeedRange = new();
+    
 
 
 
@@ -50,8 +48,6 @@ public class TargetDistanceScaler : MonoBehaviour {
 
         this.transform.localScale = new Vector3(scale, scale, scale);
 
-        float speed = Mathf.Clamp(value, _minMaxSpeedRange.x, _minMaxSpeedRange.y);
-        _enemyMissile._speed = speed;
 
 
 
