@@ -19,6 +19,8 @@ TagManager:
   - Building
   - SpeedItem
   - MissileColPos
+  - Wheel
+  - MonstarTrack
   layers:
   - Default
   - TransparentFX

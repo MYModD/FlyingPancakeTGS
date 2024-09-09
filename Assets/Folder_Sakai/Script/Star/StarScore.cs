@@ -9,6 +9,8 @@ public class StarScore : MonoBehaviour
     [SerializeField, Tag] private string _playerTag;
     [SerializeField] StarScoreManager _starScoreManager;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private AudioSource _se;
+    [SerializeField] private AudioClip _clip;
 
     private bool _justOne = true; 
     #endregion
@@ -22,6 +24,7 @@ public class StarScore : MonoBehaviour
                 _particleSystem.Play();
                 _starScoreManager.ScoreAddition(_score);
                 _justOne = false;
+                _se.PlayOneShot(_clip);
             }
 
         }
