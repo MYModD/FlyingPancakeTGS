@@ -114,6 +114,8 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         }
 
         CalculationFlying();
+
+
     }
 
 

@@ -64,6 +64,9 @@ public class ControllerSelectButton : MonoBehaviour {
     private int _indexResult = 0;
     private int _checkIndexResult = -1;
 
+    [SerializeField, Header("ボタンクリック音")]
+    private AudioClip _clickSE;
+
     private string _settingTextEnglish = "Not available"/*"English"*/;
     private string _settingTextJapanece = "Not available"/*"Japanese"*/;
     private Image[] _settingImages;
@@ -180,6 +183,7 @@ public class ControllerSelectButton : MonoBehaviour {
             print("こんにちわ");
             //選択しているボタンの押された時の処理を行う
             _titleNowSelect.GetComponent<TestButton>().OnClickSw();
+            PlaySE();
         }
         //入力の無いとき
         if (Mathf.Abs(inputVertical) < sensitivity) {
@@ -223,6 +227,7 @@ public class ControllerSelectButton : MonoBehaviour {
         if (Input.GetButtonDown("Submit")) {
             //選択しているボタンの押された時の処理を行う
             _menuNowSelect.GetComponent<TestButton>().OnClickSw();
+            PlaySE();
         }
         //入力がないときにはなにもしない
         if (Mathf.Abs(inputVertical) < sensitivity) {
@@ -284,6 +289,7 @@ public class ControllerSelectButton : MonoBehaviour {
 
                 //EnglishSwitchJapanece();
             }
+            PlaySE();
             // _settingImages[_settingIndex].sprite = _nowSprites;
             //_selected = true;
         }
@@ -457,6 +463,9 @@ public class ControllerSelectButton : MonoBehaviour {
                 _canvasManager.MenuOrResultToStart();
             }
         }
+    }
+    private void PlaySE() {
+        _audioSE.PlayOneShot(_clickSE);
     }
     /// <summary>
     /// すべてを選んでいない画像にする

@@ -9,6 +9,7 @@ using TMPro;
 public class PlayerRankManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _textTitle;
     [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private AudienceGaugeManager _gauge;
 
     [SerializeField, Header("プレイヤーのオブジェクト")]
     private GameObject[] _playerObjects;
@@ -65,6 +66,7 @@ public class PlayerRankManager : MonoBehaviour {
         
         _textTitle.text = "ToBeTheTop";
         _textScore.text = _currentPlayerRank.ToString() + "/" + "9";
+        _gauge.SetScoreValue(_currentPlayerRank, 10, "ToBeTheTop");
 
         int currentPlayerIndex = Array.IndexOf(_playerObjects, _currentPlayerObject);
 
