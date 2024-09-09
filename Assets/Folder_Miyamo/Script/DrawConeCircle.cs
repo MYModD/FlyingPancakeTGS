@@ -8,7 +8,7 @@ public class DrawConeCircle : MonoBehaviour
     [SerializeField, Header("CameraManger")]
     private TestLockOnManager _testLockOnManager;
 
-    
+    public bool _debugIsON = false;
 
     void Start()
     {
@@ -28,11 +28,17 @@ public class DrawConeCircle : MonoBehaviour
 
     private void OnDrawGizmos() {
 
-        Quaternion hoge = _testLockOnManager._circleRotation;
+        if (!_debugIsON) {
 
-        transform.rotation = hoge;
-        transform.position = _testLockOnManager._circleCenterPostion;
+            Quaternion hoge = _testLockOnManager._circleRotation;
 
+            transform.rotation = hoge;
+            transform.position = _testLockOnManager._circleCenterPostion;
 
+            float scale = _testLockOnManager._circleRadius * 0.01487f;
+            transform.localScale = new Vector3(scale, scale, scale);
+
+        }
+       
     }
 }
