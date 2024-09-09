@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 
     [Foldout("’eŠÛ”­ŽË")]
     [SerializeField, Header("’eŠÛ‘¬“x”{—¦")]
-    private float _bulletSpeedMultiplier;
+    private float _bulletSpeedMultiplier = 1000f;
 
     [Foldout("’eŠÛ”­ŽË")]
     [SerializeField, Header("’eŠÛ”­ŽËŠÔŠu")]

@@ -7,6 +7,8 @@ public class Resultet : MonoBehaviour {
 
     [SerializeField,Header("CutInのアニメーター")] private Animator _animator;
     [SerializeField, Header("1stPlayerのタグ"), Tag] private string _playerTag;
+    [SerializeField]
+    private AudienceGaugeManager _miniScore;
     // Start is called before the first frame update
     void Start() {
 
@@ -21,6 +23,7 @@ public class Resultet : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(_playerTag)) {
             _animator.Play("CutIN");
+            _miniScore.TextTrue(false);
         }
     }
 }

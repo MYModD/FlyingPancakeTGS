@@ -10,6 +10,7 @@ public class StarScoreManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _textScore;
     [SerializeField] private TextMeshProUGUI _timeText1;
     [SerializeField] private TextMeshProUGUI _timeText2;
+    [SerializeField] private AudienceGaugeManager _gauge;
     private int _score;
     private int _maxStarUSA = 50;
     #endregion
@@ -18,6 +19,8 @@ public class StarScoreManager : MonoBehaviour {
 
         _textTitle.text = "Star Count";
         _textScore.text = _score.ToString();
+        _scoreManager.InputGetStarScore(_score, _maxStarUSA);
+        _gauge.SetScoreValue(_score, _maxStarUSA, "Star Count");
     }
     public void ScoreAddition(int score) {
 

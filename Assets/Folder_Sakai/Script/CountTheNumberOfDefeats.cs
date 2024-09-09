@@ -12,11 +12,14 @@ public class CountTheNumberOfDefeats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _killCount;
     [SerializeField] private TextMeshProUGUI _killTitle;
 
+    [SerializeField] private AudienceGaugeManager _gauge;
+
 
 
     private void Update() {
         _killTitle.text = "Kill Count";
         _killCount.text = _countTheNumberOfDefeats.ToString();
+        _gauge.SetScoreValue(_countTheNumberOfDefeats, _maxEnemy, "Kill Count");
     }
 
     public void AdditionOfNumberOfDefeats() {
