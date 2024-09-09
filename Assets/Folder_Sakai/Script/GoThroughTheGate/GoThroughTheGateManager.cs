@@ -7,6 +7,7 @@ public class GoThroughTheGateManager : MonoBehaviour
 {
     #region ïœêî
     [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private AudienceGaugeManager _gauge;
     [SerializeField] private TextMeshProUGUI _textTitle;
     [SerializeField] private TextMeshProUGUI _textScore;
     private int _score = 0;
@@ -20,6 +21,7 @@ public class GoThroughTheGateManager : MonoBehaviour
         _scoreManager.InputRingScore(_score, _maxScore);
         _textTitle.text = "Ring Count";
         _textScore.text = _score.ToString();
+        _gauge.SetScoreValue(_score, _maxScore, "Kill Count");
     }
     #endregion
 }

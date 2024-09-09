@@ -112,7 +112,9 @@ public class PlayerMove : MonoBehaviour {
         }
 
         //カメラが見ているオブジェクトの位置の調整
-        _lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
+
+        //_lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
+
 
         //入力値が０だったら何もさせない
         if (inputHorizontal == 0 && inputVertical == 0) {
@@ -328,6 +330,10 @@ public class PlayerMove : MonoBehaviour {
     public void StopMoving(float seconds) {
         _stopTime = seconds;
         _isStop = true;
+    }
+    public void StartMoving() {
+        _isStop=false;
+        _stopTime=0;
     }
     #endregion
 }
