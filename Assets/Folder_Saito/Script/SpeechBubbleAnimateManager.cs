@@ -7,6 +7,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Splines;
+using TMPro;
 public class SpeechBubbleAnimateManager : MonoBehaviour {
     [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate1;
     [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate2;
@@ -18,6 +19,14 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
     [SerializeField, Header("2ndの吹き出し")] private GameObject _2ndBubble;
     [SerializeField, Header("3ndの吹き出し")] private GameObject _3rdBubble;
     [SerializeField, Header("4thの吹き出し")] private GameObject _4thBubble;
+
+    [Header("スコア表示テキスト")]
+    [SerializeField] private TextMeshProUGUI _stageTitle;
+    [SerializeField] private TextMeshProUGUI _stageScore;
+    [SerializeField] private TextMeshProUGUI _time;
+    [SerializeField] private TextMeshProUGUI _nowtime;
+
+    private Color _color;
 
     private bool _is1st = true;
     private bool _is2nd = true;
@@ -82,15 +91,19 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
         switch (index) {
             case 1:
                 _1stBubble.SetActive(true);
+                _color = Color.white;
                 break;
             case 2:
                 _2ndBubble.SetActive(true);
+                _color = Color.black;
                 break;
             case 3:
                 _3rdBubble.SetActive(true);
+                _color = Color.black;
                 break;
             case 4:
                 _4thBubble.SetActive(true);
+                _color= Color.white;
                 break;
             default:
                 _1stBubble.SetActive(false);
@@ -99,6 +112,10 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
                 _4thBubble.SetActive(false);
                 break;
         }
+        _time.color = _color;
+        _stageScore.color = _color;
+        _stageTitle.color = _color;
+        _nowtime.color = _color;
     }
     #endregion
 }
