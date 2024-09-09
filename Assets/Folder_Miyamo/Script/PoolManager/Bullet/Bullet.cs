@@ -72,12 +72,11 @@ public class Bullet : MonoBehaviour, IPooledObject<Bullet>
         //エネミータグにあたったときSetActiveをFalse
         if (other.CompareTag(_playerTag)) {
 
-            other.gameObject.SetActive(false); //とりあえずfalse
+            Debug.Log("あたったよぉ");
             ReturnToPool();
 
             // ここにBulletにあたったらのエフェクトを入れる
         }
-
 
     }
 
