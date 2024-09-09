@@ -72,7 +72,7 @@ public class MoveSpline : MonoBehaviour
         if (_percentage >= ENDSPLINE) {
 
             _percentage = STARTSPLINE;
-            _isStop = true;
+            
         }
 
         // 計算した位置（ワールド座標）をターゲットに代入

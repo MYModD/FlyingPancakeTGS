@@ -11,9 +11,11 @@ using NaughtyAttributes;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 using Unity.VisualScripting;
-public class CanvasManager : MonoBehaviour
-{
+using TMPro;
+public class CanvasManager : MonoBehaviour {
     #region 変数
+    [SerializeField] private TextMeshProUGUI[] _miniScore;
+
     [SerializeField, Header("ControllerSelectButton")] private ChengeStageManager _staChange;
     [SerializeField, Header("ControllerSelectButton")] private ControllerSelectButton _button;
     [Header("タイトルのボタン")]
@@ -258,6 +260,9 @@ public class CanvasManager : MonoBehaviour
         _button.StartBGM();
         _spAnime.enabled=false;
         _state = UIState.ED;
+        foreach (TextMeshProUGUI item in _miniScore) {
+            item.enabled = false;
+        }
     }
     public void EDToResult() {
         GameObjTrueFalse(_resultObjs, _endingObjs);
