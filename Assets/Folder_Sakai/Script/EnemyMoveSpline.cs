@@ -19,6 +19,8 @@ public class EnemyMoveSpline : MonoBehaviour
 
     [SerializeField] private bool _isStop = true; //í‚é~íÜ
 
+    [SerializeField, Tag] private string _monsterTruckTag;
+
     //à⁄ìÆë¨ìx
     private float _moveSpeed;
 
@@ -72,6 +74,11 @@ public class EnemyMoveSpline : MonoBehaviour
         if (_percentage >= ENDSPLINE) {
 
             _percentage = STARTSPLINE;
+
+            if (this.gameObject.CompareTag(_monsterTruckTag)) {
+
+                return;
+            }
             _isStop = true;
         }
 
@@ -102,8 +109,24 @@ public class EnemyMoveSpline : MonoBehaviour
         _isStop = false;
     }
 
+    public void StartMovingDelay(float stopTime) {
+        
+        StartCoroutine(StartMovingAfterStopping(stopTime));
+    }
+
+    private IEnumerator StartMovingAfterStopping(float stopTime) {
+        // stopTimeÇÃïbêîë“ã@
+        yield return new WaitForSeconds(stopTime);
+
+        _percentage = STARTSPLINE;
+        // í‚é~Çâèú
+        _isStop = false;
+    }
+
     public void ChangeSpeed() {
 
         _moveSpeed = _changeingSpeed;
     }
+
+    
 }
