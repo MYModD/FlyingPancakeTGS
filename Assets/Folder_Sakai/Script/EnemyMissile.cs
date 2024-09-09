@@ -197,8 +197,13 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
             print("ƒvƒŒƒCƒ„[‚ÉÕ“Ë");
             gameObject.SetActive(false);
         }
+
     }
 
+    public void SetActiveFalse() {
+
+        this.gameObject.SetActive(false);
+    }
     #endregion
 }
 
