@@ -39,14 +39,14 @@ public class TestLockOnManager : MonoBehaviour {
     [Header("敵のTag")]
     private string _enemyTag;
 
-    
+
 
 
     [Header("Coneに代入する間の時間")]
     [SerializeField]
     private float _coolTime;
 
-   
+
 
     [Header("Coneに代入可能か"), ReadOnly]
     [SerializeField]
@@ -56,7 +56,7 @@ public class TestLockOnManager : MonoBehaviour {
 
     [HideInInspector]
     public Vector3 _circleCenterPostion;
-    
+
 
     public float _circleRadius;
     [HideInInspector]
@@ -111,7 +111,7 @@ public class TestLockOnManager : MonoBehaviour {
 
             if (IsInFrustum(renderer, _cameraPlanes) && hit.gameObject.activeSelf) {
 
-                cashCameraTargets.Add(target);             
+                cashCameraTargets.Add(target);
             }
         }
 
@@ -122,7 +122,7 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsInCamera.AddRange(cashCameraTargets);
 
 
-        
+
 
         //-------------------------------------Cone内にいるかのスクリプト---------------------------------------
         List<Transform> visibleTargetsInCone = new List<Transform>();
@@ -132,7 +132,7 @@ public class TestLockOnManager : MonoBehaviour {
             // Cone内に入っていたらAddする
             if (IsInCone(target)) {
                 visibleTargetsInCone.Add(target);
-                   
+
             }
         }
 
@@ -144,7 +144,7 @@ public class TestLockOnManager : MonoBehaviour {
             foreach (Transform target in visibleTargetsInCone) {
 
                 // Vector3.Distanceよりこっちのほうが処理軽いらしい
-                float distanceToTarget = (_camera.transform.position - target.position).sqrMagnitude ;
+                float distanceToTarget = (_camera.transform.position - target.position).sqrMagnitude;
                 if (distanceToTarget < minDistance) {
                     if (_targetsInCone.Contains(target) == false) {
                         closestTarget = target;
