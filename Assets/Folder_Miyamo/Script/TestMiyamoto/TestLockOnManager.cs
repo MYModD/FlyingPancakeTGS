@@ -39,9 +39,7 @@ public class TestLockOnManager : MonoBehaviour {
     [Header("敵のTag")]
     private string _enemyTag;
 
-    [SerializeField, Tag]
-    [Header("ビルのタグ")]
-    private string _buildingTag;
+    
 
 
     [Header("Coneに代入する間の時間")]
@@ -191,15 +189,14 @@ public class TestLockOnManager : MonoBehaviour {
             return;
         }
 
-        foreach (Transform coneTarget in _targetsInCone) {
+        for (int i = _targetsInCone.Count - 1; i >= 0; i--) {
+            Transform coneTarget = _targetsInCone[i];
             Renderer render = _transformKeyGetRender[coneTarget];
             if (!IsInFrustum(render, _cameraPlanes)) {
-
-                _targetsInCone.Remove(coneTarget);
+                _targetsInCone.RemoveAt(i);
             }
-
         }
-        
+
     }
 
     /// <summary>
