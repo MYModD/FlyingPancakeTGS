@@ -193,17 +193,12 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         _debug.Add($"{other.gameObject.name}   :    {other.tag}  ");
 
         // ここに衝突の判別を書く
-        if (other.gameObject.CompareTag("Player")) {
-            print("プレイヤーに衝突");
-            gameObject.SetActive(false);
-        }
-
+        //if (other.gameObject.CompareTag("Player")) {
+        //    print("プレイヤーに衝突");
+        //    gameObject.SetActive(false);
+        //}
     }
 
-    public void SetActiveFalse() {
-
-        this.gameObject.SetActive(false);
-    }
     #endregion
 }
 

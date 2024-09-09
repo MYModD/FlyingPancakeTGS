@@ -22,22 +22,7 @@ public class GameController : MonoBehaviour {
     [Range(0,3f)]
     private float _missileFireInterval = 0.5f;
 
-    [Foldout("’eŠÛ”­Ë")]
-    [SerializeField]
-    private BulletPoolManager _bulletPoolManager;
-
-    [Foldout("’eŠÛ”­Ë")]
-    [SerializeField, Header("’eŠÛ”­ËˆÊ’u")]
-    private Transform _bulletLaunchPosition;
-
-    [Foldout("’eŠÛ”­Ë")]
-    [SerializeField, Header("’eŠÛ‘¬“x”{—¦")]
-    private float _bulletSpeedMultiplier = 1000f;
-
-    [Foldout("’eŠÛ”­Ë")]
-    [SerializeField, Header("’eŠÛ”­ËŠÔŠu")]
-    [Range(0, 1f)]
-    private float _bulletFireInterval  = 0.5f;
+    
 
     private float _missileCooldownTimer; // ƒ~ƒTƒCƒ‹”­Ë‚Ü‚Å‚Ìc‚èŠÔ
     private float _bulletCooldownTimer;   // ’eŠÛ”­Ë‚Ü‚Å‚Ìc‚èŠÔ
@@ -60,17 +45,6 @@ public class GameController : MonoBehaviour {
             Debug.Log("ƒ~ƒTƒCƒ‹”­Ë");
         }
 
-        // ’eŠÛ”­ËƒN[ƒ‹ƒ^ƒCƒ€‚ÌXV
-        _bulletCooldownTimer -= Time.deltaTime;
-
-        // ’eŠÛ”­ËğŒ”»’è
-        bool canFireBullet = (Input.GetKeyDown(KeyCode.K) || Input.GetButton("Fire1"))
-                              && _bulletCooldownTimer <= 0;
-
-        if (canFireBullet) {
-            _bulletPoolManager.FireBullet(_bulletLaunchPosition, _bulletSpeedMultiplier);
-            _bulletCooldownTimer = _bulletFireInterval;
-        }
     }
     #endregion
 }
