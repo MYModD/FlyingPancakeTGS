@@ -25,8 +25,14 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     [SerializeField, Header("Gforceの最大値")]
     private float _maxAcceleration = 10f;
 
+    [SerializeField, Header("G値がこれを超えればまっすぐにしか進まなくなる")]
+    private float _maxHighAcceleration = 3500f;
 
-    [Header("プレイヤーの入力状態を記録するフラグ")]
+    [SerializeField, Header("↑超えればTrueになる")]
+    private bool _isOverGforce  = false;
+
+
+   [Header("プレイヤーの入力状態を記録するフラグ")]
     [SerializeField, NaughtyAttributes.ReadOnly]
     private bool _isPlayerInputActive = false;
 
@@ -41,6 +47,10 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     [SerializeField]
     private float _inputCheckDuration = 1f; // 入力がないと判定する時間
 
+
+    [SerializeField, NaughtyAttributes.ReadOnly]
+    private float _nowGforce;
+    
 
     public ExplosionPoolManager _explosionPoolManager {
         set; private get;
@@ -74,6 +84,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     /// </summary>
     public void Initialize() {
         _offtimeValue = _timer;
+        _isOverGforce = false;
     }
 
     /// <summary>
@@ -126,6 +137,10 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
     private void CalculationFlying() {
 
+        //if (_isOverGforce) {
+        //    return;
+        //}
+
         // 前進する
         _rigidbody.velocity = transform.forward * _speed;
 
@@ -137,11 +152,18 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
         // 加速度の大きさ          1G=9.81 m/s2で割ってる
         float gForce = acceleration.magnitude / ONEG;
-
+        _nowGforce = gForce;
 
 
         Debug.Log($"今のGの値は{gForce}");
         // Gforceが_maxAcceleration超えているときreturn
+
+        if (gForce > _maxHighAcceleration) {
+            Debug.Log("こえてtrueにする");
+            _isOverGforce = true;
+            return;
+
+        }
         if (gForce > _maxAcceleration) {
             Debug.LogError($"最大値を超えました今のG値は{gForce}");
             return;
