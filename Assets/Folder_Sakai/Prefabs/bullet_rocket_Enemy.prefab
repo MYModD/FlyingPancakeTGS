@@ -5085,7 +5085,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
+
   _lerpT: 0.775
+
   _speed: 700
   _timer: 100
   _maxAcceleration: 500

@@ -6,40 +6,40 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
-    #region •Ï” + ƒvƒƒpƒeƒB  
+    #region å¤‰æ•° + ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£  
 
 
-    [SerializeField, Header("–Ú•Wƒ^[ƒQƒbƒg")]
-    public Transform _enemyTarget;                // ‚ ‚Æ‚Åset = value get private‚É•Ï‚¦‚é‚©‚à
+    [SerializeField, Header("ç›®æ¨™ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ")]
+    public Transform _enemyTarget;                // ã‚ã¨ã§set = value get privateã«å¤‰ãˆã‚‹ã‹ã‚‚
 
-    [SerializeField, Header("‚ ‚½‚è‚â‚·‚³ 0.1ƒfƒtƒH")]
+    [SerializeField, Header("ã‚ãŸã‚Šã‚„ã™ã• 0.1ãƒ‡ãƒ•ã‚©")]
     [Range(0f, 1f)]
     private float _lerpT = 0.1f;
 
-    [SerializeField, Header("ƒXƒs[ƒh")]
+    [SerializeField, Header("ã‚¹ãƒ”ãƒ¼ãƒ‰")]
     public float _speed;
 
-    [SerializeField, Header("”òsŠÔ")]
+    [SerializeField, Header("é£›è¡Œæ™‚é–“")]
     private float _timer = 10f;
 
-    [SerializeField, Header("Gforce‚ÌÅ‘å’l")]
+    [SerializeField, Header("Gforceã®æœ€å¤§å€¤")]
     private float _maxAcceleration = 10f;
 
 
-    [Header("ƒvƒŒƒCƒ„[‚Ì“ü—Íó‘Ô‚ğ‹L˜^‚·‚éƒtƒ‰ƒO")]
+    [Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å…¥åŠ›çŠ¶æ…‹ã‚’è¨˜éŒ²ã™ã‚‹ãƒ•ãƒ©ã‚°")]
     [SerializeField, NaughtyAttributes.ReadOnly]
     private bool _isPlayerInputActive = false;
 
 
     public List<string> _debug;
 
-    // ˆê’èŠÔ“ü—Í‚ª‚È‚¢‚Æfalse‚É‚È‚éƒ[ƒ‹ƒh•Ï” (Ã“I•Ï”)
+    // ä¸€å®šæ™‚é–“å…¥åŠ›ãŒãªã„ã¨falseã«ãªã‚‹ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ•° (é™çš„å¤‰æ•°)
     public static bool IsPlayerActive { get; private set; } = true;
 
 
 
     [SerializeField]
-    private float _inputCheckDuration = 1f; // “ü—Í‚ª‚È‚¢‚Æ”»’è‚·‚éŠÔ
+    private float _inputCheckDuration = 1f; // å…¥åŠ›ãŒãªã„ã¨åˆ¤å®šã™ã‚‹æ™‚é–“
 
 
     public ExplosionPoolManager _explosionPoolManager {
@@ -48,15 +48,15 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
 
     private Rigidbody _rigidbody;
-    private float _offtimeValue; //ƒ~ƒTƒCƒ‹‚ÌŠÔŒvZ—p
-    private float _off_timerandomValue; //ƒ~ƒTƒCƒ‹‚ÌŠÔŒvZ—p
-    private Vector3 _previousVelocity; //‘O‚Ì‰Á‘¬“x
+    private float _offtimeValue; //ãƒŸã‚µã‚¤ãƒ«ã®æ™‚é–“è¨ˆç®—ç”¨
+    private float _off_timerandomValue; //ãƒŸã‚µã‚¤ãƒ«ã®æ™‚é–“è¨ˆç®—ç”¨
+    private Vector3 _previousVelocity; //å‰ã®åŠ é€Ÿåº¦
 
-    private const float ONEG = 9.81f;  //1G‚Ì‰Á‘¬“x
+    private const float ONEG = 9.81f;  //1Gã®åŠ é€Ÿåº¦
     private const float MINIMUMALLOWEDVALUE = 0.05f;
 
 
-    private float _inputCheckTimer;   // ƒ^ƒCƒ}[ŒvZ—p
+    private float _inputCheckTimer;   // ã‚¿ã‚¤ãƒãƒ¼è¨ˆç®—ç”¨
 
 
     public IObjectPool<EnemyMissile> ObjectPool {
@@ -67,17 +67,17 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
     #endregion
 
-    #region ƒƒ\ƒbƒh
-    //-------------------------------objectpoolƒCƒ“ƒ^[ƒtƒFƒCƒX‚Ìˆ—--------------------------------
+    #region ãƒ¡ã‚½ãƒƒãƒ‰
+    //-------------------------------objectpoolã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã®å‡¦ç†--------------------------------
     /// <summary>
-    /// ‰Šú‰»
+    /// åˆæœŸåŒ–
     /// </summary>
     public void Initialize() {
         _offtimeValue = _timer;
     }
 
     /// <summary>
-    /// ƒv[ƒ‹‚É–ß‚·ˆ—
+    /// ãƒ—ãƒ¼ãƒ«ã«æˆ»ã™å‡¦ç†
     /// </summary>
     public void ReturnToPool() {
 
@@ -85,7 +85,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
     }
 
 
-    //-------------------------------ƒ~ƒTƒCƒ‹‚Ìˆ—--------------------------------
+    //-------------------------------ãƒŸã‚µã‚¤ãƒ«ã®å‡¦ç†--------------------------------
 
     void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
@@ -94,18 +94,18 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
     void FixedUpdate() {
         if (_enemyTarget == null) {
-            Debug.LogError("ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚È‚¢‚æ");
+            Debug.LogError("ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ãªã„ã‚ˆ");
             return;
         }
 
 
-        // ƒ^[ƒQƒbƒg‚ÌƒAƒNƒeƒBƒu‚ªfalse‚Ì‚Æ‚«•Ô‚·
+        // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãŒfalseã®ã¨ãè¿”ã™
         if (_enemyTarget.gameObject.activeSelf == false) {
             ReturnToPool();
 
         }
 
-        // ƒ^ƒCƒ}[ offtimeValue‚ª0‚É‚È‚Á‚½‚çƒv[ƒ‹‚É•Ô‚·
+        // ã‚¿ã‚¤ãƒãƒ¼ offtimeValueãŒ0ã«ãªã£ãŸã‚‰ãƒ—ãƒ¼ãƒ«ã«è¿”ã™
         _offtimeValue = Mathf.Max(0, _offtimeValue - Time.fixedDeltaTime);
         if (_offtimeValue == 0) {
 
@@ -126,24 +126,24 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
     private void CalculationFlying() {
 
-        // ‘Oi‚·‚é
+        // å‰é€²ã™ã‚‹
         _rigidbody.velocity = transform.forward * _speed;
 
         Vector3 currentVelocity = _rigidbody.velocity;
-        //(¡‚Ì‰Á‘¬“x - ‘O‚Ì‰Á‘¬“x)/ ŠÔ
+        //(ä»Šã®åŠ é€Ÿåº¦ - å‰ã®åŠ é€Ÿåº¦)/ æ™‚é–“
         Vector3 acceleration = (currentVelocity - _previousVelocity) / Time.fixedDeltaTime;
         _previousVelocity = currentVelocity;
 
 
-        // ‰Á‘¬“x‚Ì‘å‚«‚³          1G=9.81 m/s2‚ÅŠ„‚Á‚Ä‚é
+        // åŠ é€Ÿåº¦ã®å¤§ãã•          1G=9.81 m/s2ã§å‰²ã£ã¦ã‚‹
         float gForce = acceleration.magnitude / ONEG;
 
 
 
-        Debug.Log($"¡‚ÌG‚Ì’l‚Í{gForce}");
-        // Gforce‚ª_maxAcceleration’´‚¦‚Ä‚¢‚é‚Æ‚«return
+        Debug.Log($"ä»Šã®Gã®å€¤ã¯{gForce}");
+        // GforceãŒ_maxAccelerationè¶…ãˆã¦ã„ã‚‹ã¨ãreturn
         if (gForce > _maxAcceleration) {
-            Debug.LogError($"Å‘å’l‚ğ’´‚¦‚Ü‚µ‚½¡‚ÌG’l‚Í{gForce}");
+            Debug.LogError($"æœ€å¤§å€¤ã‚’è¶…ãˆã¾ã—ãŸä»Šã®Gå€¤ã¯{gForce}");
             return;
         }
 
@@ -152,7 +152,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         Quaternion targetRotation = Quaternion.LookRotation(diff);
 
 
-        // ‹…–ÊüŒ`•âŠÔ‚ğg‚Á‚Ä‰ñ“]‚ğ™X‚Éƒ^[ƒQƒbƒg‚ÉŒü‚¯‚é
+        // çƒé¢ç·šå½¢è£œé–“ã‚’ä½¿ã£ã¦å›è»¢ã‚’å¾ã€…ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«å‘ã‘ã‚‹
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _lerpT);
 
 
@@ -165,7 +165,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         float inputVertical = Input.GetAxis("Vertical");
         Debug.Log($"{inputHorizontal}  :{inputVertical}");
 
-        // “ü—Í‚ªˆê’èŠÔ‚È‚©‚Á‚½‚çbool‚ğ•Ï‚¦‚éƒXƒNƒŠƒvƒg
+        // å…¥åŠ›ãŒä¸€å®šæ™‚é–“ãªã‹ã£ãŸã‚‰boolã‚’å¤‰ãˆã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
         if (Mathf.Abs(inputHorizontal) > MINIMUMALLOWEDVALUE || Mathf.Abs(inputVertical) > MINIMUMALLOWEDVALUE) {
 
             _isPlayerInputActive = true;
@@ -192,13 +192,19 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
 
         _debug.Add($"{other.gameObject.name}   :    {other.tag}  ");
 
-        // ‚±‚±‚ÉÕ“Ë‚Ì”»•Ê‚ğ‘‚­
+        // ã“ã“ã«è¡çªã®åˆ¤åˆ¥ã‚’æ›¸ã
+
         //if (other.gameObject.CompareTag("Player")) {
-        //    print("ƒvƒŒƒCƒ„[‚ÉÕ“Ë");
+        //    print("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«è¡çª");
         //    gameObject.SetActive(false);
         //}
+
     }
 
+    public void SetActiveFalse() {
+
+        this.gameObject.SetActive(false);
+    }
     #endregion
 }
 
