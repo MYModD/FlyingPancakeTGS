@@ -5085,11 +5085,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTarget: {fileID: 0}
-  _springConstant: 20
-  _dampingConstant: 7.68
+  _lerpT: 0.1
   _speed: 700
   _timer: 100
   _maxAcceleration: 500
+  _isPlayerInputActive: 0
+  _debug: []
+  _inputCheckDuration: 1
 --- !u!114 &6827205295799507626
 MonoBehaviour:
   m_ObjectHideFlags: 0
