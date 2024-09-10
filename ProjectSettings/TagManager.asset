@@ -19,6 +19,7 @@ TagManager:
   - Building
   - SpeedItem
   - MissileColPos
+  - Pizza
   layers:
   - Default
   - TransparentFX
