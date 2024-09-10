@@ -21,6 +21,7 @@ TagManager:
   - MissileColPos
   - Wheel
   - MonstarTrack
+  - Tpoint
   layers:
   - Default
   - TransparentFX
