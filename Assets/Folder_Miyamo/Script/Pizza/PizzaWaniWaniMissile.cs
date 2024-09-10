@@ -12,33 +12,43 @@ public class EnemyAttack : MonoBehaviour {
 
     private bool _isMoving = false;
 
-    private void Start() {
-        MoveToAttackPosition().Forget();
-    }
-
     // メソッドで位置移動、滞在、戻るを実行
     public async UniTaskVoid MoveToAttackPosition() {
-        // 移動する
-        await MoveToPosition(_attackTransform.position, _moveSpeedToAttack);
+        // すでに移動中の場合は処理をスキップ
+        if (_isMoving) {
+            Debug.Log("移動中です。新しいアクションは無視されます。");
+            return;
+        }
+
+        _isMoving = true;  // 移動を開始する
+
+        // 攻撃位置に移動
+        await MoveToPosition(_attackTransform.localPosition, _moveSpeedToAttack);
 
         // 滞在する
         await UniTask.Delay((int)(_stayDuration * 1000)); // milliseconds
 
-        // 帰る
-        await MoveToPosition(_startTransform.position, _moveSpeedToStart);
+        // 元の位置に戻る
+        await MoveToPosition(_startTransform.localPosition, _moveSpeedToStart);
+
+        _isMoving = false; // 移動終了
     }
 
     // 徐々に位置を移動する処理
     private async UniTask MoveToPosition(Vector3 targetPosition, float speed) {
-        _isMoving = true;
-
-        while (Vector3.Distance(transform.position, targetPosition) > _epsilon) {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.fixedDeltaTime);
+        while (Vector3.Distance(transform.localPosition, targetPosition) > _epsilon) {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, speed * Time.fixedDeltaTime);
             await UniTask.Yield(); // 次のフレームまで待機
         }
 
         // 最終的にぴったり合わせる
-        transform.position = targetPosition;
-        _isMoving = false;
+        transform.localPosition = targetPosition;
+        Debug.Log("停止します");
+    }
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.U)) {
+
+            MoveToAttackPosition().Forget();
+        }
     }
 }
