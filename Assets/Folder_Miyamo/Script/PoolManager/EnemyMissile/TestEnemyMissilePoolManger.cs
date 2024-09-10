@@ -10,10 +10,24 @@ public class TestEnemyMissilePoolManger : PoolManager<EnemyMissile>
     [SerializeField, Header("プレイヤー")]
     private Transform _player;
 
+    [SerializeField, Header("標準目標")]
+    private Transform _playerTarget;
+
+
     [SerializeField, Header("発射位置")]
     private Transform _firePostion;
 
-    
+
+
+    protected override EnemyMissile Create() {
+        EnemyMissile enemyMissile =  base.Create();
+        Rigidbody playerRigidbody = _player.GetComponent<Rigidbody>();
+        enemyMissile._playerRigidbody = playerRigidbody;
+        return enemyMissile;
+
+    }
+
+
 
 
 
@@ -26,11 +40,8 @@ public class TestEnemyMissilePoolManger : PoolManager<EnemyMissile>
         EnemyMissile missile = _objectPool.Get();   
         missile.Initialize();                       
         missile.transform.SetPositionAndRotation(_firePostion.position, _firePostion.rotation);
-        missile._enemyTarget = _player;
+        missile._playerTarget = _playerTarget;
     }
 
-    public void SetFirePodtion(Transform firePodtion) {
-
-        _firePostion = firePodtion;
-    }
+   
 }

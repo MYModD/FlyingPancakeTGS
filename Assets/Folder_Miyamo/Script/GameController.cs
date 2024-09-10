@@ -19,12 +19,12 @@ public class GameController : MonoBehaviour {
 
     [Foldout("ミサイル発射")]
     [SerializeField, Header("ミサイル発射間隔")]
-    [Range(0,1f)]
+    [Range(0,3f)]
     private float _missileFireInterval = 0.5f;
 
     
 
-    public float _missileCooldownTimer; // ミサイル発射までの残り時間
+    private  float _missileCooldownTimer; // ミサイル発射までの残り時間
     private float _bulletCooldownTimer;   // 弾丸発射までの残り時間
 
     #endregion
