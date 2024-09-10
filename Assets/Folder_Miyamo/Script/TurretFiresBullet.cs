@@ -16,7 +16,7 @@ public class TurretFiresBullet : MonoBehaviour
     [SerializeField, Range(0, 1f)]
     private float _bulletCoolTime;
 
-    [SerializeField, Range(0, 10000)]
+    [SerializeField, Range(0, 100000)]
     private float _bulletSpeed;
 
     [SerializeField, Range(0, 1)]
@@ -30,7 +30,7 @@ public class TurretFiresBullet : MonoBehaviour
         _coolTimer -= Time.deltaTime;
 
         _coolTimer = Mathf.Max(0, _coolTimer);
-        if (_coolTimer == 0) {
+        if (_coolTimer == 0 && Input.GetKey(KeyCode.G) ){
 
             _bulletPoolManager.FireBullet( _firePostion, _player, _bulletSpeed, _bulletRandom);
             _coolTimer = _bulletCoolTime;

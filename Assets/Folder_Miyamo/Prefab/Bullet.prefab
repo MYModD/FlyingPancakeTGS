@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.79400235, y: 471.16812, z: -4963.204}
-  m_LocalScale: {x: 31.93, y: 31.93, z: 31.93}
+  m_LocalScale: {x: 69.4, y: 69.4, z: 69.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7697531511193193067}
@@ -116,7 +116,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6845867166630719924}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -129,7 +129,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31f144e118bce3e46917a8db9295a36d, type: 2}
+  - {fileID: 2100000, guid: 47791ffc03ec2c64fbd077752860cd51, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,6 +218,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: db49580e2fb7b714c94822cd401ac53c, type: 3}
       propertyPath: m_Name
       value: pizzabox
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: db49580e2fb7b714c94822cd401ac53c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

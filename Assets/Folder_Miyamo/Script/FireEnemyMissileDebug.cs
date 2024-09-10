@@ -5,6 +5,8 @@ using UnityEngine;
 public class FireEnemyMissileDebug : MonoBehaviour
 {
     public TestEnemyMissilePoolManger _testEnemyMissilePool;
+
+    public Transform _fireMissilePostion;
     void Start()
     {
         
@@ -15,7 +17,7 @@ public class FireEnemyMissileDebug : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H)) {
 
-            _testEnemyMissilePool.EnemyFireMissile(transform);
+            _testEnemyMissilePool.EnemyFireMissile(_fireMissilePostion);
         }
     }
 }
