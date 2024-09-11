@@ -13,6 +13,7 @@ public class LikePearentChild : MonoBehaviour
     void Start()
     {
         
+
     }
 
     private void FixedUpdate() {
