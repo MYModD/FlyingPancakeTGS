@@ -8,7 +8,7 @@ public class PizzaCoinInstance : MonoBehaviour
 
     public Transform[] _instantiatePostion;
 
-    public GameObject _coin;
+    public GameObject[] _coin;
     void Start()
     {
         
@@ -23,7 +23,8 @@ public class PizzaCoinInstance : MonoBehaviour
             int i = Random.Range(0, 4);
             Debug.Log($"îzóÒî‘çÜÇÕ{i}");
 
-            GameObject obj =  Instantiate(_coin);
+            int j = Random.Range(0, 2);
+            GameObject obj = Instantiate(_coin[j]);
             obj.transform.position = _instantiatePostion[i].position;
         }
     }
