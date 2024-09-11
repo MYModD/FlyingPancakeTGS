@@ -29,8 +29,10 @@ public class StarScoreManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _timeText2;
     [SerializeField] private AudienceGaugeManager _gauge;
     [SerializeField, Header("星のUI入れてね")] private GameObject[] _starUI;
-    [SerializeField]
-    private float _weitSecond = 0.1f;
+    [SerializeField] private AudioClip _clipBIG;
+    [SerializeField] private AudioClip _clipLITTLE;
+
+    [SerializeField]private float _weitSecond = 0.1f;
     private int _score;
     private int _maxStarUSA = 50;
 
@@ -52,12 +54,19 @@ public class StarScoreManager : MonoBehaviour {
         _gauge.SetScoreValue(_score, _maxStarUSA, "Star Count");
     }
 
-    public void ScoreAddition(int score,AudioClip clip) {
+    public void ScoreAddition(int score) {
+        if (score == 10000) {
+            score = Random.Range(-5, 6);
+        }
         _score += score;
         StartCoroutine(StarUP(score));  // コルーチンを開始
         _scoreManager.InputGetStarScore(_score, _maxStarUSA);
-       
-            _se.PlayOneShot(clip);
+       if (score > 0) {
+            _se.PlayOneShot(_clipBIG);
+        }else if(score<0){
+            _se.PlayOneShot(_clipLITTLE);
+        }
+           
         _textScore.color = Color.white;
         _textTitle.color = Color.white;
         _timeText1.color = Color.white;
