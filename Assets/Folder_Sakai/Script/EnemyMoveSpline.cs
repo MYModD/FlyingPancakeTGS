@@ -19,7 +19,6 @@ public class EnemyMoveSpline : MonoBehaviour
 
     [SerializeField] private bool _isStop = true; //’âŽ~’†
 
-    [SerializeField, Tag] private string _monsterTruckTag;
 
     //ˆÚ“®‘¬“x
     private float _moveSpeed;
@@ -75,10 +74,6 @@ public class EnemyMoveSpline : MonoBehaviour
 
             _percentage = STARTSPLINE;
 
-            if (this.gameObject.CompareTag(_monsterTruckTag)) {
-
-                return;
-            }
             _isStop = true;
         }
 

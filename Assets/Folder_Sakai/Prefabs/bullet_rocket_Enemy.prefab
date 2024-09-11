@@ -5084,6 +5084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65422e90abec4b4282b809a88a29419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   _playerTarget: {fileID: 0}
   _missileSpeed: 1000
   _maxTurnSpeed: 58.9
@@ -5095,6 +5096,7 @@ MonoBehaviour:
   _maxAcceleration: 6999
   _maxHighAcceleration: 7000
   _isOverGforce: 0
+
   _isPlayerInputActive: 0
   _debug: []
   _inputCheckDuration: 1
