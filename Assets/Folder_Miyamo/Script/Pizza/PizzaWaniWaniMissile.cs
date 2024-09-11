@@ -18,8 +18,7 @@ public class EnemyAttack : MonoBehaviour {
     private float _timerValue;
 
 
-    [SerializeField, Header("今の攻撃目標")]
-    private int _attackPos;
+    
 
     // メソッドで位置移動、滞在、戻るを実行
     public async UniTaskVoid MoveToAttackPosition() {
@@ -36,9 +35,6 @@ public class EnemyAttack : MonoBehaviour {
         
         await MoveToPosition(_attackTransform.localPosition, _moveSpeedToAttack);
 
-
-
-
         // 滞在する
         await UniTask.Delay((int)(_stayDuration * 1000)); // milliseconds
 
@@ -46,7 +42,6 @@ public class EnemyAttack : MonoBehaviour {
         await MoveToPosition(_startTransform.localPosition, _moveSpeedToStart);
 
         _isMoving = false; // 移動終了
-        _attackPos = Random.Range(0, 2);
 
     }
 
@@ -69,18 +64,17 @@ public class EnemyAttack : MonoBehaviour {
 
             MoveToAttackPosition().Forget();
             _timerValue = Random.Range(_durationRange.x, _durationRange.y);
-            Debug.Log($"タイマーは{_timerValue}に設定されました");
+            Debug.Log($"タイマーは{_timerValue}");
 
         }
 
-
-
     }
+
+
     private void OnEnable() {
 
 
         _timerValue = Random.Range(_durationRange.x, _durationRange.y);
-        _attackPos = Random.Range(0, 2);
 
 
     }
