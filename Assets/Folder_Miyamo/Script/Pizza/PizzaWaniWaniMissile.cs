@@ -5,7 +5,7 @@ using NaughtyAttributes;
 public class EnemyAttack : MonoBehaviour {
 
     [SerializeField] private Transform _startTransform;  // 開始位置
-    [SerializeField] private Transform[] _attackTransform; // 攻撃位置
+    [SerializeField] private Transform _attackTransform; // 攻撃位置
     [SerializeField, Range(0f, 1f)] private float _moveSpeedToAttack = 0.5f; // 攻撃位置に行くスピード
     [SerializeField, Range(0f, 1f)] private float _moveSpeedToStart = 0.3f;  // 帰るスピード
     [SerializeField] private float _epsilon = 0.01f; // 位置誤差の許容範囲
@@ -34,7 +34,7 @@ public class EnemyAttack : MonoBehaviour {
         // 攻撃位置に移動
 
         
-        await MoveToPosition(_attackTransform[_attackPos].localPosition, _moveSpeedToAttack);
+        await MoveToPosition(_attackTransform.localPosition, _moveSpeedToAttack);
 
 
 
