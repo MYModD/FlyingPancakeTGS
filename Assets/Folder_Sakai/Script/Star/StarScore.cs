@@ -9,22 +9,23 @@ public class StarScore : MonoBehaviour
     [SerializeField, Tag] private string _playerTag;
     [SerializeField] StarScoreManager _starScoreManager;
     [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private AudioSource _se;
-    [SerializeField] private AudioClip _clip;
+    [SerializeField] private AudioClip _audioClip;
 
     private bool _justOne = true; 
     #endregion
     #region ÉÅÉ\ÉbÉh
 
     private void OnTriggerEnter(Collider other) {
-
+        if (_starScoreManager == null) {
+            _starScoreManager = StarScoreManager.Instance;
+        }
         if (other.gameObject.CompareTag(_playerTag)) {
 
             if (_justOne) {
                 _particleSystem.Play();
-                _starScoreManager.ScoreAddition(_score);
+                _starScoreManager.ScoreAddition(_score,_audioClip);
+                print(_score);
                 _justOne = false;
-                _se.PlayOneShot(_clip);
             }
 
         }
