@@ -15,9 +15,9 @@ public class FireEnemyMissileDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H)) {
+        //if (Input.GetKeyDown(KeyCode.H)) {
 
-            _testEnemyMissilePool.EnemyFireMissile(_fireMissilePostion);
-        }
+        //    _testEnemyMissilePool.EnemyFireMissile(_fireMissilePostion);
+        //}
     }
 }
