@@ -14,7 +14,7 @@ public class ExplosionEffectOccurs : MonoBehaviour
 
             _enemyMissile = other.gameObject.GetComponent<EnemyMissile>();
             _explosion.SetActive(true);
-            _enemyMissile.SetActiveFalse();
+            //_enemyMissile.SetActiveFalse();  ˆê’UƒRƒƒ“ƒg
             this.gameObject.transform.parent = null;
         }
     }
