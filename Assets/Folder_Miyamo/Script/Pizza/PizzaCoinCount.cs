@@ -34,11 +34,11 @@ public class PizzaCoinCount : MonoBehaviour
             other.gameObject.SetActive(false);
 
 
-            if (_pizzaCount >= 15) {
+            if (_pizzaCount >= 10) {
 
                 // ‚±‚±‚É”j‰óˆ—‘‚­
                 Destroy(GameObject.Find("PizzaMan"));
-                _timelimit._limitTime = 0;
+                _timelimit.End3rdGame();
 
 
             }
