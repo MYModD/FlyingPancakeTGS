@@ -44,7 +44,6 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
     [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
-    [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
     [SerializeField] private FogControl _fogControl;
 
     // 4thステージに関する設定
@@ -187,7 +186,6 @@ public class ChengeStageManager : MonoBehaviour {
         if (_indexStage == 3) {
             _splineAnimate3st.enabled = false;
             _splineAnimate4st.enabled = true;
-            _3rdRank.enabled = false; // 3rdステージのランク集計を無効化
             _star.enabled = true; // 4thステージのスクリプトを有効化
         }
 
