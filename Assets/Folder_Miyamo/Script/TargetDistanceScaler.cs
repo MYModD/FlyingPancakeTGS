@@ -35,7 +35,7 @@ public class TargetDistanceScaler : MonoBehaviour {
 
     private void Update() {
 
-        Transform enemyTarget = _enemyMissile._enemyTarget;
+        Transform enemyTarget = _enemyMissile._playerTarget;
         float enemyTargetDistance = (enemyTarget.position - transform.position).sqrMagnitude;
 
         //Debug.Log($"ターゲットまでの座標{enemyTargetDistance}");

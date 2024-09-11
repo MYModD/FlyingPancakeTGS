@@ -5065,7 +5065,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7351689, y: -0.005626654, z: 0.017101051, w: 0.6776449}
   m_LocalPosition: {x: -4475.7715, y: 6432, z: 6817}
-  m_LocalScale: {x: 20.57518, y: 20.57518, z: 20.57518}
+  m_LocalScale: {x: 12.4453125, y: 12.4453125, z: 12.4453125}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5568840113265329445}
@@ -5084,16 +5084,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65422e90abec4b4282b809a88a29419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTarget: {fileID: 0}
 
-  _lerpT: 0.775
+  _playerTarget: {fileID: 0}
+  _missileSpeed: 1000
+  _maxTurnSpeed: 58.9
+  _playerRigidbody: {fileID: 0}
+  _proximityThreshold: 3000
+  _nearMissSlowdown: 0.174
+  _lerpT: 1
+  _timer: 10
+  _maxAcceleration: 6999
+  _maxHighAcceleration: 7000
+  _isOverGforce: 0
 
-  _speed: 700
-  _timer: 100
-  _maxAcceleration: 500
   _isPlayerInputActive: 0
   _debug: []
   _inputCheckDuration: 1
+  _nowGforce: 0
 --- !u!114 &6827205295799507626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5101,15 +5108,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7382726769608633511}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c11806da72ec8647a72771ddec388ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMissile: {fileID: 8669571406545530284}
   _minMaxDistanceRange: {x: 0, y: 8555602}
-  _minMaxScaleRange: {x: 12.4453125, y: 92.67873}
-  _minMaxSpeedRange: {x: 579.84753, y: 820.4922}
+  _minMaxScaleRange: {x: 31.96766, y: 92.67873}
   _targetScaleCurve:
     serializedVersion: 2
     m_Curve:
@@ -5270,7 +5276,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _isDubugOn: 0
-  _currentDebugtargetDistance: 6006
+  _currentDebugtargetDistance: 0
 --- !u!33 &956058643873837150
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5286,7 +5292,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7382726769608633511}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

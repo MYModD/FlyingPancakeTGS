@@ -19,9 +19,12 @@ TagManager:
   - Building
   - SpeedItem
   - MissileColPos
+
   - Wheel
   - MonstarTrack
   - Tpoint
+  - PizzaCoin
+
   layers:
   - Default
   - TransparentFX

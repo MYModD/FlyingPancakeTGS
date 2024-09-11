@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour {
 
     
 
-    private float _missileCooldownTimer; // ミサイル発射までの残り時間
+    private  float _missileCooldownTimer; // ミサイル発射までの残り時間
     private float _bulletCooldownTimer;   // 弾丸発射までの残り時間
 
     #endregion
