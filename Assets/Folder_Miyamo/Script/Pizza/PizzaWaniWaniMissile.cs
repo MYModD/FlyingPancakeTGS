@@ -1,20 +1,25 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 
 public class EnemyAttack : MonoBehaviour {
 
     [SerializeField] private Transform _startTransform;  // 開始位置
-    [SerializeField] private Transform _attackTransform; // 攻撃位置
+    [SerializeField] private Transform[] _attackTransform; // 攻撃位置
     [SerializeField, Range(0f, 1f)] private float _moveSpeedToAttack = 0.5f; // 攻撃位置に行くスピード
     [SerializeField, Range(0f, 1f)] private float _moveSpeedToStart = 0.3f;  // 帰るスピード
     [SerializeField] private float _epsilon = 0.01f; // 位置誤差の許容範囲
     [SerializeField] private float _stayDuration = 2f; // 攻撃位置で滞在する時間
 
-
-    public float _duration = 5f;
+    [MinMaxSlider(0,5f)]
+    public Vector2 _durationRange = new ();
 
     private bool _isMoving = false;
     private float _timerValue;
+
+
+    [SerializeField, Header("今の攻撃目標")]
+    private int _attackPos;
 
     // メソッドで位置移動、滞在、戻るを実行
     public async UniTaskVoid MoveToAttackPosition() {
@@ -28,9 +33,8 @@ public class EnemyAttack : MonoBehaviour {
 
         // 攻撃位置に移動
 
-
-
-        await MoveToPosition(_attackTransform.localPosition, _moveSpeedToAttack);
+        
+        await MoveToPosition(_attackTransform[_attackPos].localPosition, _moveSpeedToAttack);
 
 
 
@@ -42,6 +46,8 @@ public class EnemyAttack : MonoBehaviour {
         await MoveToPosition(_startTransform.localPosition, _moveSpeedToStart);
 
         _isMoving = false; // 移動終了
+        _attackPos = Random.Range(0, 2);
+
     }
 
     // 徐々に位置を移動する処理
@@ -52,7 +58,7 @@ public class EnemyAttack : MonoBehaviour {
         }
 
         // 最終的にぴったり合わせる
-        transform.localPosition = targetPosition;
+        //transform.localPosition = targetPosition;
         Debug.Log("停止します");
     }
     private void Update() {
@@ -62,7 +68,8 @@ public class EnemyAttack : MonoBehaviour {
         if (_timerValue <= 0) {
 
             MoveToAttackPosition().Forget();
-            _timerValue = _duration;
+            _timerValue = Random.Range(_durationRange.x, _durationRange.y);
+            Debug.Log($"タイマーは{_timerValue}に設定されました");
 
         }
 
@@ -72,7 +79,9 @@ public class EnemyAttack : MonoBehaviour {
     private void OnEnable() {
 
 
-        _timerValue = _duration;
+        _timerValue = Random.Range(_durationRange.x, _durationRange.y);
+        _attackPos = Random.Range(0, 2);
+
 
     }
 }
