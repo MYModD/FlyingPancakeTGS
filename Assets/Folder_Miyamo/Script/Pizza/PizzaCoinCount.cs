@@ -22,6 +22,7 @@ public class PizzaCoinCount : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
 
+        Debug.Log($"‚Ô‚Â‚©‚Á‚½‚â‚Â : {other.gameObject.name}");
 
         if (other.CompareTag(_pizzaTag)) {
 
