@@ -7,7 +7,7 @@ public class MissileLaunchesAtThePlayer : MonoBehaviour
 
     [SerializeField] private TestEnemyMissilePoolManger _enemyMissilePoolManger;
     [SerializeField, Tag] private string _playerTag;
-    [SerializeField] private Transform[] _firesPos;
+    [SerializeField] private Transform _firesPos;
 
     private void OnTriggerEnter(Collider other) {
 
