@@ -19,23 +19,20 @@ TagManager:
   - Building
   - SpeedItem
   - MissileColPos
-
-  - Wheel
-  - MonstarTrack
-  - Tpoint
   - PizzaCoin
-
+  - Tpoint
+  - Wheel
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
   - 
   - 
-  - Enemy
+  - 
   - 
   - 
   - 
