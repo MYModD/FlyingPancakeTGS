@@ -9,12 +9,15 @@ public class StarScore : MonoBehaviour
     [SerializeField, Tag] private string _playerTag;
     [SerializeField] StarScoreManager _starScoreManager;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private MTAppearanceManagement _mTAppearanceManagement;
 
     private bool _justOne = true; 
     #endregion
     #region メソッド
 
     private void OnTriggerEnter(Collider other) {
+
+        print("トリガー");
         if (_starScoreManager == null) {
             _starScoreManager = StarScoreManager.Instance;
         }
@@ -23,7 +26,15 @@ public class StarScore : MonoBehaviour
             if (_justOne) {
                 _particleSystem.Play();
                 _starScoreManager.ScoreAddition(_score);
-                print(_score);
+
+                if (_score >= 1) {
+                    print(_score);
+                    _mTAppearanceManagement.MTSpawn(_score);
+
+                } else if (_score <= -1) {
+                    print(_score);
+                    _mTAppearanceManagement.MTReduce(_score);
+                }
                 _justOne = false;
             }
 
