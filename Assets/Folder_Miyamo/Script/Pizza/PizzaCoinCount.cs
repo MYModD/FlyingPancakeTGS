@@ -28,6 +28,10 @@ public class PizzaCoinCount : MonoBehaviour {
 
     private float _lastDecreaseTime;
 
+    public PizzaMan _pizzaMan;
+    [Tag]
+    public string _pizzaManTagEnemy;
+
     void Start() {
         _lastDecreaseTime = Time.time;
     }
@@ -43,10 +47,13 @@ public class PizzaCoinCount : MonoBehaviour {
             UpdatePizzaCountText();
 
             if (_pizzaCount >= _maxPizzaCoin) {
-                // ‚±‚±‚É”j‰óˆ—‘‚­
-                Destroy(GameObject.Find("PizzaMan"));
-                _timelimit.End3rdGame();
+
+                _pizzaMan.tag = _pizzaManTagEnemy;
+
+            
             }
+
+            
         }
     }
 

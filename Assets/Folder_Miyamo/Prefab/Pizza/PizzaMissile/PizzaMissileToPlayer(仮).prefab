@@ -113,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 150, y: 150, z: 150}
+  m_LocalScale: {x: 500, y: 500, z: 500}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5313610761195880014}
@@ -132,10 +132,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _initialSpeed: 500
+  _initialSpeed: 6000
   _minSpeed: 20
-  _maxDistance: 500
-  _deceleration: 0.265
+  _maxDistance: 300
+  _deceleration: 0.105
+  _explosionScale: 100
   _playerMissileTag: Missile
   _explosionPool: {fileID: 0}
 --- !u!54 &4222494323296172454
