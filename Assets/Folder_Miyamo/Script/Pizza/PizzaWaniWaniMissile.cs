@@ -11,14 +11,18 @@ public class EnemyAttack : MonoBehaviour {
     [SerializeField] private float _epsilon = 0.01f; // 位置誤差の許容範囲
     [SerializeField] private float _stayDuration = 2f; // 攻撃位置で滞在する時間
 
-    [MinMaxSlider(0,5f)]
-    public Vector2 _durationRange = new ();
+    [SerializeField, Tag]
+    private string _pizzaCoinTag;
+
+    [MinMaxSlider(0, 5f)]
+    public Vector2 _durationRange = new();
+    public Animator _animator;
 
     private bool _isMoving = false;
     private float _timerValue;
 
 
-    
+
 
     // メソッドで位置移動、滞在、戻るを実行
     public async UniTaskVoid MoveToAttackPosition() {
@@ -31,8 +35,8 @@ public class EnemyAttack : MonoBehaviour {
         _isMoving = true;  // 移動を開始する
 
         // 攻撃位置に移動
-
-        
+        Debug.Log("起動しました");
+        _animator.SetTrigger("Start");
         await MoveToPosition(_attackTransform.localPosition, _moveSpeedToAttack);
 
         // 滞在する
@@ -70,6 +74,17 @@ public class EnemyAttack : MonoBehaviour {
 
     }
 
+    private void OnTriggerEnter(Collider other) {
+
+
+        //leftArmがピザにあたったら消える
+        if (other.CompareTag(_pizzaCoinTag)) {
+            other.gameObject.SetActive(false);
+
+        }
+
+
+    }
 
     private void OnEnable() {
 
