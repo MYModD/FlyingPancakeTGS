@@ -21,11 +21,12 @@ TagManager:
   - MissileColPos
   - PizzaCoin
   - PizzaLeftArm
+  - PizzaMissile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

@@ -1,10 +1,11 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PizzaMissile : MonoBehaviour {
     [SerializeField]
-    private Transform _player;
+    public Transform _player;
 
     [SerializeField]
     //[Range(1f, 20f)]
@@ -18,13 +19,19 @@ public class PizzaMissile : MonoBehaviour {
 
     [SerializeField]
     //[Range(10f, 50f)]
-    [Header("最大距離")]
+    [Header("ミサイルの速度変化が開始される最大距離")]
     private float _maxDistance = 20f;
 
     [SerializeField]
     [Range(0.1f, 1f)]
     [Header("減速率")]
     private float _deceleration = 0.5f;
+
+    [SerializeField, Header("プレイヤーのミサイルタグ")]
+    [Tag]
+    private string _playerMissileTag;
+    [ReadOnly]
+    public ExplosionPoolManager _explosionPool;
 
     private Vector3 _startPosition;
     private float _currentSpeed;
@@ -59,14 +66,11 @@ public class PizzaMissile : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("PlayerMissile")) {
-            // プレイヤーのミサイルに当たったら破壊
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-        } else if (other.CompareTag("Player")) {
-            // プレイヤーに当たったらダメージ処理などを行う
-            // ここにプレイヤーへのダメージ処理を追加
-            Destroy(gameObject);
-        }
+        if (other.CompareTag(_playerMissileTag)) {
+
+            _explosionPool.StartExplosion(this.transform);
+            gameObject.SetActive(false);
+
+        } 
     }
 }

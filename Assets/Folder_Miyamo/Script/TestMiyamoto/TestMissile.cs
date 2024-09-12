@@ -155,32 +155,17 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
         print("衝突");
 
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
-        if (other.gameObject.CompareTag(_enemyTag) && other.transform == _enemyTarget) {
+        if (other.transform == _enemyTarget) {
 
 
             // 敵のタグが普通の敵だったとき
             if (other.gameObject.CompareTag(_enemyTag)) {
                 _hasCollided = true; // 衝突フラグをセット
                 print($"{other.gameObject.name}に衝突");
-                /*other.gameObject.SetActive(false);   */                        // 敵のsetActiveをfalse
-                /*_explosionPoolManager.StartExplosion(other.transform);*/       // 爆発開始
-                ReturnToPool();                                              // ミサイルをプールに変換
+                ReturnToPool();                             // ミサイルをプールに変換
             }
 
-            // 敵のタグがエリートミサイルだったとき
-            if (other.gameObject.CompareTag(_eliteMissile)) {
-                _hasCollided = true; // 衝突フラグをセット
-                other.GetComponent<EliteEnemyHP>().DecreaseHP();
-                ReturnToPool();
-                Debug.Log("エリートミサイルにあっったよ");
-            }
-        } else if (other.gameObject.CompareTag(_buildingTag)) {
-            //ビルにあたっときはブラックリストから削除する
-            _explosionPoolManager.StartExplosion(other.transform);       // ビルにあたっときの処理
-            _testLockOnManager.RemoveBlackList(_enemyTarget);
-            ReturnToPool();
-
-        }
+        } 
         #endregion
 
     }
