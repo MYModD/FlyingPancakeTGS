@@ -41,6 +41,7 @@ public class StarScore : MonoBehaviour {
                 } else if (_division) {
 
                     _mTAppearanceManagement.DivisionMTReduce(_score);
+                    print(_score);
 
                 } else {
 
