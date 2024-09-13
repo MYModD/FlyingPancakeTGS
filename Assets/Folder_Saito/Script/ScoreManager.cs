@@ -101,11 +101,11 @@ public class ScoreManager : MonoBehaviour {
         } else {
             _4thStage.text = _sorryText;
         }
-        if (_doPizza) {
-            _5thStage.text = ResultTextSet(_lastGetPizza.ToString(), _maxPizza.ToString());
-        } else {
-            _5thStage.text = _sorryText;
-        }
+        //if (_doPizza) {
+        //    _5thStage.text = ResultTextSet(_lastGetPizza.ToString(), _maxPizza.ToString());
+        //} else {
+        _5thStage.text = "";
+        //}
         _gameClearTime.text = _clearTimeString;
         _rank.text = RankSettingProcess(_resultScore);
     }
