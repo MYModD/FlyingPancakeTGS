@@ -21,18 +21,9 @@ public class NotRotaionCopyPlayerMove : MonoBehaviour
 
     [SerializeField, Header("プレイヤーの移動角度値")] private float _moveAngle;
 
-    [SerializeField, Header("カメラが見ているオブジェクト")] private GameObject _lookAtObj;
-    [SerializeField, Header("カメラ入れて")] private Camera _camera;
-    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate1;
-    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate2;
-    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate3;
-    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate4;
-    [SerializeField, Header("スプラインを通るオブジェクト")] private SplineAnimate _splineAnimate5;
-
     [SerializeField, Header("CanvasManagerのオブジェクトをいれ")] private CanvasManager _canvas;
     [SerializeField] private ControllerSelectButton _selectButton;
 
-    [SerializeField] GameObject _aa;
     bool _a = true;
     private float _stopTime;
     private float _nowTime;
@@ -57,7 +48,11 @@ public class NotRotaionCopyPlayerMove : MonoBehaviour
             return;
         }
         StopOrMoving();
-       
+        //if (Input.GetKeyDown(KeyCode.Space)) {
+        //    StopMoving(5f);
+        //}
+
+
     }
     /// <summary>
     /// 動いているか止まっているかの分岐
@@ -82,8 +77,7 @@ public class NotRotaionCopyPlayerMove : MonoBehaviour
             MovePosition();
 
         }
-        //速度
-        //ChangeSpeed();
+        
     }
     /// <summary>
     /// 動き管理プロセスを実行
@@ -168,30 +162,8 @@ public class NotRotaionCopyPlayerMove : MonoBehaviour
             }
             Horizontal_RotateMove(inputHorizontal);
         }
-    }/// <summary>
-     /// プレイヤーの速度変化
-     /// </summary>
-    private void ChangeSpeed() {
-        //インプットはUpdateでまとめて取りたい
-        float inputRStick = Input.GetAxis("RStickV");
-
-        if (_splineAnimate3.enabled) {
-            _splineAnimate3.ElapsedTime += _changePower;
-        }
-        //速度計算した値
-        float speed = CalculateSpeed(inputRStick);
-        //スプラインを通り終わる時間の設定値を変えて加減速
-        if (_splineAnimate1.enabled) {
-            _splineAnimate1.ElapsedTime += speed;
-        } else if (_splineAnimate2.enabled) {
-            _splineAnimate2.ElapsedTime += speed;
-        } else if (_splineAnimate4.enabled) {
-            _splineAnimate4.ElapsedTime += speed;
-        } else {
-            _splineAnimate5.ElapsedTime += speed;
-        }
-
     }
+
     #region 動きに関するメソッド
     /// <summary>
     /// 縦の行動プロセスを実行
@@ -250,22 +222,7 @@ public class NotRotaionCopyPlayerMove : MonoBehaviour
         Vector3 movePower = Vector3.down * vertical * Time.deltaTime * _moveSpeed;
         return -movePower;
     }
-    /// <summary>
-    /// 縦の角度調整
-    /// </summary>
-    /// <param name="vertical">Verticalの入力値</param>
-    /// <returns>１フレームで加算、減算される角度</returns>
-    private Vector3 RotateVertical(float vertical) {
-        //割る値
-        float divide = 2;
-        //角度計算
-        Vector3 rotateIndex = (Vector3.right * _moveAngle / divide * Time.deltaTime);
-        //入力値によって正負を変える
-        if (vertical > 0) {
-            return rotateIndex;
-        }
-        return -rotateIndex;
-    }
+    
     #endregion
     #region Horizontal関連メソッド
     /// <summary>
@@ -295,38 +252,8 @@ public class NotRotaionCopyPlayerMove : MonoBehaviour
         return -rotateIndex;
     }
     #endregion
-    /// <summary>
-    /// Rスティックで速度変化
-    /// </summary>
-    /// <param name="input">Rスティックの入力値　-1～1</param>
-    /// <returns>速度量の変化した値</returns>
-    private float CalculateSpeed(float input) {
-        //０をなくすために加算
-        input += 2;
-        int index = _canvas.CanMove() ? 1 : 0;
-        //速度変化させる値の決定
-        float changePower = Time.deltaTime * input * _speedMagnification * index;
-        return changePower;
-    }
+    
 
-    public void CalculateSpeed3rd(float input) {
-
-        int index = _canvas.CanMove() ? 1 : 0;
-        //速度変化させる値の決定
-        _changePower = Time.deltaTime * input * _speedMagnification * index;
-    }
-    //-------------------------ここからパブリックメソッド---------------------------------------
-    /// <summary>
-    /// 指定の秒数停止メソッド
-    /// </summary>
-    /// <param name="seconds">止めたい秒数</param>
-    public void StopMoving(float seconds) {
-        _stopTime = seconds;
-        _isStop = true;
-    }
-    public void StartMoving() {
-        _isStop = false;
-        _stopTime = 0;
-    }
+   
     #endregion
 }

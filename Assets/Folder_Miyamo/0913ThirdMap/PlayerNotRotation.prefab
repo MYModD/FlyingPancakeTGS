@@ -55,13 +55,5 @@ MonoBehaviour:
   _speedMagnification: 1
   _rotateSpeed: 10
   _moveAngle: 60
-  _lookAtObj: {fileID: 0}
-  _camera: {fileID: 0}
-  _splineAnimate1: {fileID: 0}
-  _splineAnimate2: {fileID: 0}
-  _splineAnimate3: {fileID: 0}
-  _splineAnimate4: {fileID: 0}
-  _splineAnimate5: {fileID: 0}
   _canvas: {fileID: 0}
   _selectButton: {fileID: 0}
-  _aa: {fileID: 0}
