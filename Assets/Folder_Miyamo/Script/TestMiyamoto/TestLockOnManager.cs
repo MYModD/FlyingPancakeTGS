@@ -164,9 +164,6 @@ public class TestLockOnManager : MonoBehaviour {
 
     }
 
-
-
-
     IEnumerator CanBoolTimer() {
         _canAdd = false;
         yield return new WaitForSeconds(_coolTime);
@@ -258,5 +255,15 @@ public class TestLockOnManager : MonoBehaviour {
         if (_coneRange > _searchRadius) {
             Debug.LogError("_coneRangeが_searchRadiusを超えているよ！速く直してあげて ^^;");
         }
+    }
+
+    public void ChangeConeRange(float coneRange) {
+
+        _coneRange = coneRange;
+    }
+
+    public void ChangeSearchRadius(float searchRadius) {
+
+        _searchRadius = searchRadius;
     }
 }

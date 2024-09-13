@@ -1,7 +1,6 @@
 using NaughtyAttributes;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 
 public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField,Header("追いかけてる敵を取得するのに必要")]
@@ -35,7 +34,7 @@ public class TargetDistanceScaler : MonoBehaviour {
 
     private void Update() {
 
-        Transform enemyTarget = _enemyMissile._playerTarget;
+        Transform enemyTarget = _enemyMissile._enemyTarget;
         float enemyTargetDistance = (enemyTarget.position - transform.position).sqrMagnitude;
 
         //Debug.Log($"ターゲットまでの座標{enemyTargetDistance}");

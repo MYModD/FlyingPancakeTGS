@@ -20,6 +20,10 @@ TagManager:
   - SpeedItem
   - MissileColPos
   - PizzaCoin
+  - Tpoint
+  - Wheel
+  - Obstacles
+  - F14
   - PizzaLeftArm
   - PizzaMissile
   layers:

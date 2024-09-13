@@ -65,6 +65,8 @@ public class PlayerMove : MonoBehaviour {
         //if (Input.GetKeyDown(KeyCode.Space)) {
         //    StopMoving(5f);
         //}
+
+
     }
     /// <summary>
     /// 動いているか止まっているかの分岐
@@ -180,13 +182,14 @@ public class PlayerMove : MonoBehaviour {
      /// </summary>
     private void ChangeSpeed() {
         //インプットはUpdateでまとめて取りたい
-        float inputRStick = Input.GetAxis("RStickV");
+        float inputRStick = 0/*Input.GetAxis("RStickV")*/;
 
         if (_splineAnimate3.enabled) {
            _splineAnimate3.ElapsedTime += _changePower;
         }
         //速度計算した値
         float speed = CalculateSpeed(inputRStick);
+        //print(speed);
         //スプラインを通り終わる時間の設定値を変えて加減速
         if (_splineAnimate1.enabled) {
             _splineAnimate1.ElapsedTime += speed;
@@ -334,6 +337,12 @@ public class PlayerMove : MonoBehaviour {
     public void StartMoving() {
         _isStop=false;
         _stopTime=0;
+    }
+
+    public float SetChangePower() {
+
+        float changePower = CalculateSpeed(0);
+        return changePower;
     }
     #endregion
 }

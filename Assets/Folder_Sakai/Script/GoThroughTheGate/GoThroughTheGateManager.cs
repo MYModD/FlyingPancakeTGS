@@ -11,7 +11,7 @@ public class GoThroughTheGateManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textTitle;
     [SerializeField] private TextMeshProUGUI _textScore;
     private int _score = 0;
-    private int _maxScore = 58;
+    private int _maxScore = 90;
     #endregion
     #region ÉÅÉ\ÉbÉh
 
@@ -20,8 +20,8 @@ public class GoThroughTheGateManager : MonoBehaviour
         _score++;
         _scoreManager.InputRingScore(_score, _maxScore);
         _textTitle.text = "Ring Count";
-        _textScore.text = _score.ToString();
-        _gauge.SetScoreValue(_score, _maxScore, "Kill Count");
+        _textScore.text = _score.ToString() + " / "+_maxScore.ToString();
+        _gauge.SetScoreValue(_score, _maxScore, "Ring Count");
     }
     #endregion
 }

@@ -44,7 +44,6 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
     [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
-    [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
     [SerializeField] private FogControl _fogControl;
 
     // 4thステージに関する設定
@@ -116,10 +115,21 @@ public class ChengeStageManager : MonoBehaviour {
             }
         }
 
-        // 2ndステージから3rdステージへの切り替え
+        // 2ndステージから4thステージへの切り替え
         if (_indexStage == 2) {
             _game2st.SetActive(false);
             if (_game3st != null) {
+                _game4st.SetActive(true); // 4thステージを表示
+            } else {
+                _isFinish = true;
+                _canvasManager.PlayToED();
+            }
+        }
+
+        // 4thステージから3rdステージへの切り替え
+        if (_indexStage == 3) {
+            _game4st.SetActive(false);
+            if (_game4st != null) {
                 _game3st.SetActive(true);
                 _map3st.SetActive(true); // 3rdステージのマップを有効化
                 _fogControl.SetFog(true); // フォグを有効化
@@ -129,22 +139,11 @@ public class ChengeStageManager : MonoBehaviour {
             }
         }
 
-        // 3rdステージから4thステージへの切り替え
-        if (_indexStage == 3) {
+        // 4thステージから5thステージへの切り替え
+        if (_indexStage == 4) {
             _game3st.SetActive(false);
             _map3st.SetActive(false); // マップを無効化
             _fogControl.SetFog(false); // フォグを無効化
-            if (_game4st != null) {
-                _game4st.SetActive(true); // 4thステージを表示
-            } else {
-                _isFinish = true;
-                _canvasManager.PlayToED();
-            }
-        }
-
-        // 4thステージから5thステージへの切り替え
-        if (_indexStage == 4) {
-            _game4st.SetActive(false);
             if (_game5st != null) {
                 _game5st.SetActive(true); // 5thステージを表示
             } else {
@@ -178,22 +177,21 @@ public class ChengeStageManager : MonoBehaviour {
         // 2ndから3rdステージへ
         if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
-            _splineAnimate3st.enabled = true;
+            _splineAnimate4st.enabled = true;
             _numberOfDefeats.enabled = false; // 2ndステージの集計を無効化
-            _3rdTime.LimitTimerStart(); // 3rdステージのタイマー開始
+            _star.enabled = true; // 4thステージのスクリプトを有効化
         }
 
         // 3rdから4thステージへ
         if (_indexStage == 3) {
-            _splineAnimate3st.enabled = false;
-            _splineAnimate4st.enabled = true;
-            _3rdRank.enabled = false; // 3rdステージのランク集計を無効化
-            _star.enabled = true; // 4thステージのスクリプトを有効化
+            _splineAnimate4st.enabled = false;
+            _splineAnimate3st.enabled = true;
+            _3rdTime.LimitTimerStart(); // 3rdステージのタイマー開始
         }
 
         // 4thから5thステージへ
         if (_indexStage == 4) {
-            _splineAnimate4st.enabled = false;
+            _splineAnimate3st.enabled = false;
             _splineAnimate5st.enabled = true;
         }
 
