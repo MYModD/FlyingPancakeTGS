@@ -36,6 +36,8 @@ public class GameController3rd : MonoBehaviour
     #region メソッド
 
     void Update() {
+        print("残弾数" + _missileRoundsRemaining);
+
         // ミサイル発射クールタイムの更新
         _missileCooldownTimer -= Time.deltaTime;
 
@@ -56,6 +58,8 @@ public class GameController3rd : MonoBehaviour
     public void RoundsRemainingIncrease(int increaseValue) {
 
         _missileRoundsRemaining += increaseValue;
+
+        print("残弾数" + _missileRoundsRemaining);
     }
     #endregion
 }
