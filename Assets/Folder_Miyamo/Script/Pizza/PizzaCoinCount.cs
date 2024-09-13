@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Splines;
 
 public class PizzaCoinCount : MonoBehaviour {
     [Header("タグ設定")]
@@ -22,7 +23,12 @@ public class PizzaCoinCount : MonoBehaviour {
     private float _maxPizzaCoin;
 
     [Header("UI設定")]
-    public TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _title;
+
+    [SerializeField]
+    private SplineAnimate _anime;
+
 
     [Header("一定時間ごとに減少するその時間")]
     [SerializeField, Range(0, 3f)]
@@ -40,6 +46,11 @@ public class PizzaCoinCount : MonoBehaviour {
 
     void Start() {
         _lastDecreaseTime = Time.time;
+    }
+    private void Update() {
+        if (_anime.enabled == true) {
+
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -75,5 +86,6 @@ public class PizzaCoinCount : MonoBehaviour {
 
     private void UpdatePizzaCountText() {
         _text.text = _pizzaCount.ToString();
+        _title.text = "PizzaCoin";
     }
 }
