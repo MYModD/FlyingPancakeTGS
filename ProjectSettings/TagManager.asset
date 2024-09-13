@@ -24,6 +24,8 @@ TagManager:
   - Wheel
   - Obstacles
   - F14
+  - PizzaLeftArm
+  - PizzaMissile
   layers:
   - Default
   - TransparentFX
