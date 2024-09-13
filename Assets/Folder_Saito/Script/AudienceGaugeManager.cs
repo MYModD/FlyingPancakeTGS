@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using TMPro;
 public class AudienceGaugeManager : MonoBehaviour {
     #region 変数
+    [SerializeField, Header("オーディエンスPONPON")] private GameObject[] _audience;
     [Header("各ランク下限値％設定")]
     [SerializeField, Header("Sランク")] private int _rankS;
     [SerializeField, Header("Aランク")] private int _rankA;
@@ -80,26 +81,41 @@ public class AudienceGaugeManager : MonoBehaviour {
     /// ランク設定とその処理
     /// </summary>
     private void ChangeSliderValue() {
-        if (_audiencePONPONValue >= _rankS) {
+        if (_audiencePONPONValue >= 100) {
+            _audience[4].SetActive(true);
+            _fillImage.color = GetRainbowColor();
+        }
+        else if (_audiencePONPONValue >= _rankS) {
             // Sランク処理 - 時間経過で虹色に変化
             _fillImage.color = GetRainbowColor();
             _rank.text = "S";
+            _audience[3].SetActive(true);
+            _audience[4].SetActive(false);
         } else if (_audiencePONPONValue >= _rankA) {
             // Aランク処理
             _fillImage.color = Color.red;
             _rank.text = "A";
+            _audience[2].SetActive(true);
+            _audience[3].SetActive(false);
         } else if (_audiencePONPONValue >= _rankB) {
             // Bランク処理
             _fillImage.color = Color.cyan;
             _rank.text = "B";
+            _audience[1].SetActive(true);
+            _audience[2].SetActive(false);
         } else if (_audiencePONPONValue >= _rankC) {
             // Cランク処理
             _fillImage.color = Color.green;
             _rank.text = "C";
+            _audience[0].SetActive(true);
+            _audience[1].SetActive (false);
         } else {
             // Dランク処理
             _fillImage.color = Color.gray;
             _rank.text = "D";
+            foreach (GameObject obj in _audience) {
+                obj.SetActive(false);
+            }
         }
     }
     private void SetResult() {
