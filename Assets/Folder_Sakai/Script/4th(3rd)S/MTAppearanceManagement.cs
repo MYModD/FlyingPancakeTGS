@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MTAppearanceManagement : MonoBehaviour {
@@ -11,6 +12,15 @@ public class MTAppearanceManagement : MonoBehaviour {
     [SerializeField] private GameObject[] _monsterTruck;
     [SerializeField] private ExplosionPoolManager _explosionPoolManager;
 
+    [SerializeField] private ScoreManager _scoreManager;
+
+    [SerializeField]
+    private TextMeshProUGUI _text;
+    [SerializeField]
+    private TextMeshProUGUI _title;
+    private void Update() {
+        NumberOfUnitsCounted();
+    }
     // スポーンを管理するメソッド
     public void MTSpawn(int numberOfGeneration) {
         print(numberOfGeneration);
@@ -99,7 +109,7 @@ public class MTAppearanceManagement : MonoBehaviour {
         }
     }
 
-    public int NumberOfUnitsCounted() {
+    private void NumberOfUnitsCounted() {
 
         int activeCount = 0;
 
@@ -109,7 +119,8 @@ public class MTAppearanceManagement : MonoBehaviour {
                 activeCount++;
             }
         }
-
-        return activeCount;
+        _scoreManager.InputGetStarScore(activeCount, 30);
+        _text.text = activeCount.ToString();
+        _title.text = "MonstarCount";
     }
 }
