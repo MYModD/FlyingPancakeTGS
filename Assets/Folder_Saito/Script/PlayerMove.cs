@@ -345,10 +345,10 @@ public class PlayerMove : MonoBehaviour {
         return changePower;
     }
 
-    public float SetChangePower() {
+    //public float SetChangePower() {
 
-        float changePower = CalculateSpeed(0);
-        return changePower;
-    }
+    //    float changePower = CalculateSpeed(0);
+    //    return changePower;
+    //}
     #endregion
 }

@@ -13,6 +13,8 @@ public class MTAppearanceManagement : MonoBehaviour {
     [SerializeField] private ExplosionPoolManager _explosionPoolManager;
 
     [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField]
+    private AudienceGaugeManager _audienceGaugeManager;
 
     [SerializeField]
     private TextMeshProUGUI _text;
@@ -117,10 +119,12 @@ public class MTAppearanceManagement : MonoBehaviour {
         foreach (bool judge in _spawnJudge) {
             if (!judge) {
                 activeCount++;
+                print(activeCount);
             }
         }
         _scoreManager.InputGetStarScore(activeCount, 30);
         _text.text = activeCount.ToString();
         _title.text = "MonstarCount";
+        _audienceGaugeManager.SetScoreValue(activeCount, 49, "MonsterCount");
     }
 }
