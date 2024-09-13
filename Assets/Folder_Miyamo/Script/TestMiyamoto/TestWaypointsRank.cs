@@ -64,9 +64,7 @@ public class PlayerRankManager : MonoBehaviour {
 
     private void Update() {
         
-        _textTitle.text = "ToBeTheTop";
-        _textScore.text = _currentPlayerRank.ToString() + "/" + "9";
-        _gauge.SetScoreValue(_currentPlayerRank, 10, "ToBeTheTop");
+        
 
         int currentPlayerIndex = Array.IndexOf(_playerObjects, _currentPlayerObject);
 

@@ -22,13 +22,13 @@ public class StarScore : MonoBehaviour {
 
         print("ÉgÉäÉKÅ[");
         if (_starScoreManager == null) {
-            _starScoreManager = StarScoreManager.Instance;
+            //_starScoreManager = StarScoreManager.Instance;
         }
         if (other.gameObject.CompareTag(_playerTag)) {
 
             if (_justOne) {
                 _particleSystem.Play();
-                _starScoreManager.ScoreAddition(_score);
+               // _starScoreManager.ScoreAddition(_score);
 
                 if (_missileStockIncrease) {
 

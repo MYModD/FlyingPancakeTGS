@@ -13,14 +13,14 @@ public class PizzaCoinCount : MonoBehaviour {
     [SerializeField, Tag]
     private string _enemyTag;
     [SerializeField, Tag]
-    public string _pizzaManTagEnemy;
+    private string _pizzaManTagEnemy;
 
     [Header("ピザコイン設定")]
     [SerializeField]
     private int _pizzaCount = 0;
     [SerializeField]
     [Header("次のステージに進むために必要なコイン数")]
-    private float _maxPizzaCoin;
+    private int _maxPizzaCoin;
 
     [Header("UI設定")]
     [SerializeField] private TextMeshProUGUI _text;
@@ -32,17 +32,20 @@ public class PizzaCoinCount : MonoBehaviour {
 
     [Header("一定時間ごとに減少するその時間")]
     [SerializeField, Range(0, 3f)]
-    public float _decreaseInterval = 1f; // 減少する間隔（秒）
+    private float _decreaseInterval = 1f; // 減少する間隔（秒）
     [SerializeField]
     [Header("一度に減少する量")]
-    public int _decreaseAmount = 1;
+    private int _decreaseAmount = 1;
 
-    public AudioSource _audioPizza;
+    [SerializeField]
+    private AudioSource _audioPizza;
 
     private float _lastDecreaseTime;
 
     [Header("プレイヤー参照")]
     public PizzaMan _pizzaMan;
+    [SerializeField]
+    private AudienceGaugeManager _gaugeManager;
 
     void Start() {
         _lastDecreaseTime = Time.time;
@@ -87,5 +90,6 @@ public class PizzaCoinCount : MonoBehaviour {
     private void UpdatePizzaCountText() {
         _text.text = _pizzaCount.ToString();
         _title.text = "PizzaCoin";
+        _gaugeManager.SetScoreValue(_pizzaCount, _maxPizzaCoin, "PizzaCoin");
     }
 }

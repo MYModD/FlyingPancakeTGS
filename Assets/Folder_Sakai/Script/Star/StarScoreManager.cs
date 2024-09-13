@@ -48,10 +48,10 @@ public class StarScoreManager : MonoBehaviour {
         }
     }
     private void Update() {
-        _textTitle.text = "Star Count";
-        _textScore.text = _score.ToString();
-        _scoreManager.InputGetStarScore(_score, _maxStarUSA);
-        _gauge.SetScoreValue(_score, _maxStarUSA, "Star Count");
+        //_textTitle.text = "Star Count";
+        //_textScore.text = _score.ToString();
+        //_scoreManager.InputGetStarScore(_score, _maxStarUSA);
+        //_gauge.SetScoreValue(_score, _maxStarUSA, "Star Count");
     }
 
     public void ScoreAddition(int score) {
