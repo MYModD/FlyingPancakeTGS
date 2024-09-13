@@ -565,54 +565,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5496751706578934889
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8067736821124856699}
-  - component: {fileID: 7759475057083769851}
-  m_Layer: 0
-  m_Name: ChengeMainCameraLockOnDistance
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8067736821124856699
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5496751706578934889}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8541767596807045244}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7759475057083769851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5496751706578934889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36a838795e941224e91816762a9e0c18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraLockOn: {fileID: 0}
-  _sphereDistance: 5000
-  _coneRange: 4000
-  _coneAngle: 19.3
 --- !u!1 &6078480038691682328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1810,68 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2861737072641578612, guid: c8768c71533f47c4791a2b298ad2b5ba, type: 3}
   m_PrefabInstance: {fileID: 5023558716154337586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6554723159398580759
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8541767596807045244}
+    m_Modifications:
+    - target: {fileID: 1639151324632342142, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_Name
+      value: ChengeMainCameraLockOnDistance
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+--- !u!4 &8067736821124856699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3819428623430383980, guid: 9e907fcd58d99d0488adbadf00066099, type: 3}
+  m_PrefabInstance: {fileID: 6554723159398580759}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6713161741645425756
 PrefabInstance:
