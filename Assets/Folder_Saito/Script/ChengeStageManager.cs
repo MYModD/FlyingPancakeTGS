@@ -134,6 +134,7 @@ public class ChengeStageManager : MonoBehaviour {
             if (_game4st != null) {
                 _game3st.SetActive(true);
                 _map3st.SetActive(true); // 3rdステージのマップを有効化
+                _gamePad.SetActive(true);
                 _fogControl.SetFog(true); // フォグを有効化
             } else {
                 _isFinish = true;
@@ -145,7 +146,6 @@ public class ChengeStageManager : MonoBehaviour {
         if (_indexStage == 4) {
             _game3st.SetActive(false);
             _map3st.SetActive(false); // マップを無効化
-            _gamePad.SetActive(true);
             _fogControl.SetFog(false); // フォグを無効化
             if (_game5st != null) {
                 _game5st.SetActive(true); // 5thステージを表示

@@ -34,7 +34,7 @@ public class StarScoreManager : MonoBehaviour {
 
     [SerializeField]private float _weitSecond = 0.1f;
     private int _score;
-    private int _maxStarUSA = 50;
+    private int _maxStarUSA = 30;
 
     [SerializeField] private AudioSource _se;
 
