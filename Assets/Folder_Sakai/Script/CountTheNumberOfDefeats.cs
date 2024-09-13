@@ -8,7 +8,7 @@ public class CountTheNumberOfDefeats : MonoBehaviour
 {
     [SerializeField] private ScoreManager _score;
     private int _countTheNumberOfDefeats = 0;
-    private int _maxEnemy = 21;
+    private int _maxEnemy = 20;
     [SerializeField] private TextMeshProUGUI _killCount;
     [SerializeField] private TextMeshProUGUI _killTitle;
 
