@@ -98,4 +98,18 @@ public class MTAppearanceManagement : MonoBehaviour {
             }
         }
     }
+
+    public int NumberOfUnitsCounted() {
+
+        int activeCount = 0;
+
+        // _spawnJudge の中で false（アクティブなオブジェクト）の数を数える
+        foreach (bool judge in _spawnJudge) {
+            if (!judge) {
+                activeCount++;
+            }
+        }
+
+        return activeCount;
+    }
 }
