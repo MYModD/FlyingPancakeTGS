@@ -45,9 +45,11 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
     [SerializeField] private FogControl _fogControl;
+    [SerializeField]
+    private GameObject _gamePad;
 
     // 4thステージに関する設定
-    [Header("4stStage")]
+     [Header("4stStage")]
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
     [SerializeField] private SplineAnimate _splineAnimate4st;
     [SerializeField, Header("4stのステージ")] private GameObject _game4st;
@@ -143,6 +145,7 @@ public class ChengeStageManager : MonoBehaviour {
         if (_indexStage == 4) {
             _game3st.SetActive(false);
             _map3st.SetActive(false); // マップを無効化
+            _gamePad.SetActive(true);
             _fogControl.SetFog(false); // フォグを無効化
             if (_game5st != null) {
                 _game5st.SetActive(true); // 5thステージを表示
