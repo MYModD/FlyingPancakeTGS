@@ -13,12 +13,8 @@ public class MissileLaunchesAtThePlayer : MonoBehaviour
 
         if (other.gameObject.CompareTag(_playerTag)) {
 
-            foreach (Transform firePos in _firesPos) {
 
-                print("”­ŽË");
-                _enemyMissilePoolManger.EnemyFireMissile(firePos);
-            }
-
+                _enemyMissilePoolManger.EnemyFireMissile(_firesPos);
             
         }
     }

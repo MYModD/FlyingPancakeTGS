@@ -22,6 +22,8 @@ TagManager:
   - PizzaCoin
   - Tpoint
   - Wheel
+  - Obstacles
+  - F14
   layers:
   - Default
   - TransparentFX
