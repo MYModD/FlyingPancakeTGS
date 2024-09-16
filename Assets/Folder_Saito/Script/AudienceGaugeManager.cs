@@ -68,22 +68,25 @@ public class AudienceGaugeManager : MonoBehaviour {
         if (_currentPlayScore == _nowPlayerScore) {
             return;
         }
-       
-         if (_nowPlayerScore != 0) {
-            print("socool");
-            //小数点第1位まで計算する
-            _audiencePONPONValue = Mathf.Round(_nowPlayerScore / _maxScore * 1000) / 10;
+
+        if (_nowPlayerScore != 0 && _maxScore != 0) {
+            // 小数点第1位まで計算し、100%以上にならないように制限
+            _audiencePONPONValue = Mathf.Min(Mathf.Round((_nowPlayerScore / _maxScore * 1000)) / 10, 100);
         } else {
             _audiencePONPONValue = 0;
         }
+
         _audienceGauge.value = _audiencePONPONValue;
         _currentPlayScore = _nowPlayerScore;
     }
+
     /// <summary>
     /// ランク設定とその処理
     /// </summary>
     private void ChangeSliderValue() {
+        Debug.Log($"<color=#FF0000>_audiencePONPONValue: {_audiencePONPONValue}</color>"); // 赤っぽいログ表示（Rich Text, UI用）
         if (_audiencePONPONValue >= 100) {
+            _rank.text = "S";
             _audience[0].SetActive(true);
             _audience[1].SetActive(true);
             _audience[2].SetActive(true);
