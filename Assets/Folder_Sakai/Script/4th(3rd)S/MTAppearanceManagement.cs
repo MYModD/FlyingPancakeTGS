@@ -125,6 +125,6 @@ public class MTAppearanceManagement : MonoBehaviour {
         _scoreManager.InputGetStarScore(activeCount, 30);
         _text.text = activeCount.ToString();
         _title.text = "MonstarCount";
-        _audienceGaugeManager.SetScoreValue(activeCount, 49, "MonsterCount");
+        _audienceGaugeManager.SetScoreValue(activeCount, 30, "MonsterCount");
     }
 }
