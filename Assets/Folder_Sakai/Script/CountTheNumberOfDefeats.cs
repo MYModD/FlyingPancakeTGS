@@ -17,9 +17,9 @@ public class CountTheNumberOfDefeats : MonoBehaviour
 
 
     private void Update() {
-        _killTitle.text = "Kill Count";
-        _killCount.text = _countTheNumberOfDefeats.ToString();
-        _gauge.SetScoreValue(_countTheNumberOfDefeats, _maxEnemy, "Kill Count");
+        _killTitle.text = "Count";
+        _killCount.text = _countTheNumberOfDefeats.ToString()+" / " + _maxEnemy.ToString();
+        _gauge.SetScoreValue(_countTheNumberOfDefeats, _maxEnemy, "Count");
     }
 
     public void AdditionOfNumberOfDefeats() {

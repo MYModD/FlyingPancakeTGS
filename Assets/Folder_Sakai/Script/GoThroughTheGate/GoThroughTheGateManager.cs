@@ -19,9 +19,9 @@ public class GoThroughTheGateManager : MonoBehaviour
 
         _score++;
         _scoreManager.InputRingScore(_score, _maxScore);
-        _textTitle.text = "Ring Count";
+        _textTitle.text = "Count";
         _textScore.text = _score.ToString() + " / "+_maxScore.ToString();
-        _gauge.SetScoreValue(_score, _maxScore, "Ring Count");
+        _gauge.SetScoreValue(_score, _maxScore, "Count");
     }
     #endregion
 }

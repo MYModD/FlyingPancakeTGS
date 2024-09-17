@@ -50,7 +50,9 @@ public class PizzaCoinCount : MonoBehaviour {
     void Start() {
         _lastDecreaseTime = Time.time;
     }
-
+    private void OnEnable() {
+        _text.text = ""+0;
+    }
     private void OnTriggerEnter(Collider other) {
         Debug.Log($"‚Ô‚Â‚©‚Á‚½‚â‚Â : {other.gameObject.name}");
         if (other.CompareTag(_pizzaTag)) {

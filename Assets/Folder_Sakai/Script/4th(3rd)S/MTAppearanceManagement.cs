@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MTAppearanceManagement : MonoBehaviour {
     // スポーンポイント
@@ -14,8 +15,13 @@ public class MTAppearanceManagement : MonoBehaviour {
 
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _audioClip;
+    [SerializeField]
     private AudienceGaugeManager _audienceGaugeManager;
-
+    [SerializeField]
+    private GameObject[] _starUI;
     [SerializeField]
     private TextMeshProUGUI _text;
     [SerializeField]
@@ -29,6 +35,7 @@ public class MTAppearanceManagement : MonoBehaviour {
     // スポーンを管理するメソッド
     public void MTSpawn(int numberOfGeneration) {
         print(numberOfGeneration);
+        StartCoroutine(StarUP(numberOfGeneration));
         for (int i = 0; i < numberOfGeneration; i++) {
             for (int j = 0; j < _spawnJudge.Length; j++) {
                 if (_spawnJudge[j]) {
@@ -36,8 +43,21 @@ public class MTAppearanceManagement : MonoBehaviour {
                     _monsterTruck[j].transform.rotation = _spawnPoint[j].rotation;
                     _monsterTruck[j].SetActive(true);
                     _spawnJudge[j] = false;
+                    SEPlay();
+                    
                     break;
                 }
+            }
+        }
+    }
+    private IEnumerator StarUP(int starCount) {
+        for (int i = 0; i < starCount; i++) {
+            int ramdam = Random.Range(0, _starUI.Length);
+            if (_starUI[ramdam].activeSelf) {
+                i--;
+            } else {
+                yield return new WaitForSeconds(0.1f);  // 0.1秒待つ
+                _starUI[ramdam].SetActive(true);
             }
         }
     }
@@ -117,6 +137,10 @@ public class MTAppearanceManagement : MonoBehaviour {
             }
         }
     }
+    private void SEPlay() {
+        _audioSource.Stop();
+        _audioSource.PlayOneShot(_audioClip);
+    }
 
     private void NumberOfUnitsCounted() {
 
@@ -130,8 +154,8 @@ public class MTAppearanceManagement : MonoBehaviour {
             }
         }
         _scoreManager.InputGetStarScore(activeCount, 30);
-        _text.text = activeCount.ToString();
-        _title.text = "MonstarCount";
-        _audienceGaugeManager.SetScoreValue(activeCount, 30, "MonsterCount");
+        _text.text = activeCount.ToString()+" / "+49;
+        _title.text = "Count";
+        _audienceGaugeManager.SetScoreValue(activeCount, 49, "Count");
     }
 }

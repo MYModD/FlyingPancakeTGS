@@ -6,7 +6,7 @@ public class StarScore : MonoBehaviour {
     #region ïœêî
     [SerializeField] private int _score;
     [SerializeField, Tag] private string _playerTag;
-    [SerializeField] private StarScoreManager _starScoreManager;
+    //[SerializeField] private StarScoreManager _starScoreManager;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private MTAppearanceManagement _mTAppearanceManagement;
     [SerializeField] private GameController3rd _gameController;
