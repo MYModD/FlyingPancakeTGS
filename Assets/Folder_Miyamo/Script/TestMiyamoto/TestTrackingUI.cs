@@ -81,7 +81,7 @@ public class TestTrackingUI : MonoBehaviour {
 
     }
 
-    private void UpdateUIInsidePositions(MissileStuck[] missileStucks, Image[] uiElements) {
+    /*private void UpdateUIInsidePositions(MissileStuck[] missileStucks, Image[] uiElements) {
 
         for (int i = 0; i < missileStucks.Length; i++) {
             if (missileStucks[i]._enemyTarget != null) {
@@ -99,7 +99,7 @@ public class TestTrackingUI : MonoBehaviour {
 
         }
 
-    }
+    }*/
 
 
 }

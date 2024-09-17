@@ -185,7 +185,7 @@ public class PlayerMove : MonoBehaviour {
         float inputRStick = 0/*Input.GetAxis("RStickV")*/;
 
         if (_splineAnimate3.enabled) {
-           _splineAnimate3.ElapsedTime += _changePower;
+            _splineAnimate3.ElapsedTime += _changePower;
         }
         //速度計算した値
         float speed = CalculateSpeed(inputRStick);
@@ -335,8 +335,8 @@ public class PlayerMove : MonoBehaviour {
         _isStop = true;
     }
     public void StartMoving() {
-        _isStop=false;
-        _stopTime=0;
+        _isStop = false;
+        _stopTime = 0;
     }
 
     public float SetChangePower() {
@@ -344,5 +344,11 @@ public class PlayerMove : MonoBehaviour {
         float changePower = CalculateSpeed(0);
         return changePower;
     }
+
+    //public float SetChangePower() {
+
+    //    float changePower = CalculateSpeed(0);
+    //    return changePower;
+    //}
     #endregion
 }

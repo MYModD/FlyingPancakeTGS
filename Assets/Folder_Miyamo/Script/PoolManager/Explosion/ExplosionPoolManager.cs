@@ -25,4 +25,17 @@ public class ExplosionPoolManager : PoolManager<Explosion>
     }
 
 
+    public void StartExplosionScale(Transform startPosition,float scale ) {
+        if (_objectPool == null) {
+            Debug.LogError("オブジェクトがアタッチされてないよ");
+            return;
+        }
+
+        Explosion explosion = _objectPool.Get();                   // オブジェクトから取得
+        explosion.Initialize();                                    // 初期化
+        explosion.transform.position = startPosition.position;     // 爆発の位置を引数の位置にする
+        explosion.transform.localScale = new Vector3(scale, scale, scale);
+    
+    }
+
 }
