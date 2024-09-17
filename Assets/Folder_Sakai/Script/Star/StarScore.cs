@@ -27,6 +27,7 @@ public class StarScore : MonoBehaviour {
         if (other.gameObject.CompareTag(_playerTag)) {
 
             if (_justOne) {
+                print("col");
                 _particleSystem.Play();
                // _starScoreManager.ScoreAddition(_score);
 
