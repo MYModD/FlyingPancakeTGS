@@ -58,6 +58,7 @@ public class PizzaMissile : MonoBehaviour {
 
         // 現在のローカル距離に基づいて速度を調整
         float localDistanceToPlayer = Vector3.Distance(transform.localPosition, _parentTransform.InverseTransformPoint(_player.position));
+        Debug.Log($"プレイヤーの距離 : {localDistanceToPlayer}");
         float t = Mathf.Clamp01(localDistanceToPlayer / _maxDistance);
         _currentSpeed = Mathf.Lerp(_minSpeed, _initialSpeed, t);
 
