@@ -43,11 +43,11 @@ public class GameController3rd : MonoBehaviour
 
         // ミサイル発射条件判定
         bool canFireMissile = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
-                              && _missileCooldownTimer <= 0 && _missileRoundsRemaining >= 1;
+                              && _missileCooldownTimer <= 0/* && _missileRoundsRemaining >= 1*/;
 
         if (canFireMissile) {
-            _missileRoundsRemaining--;
-            print(_missileRoundsRemaining);
+            //_missileRoundsRemaining--;
+            //print(_missileRoundsRemaining);
             _missilePoolManager.FireMissiles(_missileLaunchPosition);
             _missileCooldownTimer = _missileFireInterval;
             Debug.Log("ミサイル発射");
