@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Splines;
+using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
+using System;
+using Unity.Mathematics;
 
 public class PizzaCoinCount : MonoBehaviour {
-    [Header("„Çø„Ç∞Ë®≠ÂÆö")]
+    [Header("É^ÉOê›íË")]
     [SerializeField, Tag]
     private string _pizzaTag;
     [SerializeField, Tag]
@@ -13,68 +16,72 @@ public class PizzaCoinCount : MonoBehaviour {
     [SerializeField, Tag]
     private string _enemyTag;
     [SerializeField, Tag]
-    private string _pizzaManTagEnemy;
+    public string _pizzaManTagEnemy;
 
-    [Header("„Éî„Ç∂„Ç≥„Ç§„É≥Ë®≠ÂÆö")]
+    [Header("ÉsÉUÉRÉCÉìê›íË")]
     [SerializeField]
     private int _pizzaCount = 0;
     [SerializeField]
-    [Header("Ê¨°„ÅÆ„Çπ„ÉÜ„Éº„Ç∏„Å´ÈÄ≤„ÇÄ„Åü„ÇÅ„Å´ÂøÖË¶Å„Å™„Ç≥„Ç§„É≥Êï∞")]
-    private int _maxPizzaCoin;
+    [Header("éüÇÃÉXÉeÅ[ÉWÇ…êiÇﬁÇΩÇﬂÇ…ïKóvÇ»ÉRÉCÉìêî")]
+    private float _maxPizzaCoin;
 
-    [Header("UIË®≠ÂÆö")]
-    [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private TextMeshProUGUI _title;
+    [Header("UIê›íË")]
+    public TextMeshProUGUI _text;
 
-    [SerializeField]
-    private SplineAnimate _anime;
-
-
-    [Header("‰∏ÄÂÆöÊôÇÈñì„Åî„Å®„Å´Ê∏õÂ∞ë„Åô„Çã„Åù„ÅÆÊôÇÈñì")]
+    [Header("àÍíËéûä‘Ç≤Ç∆Ç…å∏è≠Ç∑ÇÈÇªÇÃéûä‘")]
     [SerializeField, Range(0, 3f)]
-    private float _decreaseInterval = 1f; // Ê∏õÂ∞ë„Åô„ÇãÈñìÈöîÔºàÁßíÔºâ
+    public float _decreaseInterval = 1f; // å∏è≠Ç∑ÇÈä‘äuÅiïbÅj
     [SerializeField]
-    [Header("‰∏ÄÂ∫¶„Å´Ê∏õÂ∞ë„Åô„ÇãÈáè")]
-    private int _decreaseAmount = 1;
+    [Header("àÍìxÇ…å∏è≠Ç∑ÇÈó ")]
+    public int _decreaseAmount = 1;
 
-    [SerializeField]
-    private AudioSource _audioPizza;
+    public AudioSource _audioPizza;
 
     private float _lastDecreaseTime;
 
-    [Header("„Éó„É¨„Ç§„É§„ÉºÂèÇÁÖß")]
+    [Header("ÉvÉåÉCÉÑÅ[éQè∆")]
     public PizzaMan _pizzaMan;
-    [SerializeField]
-    private AudienceGaugeManager _gaugeManager;
+
+    public RedDamageEffect _redDamage;
+
+    public float _damageDuration = 1.1f;
+
+    public TestLockOnManager _lockOn;
 
     void Start() {
         _lastDecreaseTime = Time.time;
     }
-    private void Update() {
-        if (_anime.enabled == true) {
-
-        }
+    private void OnEnable() {
+        _text.text = ""+0;
     }
-
     private void OnTriggerEnter(Collider other) {
-        Debug.Log($"„Å∂„Å§„Åã„Å£„Åü„ÇÑ„Å§ : {other.gameObject.name}");
+        Debug.Log($"Ç‘Ç¬Ç©Ç¡ÇΩÇ‚Ç¬ : {other.gameObject.name}");
         if (other.CompareTag(_pizzaTag)) {
             _pizzaCount++;
+
+            float pitchRandom = UnityEngine.Random.Range(-0.05f, 0.05f);
+            Debug.Log($"ÉâÉìÉ_ÉÄíl : {pitchRandom}");
+
+            _audioPizza.pitch = 1f -pitchRandom;
             _audioPizza.Play();
             other.gameObject.SetActive(false);
             UpdatePizzaCountText();
-            //‰∏ÄÂÆöÊï∞ÈÅî„Åó„Åü„Çâ„Éî„Ç∂„Éû„É≥„ÅÆ„Çø„Ç∞„ÅåÊïµ„Å´Â§â„Çè„Çã„Çπ„ÇØ„É™„Éó„Éà
+            //àÍíËêîíBÇµÇΩÇÁÉsÉUÉ}ÉìÇÃÉ^ÉOÇ™ìGÇ…ïœÇÌÇÈÉXÉNÉäÉvÉg
             if (_pizzaCount >= _maxPizzaCoin) {
                 _pizzaMan.tag = _pizzaManTagEnemy;
             }
         }
         if (other.CompareTag(_enemyTag)) {
-            // „Åì„Åì„Å´„Éü„Çµ„Ç§„É´„ÅåÂΩì„Åü„Å£„Åü„Å®„ÅçÊ∏õ„Çâ„Åô
+            // Ç±Ç±Ç…É~ÉTÉCÉãÇ™ìñÇΩÇ¡ÇΩÇ∆Ç´å∏ÇÁÇ∑
             _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
+
+            // Ç±Ç±óvíçà”
+            _redDamage.PlayerDamage();
+            _lockOn.AddBlackList(other.transform);
             other.gameObject.SetActive(false);
+
         }
     }
-
 
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag(_pizzaLeftArmTag)) {
@@ -82,14 +89,18 @@ public class PizzaCoinCount : MonoBehaviour {
                 _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
                 _lastDecreaseTime = Time.time;
                 UpdatePizzaCountText();
+                _redDamage.PlayerDamage();
+
+
 
             }
         }
     }
 
+
+   
+
     private void UpdatePizzaCountText() {
         _text.text = _pizzaCount.ToString();
-        _title.text = "PizzaCoin";
-        _gaugeManager.SetScoreValue(_pizzaCount, _maxPizzaCoin, "PizzaCoin");
     }
 }
