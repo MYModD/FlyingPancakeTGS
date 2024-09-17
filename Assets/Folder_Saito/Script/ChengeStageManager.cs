@@ -10,6 +10,8 @@ using UnityEngine.Splines;
 
 public class ChengeStageManager : MonoBehaviour {
     #region 変数
+    [SerializeField]
+    private AudienceGaugeManager _gaugeManager;
     // 効果音再生用のAudioSource
     [SerializeField] private AudioSource _audioSE;
 
@@ -44,15 +46,17 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
     [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
-    [SerializeField, Header("killを集計するスクリプト")] private PlayerRankManager _3rdRank;
     [SerializeField] private FogControl _fogControl;
+    [SerializeField]
+    private GameObject _gamePad;
+    [SerializeField] private PizzaCoinCount _pizzaCoinCount;
 
     // 4thステージに関する設定
-    [Header("4stStage")]
+     [Header("4stStage")]
     [SerializeField, Header("4stのプレイヤー")] private GameObject _player4st;
     [SerializeField] private SplineAnimate _splineAnimate4st;
     [SerializeField, Header("4stのステージ")] private GameObject _game4st;
-    [SerializeField, Header("killを集計するスクリプト")] private StarScoreManager _star;
+    //[SerializeField, Header("killを集計するスクリプト")] private StarScoreManager _star;
 
     // 5thステージに関する設定
     [Header("5stStage")]
@@ -116,26 +120,26 @@ public class ChengeStageManager : MonoBehaviour {
             }
         }
 
-        // 2ndステージから3rdステージへの切り替え
+        // 2ndステージから4thステージへの切り替え
         if (_indexStage == 2) {
             _game2st.SetActive(false);
             if (_game3st != null) {
-                _game3st.SetActive(true);
-                _map3st.SetActive(true); // 3rdステージのマップを有効化
-                _fogControl.SetFog(true); // フォグを有効化
+                _game4st.SetActive(true); // 4thステージを表示
             } else {
                 _isFinish = true;
                 _canvasManager.PlayToED();
             }
         }
 
-        // 3rdステージから4thステージへの切り替え
+        // 4thステージから3rdステージへの切り替え
         if (_indexStage == 3) {
-            _game3st.SetActive(false);
-            _map3st.SetActive(false); // マップを無効化
-            _fogControl.SetFog(false); // フォグを無効化
+            _game4st.SetActive(false);
             if (_game4st != null) {
-                _game4st.SetActive(true); // 4thステージを表示
+                _game3st.SetActive(true);
+                _map3st.SetActive(true); // 3rdステージのマップを有効化
+                _gamePad.SetActive(true);
+                _pizzaCoinCount.enabled = true;
+                _fogControl.SetFog(true); // フォグを有効化
             } else {
                 _isFinish = true;
                 _canvasManager.PlayToED();
@@ -144,7 +148,10 @@ public class ChengeStageManager : MonoBehaviour {
 
         // 4thステージから5thステージへの切り替え
         if (_indexStage == 4) {
-            _game4st.SetActive(false);
+            _game3st.SetActive(false);
+            _map3st.SetActive(false); // マップを無効化
+            _fogControl.SetFog(false); // フォグを無効化
+            _pizzaCoinCount.enabled = false;
             if (_game5st != null) {
                 _game5st.SetActive(true); // 5thステージを表示
             } else {
@@ -161,6 +168,7 @@ public class ChengeStageManager : MonoBehaviour {
         }
         _cameraRotate.IsMainGameSwitch();
         _playerMove.StartMoving();
+        _gaugeManager.ResetValue();
     }
 
     /// <summary>
@@ -178,22 +186,22 @@ public class ChengeStageManager : MonoBehaviour {
         // 2ndから3rdステージへ
         if (_indexStage == 2) {
             _splineAnimate2st.enabled = false;
-            _splineAnimate3st.enabled = true;
+            _splineAnimate4st.enabled = true;
             _numberOfDefeats.enabled = false; // 2ndステージの集計を無効化
-            _3rdTime.LimitTimerStart(); // 3rdステージのタイマー開始
+            //_star.enabled = true; // 4thステージのスクリプトを有効化
         }
 
         // 3rdから4thステージへ
         if (_indexStage == 3) {
-            _splineAnimate3st.enabled = false;
-            _splineAnimate4st.enabled = true;
-            _3rdRank.enabled = false; // 3rdステージのランク集計を無効化
-            _star.enabled = true; // 4thステージのスクリプトを有効化
+            _splineAnimate4st.enabled = false;
+            _splineAnimate3st.enabled = true;
+            _gamePad.SetActive(true);
+            _3rdTime.LimitTimerStart(); // 3rdステージのタイマー開始
         }
 
         // 4thから5thステージへ
         if (_indexStage == 4) {
-            _splineAnimate4st.enabled = false;
+            _splineAnimate3st.enabled = false;
             _splineAnimate5st.enabled = true;
         }
 

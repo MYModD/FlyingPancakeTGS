@@ -58,6 +58,7 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
             }
             StartCoroutine(StartBubble(1,0.1f));
             _is1st = false;
+            _color = Color.white;
         }
         else if (_splineAnimate2.enabled && _is2nd) {
             if (!_is2nd) {
@@ -65,22 +66,25 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
             }
             _1stBubble.SetActive(false);
             StartCoroutine(StartBubble(2,1.5f));
+            _color = Color.black;
             _is2nd |= false;
         }
         else if (_splineAnimate3.enabled && _is3rd) {
             if (!_is3rd) {
                 return;
             }
-            _2ndBubble.SetActive(false);
+            _4thBubble.SetActive(false);
             StartCoroutine(StartBubble(3,1.5f));
+            _color = Color.black;
             _is3rd |= false;
         }else if (_splineAnimate4.enabled && _is4th) {
             if (!_is4th) {
                 return;
             }
-            _3rdBubble.SetActive(false);
+            _2ndBubble.SetActive(false);
             StartCoroutine(StartBubble(4, 1.5f));
             _is3rd |= false;
+            _color = Color.white;
         } else {
                 StartCoroutine(StartBubble(0, 0f));
             }

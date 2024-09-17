@@ -20,8 +20,14 @@ TagManager:
   - SpeedItem
   - MissileColPos
   - PizzaCoin
+  - Tpoint
+  - Wheel
+  - Obstacles
+  - F14
   - PizzaLeftArm
   - PizzaMissile
+  - 1stTag
+  - Ring
   layers:
   - Default
   - TransparentFX

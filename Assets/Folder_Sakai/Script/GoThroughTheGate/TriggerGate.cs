@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class TriggerGate : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class TriggerGate : MonoBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSE;
     [SerializeField] private AudioClip _ringPassedSE;
-    
+
+    private ControllerBuruBuru _controller;
 
     private bool _justOne = true;
     #endregion
@@ -20,9 +22,11 @@ public class TriggerGate : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
 
         if (other.gameObject.CompareTag(_playerTag)) {
-
+            if (_controller == null) {
+                _controller = ControllerBuruBuru.Instance;
+            }
+            _controller.StartVibration();
             _particleSystem.Play();
-            
             _audioSE.PlayOneShot(_ringPassedSE);
             if (_justOne) {
                 _goThroughTheGateManager.ScoreAddition();

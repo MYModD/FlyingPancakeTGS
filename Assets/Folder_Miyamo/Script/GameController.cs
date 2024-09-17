@@ -46,5 +46,9 @@ public class GameController : MonoBehaviour {
         // クールタイムの割合を計算（0~1の範囲に収める）
         _coolTimeRatio = 1f - Mathf.Clamp01(_missileCooldownTimer / _missileFireInterval);
     }
+
+    public float CoolTime() {
+        return _missileCooldownTimer;
+    }
     #endregion
 }

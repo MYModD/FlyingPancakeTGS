@@ -23,8 +23,8 @@ public class EnergyChangeSpeed : MonoBehaviour
             // 距離を計算
             float distance = Vector3.Distance(this.gameObject.transform.position,_player.position);
 
-            // 距離をログに表示
-            Debug.Log($"プレイヤーと敵機の距離: {distance}{this.gameObject.name}");
+            //// 距離をログに表示
+            //Debug.Log($"プレイヤーと敵機の距離: {distance}{this.gameObject.name}");
 
             if (_changeSpeedDistance <= distance) {
                 _enemyMoveSpline.ChangeSpeed();
