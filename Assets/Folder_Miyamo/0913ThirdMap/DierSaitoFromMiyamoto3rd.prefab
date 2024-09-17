@@ -1052,10 +1052,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9040338185884534271}
+  - component: {fileID: 6067128926504990640}
   - component: {fileID: 2917738184922692632}
   - component: {fileID: 5445005883274189680}
   - component: {fileID: 5177334927603903088}
-  - component: {fileID: 6067128926504990640}
   m_Layer: 0
   m_Name: PizzaManArm  Right   PizzaMissile
   m_TagString: Untagged
@@ -1081,6 +1081,27 @@ Transform:
   - {fileID: 8334312689650701748}
   m_Father: {fileID: 3817421836808587650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6067128926504990640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7997726585086295104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff64a78a79c7a1c48aed0ae9ae2c8c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pizzaMissileToPlayer: {fileID: 1842532819616059787, guid: d871d9fa8960e834cbfe6f1a4795c1dc, type: 3}
+  _player: {fileID: 0}
+  _firePostion:
+  - {fileID: 2972496786824176315}
+  - {fileID: 4403915138154271902}
+  - {fileID: 8334312689650701748}
+  _pearentPostion: {fileID: 0}
+  _explosionPoolManager: {fileID: 595041240772800897}
+  _fireInterval: 8
 --- !u!33 &2917738184922692632
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1152,27 +1173,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6067128926504990640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7997726585086295104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff64a78a79c7a1c48aed0ae9ae2c8c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pizzaMissileToPlayer: {fileID: 1842532819616059787, guid: d871d9fa8960e834cbfe6f1a4795c1dc, type: 3}
-  _player: {fileID: 0}
-  _firePostion:
-  - {fileID: 2972496786824176315}
-  - {fileID: 4403915138154271902}
-  - {fileID: 8334312689650701748}
-  _pearentPostion: {fileID: 0}
-  _explosionPoolManager: {fileID: 595041240772800897}
-  _fireInterval: 8
 --- !u!1 &8016037766908577196
 GameObject:
   m_ObjectHideFlags: 0
