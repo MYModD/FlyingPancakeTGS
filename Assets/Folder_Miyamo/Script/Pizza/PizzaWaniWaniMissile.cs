@@ -2,7 +2,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 
-public class EnemyAttack : MonoBehaviour {
+public class PizzaWaniWaniMissile : MonoBehaviour {
     [Header("移動設定")]
     [SerializeField] private Transform _startTransform;  // 開始位置
     [SerializeField] private Transform _attackTransform; // 攻撃位置
@@ -33,7 +33,8 @@ public class EnemyAttack : MonoBehaviour {
 
         _isMoving = true;
         Debug.Log("起動しました");
-        _animator.SetTrigger("Start");
+        
+        //_animator.SetTrigger("Start");
 
         await MoveToPosition(_attackTransform.localPosition, _moveSpeedToAttack);
         await UniTask.Delay((int)(_stayDuration * 1000));

@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1000, y: 1000, z: 1000}
+  m_LocalScale: {x: 200, y: 200, z: 200}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5313610761195880014}
@@ -137,7 +137,7 @@ MonoBehaviour:
   _minSpeed: 20
   _maxDistance: 300
   _deceleration: 0.376
-  _explosionScale: 100
+  _explosionScale: 10
   _playerMissileTag: Missile
   _explosionPool: {fileID: 0}
 --- !u!114 &6056394756863167294
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5371696920344186799}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c11806da72ec8647a72771ddec388ba, type: 3}
   m_Name: 

@@ -391,6 +391,99 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3526787274327874430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 430763452123950292}
+  - component: {fileID: 8038652464873129207}
+  - component: {fileID: 6318795670301486593}
+  - component: {fileID: 2287407904567483682}
+  m_Layer: 5
+  m_Name: RedDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &430763452123950292
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526787274327874430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 857016134058572211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1934.2, y: 1135}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8038652464873129207
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526787274327874430}
+  m_CullTransparentMesh: 1
+--- !u!114 &6318795670301486593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526787274327874430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5254902}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3d6cd0372a911d243841c82da257610d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2287407904567483682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3526787274327874430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bec55dea4eacf84aa5ae8678b9d976b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _redDamage: {fileID: 6318795670301486593}
+  _isDamageActive: 0
+  _duration: 2
+  _fadeInDuration: 0.5
+  _fadeOutDuration: 1
 --- !u!1 &4089497230502168899
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +856,7 @@ RectTransform:
   m_Children:
   - {fileID: 2542039284457961867}
   - {fileID: 8412566809314918901}
-  - {fileID: 3842080921948248923}
+  - {fileID: 430763452123950292}
   m_Father: {fileID: 8541767596807045244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -843,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9007513225654321550}
-  - component: {fileID: 2764299030879218737}
+  - component: {fileID: 5902271379565230473}
   - component: {fileID: 7609886287562755534}
   - component: {fileID: 4020964764370470474}
   - component: {fileID: 468320427923982030}
@@ -871,26 +964,26 @@ Transform:
   - {fileID: 3881108294016427085}
   m_Father: {fileID: 3817421836808587650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2764299030879218737
+--- !u!114 &5902271379565230473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6327468910464777766}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ee0817fd7569b34aa27850e1f22b2c7, type: 3}
+  m_Script: {fileID: 11500000, guid: c6e4558f04cff6b49a17c5a50323c449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startTransform: {fileID: 246959480609746229}
   _attackTransform: {fileID: 6891421247473605832}
-  _moveSpeedToAttack: 0.939
-  _moveSpeedToStart: 0.491
+  _moveSpeedToAttack: 0.31
+  _moveSpeedToStart: 0.48
   _epsilon: 50
   _stayDuration: 2
   _pizzaCoinTag: PizzaCoin
-  _durationRange: {x: 1.0447297, y: 4.3392487}
+  _durationRange: {x: 1, y: 4.188221}
   _animator: {fileID: 1091697022840757117}
 --- !u!33 &7609886287562755534
 MeshFilter:
@@ -990,97 +1083,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &6665223156364822390
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3842080921948248923}
-  - component: {fileID: 2796775052400601420}
-  - component: {fileID: 2371367522475442295}
-  - component: {fileID: 4529354438423373827}
-  m_Layer: 5
-  m_Name: RedDamage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3842080921948248923
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6665223156364822390}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 857016134058572211}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1934.2, y: 1135}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2796775052400601420
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6665223156364822390}
-  m_CullTransparentMesh: 1
---- !u!114 &2371367522475442295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6665223156364822390}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d6cd0372a911d243841c82da257610d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &4529354438423373827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6665223156364822390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bec55dea4eacf84aa5ae8678b9d976b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _redDamage: {fileID: 2371367522475442295}
-  _isDamageActive: 0
-  _duration: 2
 --- !u!1 &7409010782048935629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1122,7 @@ Transform:
   - {fileID: 1169202129822900386}
   - {fileID: 857016134058572211}
   - {fileID: 8067736821124856699}
+  - {fileID: 5712876064215245061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8630077990381649078
@@ -1135,6 +1138,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _note: "PizzaCoinCountFirePizzaMissile\nPlayerNotRotation\n\u3092\u4EE5\u4E0B\u306E\u901A\u308A\u306B\u914D\u7F6E\nhttps://cdn.discordapp.com/attachments/682723744375898171/1283984645096214558/image.png?ex=66e4fb62&is=66e3a9e2&hm=290d0fed7fe10f1e5b6dcbee851a0ce45aa0976ef5c89e8f3ffae0054c5facf0&"
+--- !u!1 &7616330994124580670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5712876064215245061}
+  - component: {fileID: 6416203242480291026}
+  m_Layer: 0
+  m_Name: StartTimerAndMove
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5712876064215245061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7616330994124580670}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8541767596807045244}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6416203242480291026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7616330994124580670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ef39e30a31fad4aacb61c069e6882f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pizzaWanima: {fileID: 5902271379565230473}
+  _firePizzaMissileToPlayer: {fileID: 6067128926504990640}
+  _delay: 2
 --- !u!1 &7997726585086295104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,10 +1194,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9040338185884534271}
+  - component: {fileID: 6067128926504990640}
   - component: {fileID: 2917738184922692632}
   - component: {fileID: 5445005883274189680}
   - component: {fileID: 5177334927603903088}
-  - component: {fileID: 6067128926504990640}
   m_Layer: 0
   m_Name: PizzaManArm  Right   PizzaMissile
   m_TagString: Untagged
@@ -1173,6 +1223,27 @@ Transform:
   - {fileID: 8334312689650701748}
   m_Father: {fileID: 3817421836808587650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6067128926504990640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7997726585086295104}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff64a78a79c7a1c48aed0ae9ae2c8c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pizzaMissileToPlayer: {fileID: 1842532819616059787, guid: d871d9fa8960e834cbfe6f1a4795c1dc, type: 3}
+  _player: {fileID: 0}
+  _firePostion:
+  - {fileID: 2972496786824176315}
+  - {fileID: 4403915138154271902}
+  - {fileID: 8334312689650701748}
+  _pearentPostion: {fileID: 0}
+  _explosionPoolManager: {fileID: 595041240772800897}
+  _fireInterval: 8
 --- !u!33 &2917738184922692632
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1244,27 +1315,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6067128926504990640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7997726585086295104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff64a78a79c7a1c48aed0ae9ae2c8c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pizzaMissileToPlayer: {fileID: 1842532819616059787, guid: d871d9fa8960e834cbfe6f1a4795c1dc, type: 3}
-  _player: {fileID: 0}
-  _firePostion:
-  - {fileID: 2972496786824176315}
-  - {fileID: 4403915138154271902}
-  - {fileID: 8334312689650701748}
-  _pearentPostion: {fileID: 0}
-  _explosionPoolManager: {fileID: 595041240772800897}
-  _fireInterval: 8
 --- !u!1 &8016037766908577196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,6 +2646,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6920210954157297657, guid: 26d674fdb70a09a40a975073b02e83a3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d64e6e8c53e7f8a49b569f7cf80c85ec, type: 2}
     m_RemovedComponents:
     - {fileID: 560951443478904720, guid: 26d674fdb70a09a40a975073b02e83a3, type: 3}
     m_RemovedGameObjects: []

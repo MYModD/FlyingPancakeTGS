@@ -1,43 +1,58 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
-using System;  // UniTaskを使用するためのライブラリを追加
+using System;
 
 public class RedDamageEffect : MonoBehaviour {
-    [SerializeField] private Image _redDamage;  // _redDamage Imageをシリアライズ
-    public bool _isDamageActive = false;       // ダメージエフェクトがアクティブかどうか
-    public float _duration;
+    [SerializeField] private Image _redDamage;
+    public bool _isDamageActive = false;
+    public float _duration = 2f;
+    public float _fadeInDuration = 0.5f;
+    public float _fadeOutDuration = 0.5f;
+
     private void Start() {
-        _redDamage.enabled = false;// 最初は非表示に設定
+        SetAlpha(0);
     }
 
-    // ダメージ時に呼び出されるメソッド
     public void PlayerDamage() {
         if (_isDamageActive) {
-        
-            return;  // 既にエフェクトが表示されている場合は何もしない
-
+            return;
         }
 
-        // ダメージエフェクトを表示
-        _redDamage.enabled = true;
         _isDamageActive = true;
-
-        // 一定時間後にエフェクトを非表示にする
-        HideRedDamageAsync().Forget();
+        FadeInOutAsync().Forget();
     }
 
-    /// <summary>
-    /// 一定時間後にImageを非表示にする非同期処理
-    /// </summary>
-    /// <returns></returns>
-    private async UniTaskVoid HideRedDamageAsync() {
-        // 指定した時間（例: 2秒間）待機
-        await UniTask.Delay(TimeSpan.FromSeconds(_duration));
+    private async UniTaskVoid FadeInOutAsync() {
+        // フェードイン
+        await FadeAsync(0, 1, _fadeInDuration);
 
-        // エフェクトを非表示にし、処理が終わったことを示すフラグをリセット
-        _redDamage.enabled = false;
+        // 最大アルファ値で待機
+        await UniTask.Delay(TimeSpan.FromSeconds(_duration - _fadeInDuration - _fadeOutDuration));
+
+        // フェードアウト
+        await FadeAsync(1, 0, _fadeOutDuration);
+
         _isDamageActive = false;
+    }
+
+    private async UniTask FadeAsync(float startAlpha, float endAlpha, float fadeDuration) {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration) {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / fadeDuration);
+            float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, t);
+            SetAlpha(currentAlpha);
+            await UniTask.Yield();
+        }
+
+        SetAlpha(endAlpha);
+    }
+
+    private void SetAlpha(float alpha) {
+        Color color = _redDamage.color;
+        color.a = alpha;
+        _redDamage.color = color;
     }
 }
