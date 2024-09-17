@@ -58,6 +58,9 @@ MonoBehaviour:
   _decreaseAmount: 5
   _audioPizza: {fileID: 2803642576260964535}
   _pizzaMan: {fileID: 0}
+  _redDamage: {fileID: 0}
+  _damageDuration: 1.14
+  _lockOn: {fileID: 0}
 --- !u!54 &4150469320300710178
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,9 +119,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 84bb1580dcdaaa04392d1682df1d1de9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cd526849545656e4baaaa7dd63f7d85f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.109
   m_Pitch: 1
   Loop: 0
   Mute: 0
