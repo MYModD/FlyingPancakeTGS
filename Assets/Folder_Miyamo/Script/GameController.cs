@@ -46,5 +46,9 @@ public class GameController : MonoBehaviour {
         }
 
     }
+
+    public float CoolTime() {
+        return _missileCooldownTimer;
+    }
     #endregion
 }
