@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
+using Unity.Mathematics;
 
 public class PizzaCoinCount : MonoBehaviour {
     [Header("タグ設定")]
@@ -55,6 +56,11 @@ public class PizzaCoinCount : MonoBehaviour {
         Debug.Log($"ぶつかったやつ : {other.gameObject.name}");
         if (other.CompareTag(_pizzaTag)) {
             _pizzaCount++;
+
+            float pitchRandom = UnityEngine.Random.Range(-0.05f, 0.05f);
+            Debug.Log($"ランダム値 : {pitchRandom}");
+
+            _audioPizza.pitch = 1f -pitchRandom;
             _audioPizza.Play();
             other.gameObject.SetActive(false);
             UpdatePizzaCountText();
