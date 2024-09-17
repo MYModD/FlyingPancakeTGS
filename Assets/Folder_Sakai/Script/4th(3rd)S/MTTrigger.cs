@@ -7,6 +7,7 @@ public class MTTrigger : MonoBehaviour
     [SerializeField] private ExplosionPoolManager _explosionPoolManager;
     [SerializeField] private MTAppearanceManagement _mTAppearanceManagement;
     [SerializeField] private int _spawnPointNumber = default;
+    private ControllerBuruBuru _controller;
     [SerializeField, Tag] private string _obstaclesTag;
 
     // Start is called before the first frame update
@@ -27,6 +28,11 @@ public class MTTrigger : MonoBehaviour
 
             _mTAppearanceManagement.MTTriggerObstacles(_spawnPointNumber);
             _explosionPoolManager.StartExplosion(this.gameObject.transform);
+
+            if (_controller == null) {
+                _controller = ControllerBuruBuru.Instance;
+            }
+            _controller.StartVibration();
             this.gameObject.SetActive(false);
         }
     }
