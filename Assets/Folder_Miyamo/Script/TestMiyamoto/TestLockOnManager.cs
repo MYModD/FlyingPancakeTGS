@@ -175,6 +175,15 @@ public class TestLockOnManager : MonoBehaviour {
         _targetsInCone.Clear();
     }
 
+
+
+    public void AddBlackList(Transform enemy) {
+
+        _targetsInCone = _targetsInCone.Where(target => target != enemy).ToList();
+        _targetsBlackList.Add(enemy);
+        
+    }
+
     public void RemoveBlackList(Transform transform) {
         _targetsBlackList.Remove(transform);
     }
