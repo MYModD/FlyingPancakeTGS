@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.iOS;
 
 public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField,Header("追いかけてる敵を取得するのに必要")]
-    private EnemyMissile _enemyMissile;
+    private PizzaMissile _pizzamissile;
 
 
     [MinMaxSlider(0, 10000000), Header("minは0にしてね")]
@@ -13,7 +13,7 @@ public class TargetDistanceScaler : MonoBehaviour {
     private Vector2 _minMaxDistanceRange = new Vector2(0, 10000);
 
 
-    [MinMaxSlider(1, 100), Header("最大最小スケール")]
+    [MinMaxSlider(100, 1000), Header("最大最小スケール")]
     [SerializeField]
     private Vector2 _minMaxScaleRange = new Vector2(1, 100);
 
@@ -35,7 +35,7 @@ public class TargetDistanceScaler : MonoBehaviour {
 
     private void Update() {
 
-        Transform enemyTarget = _enemyMissile._playerTarget;
+        Transform enemyTarget = _pizzamissile._player;
         float enemyTargetDistance = (enemyTarget.position - transform.position).sqrMagnitude;
 
         //Debug.Log($"ターゲットまでの座標{enemyTargetDistance}");
@@ -50,6 +50,12 @@ public class TargetDistanceScaler : MonoBehaviour {
 
 
 
+
+
+    }
+
+    private void OnEnable() {
+        
 
 
     }
