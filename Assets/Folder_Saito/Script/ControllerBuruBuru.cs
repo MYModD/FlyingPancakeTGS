@@ -42,11 +42,28 @@ public class ControllerBuruBuru : MonoBehaviour {
     public void StartVibration() {
         StartCoroutine(Vibration());
     }
-    IEnumerator Vibration() {
+    public void StartLongVibration() {
+        StartCoroutine(LBVibration());
+    }
+    public void CustomVibrationStart(float leftVibration,float rightVibration,float vibrationTime) {
+        StartCoroutine(CustomVibration(leftVibration, rightVibration, vibrationTime));
+    }
+    #region 振動コルーチン
+    private IEnumerator Vibration() {
         GamePad.SetVibration(0, _leftPower, _rightPower);
         yield return new WaitForSecondsRealtime(_duration);
         GamePad.SetVibration(0, 0, 0);
     }
-
+    private IEnumerator LBVibration() {
+        GamePad.SetVibration(0, _leftPower, _rightPower);
+        yield return new WaitForSecondsRealtime(_duration*5);
+        GamePad.SetVibration(0, 0, 0);
+    }
+    private IEnumerator CustomVibration(float leftVibration, float rightVibration, float vibrationTime) {
+        GamePad.SetVibration(0, leftVibration, rightVibration);
+        yield return new WaitForSecondsRealtime(vibrationTime);
+        GamePad.SetVibration(0, 0, 0);
+    }
+    #endregion;
     #endregion
 }
