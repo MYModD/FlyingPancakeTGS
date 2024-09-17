@@ -132,10 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _initialSpeed: 6000
+  _initialSpeed: 3000
   _minSpeed: 20
   _maxDistance: 300
-  _deceleration: 0.105
+  _deceleration: 0.544
   _explosionScale: 100
   _playerMissileTag: Missile
   _explosionPool: {fileID: 0}
