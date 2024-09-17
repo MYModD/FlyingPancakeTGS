@@ -20,16 +20,53 @@ public class StarScore : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
 
-        print("ƒgƒŠƒK[");
-        if (_starScoreManager == null) {
-            //_starScoreManager = StarScoreManager.Instance;
-        }
-        if (other.gameObject.CompareTag(_playerTag)) {
+        //print("ƒgƒŠƒK[");
+        //if (_starScoreManager == null) {
+        //    _starScoreManager = StarScoreManager.Instance;
+        //}
+        //if (other.gameObject.CompareTag(_playerTag)) {
+
+        //    if (_justOne) {
+        //        print("col");
+        //        _particleSystem.Play();
+        //        _starScoreManager.ScoreAddition(_score);
+
+        //        if (_missileStockIncrease) {
+
+        //            _gameController.RoundsRemainingIncrease(_score);
+
+        //        } else if (_multiplication) {
+
+        //            _mTAppearanceManagement.MultiplicationMTSpawn(_score);
+
+        //        } else if (_division) {
+
+        //            _mTAppearanceManagement.DivisionMTReduce(_score);
+        //            print(_score);
+
+        //        } else {
+
+        //            if (_score >= 1) {
+        //                print(_score);
+        //                _mTAppearanceManagement.MTSpawn(_score);
+
+        //            } else if (_score <= -1) {
+        //                print(_score);
+        //                _mTAppearanceManagement.MTReduce(_score);
+        //            }
+        //        }
+
+        //        _justOne = false;
+        //    }
+
+        //}
+    }
+
+    public void ScoreJudgment() {
 
             if (_justOne) {
-                print("col");
                 _particleSystem.Play();
-               // _starScoreManager.ScoreAddition(_score);
+                //_starScoreManager.ScoreAddition(_score);
 
                 if (_missileStockIncrease) {
 
@@ -58,8 +95,6 @@ public class StarScore : MonoBehaviour {
 
                 _justOne = false;
             }
-
         }
-    }
     #endregion
 }

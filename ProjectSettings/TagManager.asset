@@ -27,6 +27,7 @@ TagManager:
   - PizzaLeftArm
   - PizzaMissile
   - 1stTag
+  - Ring
   layers:
   - Default
   - TransparentFX

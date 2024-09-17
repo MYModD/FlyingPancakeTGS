@@ -20,6 +20,9 @@ public class MTAppearanceManagement : MonoBehaviour {
     private TextMeshProUGUI _text;
     [SerializeField]
     private TextMeshProUGUI _title;
+
+    private ControllerBuruBuru _controller;
+
     private void Update() {
         NumberOfUnitsCounted();
     }
@@ -101,6 +104,10 @@ public class MTAppearanceManagement : MonoBehaviour {
             if (!_spawnJudge[i]) {
                 _spawnJudge[i] = true;
                 _explosionPoolManager.StartExplosion(_spawnPoint[i].transform);
+                if (_controller == null) {
+                    _controller = ControllerBuruBuru.Instance;
+                }
+                _controller.StartVibration();
                 _monsterTruck[i].SetActive(false);
                 reducedCount++;
 
