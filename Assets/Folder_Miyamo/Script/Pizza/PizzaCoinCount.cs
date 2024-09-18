@@ -86,6 +86,7 @@ public class PizzaCoinCount : MonoBehaviour {
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag(_pizzaLeftArmTag)) {
             if (Time.time - _lastDecreaseTime >= _decreaseInterval) {
+                Debug.Log("Ç†ÇΩÇ¡ÇƒÇ‹Ç∑ÇÊÅ[");
                 _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
                 _lastDecreaseTime = Time.time;
                 UpdatePizzaCountText();
