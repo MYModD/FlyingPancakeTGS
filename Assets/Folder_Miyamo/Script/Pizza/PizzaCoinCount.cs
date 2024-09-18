@@ -12,8 +12,7 @@ public class PizzaCoinCount : MonoBehaviour {
     [Header("タグ設定")]
     [SerializeField, Tag]
     private string _pizzaTag;
-    [SerializeField, Tag]
-    private string _pizzaLeftArmTag;
+
     [SerializeField, Tag]
     private string _enemyTag;
     [SerializeField, Tag]
@@ -49,7 +48,6 @@ public class PizzaCoinCount : MonoBehaviour {
 
     public RedDamageEffect _redDamage;
 
-    public float _damageDuration = 1.1f;
 
     public TestLockOnManager _lockOn;
 
@@ -89,20 +87,11 @@ public class PizzaCoinCount : MonoBehaviour {
     }
 
 
-    private void Update() {
-
-        float distance = Vector3.SqrMagnitude(_playerMovingObj.transform.position - this.transform.position);
-        //Debug.Log($"プレイヤーと左腕の距離{hoge}");
-
-        // if(distance <= )
-
-
-
-
-
-    }
+   
 
     private void OnTriggerStay(Collider other) {
+
+        /*
         if (other.CompareTag(_pizzaLeftArmTag)) {
             if (Time.time - _lastDecreaseTime >= _decreaseInterval) {
 
@@ -114,11 +103,22 @@ public class PizzaCoinCount : MonoBehaviour {
 
 
             }
-        }
+        }*/
+    }
+
+    public void DegreePizzaCoinLeftArm() {
+
+        _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
+        UpdatePizzaCountText();
+        _redDamage.PlayerDamage();
+
     }
 
 
-   
+
+
+
+
 
     private void UpdatePizzaCountText() {
         _text.text = _pizzaCount.ToString();
