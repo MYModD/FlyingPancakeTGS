@@ -8,43 +8,45 @@ using System;
 using Unity.Mathematics;
 
 public class PizzaCoinCount : MonoBehaviour {
-    [Header("É^ÉOê›íË")]
+    [Header("„Çø„Ç∞Ë®≠ÂÆö")]
     [SerializeField, Tag]
     private string _pizzaTag;
-    [SerializeField, Tag]
-    private string _pizzaLeftArmTag;
+
     [SerializeField, Tag]
     private string _enemyTag;
     [SerializeField, Tag]
     public string _pizzaManTagEnemy;
 
-    [Header("ÉsÉUÉRÉCÉìê›íË")]
+    [Header("„Éî„Ç∂„Ç≥„Ç§„É≥Ë®≠ÂÆö")]
     [SerializeField]
     private int _pizzaCount = 0;
     [SerializeField]
-    [Header("éüÇÃÉXÉeÅ[ÉWÇ…êiÇﬁÇΩÇﬂÇ…ïKóvÇ»ÉRÉCÉìêî")]
+    [Header("Ê¨°„ÅÆ„Çπ„ÉÜ„Éº„Ç∏„Å´ÈÄ≤„ÇÄ„Åü„ÇÅ„Å´ÂøÖË¶Å„Å™„Ç≥„Ç§„É≥Êï∞")]
     private float _maxPizzaCoin;
 
-    [Header("UIê›íË")]
+    [Header("UIË®≠ÂÆö")]
     public TextMeshProUGUI _text;
 
-    [Header("àÍíËéûä‘Ç≤Ç∆Ç…å∏è≠Ç∑ÇÈÇªÇÃéûä‘")]
+    [Header("‰∏ÄÂÆöÊôÇÈñì„Åî„Å®„Å´Ê∏õÂ∞ë„Åô„Çã„Åù„ÅÆÊôÇÈñì")]
     [SerializeField, Range(0, 3f)]
-    public float _decreaseInterval = 1f; // å∏è≠Ç∑ÇÈä‘äuÅiïbÅj
+    public float _decreaseInterval = 1f; // Ê∏õÂ∞ë„Åô„ÇãÈñìÈöîÔºàÁßíÔºâ
     [SerializeField]
-    [Header("àÍìxÇ…å∏è≠Ç∑ÇÈó ")]
+    [Header("‰∏ÄÂ∫¶„Å´Ê∏õÂ∞ë„Åô„ÇãÈáè")]
     public int _decreaseAmount = 1;
 
     public AudioSource _audioPizza;
 
     private float _lastDecreaseTime;
 
-    [Header("ÉvÉåÉCÉÑÅ[éQè∆")]
+    [Header("„Éó„É¨„Ç§„É§„ÉºÂèÇÁÖß")]
     public PizzaMan _pizzaMan;
+
+    [Header("Player(MovingObj)")]
+    public GameObject _playerMovingObj;
+
 
     public RedDamageEffect _redDamage;
 
-    public float _damageDuration = 1.1f;
 
     public TestLockOnManager _lockOn;
 
@@ -55,27 +57,27 @@ public class PizzaCoinCount : MonoBehaviour {
         _text.text = ""+0;
     }
     private void OnTriggerEnter(Collider other) {
-        Debug.Log($"Ç‘Ç¬Ç©Ç¡ÇΩÇ‚Ç¬ : {other.gameObject.name}");
+        Debug.Log($"„Å∂„Å§„Åã„Å£„Åü„ÇÑ„Å§ : {other.gameObject.name}");
         if (other.CompareTag(_pizzaTag)) {
             _pizzaCount++;
 
             float pitchRandom = UnityEngine.Random.Range(-0.05f, 0.05f);
-            Debug.Log($"ÉâÉìÉ_ÉÄíl : {pitchRandom}");
+            Debug.Log($"„É©„É≥„ÉÄ„É†ÂÄ§ : {pitchRandom}");
 
             _audioPizza.pitch = 1f -pitchRandom;
             _audioPizza.Play();
             other.gameObject.SetActive(false);
             UpdatePizzaCountText();
-            //àÍíËêîíBÇµÇΩÇÁÉsÉUÉ}ÉìÇÃÉ^ÉOÇ™ìGÇ…ïœÇÌÇÈÉXÉNÉäÉvÉg
+            //‰∏ÄÂÆöÊï∞ÈÅî„Åó„Åü„Çâ„Éî„Ç∂„Éû„É≥„ÅÆ„Çø„Ç∞„ÅåÊïµ„Å´Â§â„Çè„Çã„Çπ„ÇØ„É™„Éó„Éà
             if (_pizzaCount >= _maxPizzaCoin) {
                 _pizzaMan.tag = _pizzaManTagEnemy;
             }
         }
         if (other.CompareTag(_enemyTag)) {
-            // Ç±Ç±Ç…É~ÉTÉCÉãÇ™ìñÇΩÇ¡ÇΩÇ∆Ç´å∏ÇÁÇ∑
+            // „Åì„Åì„Å´„Éü„Çµ„Ç§„É´„ÅåÂΩì„Åü„Å£„Åü„Å®„ÅçÊ∏õ„Çâ„Åô
             _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
 
-            // Ç±Ç±óvíçà”
+            // „Åì„ÅìË¶ÅÊ≥®ÊÑè
             _redDamage.PlayerDamage();
             _lockOn.AddBlackList(other.transform);
             other.gameObject.SetActive(false);
@@ -83,23 +85,36 @@ public class PizzaCoinCount : MonoBehaviour {
         }
     }
 
+
+   
+
     private void OnTriggerStay(Collider other) {
+
+        /*
         if (other.CompareTag(_pizzaLeftArmTag)) {
             if (Time.time - _lastDecreaseTime >= _decreaseInterval) {
-                Debug.Log("Ç†ÇΩÇ¡ÇƒÇ‹Ç∑ÇÊÅ[");
-                _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
-                _lastDecreaseTime = Time.time;
-                UpdatePizzaCountText();
-                _redDamage.PlayerDamage();
+
+
 
 
 
             }
-        }
+        }*/
+    }
+
+    public void DegreePizzaCoinLeftArm() {
+
+        _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
+        UpdatePizzaCountText();
+        _redDamage.PlayerDamage();
+
     }
 
 
-   
+
+
+
+
 
     private void UpdatePizzaCountText() {
         _text.text = _pizzaCount.ToString();

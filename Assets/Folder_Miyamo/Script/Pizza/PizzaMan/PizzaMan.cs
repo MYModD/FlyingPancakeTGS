@@ -20,6 +20,8 @@ public class PizzaMan : MonoBehaviour {
 
 
     private void OnTriggerEnter(Collider other) {
+
+        Debug.Log($"{other.gameObject.name}‚É‚ ‚½‚Á‚½‚æII");
         if (other.CompareTag(_missileTag) && !_isProcessing && Time.time - _lastTriggerTime > TRIGGER_COOLDOWN) {
             _lastTriggerTime = Time.time;
             ProcessCollisionAsync().Forget();

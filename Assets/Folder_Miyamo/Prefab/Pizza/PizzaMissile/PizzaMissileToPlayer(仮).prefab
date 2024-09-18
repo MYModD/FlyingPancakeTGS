@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 200, y: 200, z: 200}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5313610761195880014}
@@ -147,121 +147,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5371696920344186799}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c11806da72ec8647a72771ddec388ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pizzamissile: {fileID: 1842532819616059787}
-  _minMaxDistanceRange: {x: 0, y: 8732650}
-  _minMaxScaleRange: {x: 100, y: 721.7821}
-  _targetScaleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.875
-      outSlope: 1.875
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.12500007
-      value: 0.23437513
-      inSlope: 1.7499998
-      outSlope: 1.7499998
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.25000033
-      value: 0.43750048
-      inSlope: 1.5000002
-      outSlope: 1.5000002
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.37499872
-      value: 0.6093734
-      inSlope: 1.2500026
-      outSlope: 1.2500026
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4999971
-      value: 0.7499971
-      inSlope: 1.000006
-      outSlope: 1.000006
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.6249955
-      value: 0.85937166
-      inSlope: 0.75000906
-      outSlope: 0.75000906
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7499939
-      value: 0.93749696
-      inSlope: 0.53151184
-      outSlope: 0.53151184
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8119931
-      value: 0.96465343
-      inSlope: 0.37551388
-      outSlope: 0.37551388
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8749923
-      value: 0.9843731
-      inSlope: 0.25001538
-      outSlope: 0.25001538
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9379915
-      value: 0.99615496
-      inSlope: 0.124512225
-      outSlope: 0.124512225
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.06200821
-      outSlope: 0.06200821
-      tangentMode: 35
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _isDubugOn: 0
-  _currentDebugtargetDistance: 0
+  _target: {fileID: 0}
+  _minDistance: 300
+  _maxDistance: 7670842
+  _minScale: 100
+  _maxScale: 1000
+  _debugDistance: 300
+  _currentScale: 0
+  _useDebugDistance: 1
 --- !u!54 &4222494323296172454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -304,11 +202,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.63855046, y: 0.63855004, z: 3.3088088}
+  m_Size: {x: 7, y: 7, z: 3.89}
   m_Center: {x: 0, y: -0.00000028312206, z: -0.000000059604645}
 --- !u!23 &646002719545826334
 MeshRenderer:
