@@ -33,7 +33,7 @@ public class PlayerDamegedByLeftPizza : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         float distance = Vector3.SqrMagnitude(_playerMovingObj.transform.position - _pizzaLeftArm.transform.position);
-        Debug.Log($"プレイヤーと左腕の距離{distance}");
+        //Debug.Log($"プレイヤーと左腕の距離{distance}");
 
 
         if (distance < _unacceptableDistance) {

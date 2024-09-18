@@ -16,7 +16,7 @@ public class DrawConeCircle : MonoBehaviour {
     }
 
     // Update is called once per frame
-    private void LateUpdate() {
+    private void Update() {
 
 
         Vector3 hoge = RectTransformUtility.WorldToScreenPoint(_mainCamera, _testLockOnManager._circleCenterPostion);
