@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
 using Unity.Mathematics;
-using UnityEditor.ShaderGraph.Internal;
 
 public class PizzaCoinCount : MonoBehaviour {
     [Header("É^ÉOê›íË")]
