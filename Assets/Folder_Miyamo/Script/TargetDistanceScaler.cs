@@ -1,7 +1,6 @@
 using NaughtyAttributes;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 
 public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField,Header("’Ç‚¢‚©‚¯‚Ä‚é“G‚ðŽæ“¾‚·‚é‚Ì‚É•K—v")]
