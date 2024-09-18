@@ -5107,7 +5107,6 @@ MonoBehaviour:
   _enemyMissile: {fileID: 8669571406545530284}
   _minMaxDistanceRange: {x: 0, y: 8555602}
   _minMaxScaleRange: {x: 12.4453125, y: 92.67873}
-  _minMaxSpeedRange: {x: 410.746, y: 820.4922}
   _targetScaleCurve:
     serializedVersion: 2
     m_Curve:
