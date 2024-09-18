@@ -55,6 +55,8 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField, Header("EDと入れてね")] private string _ed;
     [SerializeField] private TextMeshProUGUI[] _textEd;
     [SerializeField] private AudioClip[] _edClip;
+    [SerializeField]
+    private BoxCollider[] _rd;
     private int _indexED = 0;
     private int _checkIndexEd = -1;
 
@@ -63,12 +65,13 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI[] _textResult;
     private int _indexResult = 0;
     private int _checkIndexResult = -1;
+    private ControllerBuruBuru _controllerBuru;
 
     [SerializeField, Header("ボタンクリック音")]
     private AudioClip _clickSE;
 
-    private string _settingTextEnglish = "Not available"/*"English"*/;
-    private string _settingTextJapanece = "Not available"/*"Japanese"*/;
+    private string _settingTextEnglish = "English";
+    private string _settingTextJapanece = "Japanese";
     private Image[] _settingImages;
     private GameObject _settingNowSelect;
     private int _settingIndex = 0;
@@ -462,6 +465,16 @@ public class ControllerSelectButton : MonoBehaviour {
             if (_indexResult >= _textResult.Length) {
                 _canvasManager.MenuOrResultToStart();
             }
+        }
+        if (Input.GetKeyDown("joystick button 2")) {
+            foreach (BoxCollider pizza in _rd) {
+                pizza.enabled = true;
+                pizza.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            }
+            if (_controllerBuru == null) {
+                _controllerBuru=ControllerBuruBuru.Instance;
+            }
+            _controllerBuru.StartLongVibration();
         }
     }
     private void PlaySE() {

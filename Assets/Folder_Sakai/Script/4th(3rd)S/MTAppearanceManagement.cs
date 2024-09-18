@@ -153,7 +153,7 @@ public class MTAppearanceManagement : MonoBehaviour {
                 print(activeCount);
             }
         }
-        _scoreManager.InputGetStarScore(activeCount, 30);
+        _scoreManager.InputGetStarScore(activeCount, 49);
         _text.text = activeCount.ToString()+" / "+49;
         _title.text = "Count";
         _audienceGaugeManager.SetScoreValue(activeCount, 49, "Count");

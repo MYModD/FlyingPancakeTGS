@@ -1,8 +1,10 @@
 using UnityEngine;
+
 using NaughtyAttributes;
 
+
 public class TargetDistanceScaler : MonoBehaviour {
-    [SerializeField] private Transform _target; // ƒXƒP[ƒ‹‚ğ’²®‚·‚é‘ÎÛ
+    [SerializeField] private Transform _target; // ã‚¹ã‚±ãƒ¼ãƒ«ã‚’èª¿æ•´ã™ã‚‹å¯¾è±¡
 
     [SerializeField] private float _minDistance = 300f;
     [SerializeField] private float _maxDistance = 27000f;
