@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
 using Unity.Mathematics;
+using UnityEditor.ShaderGraph.Internal;
 
 public class PizzaCoinCount : MonoBehaviour {
     [Header("タグ設定")]
@@ -41,6 +42,10 @@ public class PizzaCoinCount : MonoBehaviour {
 
     [Header("プレイヤー参照")]
     public PizzaMan _pizzaMan;
+
+    [Header("Player(MovingObj)")]
+    public GameObject _playerMovingObj;
+
 
     public RedDamageEffect _redDamage;
 
@@ -83,9 +88,24 @@ public class PizzaCoinCount : MonoBehaviour {
         }
     }
 
+
+    private void Update() {
+
+        float distance = Vector3.SqrMagnitude(_playerMovingObj.transform.position - this.transform.position);
+        //Debug.Log($"プレイヤーと左腕の距離{hoge}");
+
+        // if(distance <= )
+
+
+
+
+
+    }
+
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag(_pizzaLeftArmTag)) {
             if (Time.time - _lastDecreaseTime >= _decreaseInterval) {
+
                 _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
                 _lastDecreaseTime = Time.time;
                 UpdatePizzaCountText();

@@ -16,9 +16,6 @@ public class TargetDistanceScaler : MonoBehaviour {
     [SerializeField]
     private Vector2 _minMaxScaleRange = new Vector2(1, 100);
 
-    
-
-
 
     [SerializeField, Header("カーブで表現できるニョ")]
     public AnimationCurve _targetScaleCurve;
