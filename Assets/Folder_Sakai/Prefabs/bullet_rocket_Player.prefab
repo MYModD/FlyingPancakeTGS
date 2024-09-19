@@ -5300,6 +5300,8 @@ MonoBehaviour:
   _enemyTag: Enemy
   _eliteMissile: EliteMissile
   _buildingTag: Building
+  _audioSource: {fileID: 0}
+  _audioClip: {fileID: 8300000, guid: 187ec2c5e42e74a4e954328edb4a3fc6, type: 3}
 --- !u!1001 &2797457237505117729
 PrefabInstance:
   m_ObjectHideFlags: 0

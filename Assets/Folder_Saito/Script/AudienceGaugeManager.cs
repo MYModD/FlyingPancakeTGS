@@ -20,6 +20,7 @@ public class AudienceGaugeManager : MonoBehaviour {
 
     [SerializeField, Header("オーディエンスゲージ")] private Image _fillImage;
     [SerializeField] private Slider _audienceGauge;
+    [SerializeField] private Image _blurImage;
 
     [SerializeField] private TextMeshProUGUI _stageTitle;
     [SerializeField] private TextMeshProUGUI _stageScore;
@@ -161,7 +162,6 @@ public class AudienceGaugeManager : MonoBehaviour {
     public void SetScoreValue(int nowScore, int maxScoreStage, string stagename) {
         _nowPlayerScore = nowScore;
         _maxScore = maxScoreStage;
-        print($"{_maxScore}よよよよｙ");
         _stagename = stagename;
     }
     /// <summary>
@@ -172,6 +172,7 @@ public class AudienceGaugeManager : MonoBehaviour {
         _maxScore = 0;
     }
     public void TextTrue(bool isSw) {
+        _blurImage.enabled = isSw;
         _stageScore.enabled = isSw;
         _stageTitle.enabled = isSw;
         _rank.enabled = isSw;

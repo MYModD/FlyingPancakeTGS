@@ -42,6 +42,8 @@ public class CountDownUI : MonoBehaviour {
             foreach (Camera camera in _cameras) {
                 camera.gameObject.SetActive(false);
                 _audioSource.PlayOneShot(_audioClip[_count]);
+                _audioSource.PlayOneShot(_audioClip[_count]);
+                _audioSource.PlayOneShot(_audioClip[_count]);
             }
             //foreach (GameObject obj in _gameObject) {
             //    obj.gameObject.SetActive(true);
