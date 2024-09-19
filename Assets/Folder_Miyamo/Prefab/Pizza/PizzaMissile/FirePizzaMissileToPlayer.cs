@@ -25,12 +25,17 @@ public class FirePizzaMissileToPlayer : MonoBehaviour {
     [SerializeField]
     private float _fireInterval = 1.0f; // ”­ËŠÔŠu (•b)
 
+    public Animator _anime;
+
     private float _timer = 0.0f;
 
     void Update() {
         _timer += Time.deltaTime;
         if (_timer >= _fireInterval) {
             _timer = 0.0f;
+
+
+            _anime.SetTrigger("Start");
 
             // ”­Ë‚·‚éƒ~ƒTƒCƒ‹‚Ì”
             int numToFire = Random.Range(1, _firePostion.Length + 1);
