@@ -6,10 +6,11 @@ public class OnEnableOtherOBJON : MonoBehaviour
 {
     public GameObject[] _offToOnObj;
 
-    
+    public GameObject _fuckU;
 
     private void OnEnable() {
 
+        Instantiate(_fuckU);
 
         foreach (GameObject item in _offToOnObj) {
 
