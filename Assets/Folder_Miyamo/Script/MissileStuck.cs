@@ -11,10 +11,10 @@ public class MissileStuck : MonoBehaviour
 
     private void Update() {
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        //if (Input.GetKeyDown(KeyCode.Space)) {
 
-            _audio.Play();
-        }
+        //    _audio.Play();
+        //}
 
 
     }

@@ -33,7 +33,6 @@ public class TargetDistanceScaler : MonoBehaviour {
 
         float distance =  Vector3.SqrMagnitude(_target.position -  transform.position);
         float t = Mathf.InverseLerp(_minDistance, _maxDistance, distance);
-        Debug.LogError(distance);
         float scale =  Mathf.Lerp(_minScale, _maxScale, t);
 
         this.transform.localScale = new Vector3(scale, scale, scale);
