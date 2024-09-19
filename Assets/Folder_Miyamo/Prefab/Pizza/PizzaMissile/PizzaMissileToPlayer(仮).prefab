@@ -151,7 +151,7 @@ MonoBehaviour:
   _minSpeed: 20
   _maxDistance: 300
   _deceleration: 0.376
-  _explosionScale: 10
+  _explosionScale: 50
   _playerMissileTag: Missile
   _explosionPool: {fileID: 0}
 --- !u!114 &6056394756863167294

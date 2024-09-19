@@ -15,6 +15,16 @@ public class GameController : MonoBehaviour {
     [SerializeField]
     private MissilePoolManager _missilePoolManager;
 
+
+    [Header("4thMapのMemo")]
+    [SerializeField]
+    private Memo _memo;
+
+    [Header("4thのミサイルスピード")]
+    [SerializeField]
+    private float _4thMissileSpeed;
+
+
     [Foldout("ミサイル発射")]
     [SerializeField, Header("ミサイル発射間隔")]
     [Range(0, 3f)]
@@ -33,14 +43,37 @@ public class GameController : MonoBehaviour {
         _missileCooldownTimer -= Time.deltaTime;
         _missileCooldownTimer = Mathf.Max(_missileCooldownTimer, 0f); // 0未満にならないようにする
 
+
         // ミサイル発射条件判定
         bool canFireMissile = (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
                               && _missileCooldownTimer <= 0;
 
         if (canFireMissile) {
-            _missilePoolManager.FireMissiles(_missileLaunchPosition);
-            _missileCooldownTimer = _missileFireInterval;
-            Debug.Log("ミサイル発射");
+
+            if (_memo.gameObject.activeSelf == true) {
+
+                // 4thマップ ピザラミエルがONの場合
+
+                _missilePoolManager.FireMissilesSpeed4th(_missileLaunchPosition, _4thMissileSpeed);
+                _missileCooldownTimer = _missileFireInterval;
+                Debug.Log("4thVerのミサイル発射");
+
+
+
+            } else {
+
+                _missilePoolManager.FireMissiles(_missileLaunchPosition);
+                _missileCooldownTimer = _missileFireInterval;
+                Debug.Log("ミサイル発射");
+
+            }
+
+
+
+
+
+
+            
         }
 
         // クールタイムの割合を計算（0~1の範囲に収める）

@@ -763,6 +763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2383790880617994795}
+  - component: {fileID: 1534750183860063211}
   m_Layer: 0
   m_Name: PizzaCoinsLeftShort
   m_TagString: Untagged
@@ -788,6 +789,19 @@ Transform:
   - {fileID: 6905500638553231115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1534750183860063211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975048973930168019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da60dc9b7df1ad4f9d536cbce9b8b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveUnZ: 5
 --- !u!1 &8040164466576995730
 GameObject:
   m_ObjectHideFlags: 0

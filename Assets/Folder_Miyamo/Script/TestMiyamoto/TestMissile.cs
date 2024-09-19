@@ -19,7 +19,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     private float _lerpT = 0.1f;
 
     [SerializeField, Header("スピード")]
-    private float _speed;
+    public float _speed;
 
     [SerializeField, Header("飛行時間")]
     private float _timer = 10f;
@@ -102,7 +102,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             return;
         }
 
-        if (_enemyTarget.gameObject.activeSelf == false)  // ターゲットのアクティブがfalseのとき返す
+        if (_enemyTarget.gameObject.activeSelf == false  || _enemyTarget.gameObject == null)  // ターゲットのアクティブがfalseのとき返す
         {
             ReturnToPool();
         }
