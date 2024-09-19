@@ -16,19 +16,31 @@ public class TestTrackingUI : MonoBehaviour {
                                                         //Imageコンポーネント
     private Image[] _enemyInConeImages;
 
-    [SerializeField, Header("子のスケール変更の値")] private float _childrenScale = 1f;
-    [SerializeField, Button,]
+    [SerializeField, Header("子のスケール変更の値")] private float _childrenCameraScale = 1f;
+
+
+    [SerializeField, Button,] 
 
     /// <summary>
     /// uiのスケール変更
     /// </summary>
-    private void ChengeChildrenScale() {
+    private void ChengeChildrenIncameraScale() {
 
         for (int i = 0; i < _enemyIncameraUI.Length; i++) {
-            _enemyIncameraUI[i].GetComponent<RectTransform>().localScale = new Vector3(_childrenScale, _childrenScale, _childrenScale);
+            _enemyIncameraUI[i].GetComponent<RectTransform>().localScale = new Vector3(_childrenCameraScale, _childrenCameraScale, _childrenCameraScale);
         }
+        
+    }
+
+
+    [SerializeField, Header("子のスケール変更の値")] private float _childrenConeScale = 1f;
+    [SerializeField, Button,]
+
+    private void ChengeChildrenInConeScale() {
+
+       
         for (int i = 0; i < _enemyInCone.Length; i++) {
-            _enemyInCone[i].GetComponent<RectTransform>().localScale = new Vector3(_childrenScale, _childrenScale, _childrenScale);
+            _enemyInCone[i].GetComponent<RectTransform>().localScale = new Vector3(_childrenConeScale, _childrenConeScale, _childrenConeScale);
         }
 
     }
@@ -42,7 +54,10 @@ public class TestTrackingUI : MonoBehaviour {
     }
 
     
-    private void LateUpdate() {
+    private void Update() {
+
+        
+
         UpdateUIOutSidePositions(_lockOnManager._targetsInCamera, _enemyInCameraImages);
         UpdateUIOutSidePositions(_lockOnManager._targetsInCone, _enemyInConeImages);
     }

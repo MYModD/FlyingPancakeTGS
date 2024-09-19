@@ -913,8 +913,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1849877414}
     - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _enemyInCone.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
       propertyPath: _missileStuck.Array.size
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
+      propertyPath: _enemyIncameraUI.Array.size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8094194373996976235, guid: ba3fc91f25ac12d47b26fd6fd317fca7, type: 3}
       propertyPath: _missileStuck.Array.data[0]
