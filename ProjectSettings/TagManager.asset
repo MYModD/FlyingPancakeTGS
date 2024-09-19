@@ -28,6 +28,7 @@ TagManager:
   - PizzaMissile
   - 1stTag
   - Ring
+  - PizzaCoinUI
   layers:
   - Default
   - TransparentFX
