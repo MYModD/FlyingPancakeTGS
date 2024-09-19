@@ -91,8 +91,8 @@ public class CanvasManager : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
-        if (Input.GetMouseButton(0)&&Input.GetMouseButton(1)) {
-            MenuOrResultToStart();
+        if ((Input.GetMouseButton(0)&&Input.GetMouseButton(1))||(Input.GetMouseButton(1)&&Input.GetMouseButton(0))) {
+            SceneManager.LoadScene("StartScene");
         }
         if (_state == UIState.title) {
             _nowTitleTime += Time.deltaTime;

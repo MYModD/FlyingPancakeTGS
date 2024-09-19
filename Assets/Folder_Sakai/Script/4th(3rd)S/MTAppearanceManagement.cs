@@ -116,6 +116,8 @@ public class MTAppearanceManagement : MonoBehaviour {
 
     // 下から順に _spawnJudge の false を true にして、対応するモンスタートラックを非アクティブ化
     public void MTReduce(int numberOfReduce) {
+
+        print("よばれた");
         int numberOfTimesToReduce = Mathf.Abs(numberOfReduce);
         int reducedCount = 0;
 
