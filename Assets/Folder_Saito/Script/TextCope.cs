@@ -36,10 +36,13 @@ void Start ()
 /// </summary>
 void Update ()
 {
+
+        _thisText.color = _parentTextMeshPro.color;
         if (_parentTextMeshPro.text==_thisText.text) {
             return;
         }
-        _thisText.text=_parentTextMeshPro.text;
-}
-#endregion
+        _thisText.text = _parentTextMeshPro.text;
+        _thisText.color = _parentTextMeshPro.color;
+    }
+    #endregion
 }
