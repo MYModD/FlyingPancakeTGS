@@ -42,7 +42,7 @@ public class PlayerDamegedByLeftPizza : MonoBehaviour {
 
 
                 bool playerisRight = _playerMove.transform.localPosition.x < 0f;
-                Debug.LogError(playerisRight);
+                //Debug.LogError(playerisRight);
 
                 if (playerisRight) {
 
