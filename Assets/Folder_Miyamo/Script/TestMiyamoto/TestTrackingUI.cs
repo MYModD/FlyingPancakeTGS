@@ -12,6 +12,10 @@ public class TestTrackingUI : MonoBehaviour {
 
     [SerializeField] private TestLockOnManager _lockOnManager;
 
+
+    public float _coneSpeed;
+    public float _cameraSpeed;
+
     private Image[] _enemyInCameraImages;               //キャッシュ用の
                                                         //Imageコンポーネント
     private Image[] _enemyInConeImages;
@@ -56,7 +60,16 @@ public class TestTrackingUI : MonoBehaviour {
     
     private void Update() {
 
-        
+        foreach (GameObject item in _enemyIncameraUI) {
+
+
+            item.transform.Rotate(new Vector3(0, 0, _cameraSpeed * Time.deltaTime ));
+        }
+        foreach (GameObject item in _enemyInCone) {
+
+
+            item.transform.Rotate(new Vector3(0, 0, _coneSpeed * Time.deltaTime));
+        }
 
         UpdateUIOutSidePositions(_lockOnManager._targetsInCamera, _enemyInCameraImages);
         UpdateUIOutSidePositions(_lockOnManager._targetsInCone, _enemyInConeImages);
