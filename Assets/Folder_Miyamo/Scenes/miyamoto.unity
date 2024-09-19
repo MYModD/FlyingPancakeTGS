@@ -1065,6 +1065,8 @@ MonoBehaviour:
   _pooledPrefab: {fileID: 4318666455470182286, guid: 4738954a3cd31d941bf189e38b718a18, type: 3}
   _defaultCapacity: 32
   _maxSize: 100
+  _widthRandom: 7.3
+  _scaleYrandom: 12.6
 --- !u!1 &853475429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3295,11 +3297,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4658301503174238037, guid: 4738954a3cd31d941bf189e38b718a18, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -365
       objectReference: {fileID: 0}
     - target: {fileID: 4658301503174238037, guid: 4738954a3cd31d941bf189e38b718a18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -320
+      value: -458
       objectReference: {fileID: 0}
     - target: {fileID: 4658301503174238037, guid: 4738954a3cd31d941bf189e38b718a18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
