@@ -55,6 +55,8 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField, Header("EDと入れてね")] private string _ed;
     [SerializeField] private TextMeshProUGUI[] _textEd;
     [SerializeField] private AudioClip[] _edClip;
+    [SerializeField]
+    private BoxCollider[] _rd;
     private int _indexED = 0;
     private int _checkIndexEd = -1;
 
@@ -63,12 +65,16 @@ public class ControllerSelectButton : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI[] _textResult;
     private int _indexResult = 0;
     private int _checkIndexResult = -1;
+    private ControllerBuruBuru _controllerBuru;
+    [SerializeField]
+    private AudioClip _audioBoom;
+    private bool _isOne = true;
 
     [SerializeField, Header("ボタンクリック音")]
     private AudioClip _clickSE;
 
-    private string _settingTextEnglish = "Not available"/*"English"*/;
-    private string _settingTextJapanece = "Not available"/*"Japanese"*/;
+    private string _settingTextEnglish = "English";
+    private string _settingTextJapanece = "Japanese";
     private Image[] _settingImages;
     private GameObject _settingNowSelect;
     private int _settingIndex = 0;
@@ -180,7 +186,6 @@ public class ControllerSelectButton : MonoBehaviour {
         _titleImages[_titleIndex].sprite = _nowSprites;
         //決定押された時
         if (Input.GetButtonDown("Submit")) {
-            print("こんにちわ");
             //選択しているボタンの押された時の処理を行う
             _titleNowSelect.GetComponent<TestButton>().OnClickSw();
             PlaySE();
@@ -418,6 +423,7 @@ public class ControllerSelectButton : MonoBehaviour {
             _textOp[_indexOP].enabled = true;
             _audioSE.Stop();
             _audioSE.PlayOneShot(_opClip[_indexOP]);
+            _audioSE.PlayOneShot(_opClip[_indexOP]);
             _checkIndexOp = _indexOP;
         }
         if (Input.GetButtonDown("Submit")) {
@@ -442,6 +448,7 @@ public class ControllerSelectButton : MonoBehaviour {
             _textEd[_indexED].enabled = true;
             _audioSE.Stop();
             _audioSE.PlayOneShot(_edClip[_indexED]);
+            _audioSE.PlayOneShot(_edClip[_indexED]);
             _checkIndexEd = _indexED;
         }
         if (Input.GetButtonDown("Submit")) {
@@ -463,8 +470,24 @@ public class ControllerSelectButton : MonoBehaviour {
                 _canvasManager.MenuOrResultToStart();
             }
         }
+        if (Input.GetKeyDown("joystick button 2")&&_isOne) {
+            foreach (BoxCollider pizza in _rd) {
+                pizza.enabled = true;
+                pizza.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            }
+            if (_controllerBuru == null) {
+                _controllerBuru=ControllerBuruBuru.Instance;
+            }
+            _controllerBuru.StartLongVibration();
+            _audioSE.PlayOneShot(_audioBoom);
+            _audioSE.PlayOneShot(_audioBoom);
+            _audioSE.PlayOneShot(_audioBoom);
+            _audioSE.PlayOneShot(_audioBoom);
+            _isOne = false;
+        }
     }
     private void PlaySE() {
+        _audioSE.PlayOneShot(_clickSE);
         _audioSE.PlayOneShot(_clickSE);
     }
     /// <summary>

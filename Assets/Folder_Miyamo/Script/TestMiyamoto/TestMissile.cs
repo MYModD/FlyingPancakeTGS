@@ -45,6 +45,10 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [Tag]
     private string _buildingTag;
 
+    [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _audioClip;
 
 
 
@@ -152,12 +156,13 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
     private void OnTriggerEnter(Collider other) {
-        print("衝突");
-
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
         if (other.transform == _enemyTarget) {
-
-
+            if (_audioSource == null) {
+                _audioSource = GameObject.Find("SEAudio").GetComponent<AudioSource>();
+            }
+            _audioSource.PlayOneShot(_audioClip);
+            _audioSource.PlayOneShot(_audioClip);
             // 敵のタグが普通の敵だったとき
             if (other.gameObject.CompareTag(_enemyTag)) {
                 _hasCollided = true; // 衝突フラグをセット

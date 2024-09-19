@@ -5,6 +5,13 @@ using System;
 public class PizzaMan : MonoBehaviour {
     public TimeLimit _timeLimit;
     public ExplosionPoolManager _explosionPoolManager;
+
+    public NotRotaionCopyPlayerMove _destoryObjs;
+
+    public PizzaCoinInstance _coinInstance;
+    public GameObject _coinSpawingPearnt;
+
+
     public float _endToNextGameDuration;
     public float _explosionScale = 100f;
     [SerializeField]
@@ -20,6 +27,8 @@ public class PizzaMan : MonoBehaviour {
 
 
     private void OnTriggerEnter(Collider other) {
+
+        Debug.Log($"{other.gameObject.name}にあたったよ！！");
         if (other.CompareTag(_missileTag) && !_isProcessing && Time.time - _lastTriggerTime > TRIGGER_COOLDOWN) {
             _lastTriggerTime = Time.time;
             ProcessCollisionAsync().Forget();
@@ -38,7 +47,21 @@ public class PizzaMan : MonoBehaviour {
         foreach (GameObject item in _childObject) {
 
             item.SetActive(false);
+            _explosionPoolManager.StartExplosionScale(item.transform, 50f);
         }
+
+        // ミサイルを破壊
+
+        PizzaMissile[] obj = _destoryObjs.GetComponentsInChildren<PizzaMissile>();
+        foreach (PizzaMissile item in obj) {
+
+            _explosionPoolManager.StartExplosionScale(item.transform, 20f);
+
+        }
+
+        Destroy(_destoryObjs.gameObject);
+        Destroy(_coinInstance.gameObject);
+        Destroy(_coinSpawingPearnt);
 
 
         await UniTask.Delay(TimeSpan.FromSeconds(_endToNextGameDuration), cancellationToken: this.GetCancellationTokenOnDestroy());

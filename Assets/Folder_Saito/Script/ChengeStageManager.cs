@@ -217,6 +217,8 @@ public class ChengeStageManager : MonoBehaviour {
         yield return new WaitForSeconds(0.75f);
         if (!_isFinish) {
             _audioSE.PlayOneShot(_stageVoice[_indexStage]); // ボイスを再生
+            _audioSE.PlayOneShot(_stageVoice[_indexStage]); // ボイスを再生
+            _audioSE.PlayOneShot(_stageVoice[_indexStage]); // ボイスを再生
             _indexStage++; // ステージインデックスを進める
         }
     }

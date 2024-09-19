@@ -1,85 +1,44 @@
-using NaughtyAttributes;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
+
+using NaughtyAttributes;
+
 
 public class TargetDistanceScaler : MonoBehaviour {
-    [SerializeField,Header("追いかけてる敵を取得するのに必要")]
-    private PizzaMissile _pizzamissile;
+    [SerializeField] private Transform _target; // 繧ｹ繧ｱ繝ｼ繝ｫ繧定ｪｿ謨ｴ縺吶ｋ蟇ｾ雎｡
 
+    [SerializeField] private float _minDistance = 300f;
+    [SerializeField] private float _maxDistance = 27000f;
+    [SerializeField] private float _minScale = 100f;
+    [SerializeField] private float _maxScale = 300f;
 
-    [MinMaxSlider(0, 10000000), Header("minは0にしてね")]
+    [SerializeField, Range(300f, 27000f)]
+    private float _debugDistance = 300f;
+
+    [SerializeField, ReadOnly]
+    private float _currentScale;
+
     [SerializeField]
-    private Vector2 _minMaxDistanceRange = new Vector2(0, 10000);
-
-
-    [MinMaxSlider(100, 1000), Header("最大最小スケール")]
-    [SerializeField]
-    private Vector2 _minMaxScaleRange = new Vector2(1, 100);
+    private bool _useDebugDistance = true;
 
     
 
-
-
-    [SerializeField, Header("カーブで表現できるニョ")]
-    public AnimationCurve _targetScaleCurve;
-
-    [SerializeField, Header("debugをONにしますか？")]
-    private bool _isDubugOn = false;
-
-    [Range(0, 10000000), Header("debug用、ゲームスタートすると使えないよ")]
-    [ShowIf(nameof(_isDubugOn))]
-    public float _currentDebugtargetDistance;
-
-    const float MULTIPLAY = 100f; 
-
     private void Update() {
+        UpdateScale();
+    }
 
-        Transform enemyTarget = _pizzamissile._player;
-        float enemyTargetDistance = (enemyTarget.position - transform.position).sqrMagnitude;
+    private void UpdateScale() {
+        if (_target == null) {
+            _target = GetComponent<PizzaMissile>()._player;
+        }
 
-        //Debug.Log($"ターゲットまでの座標{enemyTargetDistance}");
-
-        //debug用とは違い、targetを参照してその距離を求める
-        float value = _targetScaleCurve.Evaluate(enemyTargetDistance / _minMaxDistanceRange.y);
-
-        value = value * MULTIPLAY;
-        float scale  = Mathf.Clamp(value, _minMaxScaleRange.x, _minMaxScaleRange.y);
+        float distance =  Vector3.SqrMagnitude(_target.position -  transform.position);
+        float t = Mathf.InverseLerp(_minDistance, _maxDistance, distance);
+        float scale =  Mathf.Lerp(_minScale, _maxScale, t);
 
         this.transform.localScale = new Vector3(scale, scale, scale);
 
 
-
-
-
     }
 
-    private void OnEnable() {
-        
-
-
-    }
-
-#if UNITY_EDITOR
-    /// <summary>
-    /// debug用
-    /// </summary>
-    private void OnValidate() {
-        if (_isDubugOn) {
-
-            float scale = _targetScaleCurve.Evaluate(_currentDebugtargetDistance / _minMaxDistanceRange.y);
-
-            scale = scale * MULTIPLAY;
-            scale = Mathf.Clamp(scale, _minMaxScaleRange.x, _minMaxScaleRange.y);
-            Debug.Log(_minMaxScaleRange.y);
-
-            this.transform.localScale = new Vector3(scale, scale, scale);
-
-            
-        }
-
-       
-    }
-#endif
 
 }

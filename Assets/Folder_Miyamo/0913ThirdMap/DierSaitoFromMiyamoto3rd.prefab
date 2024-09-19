@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 7975048973930168019, guid: 0845853e248b95a4184d32adca098248, type: 3}
   _rightCoin: {fileID: 7975048973930168019, guid: 710d81b6f6b38d549943b86c4370b149, type: 3}
   _leftCoinDuration: 2
-  _rightCoinDuration: 5
+  _rightCoinDuration: 9
   _leftProbability: 70
 --- !u!1 &673501469686435837
 GameObject:
@@ -347,7 +347,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.21, y: 0.16, z: 0.15}
+  m_Size: {x: 0.15, y: 0.37, z: 0.14}
   m_Center: {x: 0, y: 0.07, z: 0}
 --- !u!23 &8081277068569574962
 MeshRenderer:
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5254902}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -978,8 +978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startTransform: {fileID: 246959480609746229}
   _attackTransform: {fileID: 6891421247473605832}
-  _moveSpeedToAttack: 0.31
-  _moveSpeedToStart: 0.48
+  _moveSpeedToAttack: 1
+  _moveSpeedToStart: 0.506
   _epsilon: 50
   _stayDuration: 2
   _pizzaCoinTag: PizzaCoin
@@ -1054,8 +1054,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.15, y: 1, z: 3.38}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.154, y: 1, z: 3.38}
+  m_Center: {x: -0.0062, y: 0, z: 0}
 --- !u!54 &8563253705739864358
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1123,6 +1123,7 @@ Transform:
   - {fileID: 857016134058572211}
   - {fileID: 8067736821124856699}
   - {fileID: 5712876064215245061}
+  - {fileID: 584137885911951796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8630077990381649078
@@ -1272,7 +1273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8f51b10983ddf504f9f1b9b2d8d90b63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1497,6 +1498,66 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8232386953295777007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584137885911951796}
+  - component: {fileID: 9012919506189475824}
+  - component: {fileID: 137310252595390451}
+  m_Layer: 0
+  m_Name: 4thON-anotherObjisOn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584137885911951796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8232386953295777007}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8541767596807045244}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9012919506189475824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8232386953295777007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e792eb81ed9434395492cc54a2d457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _note: "4th\u30B9\u30C6\u30FC\u30B8\u304CTrue\u306B\u306A\u3063\u305F\u3068\u304D4th\u4EE5\u5916\u306B\u3042\u308BOBJ\u3092ON\u306B\u3059\u308B\u30B9\u30AF\u30EA\u30D7\u30C8"
+--- !u!114 &137310252595390451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8232386953295777007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c47b07127a679140bffd50f74b05898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offToOnObj:
+  - {fileID: 0}
 --- !u!1 &8266886570259458756
 GameObject:
   m_ObjectHideFlags: 0

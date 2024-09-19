@@ -11,6 +11,9 @@ public class PizzaCoinInstance : MonoBehaviour {
     public GameObject[] _leftCoins;
     [Header("短いやつしかないよ")]
     public GameObject _rightCoin;
+
+
+    public Transform _instancePearent;
     // コイン生成間隔
     public float _leftCoinDuration;
     public float _rightCoinDuration;
@@ -32,7 +35,7 @@ public class PizzaCoinInstance : MonoBehaviour {
         // 左のコイン生成
         if (_leftTimer <= 0) {
             if (Random.Range(0, 100) < _leftProbability) {
-                GameObject obj = Instantiate(_leftCoins[Random.Range(0, _leftCoins.Length)]);
+                GameObject obj = Instantiate(_leftCoins[Random.Range(0, _leftCoins.Length)], _instancePearent);
                 obj.transform.position = _instantiateLeftPosition.position;
             }
             _leftTimer = _leftCoinDuration;
@@ -40,7 +43,7 @@ public class PizzaCoinInstance : MonoBehaviour {
 
         // 右のコイン生成
         if (_rightTimer <= 0) {
-            GameObject obj = Instantiate(_rightCoin);
+            GameObject obj = Instantiate(_rightCoin, _instancePearent);
             obj.transform.position = _instantiateRightPosition.position;
             _rightTimer = _rightCoinDuration;
         }
