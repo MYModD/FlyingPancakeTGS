@@ -9,7 +9,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 {
     
     [Header("プールされるオブジェクト")]
-    [SerializeField] private T _pooledPrefab; 
+    [SerializeField] protected T _pooledPrefab; 
 
     protected IObjectPool<T> _objectPool; // オブジェクトプールの管理インスタンス
 

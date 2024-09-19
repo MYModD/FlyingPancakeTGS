@@ -76,17 +76,7 @@ public class MissilePoolManager : PoolManager<TestMissile> {
 
 
 
-    /*  gamepad側でforeachするよりこっちでforeachしたかったためコメント化
-    /// <summary>
-    /// 外部から実行される オブジェクトプールから取得する
-    /// </summary>
-    public void FireMissile(Transform enemyTarget, Transform firePosition) {
-        TestMissile missile = _objectPool.Get();
-        missile.Initialize();                       //初期化
-        missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
-        missile._enemyTarget = enemyTarget;
-    }
-    */
+  
 
 }
 
