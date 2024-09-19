@@ -44,9 +44,9 @@ public class ChengeStageManager : MonoBehaviour {
     [SerializeField, Header("3stのプレイヤー")] private GameObject _player3st;
     [SerializeField] private SplineAnimate _splineAnimate3st;
     [SerializeField, Header("3stのステージ")] private GameObject _game3st;
-    [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
+   // [SerializeField, Header("3stのMapMagic")] private GameObject _map3st;
     [SerializeField, Header("killを集計するスクリプト")] private TimeLimit _3rdTime;
-    [SerializeField] private FogControl _fogControl;
+    //[SerializeField] private FogControl _fogControl;
     [SerializeField]
     private GameObject _gamePad;
     [SerializeField] private PizzaCoinCount _pizzaCoinCount;
@@ -136,10 +136,10 @@ public class ChengeStageManager : MonoBehaviour {
             _game4st.SetActive(false);
             if (_game4st != null) {
                 _game3st.SetActive(true);
-                _map3st.SetActive(true); // 3rdステージのマップを有効化
+                //_map3st.SetActive(true); // 3rdステージのマップを有効化
                 _gamePad.SetActive(true);
                 _pizzaCoinCount.enabled = true;
-                _fogControl.SetFog(true); // フォグを有効化
+                //_fogControl.SetFog(true); // フォグを有効化
             } else {
                 _isFinish = true;
                 _canvasManager.PlayToED();
@@ -149,8 +149,8 @@ public class ChengeStageManager : MonoBehaviour {
         // 4thステージから5thステージへの切り替え
         if (_indexStage == 4) {
             _game3st.SetActive(false);
-            _map3st.SetActive(false); // マップを無効化
-            _fogControl.SetFog(false); // フォグを無効化
+            //_map3st.SetActive(false); // マップを無効化
+            //_fogControl.SetFog(false); // フォグを無効化
             _pizzaCoinCount.enabled = false;
             if (_game5st != null) {
                 _game5st.SetActive(true); // 5thステージを表示
