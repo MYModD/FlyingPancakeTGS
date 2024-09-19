@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5313610761195880014}
   - component: {fileID: 6946365567832357112}
   - component: {fileID: 6577813571684333751}
+  - component: {fileID: 1423851964620502531}
   m_Layer: 3
   m_Name: PizzaZRotation
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2806782449351271833}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.14858618, w: 0.98889947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6089051245538003405}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -17.09}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6946365567832357112
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1423851964620502531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2806782449351271833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3d04053b6d8f04388d16e0e8136763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotation: 5
 --- !u!1 &5371696920344186799
 GameObject:
   m_ObjectHideFlags: 0

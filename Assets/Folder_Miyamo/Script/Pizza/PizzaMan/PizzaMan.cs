@@ -7,6 +7,11 @@ public class PizzaMan : MonoBehaviour {
     public ExplosionPoolManager _explosionPoolManager;
 
     public NotRotaionCopyPlayerMove _destoryObjs;
+
+    public PizzaCoinInstance _coinInstance;
+    public GameObject _coinSpawingPearnt;
+
+
     public float _endToNextGameDuration;
     public float _explosionScale = 100f;
     [SerializeField]
@@ -47,15 +52,16 @@ public class PizzaMan : MonoBehaviour {
 
         // ƒ~ƒTƒCƒ‹‚ð”j‰ó
 
-        var obj = _destoryObjs.GetComponentsInChildren<PizzaMissile>();
-        foreach (var item in obj) {
+        PizzaMissile[] obj = _destoryObjs.GetComponentsInChildren<PizzaMissile>();
+        foreach (PizzaMissile item in obj) {
 
             _explosionPoolManager.StartExplosionScale(item.transform, 20f);
 
         }
 
         Destroy(_destoryObjs.gameObject);
-
+        Destroy(_coinInstance.gameObject);
+        Destroy(_coinSpawingPearnt);
 
 
         await UniTask.Delay(TimeSpan.FromSeconds(_endToNextGameDuration), cancellationToken: this.GetCancellationTokenOnDestroy());
