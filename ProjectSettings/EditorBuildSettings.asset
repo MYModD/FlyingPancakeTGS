@@ -19,8 +19,9 @@ EditorBuildSettings:
     guid: 7f784cb7c94250542845a650f34cd394
 
   - enabled: 1
-
+  
     path: Assets/!0917LargeFiles/Saito/DaiScene.unity
+
     guid: 6f26cd833d2e41448a89c9d1c0c31340
   - enabled: 0
     path: Assets/Folder_Sakai/Scenes/Now/MainGame.copy.3rd.unity
