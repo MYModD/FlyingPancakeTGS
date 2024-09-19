@@ -44,6 +44,33 @@ public class MissilePoolManager : PoolManager<TestMissile> {
         }
         _testLockOnManager.ClearConeTargetAndAddBlackList();
 
+    } 
+    
+
+    public void FireMissilesSpeed4th(Transform firePosition,float speed) {
+
+        int missileNum = 0;
+
+        Debug.Log("fire");
+        foreach (Transform target in _testLockOnManager._targetsInCone) {
+
+            // _isValueAssignable‚ª‚·‚Å‚É‘ã“ü‚³‚ê‚Ä‚¢‚é‚à‚Ì‚¾‚¯”­Ë‚µ‚Ä‚Ù‚µ‚¢‚½‚ßfalse
+
+            missileNum++;
+            Debug.Log($"{missileNum}”­–Ú”­Ë");
+
+            TestMissile missile = _objectPool.Get();
+            missile.Initialize();                       //‰Šú‰»
+            missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
+            missile._enemyTarget = target;
+            missile._speed = speed;
+
+            missile._testLockOnManager = _testLockOnManager;
+
+
+        }
+        _testLockOnManager.ClearConeTargetAndAddBlackList();
+
     }
 
 
@@ -61,7 +88,6 @@ public class MissilePoolManager : PoolManager<TestMissile> {
     }
     */
 
-
-
-
 }
+
+
