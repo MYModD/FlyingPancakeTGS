@@ -1,8 +1,7 @@
-using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Splines;
+using Randomdom = UnityEngine.Random;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
@@ -48,7 +47,7 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [SerializeField]
     private AudioSource _audioSource;
     [SerializeField]
-    private AudioClip _audioClip;
+    private AudioClip[] _audioClip;
 
 
 
@@ -161,8 +160,10 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
             if (_audioSource == null) {
                 _audioSource = GameObject.Find("SEAudio").GetComponent<AudioSource>();
             }
-            _audioSource.PlayOneShot(_audioClip);
-            _audioSource.PlayOneShot(_audioClip);
+            int index = Randomdom.Range(0, _audioClip.Length);
+            _audioSource.Stop();
+            _audioSource.PlayOneShot(_audioClip[index]);
+            _audioSource.PlayOneShot(_audioClip[index]);
             // 敵のタグが普通の敵だったとき
             if (other.gameObject.CompareTag(_enemyTag)) {
                 _hasCollided = true; // 衝突フラグをセット

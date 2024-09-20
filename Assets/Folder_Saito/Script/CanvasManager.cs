@@ -23,6 +23,7 @@ public class CanvasManager : MonoBehaviour {
     [SerializeField, Header("ゲーム終了ボタン")] private Button _titleGameEnd;
     [SerializeField, Header("設定ボタン")] private Button _titleSetting;
 
+    [SerializeField, Header("フィクションのオブジェクト")] private GameObject[] _fiction;
     [SerializeField, Header("タイトルのオブジェクト")] private GameObject[] _titleObjs;
     [SerializeField, Header("カウントダウンのオブジェクト")] private GameObject[] _countObjs;
     [SerializeField, Header("一時停止のオブジェクト")] private GameObject[] _menuObjs;
@@ -32,6 +33,7 @@ public class CanvasManager : MonoBehaviour {
     [SerializeField, Header("オープニングのオブジェクト")] private GameObject[] _openingObjs;
     [SerializeField, Header("エンディングのオブジェクト")] private GameObject[] _endingObjs;
     [SerializeField, Header("ゲームプレイ中に使うオブジェクト")] private GameObject[] _gameObjs;
+    [SerializeField] private GameObject[] _none;
     [SerializeField] private SplineAnimate _spAnime;
 
     [SerializeField, Header("タイトルに行かせたいタグ"),Tag] private string _tagTitle;
@@ -56,7 +58,7 @@ public class CanvasManager : MonoBehaviour {
 
     private bool _isStartPush=true;
     private enum UIState {
-        title = 0,
+        title,
         gamePlay,
         result,
         menu,
@@ -64,6 +66,7 @@ public class CanvasManager : MonoBehaviour {
         OP,
         ED,
         Movie,
+        Fiction,
     }
     private UIState _state;
     private UIState _prevState;
@@ -84,7 +87,7 @@ public class CanvasManager : MonoBehaviour {
     /// </summary>
     void Start()
     {
-        _state = UIState.title;
+        _state = UIState.Fiction;
 
     }
     /// <summary>
@@ -92,12 +95,16 @@ public class CanvasManager : MonoBehaviour {
     /// </summary>
     void Update() {
         if ((Input.GetMouseButton(0)&&Input.GetMouseButton(1))||(Input.GetMouseButton(1)&&Input.GetMouseButton(0))) {
-            SceneManager.LoadScene("StartScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (_state == UIState.Fiction) {
+
         }
         if (_state == UIState.title) {
             _nowTitleTime += Time.deltaTime;
             if (_titleTime <= _nowTitleTime) {
                 _state = UIState.Movie;
+                GameObjTrueFalse(_none, _titleObjs);
                 _audioBGM.Stop();
                 _videoPlay.SetActive(true);
                 _nowTitleTime = 0;
@@ -108,10 +115,10 @@ public class CanvasManager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Z)) {
                 PlayToED();
             }
-            if (Input.GetKeyDown("joystick button 7")&&_isStartPush) {
-                PlayToMenu();
-                _isStartPush = false;
-            }
+            //if (Input.GetKeyDown("joystick button 7")&&_isStartPush) {
+            //    PlayToMenu();
+            //    _isStartPush = false;
+            //}
             if (Input.GetKeyUp("joystick button 7")) {
                 _isStartPush = true;
             }
@@ -121,8 +128,8 @@ public class CanvasManager : MonoBehaviour {
             //if (Input.GetButtonDown("Cancel") &&_isStartPush) {
             //    MenuOrResultToStart();
             //}
-            _resultManager.SetTexts();
-            _canMove= false;
+            //_resultManager.SetTexts();
+            //_canMove= false;
         }
         if (_state == UIState.menu) {
             if (Input.GetKeyDown("joystick button 7") && _isStartPush) {
@@ -142,8 +149,8 @@ public class CanvasManager : MonoBehaviour {
         if (_state == UIState.Movie) {
             _nowTitleTime += Time.deltaTime;
             if (_nowTitleTime >= _videotime||Input.anyKeyDown) {
-                _state = UIState.title;
-                _audioBGM.Play();
+                _state = UIState.Fiction;
+                GameObjTrueFalse(_fiction,_none);
                 _videoPlay.SetActive(false);
                 _nowTitleTime = 0;
             }
@@ -174,6 +181,10 @@ public class CanvasManager : MonoBehaviour {
             MenuOrResultToStart();
         }
 
+    }
+    public void FictionAnimEnd() {
+        _state = UIState.title;
+        GameObjTrueFalse( _titleObjs,_fiction);
     }
     /// <summary>
     /// タイトルからゲーム画面へ

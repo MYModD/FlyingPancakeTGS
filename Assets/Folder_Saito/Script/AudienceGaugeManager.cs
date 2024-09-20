@@ -26,6 +26,7 @@ public class AudienceGaugeManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _stageScore;
     [SerializeField] private TextMeshProUGUI _rank;
     [SerializeField] private TextMeshProUGUI _rankTitle;
+    [SerializeField] private Image _title;
     private int _audienceMaxValue = 100;
 
     private float _nowPlayerScore = 0;
@@ -172,6 +173,7 @@ public class AudienceGaugeManager : MonoBehaviour {
         _maxScore = 0;
     }
     public void TextTrue(bool isSw) {
+        _title.enabled = isSw;
         _blurImage.enabled = isSw;
         _stageScore.enabled = isSw;
         _stageTitle.enabled = isSw;
