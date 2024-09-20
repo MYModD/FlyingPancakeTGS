@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Folder_Miyamo/Scenes/sakai_ForWork_3rd.unity
     guid: 7f784cb7c94250542845a650f34cd394
-  - enabled: 1
+  - enabled: 0
     path: Assets/!0917LargeFiles/Saito/StartScene.unity
     guid: 557178379d3b88b448a2fb3e0f6d2b67
   - enabled: 1
