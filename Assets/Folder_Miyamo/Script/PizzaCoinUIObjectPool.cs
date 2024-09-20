@@ -11,6 +11,9 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
     private RectTransform _rockOnRectTransform;
 
 
+    [Header("pizzaテキストがある場所")]
+    public RectTransform _targetTransform;
+
     [Header("生成位置のランダムさ")]
     [Range(0,500f)]
     [SerializeField]
@@ -34,9 +37,10 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
 
     public PizzaCoinUICounter _pizzaCoinUICounter;
 
-    public Transform _debugPlayer;
 
-    public RectTransform _targetTransform;
+
+    [Header("デバック用")]
+    public Transform _debugPlayer;
 
     // ObjectPool の初期化
     protected override IObjectPool<PizzaCoinUI> ObjectPool {
