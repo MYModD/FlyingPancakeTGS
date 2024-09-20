@@ -13,7 +13,7 @@ public class BulletPoolManager : PoolManager<Bullet> {
 
     public void FireBullet(Transform turretFirePosition, Transform toPlayer, float multiplyValue, float spreadAngle) {
         // オブジェクトプールから弾を取得、初期化
-        Bullet bullet = _objectPool.Get();
+        Bullet bullet = ObjectPool.Get();
         bullet.Initialize();
 
         // 弾の位置と回転を発射位置と同じに設定

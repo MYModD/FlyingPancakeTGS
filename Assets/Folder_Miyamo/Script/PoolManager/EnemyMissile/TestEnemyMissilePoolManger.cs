@@ -31,7 +31,7 @@ public class TestEnemyMissilePoolManger : PoolManager<EnemyMissile>
     public void EnemyFireMissile(Transform firePodtion) {
 
         _firePostion = firePodtion;
-        EnemyMissile missile = _objectPool.Get();   
+        EnemyMissile missile = ObjectPool.Get();   
         missile.Initialize();                       
         missile.transform.SetPositionAndRotation(_firePostion.position, _firePostion.rotation);
         missile._enemyTarget = _playerTarget;

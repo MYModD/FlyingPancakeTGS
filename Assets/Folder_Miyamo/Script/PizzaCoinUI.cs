@@ -4,13 +4,20 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 public class PizzaCoinUI : MonoBehaviour, IPooledObject<PizzaCoinUI> {
-    [Tag]
-    public string _pizzaCoinUI;
 
+    [Header("UIに接続するスクリプト")]
     public PizzaCoinUICounter _pizzaCoinUICounter;
 
+    [Header("UIの位置")]
     public RectTransform _targetTransform; // UIのターゲット位置
-    public float _attractionSpeed = 5f;
+
+    [Header("移動スピード")]
+    public float _attractionSpeed = 1000f;
+
+
+
+    [Tag]
+    public string _pizzaCoinUI;
     public IObjectPool<PizzaCoinUI> ObjectPool {
         get; set;
     }
@@ -18,8 +25,14 @@ public class PizzaCoinUI : MonoBehaviour, IPooledObject<PizzaCoinUI> {
     public RectTransform _rectTransform;
 
 
+
+    public void Hoge() {
+
+        Debug.Log(ObjectPool);
+    }
     private void Awake() {
         _rectTransform = GetComponent<RectTransform>();
+      
     }
     public void Initialize() {
         if (_rectTransform == null) {
@@ -29,6 +42,8 @@ public class PizzaCoinUI : MonoBehaviour, IPooledObject<PizzaCoinUI> {
         if (_targetTransform == null) {
             Debug.LogError("TargetTransformが設定されていません");
         }
+
+
     }
 
     public void ReturnToPool() {
@@ -37,6 +52,8 @@ public class PizzaCoinUI : MonoBehaviour, IPooledObject<PizzaCoinUI> {
 
     // Update is called once per frame
     void FixedUpdate() {
+
+
         if (_rectTransform == null) {
             Debug.LogError("入ってないよ！！");
             return;

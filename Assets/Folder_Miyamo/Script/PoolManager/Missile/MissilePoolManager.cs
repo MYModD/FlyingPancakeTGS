@@ -33,7 +33,7 @@ public class MissilePoolManager : PoolManager<TestMissile> {
             missileNum++;
             Debug.Log($"{missileNum}”­–Ú”­Ë");
 
-            TestMissile missile = _objectPool.Get();
+            TestMissile missile = ObjectPool.Get();
             missile.Initialize();                       //‰Šú‰»
             missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
             missile._enemyTarget = target;
@@ -59,7 +59,7 @@ public class MissilePoolManager : PoolManager<TestMissile> {
             missileNum++;
             Debug.Log($"{missileNum}”­–Ú”­Ë");
 
-            TestMissile missile = _objectPool.Get();
+            TestMissile missile = ObjectPool.Get();
             missile.Initialize();                       //‰Šú‰»
             missile.transform.SetPositionAndRotation(firePosition.position, firePosition.rotation);
             missile._enemyTarget = target;
