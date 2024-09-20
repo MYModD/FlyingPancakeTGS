@@ -44,6 +44,8 @@ public class PizzaCoinCount : MonoBehaviour {
     [Header("Player(MovingObj)")]
     public GameObject _playerMovingObj;
 
+    public PizzaCoinUIObjectPool _pizzaUI;
+
 
     public RedDamageEffect _redDamage;
 
@@ -58,7 +60,15 @@ public class PizzaCoinCount : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other) {
         Debug.Log($"ぶつかったやつ : {other.gameObject.name}");
+
+
+        
         if (other.CompareTag(_pizzaTag)) {
+
+
+            _pizzaUI.CoinStart();
+
+            /*
             _pizzaCount++;
 
             float pitchRandom = UnityEngine.Random.Range(-0.05f, 0.05f);
@@ -72,6 +82,7 @@ public class PizzaCoinCount : MonoBehaviour {
             if (_pizzaCount >= _maxPizzaCoin) {
                 _pizzaMan.tag = _pizzaManTagEnemy;
             }
+            */
         }
         if (other.CompareTag(_enemyTag)) {
             // ここにミサイルが当たったとき減らす

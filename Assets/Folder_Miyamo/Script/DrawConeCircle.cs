@@ -6,6 +6,9 @@ public class DrawConeCircle : MonoBehaviour {
 
     public Camera _mainCamera;
 
+    [SerializeField]
+    private GameObject _canvas = default;
+
     [SerializeField, Header("CameraManger")]
     private TestLockOnManager _testLockOnManager;
 
@@ -20,17 +23,23 @@ public class DrawConeCircle : MonoBehaviour {
 
 
         Vector3 hoge = RectTransformUtility.WorldToScreenPoint(_mainCamera, _testLockOnManager._circleCenterPostion);
-        this.transform.position = hoge;
-        float scale = _testLockOnManager._coneAngle * 0.1339f;
-        transform.localScale = new Vector3(scale, scale, scale);
+
+
+
+        transform.position = hoge;
+
+        //float scale = _testLockOnManager._coneAngle * 0.1339f;
+        //transform.localScale = new Vector3(scale, scale, scale);
 
     }
 
+
+#if UNITY_EDITOR
     private void OnDrawGizmos() {
 
         if (!_debugIsON) {
 
-            Vector3 hoge = RectTransformUtility.WorldToScreenPoint(_mainCamera, _testLockOnManager._circleCenterPostion);
+            Vector3 hoge = RectTransformUtility.WorldToScreenPoint(Camera.main, _testLockOnManager._circleCenterPostion);
             this.transform.position = hoge;
             float scale = _testLockOnManager._coneAngle * 0.1339f;
             transform.localScale = new Vector3(scale, scale, scale);
@@ -48,4 +57,5 @@ public class DrawConeCircle : MonoBehaviour {
         }
 
     }
+#endif
 }
