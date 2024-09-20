@@ -73,6 +73,8 @@ public class TestLockOnManager : MonoBehaviour {
 
     private void Update() {
 
+
+        UpdateCameraPostion();
         // 最初にロックオンの時間計算をする
 
 
@@ -230,7 +232,35 @@ public class TestLockOnManager : MonoBehaviour {
         _canAdd = true;
     }
 
-    void OnDrawGizmos() {
+
+    private void UpdateCameraPostion() {
+
+
+        if (_camera != null) {
+                    
+            float coneAngleRad = Mathf.Deg2Rad * _coneAngle / 2;
+
+            Vector3 coneBaseCenter = _camera.transform.position + ((_player.position - _camera.transform.position).normalized * _coneRange);
+            _circleCenterPostion = coneBaseCenter;
+
+            Vector3 hoge = _drawOrigin + _player.transform.rotation.eulerAngles;
+            hoge.z = 0;
+
+            _circleRotation = Quaternion.Euler(hoge);
+            _circleRadius = _coneRange * Mathf.Tan(coneAngleRad);         
+            
+            Vector3 forward = (_player.position - _camera.transform.position).normalized * _coneRange;
+            Vector3 rightBoundary = Quaternion.Euler(0, _coneAngle / 2, 0) * forward;
+            Vector3 leftBoundary = Quaternion.Euler(0, -_coneAngle / 2, 0) * forward;
+
+            
+        }
+
+
+    }
+
+
+    private void OnDrawGizmos() {
         if (_camera != null) {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(_camera.transform.position, _searchRadius);

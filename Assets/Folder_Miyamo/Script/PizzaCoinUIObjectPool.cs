@@ -75,7 +75,7 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
 
    
 
-    public void CoinStart(Transform playerTransform) {
+    public void CoinStart() {
 
         //Vector2 playerPostion = RectTransformUtility.WorldToScreenPoint(_cameraMain, playerTransform.position);
 
@@ -88,8 +88,6 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
     }
 
     private void Update() {
-        if (Input.GetKey(KeyCode.Space)) {
-            CoinStart(_debugPlayer);
-        }
+       
     }
 }
