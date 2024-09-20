@@ -68,7 +68,7 @@ public class PizzaCoinCount : MonoBehaviour {
 
             _pizzaUI.CoinStart();
 
-            /*
+            
             _pizzaCount++;
 
             float pitchRandom = UnityEngine.Random.Range(-0.05f, 0.05f);
@@ -82,7 +82,7 @@ public class PizzaCoinCount : MonoBehaviour {
             if (_pizzaCount >= _maxPizzaCoin) {
                 _pizzaMan.tag = _pizzaManTagEnemy;
             }
-            */
+            
         }
         if (other.CompareTag(_enemyTag)) {
             // ここにミサイルが当たったとき減らす
