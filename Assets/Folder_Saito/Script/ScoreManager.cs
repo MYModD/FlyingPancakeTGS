@@ -69,6 +69,9 @@ public class ScoreManager : MonoBehaviour {
     #endregion
 
     #region メソッド
+    private void Update() {
+        ResultSetText();
+    }
     /// <summary>
     /// スコア計算と表示を開始するメソッド
     /// </summary>
