@@ -17,18 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Folder_Miyamo/Scenes/sakai_ForWork_3rd.unity
     guid: 7f784cb7c94250542845a650f34cd394
-
-  - enabled: 1
-
-    path: Assets/!0917LargeFiles/Saito/DaiScene.unity
-    guid: 6f26cd833d2e41448a89c9d1c0c31340
   - enabled: 0
-    path: Assets/Folder_Sakai/Scenes/Now/MainGame.copy.3rd.unity
-    guid: 1881dbba2355f0c4e84d15a35e8c0599
-  - enabled: 0
-    path: Assets/LargeFiles/MapMagic2.0/Demo/TutorialURP.unity
-    guid: a6ccfec92389974439e5e0f3730bbcf1
+    path: Assets/!0917LargeFiles/Miyamoto/0919/DaiSceneByMiyamotoCopy.unity
+    guid: bb3e75c975414554e92099848fd0aa3e
   - enabled: 1
-    path: Assets/!0917LargeFiles/Miyamoto/0917/DaiScene_MiyamotoCopy.unity
-    guid: de94c0928bf5b204d8c3baa0b5e56235
+    path: Assets/Folder_Miyamo/Scenes/miyamoto.unity
+    guid: feffb762cefd5fc4cb9323eceac81317
   m_configObjects: {}
