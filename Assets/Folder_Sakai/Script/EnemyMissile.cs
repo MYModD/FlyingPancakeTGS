@@ -143,7 +143,7 @@ public class EnemyMissile : MonoBehaviour, IPooledObject<EnemyMissile> {
         Debug.Log($"今のGの値は{gForce}");
         // Gforceが_maxAcceleration超えているときreturn
         if (gForce > _maxAcceleration) {
-            Debug.LogError($"最大値を超えました今のG値は{gForce}");
+            //Debug.LogError($"最大値を超えました今のG値は{gForce}");
             return;
         }
 

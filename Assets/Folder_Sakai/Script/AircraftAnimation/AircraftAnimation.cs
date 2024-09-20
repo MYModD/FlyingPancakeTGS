@@ -32,22 +32,6 @@ public class AircraftAnimation : MonoBehaviour {
     }
 
     void Update() {
-        // キーが押された場合、回転中でなければ回転を開始
-        if (Input.GetKeyDown(KeyCode.L)) {
-            if (!_isRotating) {
-                _isRotating = true;
-                _finishRotate = false; // 回転を始める前にリセット
-
-                // 回転を始める角度を記録
-                _startAngle = _currentAngle;
-
-                // 目標角度を切り替え
-                _isTargetAngle1 = !_isTargetAngle1;
-
-                // 回転進行度をリセット
-                _rotationProgress = 0f;
-            }
-        }
 
         // 回転処理
         if (_isRotating && !_finishRotate) {
@@ -69,6 +53,23 @@ public class AircraftAnimation : MonoBehaviour {
                 _finishRotate = true; // 回転終了を記録
                 _currentAngle = targetAngle; // 最後に目標角度に正確に合わせる
             }
+        }
+    }
+
+    public void Variable() {
+
+        if (!_isRotating) {
+            _isRotating = true;
+            _finishRotate = false; // 回転を始める前にリセット
+
+            // 回転を始める角度を記録
+            _startAngle = _currentAngle;
+
+            // 目標角度を切り替え
+            _isTargetAngle1 = !_isTargetAngle1;
+
+            // 回転進行度をリセット
+            _rotationProgress = 0f;
         }
     }
 }

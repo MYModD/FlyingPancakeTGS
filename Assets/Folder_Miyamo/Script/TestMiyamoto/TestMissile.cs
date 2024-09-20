@@ -1,8 +1,7 @@
-using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Splines;
+using Randomdom = UnityEngine.Random;
 
 public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     #region 変数 + プロパティ  
@@ -45,6 +44,10 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
     [Tag]
     private string _buildingTag;
 
+    [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip[] _audioClip;
 
 
 
@@ -152,12 +155,15 @@ public class TestMissile : MonoBehaviour, IPooledObject<TestMissile> {
 
 
     private void OnTriggerEnter(Collider other) {
-        print("衝突");
-
         // 敵のタグがが普通の敵で標的の敵と同じだったとき
         if (other.transform == _enemyTarget) {
-
-
+            if (_audioSource == null) {
+                _audioSource = GameObject.Find("SEAudio").GetComponent<AudioSource>();
+            }
+            int index = Randomdom.Range(0, _audioClip.Length);
+            _audioSource.Stop();
+            _audioSource.PlayOneShot(_audioClip[index]);
+            _audioSource.PlayOneShot(_audioClip[index]);
             // 敵のタグが普通の敵だったとき
             if (other.gameObject.CompareTag(_enemyTag)) {
                 _hasCollided = true; // 衝突フラグをセット
