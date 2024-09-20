@@ -9,9 +9,14 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
 {
     
     [Header("プールされるオブジェクト")]
-    [SerializeField] private T _pooledPrefab; 
+    [SerializeField] protected T _pooledPrefab;
 
-    protected IObjectPool<T> _objectPool; // オブジェクトプールの管理インスタンス
+    // プロパティに変更
+    protected virtual IObjectPool<T> ObjectPool {
+        get; set;
+    }
+
+
 
     [Header("プールの初期生成数")]
     [SerializeField] private int _defaultCapacity = 32; 
@@ -35,8 +40,8 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     }
     public virtual void Initialize()
     {
-       
-        _objectPool = new ObjectPool<T>(
+
+        ObjectPool = new ObjectPool<T>(
             Create,
             OnGetFromPool,
             OnReleaseToPool,
@@ -51,7 +56,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
         for (int i = 0; i < _defaultCapacity; i++)
         {
             T game = Create();
-            _objectPool.Release(game);
+            ObjectPool.Release(game);
         }
     }
 
@@ -61,7 +66,7 @@ public abstract class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IP
     protected virtual T Create()
     {
         var instance = Instantiate(_pooledPrefab, transform.position, Quaternion.identity, transform);
-        instance.ObjectPool = _objectPool;
+        instance.ObjectPool = ObjectPool;
         return instance;
     }
 

@@ -10,7 +10,7 @@ public class EnemyBulletPoolManger : PoolManager<EnemyBullet> {
     /// 外部から実行される オブジェクトプールから取得する
     /// </summary>
     public void EnemyFireBullet() {
-        EnemyBullet enemyBullet = _objectPool.Get();
+        EnemyBullet enemyBullet = ObjectPool.Get();
         enemyBullet.Initialize();
         enemyBullet.transform.SetPositionAndRotation(_firePostion.position, _firePostion.rotation);
     }
