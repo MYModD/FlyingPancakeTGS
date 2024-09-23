@@ -5,6 +5,8 @@ using UnityEngine;
 public class PizzaAttackTimer : MonoBehaviour {
     public PizzaWanima _pizzaWanima;
     public FirePizzaMissileToPlayer _firePizzaMissileToPlayer;
+    public PizzaCoinInstance _pizzaCoinInstance;
+
     public float _delay = 3f; // 遅延時間（秒）、インスペクターで調整可能
 
     private void OnEnable() {
@@ -28,5 +30,17 @@ public class PizzaAttackTimer : MonoBehaviour {
         } else {
             Debug.LogWarning("FirePizzaMissileToPlayer is not assigned!");
         }
+
+        if (_pizzaCoinInstance.enabled == true) {
+            Debug.LogError("FalseからTrueになるべき処理が最初からTrueになっている");
+
+        } else {
+            
+            _pizzaCoinInstance.enabled = true;
+
+        }
+
+
+
     }
 }

@@ -52,6 +52,8 @@ public class PizzaCoinCount : MonoBehaviour {
 
     public TestLockOnManager _lockOn;
 
+    public PizzaCoinUICounter _pizzaCoinUICounter;
+
     void Start() {
         _lastDecreaseTime = Time.time;
     }
@@ -66,10 +68,12 @@ public class PizzaCoinCount : MonoBehaviour {
         if (other.CompareTag(_pizzaTag)) {
 
 
+            // ピザコイン取得時の処理
+
             _pizzaUI.CoinStart();
 
             
-            _pizzaCount++;
+            
 
             float pitchRandom = UnityEngine.Random.Range(-0.05f, 0.05f);
             Debug.Log($"ランダム値 : {pitchRandom}");
@@ -77,16 +81,18 @@ public class PizzaCoinCount : MonoBehaviour {
             _audioPizza.pitch = 1f -pitchRandom;
             _audioPizza.Play();
             other.gameObject.SetActive(false);
-            UpdatePizzaCountText();
-            //一定数達したらピザマンのタグが敵に変わるスクリプト
-            if (_pizzaCount >= _maxPizzaCoin) {
-                _pizzaMan.tag = _pizzaManTagEnemy;
-            }
+
+
+           
             
         }
         if (other.CompareTag(_enemyTag)) {
             // ここにミサイルが当たったとき減らす
-            _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
+
+            //_pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
+
+            _pizzaCoinUICounter.DegreePizzaCoin();
+
 
             // ここ要注意
             _redDamage.PlayerDamage();
@@ -115,8 +121,9 @@ public class PizzaCoinCount : MonoBehaviour {
 
     public void DegreePizzaCoinLeftArm() {
 
-        _pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
-        UpdatePizzaCountText();
+        //_pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
+        //UpdatePizzaCountText();
+        _pizzaCoinUICounter.DegreePizzaCoin();
         _redDamage.PlayerDamage();
 
     }
