@@ -60,7 +60,7 @@ public class PizzaMan : MonoBehaviour {
         }
 
         Destroy(_destoryObjs.gameObject);
-        Destroy(_coinInstance.gameObject);
+        _coinInstance.gameObject.SetActive(false);
         Destroy(_coinSpawingPearnt);
 
 

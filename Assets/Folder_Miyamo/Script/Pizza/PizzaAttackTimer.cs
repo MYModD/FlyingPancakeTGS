@@ -7,7 +7,12 @@ public class PizzaAttackTimer : MonoBehaviour {
     public FirePizzaMissileToPlayer _firePizzaMissileToPlayer;
     public PizzaCoinInstance _pizzaCoinInstance;
 
+    
+    [Header("ラミエル武器の遅延")]
     public float _delay = 3f; // 遅延時間（秒）、インスペクターで調整可能
+
+    [Header("コイン発生の遅延")]
+    public float _coinDelay;
 
     private void OnEnable() {
         StartCoroutine(EnableAttackComponents());
@@ -31,16 +36,23 @@ public class PizzaAttackTimer : MonoBehaviour {
             Debug.LogWarning("FirePizzaMissileToPlayer is not assigned!");
         }
 
+        
+
+
+
+    }
+
+    private IEnumerator EnableCoinInstance() {
+    
+        yield return new WaitForSeconds(_delay);
+
         if (_pizzaCoinInstance.enabled == true) {
             Debug.LogError("FalseからTrueになるべき処理が最初からTrueになっている");
 
         } else {
-            
+
             _pizzaCoinInstance.enabled = true;
 
         }
-
-
-
     }
 }
