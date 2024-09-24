@@ -54,6 +54,9 @@ public class PizzaCoinCount : MonoBehaviour {
 
     public PizzaCoinUICounter _pizzaCoinUICounter;
 
+
+    private ControllerBuruBuru _controller;
+
     void Start() {
         _lastDecreaseTime = Time.time;
     }
@@ -95,6 +98,10 @@ public class PizzaCoinCount : MonoBehaviour {
 
 
             // ここ要注意
+            if (_controller == null) {
+                _controller = ControllerBuruBuru.Instance;
+            }
+            _controller.StartVibration();
             _redDamage.PlayerDamage();
             _lockOn.AddBlackList(other.transform);
             other.gameObject.SetActive(false);
@@ -121,8 +128,15 @@ public class PizzaCoinCount : MonoBehaviour {
 
     public void DegreePizzaCoinLeftArm() {
 
+
         //_pizzaCount = Mathf.Max(0, _pizzaCount - _decreaseAmount);
         //UpdatePizzaCountText();
+
+        if (_controller == null) {
+            _controller = ControllerBuruBuru.Instance;
+        }
+        _controller.StartVibration();
+
         _pizzaCoinUICounter.DegreePizzaCoin();
         _redDamage.PlayerDamage();
 
