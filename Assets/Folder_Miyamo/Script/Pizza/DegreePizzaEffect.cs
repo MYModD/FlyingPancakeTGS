@@ -18,6 +18,9 @@ public class DegreePizzaEffect : MonoBehaviour {
     void Awake() {
         _rectTransform = GetComponent<RectTransform>();
         _firstPostion = _rectTransform.position;
+        foreach (Image image in _images) {
+            image.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -46,6 +49,7 @@ public class DegreePizzaEffect : MonoBehaviour {
 
         // image‚Ì“§–¾“x‚ğ100“‚É‚·‚éˆ—
         foreach (Image item in _images) {
+            item.enabled = true;
             Color color = item.color;
             color.a = 1f;
             item.color = color;
