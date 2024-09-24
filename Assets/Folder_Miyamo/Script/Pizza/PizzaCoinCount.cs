@@ -106,12 +106,12 @@ public class PizzaCoinCount : MonoBehaviour {
             if (_controller == null) {
                 _controller = ControllerBuruBuru.Instance;
             }
+            other.gameObject.SetActive(false);
 
             _pizzaEffect.Play();
             _controller.StartVibration();
             _redDamage.PlayerDamage();
             _lockOn.AddBlackList(other.transform);
-            other.gameObject.SetActive(false);
 
         }
     }
