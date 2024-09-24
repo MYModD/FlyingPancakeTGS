@@ -8,9 +8,7 @@ public class TesTes : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Y)) {
-            // _as がアクティブなら非アクティブに、非アクティブならアクティブに切り替える
-            bool isActive = _as.activeSelf;
-            _as.SetActive(!isActive);
+            GetComponent<ParticleSystem>().Play();
         }
     }
 }
