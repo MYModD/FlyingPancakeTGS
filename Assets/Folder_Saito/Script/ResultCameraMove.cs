@@ -17,6 +17,8 @@ public class ResultCameraMove : MonoBehaviour
     private GameObject _player;
     [SerializeField]
     private AudienceGaugeManager _miniScore;
+    [SerializeField]
+    private GameObject _currsul;
     #endregion
     #region プロパティ
     #endregion
@@ -26,6 +28,7 @@ public class ResultCameraMove : MonoBehaviour
             _camera.IsResultMoveSwitch();
             _playerMove.StopMoving(10000f);
             _miniScore.TextTrue(true);
+            _currsul.SetActive(false);
         }
     }
     #endregion
