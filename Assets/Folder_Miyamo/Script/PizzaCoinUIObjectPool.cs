@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UI;
 
 public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
 
@@ -15,7 +17,7 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
     public RectTransform _targetTransform;
 
     [Header("生成位置のランダムさ")]
-    [Range(0,500f)]
+    [Range(0, 500f)]
     [SerializeField]
     private float _instancePostionRandom;
 
@@ -47,10 +49,10 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
         get; set;
     }
 
-    
+
 
     // プールのセットアップ
-    
+
 
     protected override PizzaCoinUI Create() {
         PizzaCoinUI instance = Instantiate(_pooledPrefab, transform.position, Quaternion.identity, transform);
@@ -70,26 +72,39 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
             Debug.LogWarning("RectTransform component not found on the instantiated PizzaCoinUI.");
         }
 
+
+
+
+        instance.GetComponent<Image>().color = Color.HSVToRGB(Random.Range(0, 0.5f), Random.Range(0, 0.3f), 1f);
+
         return instance;
     }
 
-   
+
 
     public void CoinStart() {
 
         PizzaCoinUI instance = ObjectPool.Get();
 
         Vector2 randmPostion = Random.insideUnitCircle * _instancePostionRandom;
-        instance.transform.position = _rockOnRectTransform.position - new Vector3( randmPostion.x, randmPostion.y, 0);
+        instance.transform.position = _rockOnRectTransform.position - new Vector3(randmPostion.x, randmPostion.y, 0);
     }
 
 
     public void ExplosionPizzaCoin() {
-    
-        
-    
-    
-    
+
+
+
+
+
+    }
+    private void Update() {
+        if (Input.GetKey(KeyCode.Space)) {
+
+            CoinStart();
+        }
+
+
     }
 
 }
