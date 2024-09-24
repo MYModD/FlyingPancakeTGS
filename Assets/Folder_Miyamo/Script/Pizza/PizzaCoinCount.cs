@@ -55,7 +55,12 @@ public class PizzaCoinCount : MonoBehaviour {
     public PizzaCoinUICounter _pizzaCoinUICounter;
 
 
+    public ParticleSystem _pizzaEffect;
+
+
     private ControllerBuruBuru _controller;
+
+
 
     void Start() {
         _lastDecreaseTime = Time.time;
@@ -101,6 +106,8 @@ public class PizzaCoinCount : MonoBehaviour {
             if (_controller == null) {
                 _controller = ControllerBuruBuru.Instance;
             }
+
+            _pizzaEffect.Play();
             _controller.StartVibration();
             _redDamage.PlayerDamage();
             _lockOn.AddBlackList(other.transform);
@@ -136,6 +143,7 @@ public class PizzaCoinCount : MonoBehaviour {
             _controller = ControllerBuruBuru.Instance;
         }
         _controller.StartVibration();
+        _pizzaEffect.Play();
 
         _pizzaCoinUICounter.DegreePizzaCoin();
         _redDamage.PlayerDamage();
