@@ -77,17 +77,19 @@ public class PizzaCoinUIObjectPool : PoolManager<PizzaCoinUI> {
 
     public void CoinStart() {
 
-        //Vector2 playerPostion = RectTransformUtility.WorldToScreenPoint(_cameraMain, playerTransform.position);
-
-        //Debug.Log(playerPostion);
-
         PizzaCoinUI instance = ObjectPool.Get();
 
         Vector2 randmPostion = Random.insideUnitCircle * _instancePostionRandom;
         instance.transform.position = _rockOnRectTransform.position - new Vector3( randmPostion.x, randmPostion.y, 0);
     }
 
-    private void Update() {
-       
+
+    public void ExplosionPizzaCoin() {
+    
+        
+    
+    
+    
     }
+
 }
