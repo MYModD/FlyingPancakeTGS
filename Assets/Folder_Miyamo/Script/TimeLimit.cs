@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TimeLimit : MonoBehaviour
-{
+public class TimeLimit : MonoBehaviour {
     [SerializeField] private ScoreManager _scoreManger;
     [SerializeField] private Animator _cutIN;
     [Header("制限時間")]
@@ -15,9 +14,11 @@ public class TimeLimit : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _textLimitTime;
 
-    [SerializeField,Header("できたらreadonlyにしたい")]
+    [SerializeField, Header("できたらreadonlyにしたい")]
     public bool _isStart = false;
 
+    [SerializeField]
+    private GameObject _gameObject;
 
     private float _firstMaxtime = default;
     // 後で直す
@@ -37,7 +38,7 @@ public class TimeLimit : MonoBehaviour
 
             _limitTime -= Time.deltaTime;
             if (_limitTime <= 0f||(Input.GetKey(KeyCode.P)&&Input.GetKeyDown(KeyCode.F))) {
-                End3rdGame();
+                StartCoroutine(ResultPizza());
             }
             _textTitle.text = "TimeLimit";
             _textLimitTime.text = ChangeTimeText(_limitTime);
@@ -45,7 +46,12 @@ public class TimeLimit : MonoBehaviour
             _textTitle.gameObject.SetActive(true);
         }
     }
-
+    private IEnumerator ResultPizza() {
+        _gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        _gameObject.SetActive(false);
+        End3rdGame();
+    }
 
     /// <summary>
     /// タイマーが0になったもしくは、1位になった敵が撃破されたら実行する

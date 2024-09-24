@@ -22,32 +22,29 @@ public class AudienceGaugeManager : MonoBehaviour {
     [SerializeField] private Slider _audienceGauge;
     [SerializeField] private Image _blurImage;
 
+    //変更したいテキスト
     [SerializeField] private TextMeshProUGUI _stageTitle;
     [SerializeField] private TextMeshProUGUI _stageScore;
     [SerializeField] private TextMeshProUGUI _rank;
     [SerializeField] private TextMeshProUGUI _rankTitle;
     [SerializeField] private Image _title;
-    private int _audienceMaxValue = 100;
+    private int _audienceMaxValue = 100;//ゲージのマックス設定値
 
-    private float _nowPlayerScore = 0;
-    private float _maxScore;
-    private float _currentPlayScore = 0;
-    private float _audiencePONPONValue = 0;
-    private string _stagename;
+    private float _nowPlayerScore = 0;//現在のスコアの保持
+    private float _maxScore;//そのステージのマックススコア
+    private float _currentPlayScore = 0;//1フレーム前のスコアの保存
+    private float _audiencePONPONValue = 0;//ゲージの数値保存
+    private string _stagename;//現在のステージ名
 
     #endregion
     #region プロパティ
     #endregion
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-    }
-    /// <summary>
     /// 更新前処理
     /// </summary>
     void Start() {
+        //スライダーの初期設定
         _audienceGauge.value = 0;
         _audienceGauge.maxValue = _audienceMaxValue;
     }
@@ -58,27 +55,26 @@ public class AudienceGaugeManager : MonoBehaviour {
         SetPercentValue();
         ChangeSliderValue();
         SetResult();
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-           print( (Mathf.Round(_nowPlayerScore / _maxScore * 1000) / 10)+"%ですわよ");
-        }
     }
     /// <summary>
     /// ゲージ変更
     /// </summary>
     private void SetPercentValue() {
+        //スコアが変わらなかったらリターンする
         if (_currentPlayScore == _nowPlayerScore) {
             return;
         }
-
+        //ゼロが含んだ計算をさせない
         if (_nowPlayerScore != 0 && _maxScore != 0) {
             // 小数点第1位まで計算し、100%以上にならないように制限
             _audiencePONPONValue = Mathf.Min(Mathf.Round((_nowPlayerScore / _maxScore * 1000)) / 10, 100);
         } else {
+            //どっちもゼロならゼロにする
             _audiencePONPONValue = 0;
         }
-
+        //ゲージの数値更新
         _audienceGauge.value = _audiencePONPONValue;
+        //スコア更新
         _currentPlayScore = _nowPlayerScore;
     }
 
@@ -86,7 +82,6 @@ public class AudienceGaugeManager : MonoBehaviour {
     /// ランク設定とその処理
     /// </summary>
     private void ChangeSliderValue() {
-        Debug.Log($"<color=#FF0000>_audiencePONPONValue: {_audiencePONPONValue}</color>"); // 赤っぽいログ表示（Rich Text, UI用）
         if (_audiencePONPONValue >= 100) {
             _rank.text = "S";
             _audience[0].SetActive(true);
@@ -140,6 +135,9 @@ public class AudienceGaugeManager : MonoBehaviour {
             }
         }
     }
+    /// <summary>
+    /// テキストに表示させる
+    /// </summary>
     private void SetResult() {
         _stageTitle.text = _stagename;
         _stageScore.text = _nowPlayerScore + "/" + _maxScore;
@@ -161,9 +159,9 @@ public class AudienceGaugeManager : MonoBehaviour {
     /// <param name="nowScore">現在のスコア</param>
     /// <param name="maxScoreStage">マックス</param>
     public void SetScoreValue(int nowScore, int maxScoreStage, string stagename) {
-        _nowPlayerScore = nowScore;
-        _maxScore = maxScoreStage;
-        _stagename = stagename;
+        _nowPlayerScore = nowScore;//プレイヤーのスコアの保存
+        _maxScore = maxScoreStage;//マックススコアの設定
+        _stagename = stagename;//ステージの名前の設定
     }
     /// <summary>
     /// ステージ変更の時にリセット
@@ -172,6 +170,10 @@ public class AudienceGaugeManager : MonoBehaviour {
         _nowPlayerScore = 0;
         _maxScore = 0;
     }
+    /// <summary>
+    /// 多分、表示非表示の切り替え
+    /// </summary>
+    /// <param name="isSw"></param>
     public void TextTrue(bool isSw) {
         _title.enabled = isSw;
         _blurImage.enabled = isSw;

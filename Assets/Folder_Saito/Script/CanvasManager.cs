@@ -12,17 +12,25 @@ using UnityEngine.InputSystem;
 using UnityEngine.Splines;
 using Unity.VisualScripting;
 using TMPro;
+
 public class CanvasManager : MonoBehaviour {
     #region 変数
+    // ミニスコア表示用のTextMeshProUGUI配列
     [SerializeField] private TextMeshProUGUI[] _miniScore;
 
+    // ステージ変更用のマネージャー
     [SerializeField, Header("ControllerSelectButton")] private ChengeStageManager _staChange;
+
+    // コントローラーボタンの設定
     [SerializeField, Header("ControllerSelectButton")] private ControllerSelectButton _button;
+
+    // タイトル画面の各種ボタン
     [Header("タイトルのボタン")]
     [SerializeField, Header("スタートボタン")] private Button _titleStart;
     [SerializeField, Header("ゲーム終了ボタン")] private Button _titleGameEnd;
     [SerializeField, Header("設定ボタン")] private Button _titleSetting;
 
+    // ゲーム内で表示するオブジェクトのグループ
     [SerializeField, Header("フィクションのオブジェクト")] private GameObject[] _fiction;
     [SerializeField, Header("タイトルのオブジェクト")] private GameObject[] _titleObjs;
     [SerializeField, Header("カウントダウンのオブジェクト")] private GameObject[] _countObjs;
@@ -33,119 +41,137 @@ public class CanvasManager : MonoBehaviour {
     [SerializeField, Header("オープニングのオブジェクト")] private GameObject[] _openingObjs;
     [SerializeField, Header("エンディングのオブジェクト")] private GameObject[] _endingObjs;
     [SerializeField, Header("ゲームプレイ中に使うオブジェクト")] private GameObject[] _gameObjs;
-    [SerializeField] private GameObject[] _none;
+    [SerializeField] private GameObject[] _none;  // オブジェクトが無い場合の処理用
     [SerializeField] private SplineAnimate _spAnime;
 
-    [SerializeField, Header("タイトルに行かせたいタグ"),Tag] private string _tagTitle;
+    // タグに基づいてシーン遷移を制御するための設定
+    [SerializeField, Header("タイトルに行かせたいタグ"), Tag] private string _tagTitle;
     [SerializeField, Header("ゲームに行かせたいタグ"), Tag] private string _tagGame;
     [SerializeField, Header("ゲームに戻すタグ"), Tag] private string _tagBackGame;
-    [SerializeField, Header("設定に行かせたいタグ"),Tag] private string _tagSetting;
+    [SerializeField, Header("設定に行かせたいタグ"), Tag] private string _tagSetting;
     [SerializeField, Header("ゲーム終了させたいタグ"), Tag] private string _tagFinish;
-    [SerializeField]
-    private ResultManager _resultManager;
 
+    // リザルト画面の管理
+    [SerializeField] private ResultManager _resultManager;
+
+    // ゲームプレイ時間とタイトル画面での放置時間のカウント
     private float _gamePlayTime;
 
-    [SerializeField,Header("何秒操作がなかったら動画を流すか")]
+    // タイトル画面での自動遷移用タイマー設定
+    [SerializeField, Header("何秒操作がなかったら動画を流すか")]
     private float _titleTime;
-    private float _nowTitleTime;
-    [SerializeField]
-    private GameObject _videoPlay;
-    [SerializeField]
-    private AudioSource _audioBGM;
-    [SerializeField]
-    private float _videotime;
+    private float _nowTitleTime;  // タイトルでの経過時間カウント
 
-    private bool _isStartPush=true;
+    // 動画再生用のオブジェクトとBGM制御
+    [SerializeField] private GameObject _videoPlay;
+    [SerializeField] private AudioSource _audioBGM;
+    [SerializeField] private float _videotime;  // 動画再生時間
+
+    // 各種状態を管理するためのフラグ
+    private bool _isStartPush = true;
+
+    // UIの状態を管理するための列挙体
     private enum UIState {
-        title,
-        gamePlay,
-        result,
-        menu,
-        setting,
-        OP,
-        ED,
-        Movie,
-        Fiction,
+        title,       // タイトル画面
+        gamePlay,    // ゲームプレイ中
+        result,      // リザルト画面
+        menu,        // メニュー（ポーズ）画面
+        setting,     // 設定画面
+        OP,          // オープニング画面
+        ED,          // エンディング画面
+        Movie,       // ムービー再生中
+        Fiction,     // フィクションシーン
     }
+
+    // 現在と前回のUI状態
     private UIState _state;
     private UIState _prevState;
-    private bool _canMove = true;
+
+    // 移動可能かどうかを管理するフラグ
+    private bool _canMove = false;
     #endregion
     #region プロパティ
     #endregion
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake()
-    {
-        _canMove = false;
-    }
-    /// <summary>
     /// 更新前処理
     /// </summary>
     void Start()
     {
+        //フィクション流してタイトルに行かせるから変更
         _state = UIState.Fiction;
-
     }
     /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
+        //マウス同時に押すとシーンをリロード
         if ((Input.GetMouseButton(0)&&Input.GetMouseButton(1))||(Input.GetMouseButton(1)&&Input.GetMouseButton(0))) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        //フィクションの時
         if (_state == UIState.Fiction) {
-
+            //まだ処理はない
         }
+        //タイトルの時
         if (_state == UIState.title) {
+            //タイトルにいる時間の計測
             _nowTitleTime += Time.deltaTime;
+            //規定値を超えたら
             if (_titleTime <= _nowTitleTime) {
+                //ステータスをムービーに
                 _state = UIState.Movie;
+                //タイトルオブジェクトを無効化
                 GameObjTrueFalse(_none, _titleObjs);
+                //BGMを止める
                 _audioBGM.Stop();
+                //ビデオ再生
                 _videoPlay.SetActive(true);
+                //時間をリセット
                 _nowTitleTime = 0;
             }
         }
+        //ゲーム中の時
         if (_state == UIState.gamePlay) {
+            //プレイ時間加算
             _gamePlayTime += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Z)) {
-                PlayToED();
-            }
+            //メニューに行かせるのは一旦無くす
+
             //if (Input.GetKeyDown("joystick button 7")&&_isStartPush) {
             //    PlayToMenu();
             //    _isStartPush = false;
             //}
-            if (Input.GetKeyUp("joystick button 7")) {
-                _isStartPush = true;
-            }
+            //if (Input.GetKeyUp("joystick button 7")) {
+            //    _isStartPush = true;
+            //}
             _canMove = true;
         }
-        if (_state == UIState.result) {
-            //if (Input.GetButtonDown("Cancel") &&_isStartPush) {
-            //    MenuOrResultToStart();
-            //}
-            //_resultManager.SetTexts();
-            //_canMove= false;
-        }
-        if (_state == UIState.menu) {
-            if (Input.GetKeyDown("joystick button 7") && _isStartPush) {
-                MenuToPlay();
-                _isStartPush=false;
-            }
-            if (Input.GetKeyUp("joystick button 7")) {
-                _isStartPush = true;
-            }
-            _canMove=false;
-        }
+        //処理書いてるけど今は使ってない
+
+        //if (_state == UIState.result) {
+        //    if (Input.GetButtonDown("Cancel") && _isStartPush) {
+        //        MenuOrResultToStart();
+        //    }
+        //    _resultManager.SetTexts();
+        //    _canMove = false;
+        //}
+        //if (_state == UIState.menu) {
+        //    if (Input.GetKeyDown("joystick button 7") && _isStartPush) {
+        //        MenuToPlay();
+        //        _isStartPush=false;
+        //    }
+        //    if (Input.GetKeyUp("joystick button 7")) {
+        //        _isStartPush = true;
+        //    }
+        //    _canMove=false;
+        //}
         if (_state == UIState.setting) {
+            //Bボタンで戻る
             if (Input.GetButtonDown("Cancel")) {
                 SettingToTitleOrMenu();
             }
         }
+        //
         if (_state == UIState.Movie) {
             _nowTitleTime += Time.deltaTime;
             if (_nowTitleTime >= _videotime||Input.anyKeyDown) {
