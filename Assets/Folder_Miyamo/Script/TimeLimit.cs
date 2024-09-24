@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TimeLimit : MonoBehaviour
@@ -9,6 +10,10 @@ public class TimeLimit : MonoBehaviour
     [SerializeField] private Animator _cutIN;
     [Header("êßå¿éûä‘")]
     public float _limitTime = 60f;
+    [SerializeField]
+    private TextMeshProUGUI _textTitle;
+    [SerializeField]
+    private TextMeshProUGUI _textLimitTime;
 
     [SerializeField,Header("Ç≈Ç´ÇΩÇÁreadonlyÇ…ÇµÇΩÇ¢")]
     public bool _isStart = false;
@@ -34,7 +39,10 @@ public class TimeLimit : MonoBehaviour
             if (_limitTime <= 0f||(Input.GetKey(KeyCode.P)&&Input.GetKeyDown(KeyCode.F))) {
                 End3rdGame();
             }
-        
+            _textTitle.text = "TimeLimit";
+            _textLimitTime.text = ChangeTimeText(_limitTime);
+            _textLimitTime.gameObject.SetActive(true);
+            _textTitle.gameObject.SetActive(true);
         }
     }
 
