@@ -59,6 +59,9 @@ public class TestLockOnManager : MonoBehaviour {
 
 
     public float _circleRadius;
+
+    public AudioSource _lockOnSE;
+
     [HideInInspector]
     public Quaternion _circleRotation;
 
@@ -69,6 +72,7 @@ public class TestLockOnManager : MonoBehaviour {
 
 
     private Dictionary<Transform, Renderer> _transformKeyGetRender = new Dictionary<Transform, Renderer>();
+
 
 
     private void Update() {
@@ -157,6 +161,7 @@ public class TestLockOnManager : MonoBehaviour {
 
             if (closestTarget != null) {
                 _targetsInCone.Add(closestTarget);
+                _lockOnSE.Play();
                 StartCoroutine(nameof(CanBoolTimer));
             }
         }

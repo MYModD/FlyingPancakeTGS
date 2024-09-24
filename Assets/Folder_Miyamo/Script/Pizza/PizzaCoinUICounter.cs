@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PizzaCoinUICounter : MonoBehaviour
-{
+public class PizzaCoinUICounter : MonoBehaviour {
 
     public TextMeshProUGUI _text;
 
-    public int _currentValue;
 
     public PizzaMan _pizzaMan;
     [Tag]
@@ -17,16 +15,19 @@ public class PizzaCoinUICounter : MonoBehaviour
     [Tag]
     public string _pizzaEnemyTag;
 
+    [Header("今のコイン枚数")]
+    public int _currentValue;
+
+
+    [Header("ダメージ受けたときの減る量")]
+    public int _degreeValue = 5;
+
+
     [Header("何個以上でラミエルのタグをかえるか")]
     [SerializeField]
     private int _chengeTagValue = 60;
 
 
-
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update() {
@@ -34,18 +35,13 @@ public class PizzaCoinUICounter : MonoBehaviour
 
 
             _pizzaMan.tag = _pizzaEnemyTag;//一定数達したらピザマンのタグが敵に変わるスクリプト
-            
+
 
         }
 
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-
-
-       
-    }
 
     public void TouchMyField() {
 
@@ -53,6 +49,20 @@ public class PizzaCoinUICounter : MonoBehaviour
         _text.text = _currentValue.ToString();
 
     }
+
+    public void DegreePizzaCoin() {
+
+        _currentValue = Mathf.Max(0, _currentValue - _degreeValue);
+
+        _text.text = _currentValue.ToString();
+
+
+
+    }
+
+
+
+
 
 
 }
