@@ -45,10 +45,9 @@ public class CountDownUI : MonoBehaviour {
                 _audioSource.PlayOneShot(_audioClip[_count]);
                 _audioSource.PlayOneShot(_audioClip[_count]);
             }
-            //foreach (GameObject obj in _gameObject) {
-            //    obj.gameObject.SetActive(true);
-            //    _audioSource.PlayOneShot(_audioClip[1]);
-            //}
+            foreach (GameObject obj in _gameObject) {
+                obj.gameObject.SetActive(false);
+            }
             _images[2].enabled = false;
             _images[3].enabled = false;
             _isActive = false;

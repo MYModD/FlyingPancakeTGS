@@ -21,7 +21,7 @@ public class AircraftAnimation : MonoBehaviour {
 
     private bool _finishRotate = false;   // 回転が完了したかどうか
     private bool _isRotating = false;     // 回転中かどうか
-    private bool _isTargetAngle1 = true;  // 現在の目標角度がターゲット1かどうか
+    private bool _isTargetAngle1 = false;  // 現在の目標角度がターゲット1かどうか
     private float _rotationThreshold = 0.1f; // 目標角度との許容差
 
     private float _startAngle;  // 回転の開始角度
@@ -29,6 +29,7 @@ public class AircraftAnimation : MonoBehaviour {
 
     void Start() {
         _currentAngle = _targetAngle2; // 初期角度を設定
+        Variable();
     }
 
     void Update() {
@@ -58,6 +59,7 @@ public class AircraftAnimation : MonoBehaviour {
 
     public void Variable() {
 
+        print("いばれわよ00");
         if (!_isRotating) {
             _isRotating = true;
             _finishRotate = false; // 回転を始める前にリセット
@@ -67,6 +69,8 @@ public class AircraftAnimation : MonoBehaviour {
 
             // 目標角度を切り替え
             _isTargetAngle1 = !_isTargetAngle1;
+
+            print(_isTargetAngle1);
 
             // 回転進行度をリセット
             _rotationProgress = 0f;

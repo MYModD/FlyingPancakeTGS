@@ -9,7 +9,8 @@ public class Resultet : MonoBehaviour {
     [SerializeField, Header("1stPlayer‚Ìƒ^ƒO"), Tag] private string _playerTag;
     [SerializeField]
     private AudienceGaugeManager _miniScore;
-    [SerializeField] private AircraftAnimation _aircraftAnimation;
+    [SerializeField] private AircraftAnimation _aircraftAnimation1;
+    [SerializeField] private AircraftAnimation _aircraftAnimation2;
     // Start is called before the first frame update
     void Start() {
 
@@ -25,7 +26,8 @@ public class Resultet : MonoBehaviour {
         if (other.CompareTag(_playerTag)) {
             _animator.Play("CutIN");
             _miniScore.TextTrue(false);
-            _aircraftAnimation.Variable();
+            _aircraftAnimation1.Variable();
+            _aircraftAnimation2.Variable();
         }
     }
 }

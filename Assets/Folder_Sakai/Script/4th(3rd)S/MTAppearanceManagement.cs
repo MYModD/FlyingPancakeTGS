@@ -37,14 +37,13 @@ public class MTAppearanceManagement : MonoBehaviour {
         print(numberOfGeneration);
         StartCoroutine(StarUP(numberOfGeneration));
         for (int i = 0; i < numberOfGeneration; i++) {
+            SEPlay();
             for (int j = 0; j < _spawnJudge.Length; j++) {
                 if (_spawnJudge[j]) {
                     _monsterTruck[j].transform.position = _spawnPoint[j].position;
                     _monsterTruck[j].transform.rotation = _spawnPoint[j].rotation;
                     _monsterTruck[j].SetActive(true);
                     _spawnJudge[j] = false;
-                    SEPlay();
-                    
                     break;
                 }
             }

@@ -74,6 +74,10 @@ public class ChengeStageManager : MonoBehaviour {
     private PlayerMove _playerMove;
     [SerializeField]
     private CameraRotate _cameraRotate;
+    [SerializeField]
+    private GameObject _title;
+    [SerializeField]
+    private GameObject _score;
 
     // ゲーム終了フラグ
     private bool _isFinish = false;
@@ -197,6 +201,8 @@ public class ChengeStageManager : MonoBehaviour {
             _splineAnimate3st.enabled = true;
             _gamePad.SetActive(true);
             _3rdTime.LimitTimerStart(); // 3rdステージのタイマー開始
+            _title.SetActive(false);
+            _score.SetActive(false);
         }
 
         // 4thから5thステージへ
