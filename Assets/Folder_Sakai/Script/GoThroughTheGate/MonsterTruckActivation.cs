@@ -9,6 +9,8 @@ public class MonsterTruckActivation : MonoBehaviour {
     [SerializeField] private GameObject[] _monsterTrucksGroup2;
     [SerializeField] private GameObject[] _monsterTrucksGroup3;
     [SerializeField] private GameObject[] _monsterTrucksGroup4;
+    [SerializeField] private GameObject[] _monsterTrucksGroup5;
+    [SerializeField] private GameObject[] _monsterTrucksGroup6;
 
     [SerializeField] private float _activationInterval = 2.0f; // アクティブ化の間隔（秒）
 
@@ -25,7 +27,9 @@ public class MonsterTruckActivation : MonoBehaviour {
             _monsterTrucksGroup1.Length,
             _monsterTrucksGroup2.Length,
             _monsterTrucksGroup3.Length,
-            _monsterTrucksGroup4.Length
+            _monsterTrucksGroup4.Length,
+            _monsterTrucksGroup5.Length,
+            _monsterTrucksGroup6.Length
         );
 
         for (int i = 0; i < maxCount; i++) {
@@ -43,6 +47,14 @@ public class MonsterTruckActivation : MonoBehaviour {
 
             if (i < _monsterTrucksGroup4.Length) {
                 _monsterTrucksGroup4[i].SetActive(true);
+            }
+
+            if (i < _monsterTrucksGroup5.Length) {
+                _monsterTrucksGroup5[i].SetActive(true);
+            }
+
+            if (i < _monsterTrucksGroup6.Length) {
+                _monsterTrucksGroup6[i].SetActive(true);
             }
 
             // 指定された秒数待機
