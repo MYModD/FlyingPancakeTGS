@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public static class DebugLogExtentions 
+public static class DebugLogExtentions
 {
     #region 基本メソッド
-/// <summary>
-    /// 色変更
+    /// <summary>
+    /// 色変更   例: Color.red
     /// </summary>>
     /// <returns></returns>
-    public static string SetColor(this string str,Color color)
+    public static string SetColor(this string str, Color color)
     {
         string colorHtmlString = ColorUtility.ToHtmlStringRGBA(color);
-        
+
         return $"<color=#{colorHtmlString}>{str}</color>";
     }
 
     /// <summary>
-    /// サイズ変更
+    /// サイズ変更 15標準　30+太文字でそこそこでかい
     /// </summary>
     /// <param name="str"></param>
     /// <param name="sizeValue"></param>
@@ -34,11 +34,12 @@ public static class DebugLogExtentions
     /// <returns></returns>
     public static string SetBold(this string str)
     {
-
         return $"<b>{str}</b>";
     }
+
+
     /// <summary>
-    /// イタリック
+    /// イタリック 
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
@@ -61,7 +62,7 @@ public static class DebugLogExtentions
     #region 便利メソッド
 
 
-   
+
     /// <summary>
     /// 警告 文字黄色
     /// </summary>
@@ -136,7 +137,7 @@ public static class DebugLogExtentions
 
         // 赤:0から青:240　までグラデーションするための値を文字数で割る
         // これで文字数が異なる場合でも同じグラデーションができる
-        float addLerpTValue = 240f  / 360f / str.Length;
+        float addLerpTValue = 240f / 360f / str.Length;
 
 
         string rainbowString = "";
