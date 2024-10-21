@@ -84,6 +84,7 @@ public class ScoreManager : MonoBehaviour {
     /// </summary>
     private void ResultSetText() {
         ScoreCalculation();
+        //入力があったらテキストに入れ、無かったら誤り文を出す
         if (_doRing) {
             _1stStage.text = ResultTextSet(_passedRingCount.ToString(), _maxRing.ToString());
         } else {

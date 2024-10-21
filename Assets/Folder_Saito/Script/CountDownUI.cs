@@ -38,19 +38,24 @@ public class CountDownUI : MonoBehaviour {
 
     void StartCountDown() {
         if (_isActive) {
+            //ゲームプレイに
             _canvasManager.OPToGamePlay();
             foreach (Camera camera in _cameras) {
+                //カウントダウン用のカメラワーク
                 camera.gameObject.SetActive(false);
                 _audioSource.PlayOneShot(_audioClip[_count]);
                 _audioSource.PlayOneShot(_audioClip[_count]);
                 _audioSource.PlayOneShot(_audioClip[_count]);
             }
             foreach (GameObject obj in _gameObject) {
+                //カウントダウンに使う配列の中身無効化
                 obj.gameObject.SetActive(false);
             }
             _images[2].enabled = false;
             _images[3].enabled = false;
+            //２度はさせない
             _isActive = false;
+            //加算
             _count++;
         }
     }
@@ -68,6 +73,7 @@ public class CountDownUI : MonoBehaviour {
     }
 
     void SetupCameraViewport(Camera camera, int index) {
+        //カメラのそれぞれの設定
         switch (index) {
             case 0:
                 _images[1].enabled = false;

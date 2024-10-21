@@ -21,23 +21,17 @@ public class TankLookOnTarget : MonoBehaviour {
     #endregion
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-    }
-    /// <summary>
-    /// 更新前処理
-    /// </summary>
-    void Start() {
-    }
-    /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
+        //規定値よりも近くなったら
         if (_distance > Vector3.Distance(_target.transform.position, this.transform.position)) {
+            //ターゲットを見る
             _muzzle.transform.LookAt(_target.transform);
+            //高さだけ変えて見る
             Vector3 targetEnemy = new Vector3(_target.transform.position.x,
                 this.transform.position.y + 1.5f, _target.transform.position.z);
+            //ターゲット見る
             _turret.transform.LookAt(targetEnemy);
         }
 

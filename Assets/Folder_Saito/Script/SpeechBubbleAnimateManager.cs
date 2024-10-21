@@ -47,19 +47,10 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
     #endregion
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-    }
-    /// <summary>
-    /// 更新前処理
-    /// </summary>
-    void Start() {
-    }
-    /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
+        //色の設定とスタートコルーチンの時間設定
         if (_splineAnimate1.enabled ) {
             if (!_is1st) {
                 return;
@@ -97,6 +88,7 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
     }
     IEnumerator StartBubble(int index,float time) {
         yield return new WaitForSeconds(time);
+        //ステージごとの吹き出しアニメーション
         switch (index) {
             case 1:
                 _image.sprite = _ring[_controller.LanguageInversionCheak() ? 1 : 0];
@@ -126,6 +118,7 @@ public class SpeechBubbleAnimateManager : MonoBehaviour {
             default:
                 break;
         }
+        //ステージごとのテキスト色を設定
         _time.color = _color;
         _stageScore.color = _color;
         _stageTitle.color = _color;

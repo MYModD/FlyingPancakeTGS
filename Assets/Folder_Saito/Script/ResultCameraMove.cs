@@ -25,9 +25,14 @@ public class ResultCameraMove : MonoBehaviour
     #region メソッド
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject == _player) {
+            //ミニリザルト表示の時のオブジェクトの動き
+            //カメラをリザルトのポジションへ
             _camera.IsResultMoveSwitch();
+            //指令があるときに動くようにしたいから１００００渡す
             _playerMove.StopMoving(10000f);
+            //テキスト表示
             _miniScore.TextTrue(true);
+            //ロックオンカーソンを消す
             _currsul.SetActive(false);
         }
     }

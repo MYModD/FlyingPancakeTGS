@@ -16,9 +16,13 @@ public class EnableParticle : MonoBehaviour
     #endregion
     #region メソッド
     private void OnEnable() {
-        _particle=this.transform.GetChild(1).gameObject;
+        _particle=this.transform.GetChild(1).gameObject;//GetChildはあまり使いたくない
         StartCoroutine(PlayParticle());
     }
+    /// <summary>
+    /// 一秒間表示
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator PlayParticle() {
         _particle.SetActive(true);
         yield return new WaitForSeconds(1f);

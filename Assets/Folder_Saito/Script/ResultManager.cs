@@ -26,22 +26,17 @@ public class ResultManager : MonoBehaviour {
     #endregion
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-    }
-    /// <summary>
-    /// 更新前処理
-    /// </summary>
-    void Start() {
-    }
-    /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
         _gameTimeText.text = ChangeTimeText(_canvasManager.GamePlayTime());
         SetClearTime();
     }
+    /// <summary>
+    /// 秒数を分、秒、秒以下３桁の形にする
+    /// </summary>
+    /// <param name="secondTime">その形式にしたい秒数</param>
+    /// <returns></returns>
     private string ChangeTimeText(float secondTime) {
         // 定数定義
         const int SECONDS_IN_MINUTE = 60;
@@ -81,6 +76,9 @@ public class ResultManager : MonoBehaviour {
         SetClearTime();
         _scoreManager.StartResultProcess();
     }
+    /// <summary>
+    /// 各種データ渡し
+    /// </summary>
     private void SetClearTime() {
         _clearTime = _canvasManager.GamePlayTime();
         _scoreManager.InputTimeScore(_clearTime, _limitTime, ChangeTimeText(_clearTime));

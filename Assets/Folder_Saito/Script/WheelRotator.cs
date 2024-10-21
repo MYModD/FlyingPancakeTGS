@@ -30,6 +30,7 @@ public class WheelRotator : MonoBehaviour {
     /// タグに基づいて車輪を取得するメソッド
     /// </summary>
     private void FindWheelsByTag() {
+        //指定したタグを持つオブジェクトを取得
         GameObject[] wheelObjects = GameObject.FindGameObjectsWithTag(_wheelTag);
         foreach (GameObject wheelObject in wheelObjects) {
             _wheels.Add(wheelObject.transform); // 車輪のTransformをリストに追加

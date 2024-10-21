@@ -56,40 +56,39 @@ public class PlayerMove : MonoBehaviour {
     /// 更新処理
     /// </summary>
     void Update() {
-
         if (!_canvas.CanMove()) {
-
+            //動けないから
             return;
         }
         StopOrMoving();
-        //if (Input.GetKeyDown(KeyCode.Space)) {
-        //    StopMoving(5f);
-        //}
-
-
     }
     /// <summary>
     /// 動いているか止まっているかの分岐
     /// </summary>
     private void StopOrMoving() {
+        //上下反転するかどうか
         _isVerticalInversion = _selectButton.VerticalInversionCheak();
         _verticalIndex = _isVerticalInversion ? -1 : 1;
+        //左右反転するかどうか
         _ishorizontalInversion = _selectButton.HorizontalInversionCheak();
         _horizontalIndex = _ishorizontalInversion ? -1 : 1;
+        //止まる信号か来た時
         if (_isStop) {
-
+            //ポジションローテーションを０に
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * _resetSpeed);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, Time.deltaTime * _resetSpeed);
+            //計測
             _nowTime += Time.deltaTime;
+            //既定の時間超えたら
             if (_nowTime >= _stopTime) {
+                //解除
                 _isStop = false;
+                //リセット
                 _nowTime = 0;
             }
         } else {
-
             //動きと角度
             MovePosition();
-
         }
         //速度
         ChangeSpeed();
@@ -108,26 +107,18 @@ public class PlayerMove : MonoBehaviour {
         if (_isVerticalInversion) {
             inputVertical *= -1;
         }
-
+        //ここも
         if (_ishorizontalInversion) {
             inputHorizontal *= -1;
         }
-
-        //カメラが見ているオブジェクトの位置の調整
-
-        //_lookAtObj.transform.localPosition = new Vector3(transform.localPosition.x / 2, transform.localPosition.y / 2, _lookAtObj.transform.localPosition.z);
-
-
         //入力値が０だったら何もさせない
         if (inputHorizontal == 0 && inputVertical == 0) {
             ResetRotation();
             return;
         }
-
         VerticalProcess(inputVertical, inputHorizontal);
         HorizontalProcess(inputHorizontal);
     }
-
     /// <summary>
     /// 縦の動き 上下の処理分け
     /// </summary>
@@ -334,21 +325,18 @@ public class PlayerMove : MonoBehaviour {
         _stopTime = seconds;
         _isStop = true;
     }
+    /// <summary>
+    /// 強制的に動かす
+    /// </summary>
     public void StartMoving() {
         _isStop = false;
         _stopTime = 0;
     }
-
+    //使わなくなっちゃった
     public float SetChangePower() {
 
         float changePower = CalculateSpeed(0);
         return changePower;
     }
-
-    //public float SetChangePower() {
-
-    //    float changePower = CalculateSpeed(0);
-    //    return changePower;
-    //}
     #endregion
 }

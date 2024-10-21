@@ -23,8 +23,13 @@ public class PizzaCoinUICounter : MonoBehaviour {
     public Sprite[] _setImageSource;
     public DegreePizzaEffect _degreePizzaEffect;
 
+    private void Awake() {
+        _pizzaMan.gameObject.GetComponent<BoxCollider>().enabled = false;
+        
+    }
     void Update() {
         if (_currentValue > _chengeTagValue) {
+            _pizzaMan.gameObject.GetComponent<BoxCollider>().enabled = true;
             _pizzaMan.tag = _pizzaEnemyTag;
         }
     }

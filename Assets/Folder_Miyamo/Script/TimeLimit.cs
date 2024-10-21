@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeLimit : MonoBehaviour {
     [SerializeField] private ScoreManager _scoreManger;
@@ -19,6 +20,11 @@ public class TimeLimit : MonoBehaviour {
 
     [SerializeField]
     private GameObject _gameObject;
+
+    [SerializeField]
+    private Image _image;
+    [SerializeField] private Sprite _clearSprite;
+    [SerializeField] private Sprite _failedSprite;
 
     private float _firstMaxtime = default;
     // Œã‚Å’¼‚·
@@ -38,7 +44,10 @@ public class TimeLimit : MonoBehaviour {
 
             _limitTime -= Time.deltaTime;
             if (_limitTime <= 0f||(Input.GetKey(KeyCode.P)&&Input.GetKeyDown(KeyCode.F))) {
-                StartCoroutine(ResultPizza());
+                StartCoroutine(ResultPizza(false));
+            }
+            if (_limitTime <= 0) {
+                _limitTime = 0f;
             }
             _textTitle.text = "TimeLimit";
             _textLimitTime.text = ChangeTimeText(_limitTime);
@@ -46,7 +55,12 @@ public class TimeLimit : MonoBehaviour {
             _textTitle.gameObject.SetActive(true);
         }
     }
-    private IEnumerator ResultPizza() {
+    public void OUTREsult(bool isClear) {
+        StartCoroutine(ResultPizza(isClear));
+    }
+    private IEnumerator ResultPizza(bool isClear) {
+        _image.sprite =isClear ? _clearSprite:_failedSprite;
+        _isStart=false;
         _gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         _gameObject.SetActive(false);
