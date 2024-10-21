@@ -97,26 +97,26 @@ public class ControllerSelectButton : MonoBehaviour {
     /// タイトルのボタンに対応するもの
     /// </summary>
     private enum TitleState {
-        goGame = 0,
-        setting,
-        finish,
+        goGame = 0,//ゲームに進む
+        setting,//設定画面へ
+        finish,//ゲーム終了
     }
     /// <summary>
     /// メニューの対応するもの
     /// </summary>
     private enum MenuState {
-        goTitie = 0,
-        setting,
+        goTitie = 0,//タイトルに戻る
+        setting,//設定画面へ
     }
     /// <summary>
     /// 設定画面の対応するもの
     /// </summary>
     private enum SettingState {
-        mainVolume = 0,
-        seVolume,
-        verticalInversion,
-        horizontalInversion,
-        language,
+        mainVolume = 0,//メインボリュームチェンジ
+        seVolume,//効果音ボリュームチェンジ
+        verticalInversion,//反転スイッチ
+        horizontalInversion,//反転スイッチ
+        language,//言語スイッチ
     }
     #endregion
 
@@ -154,24 +154,29 @@ public class ControllerSelectButton : MonoBehaviour {
         GetStateName();
         //ステータスに応じて動きを変える
         if (_stateName == _title) {
+            //タイトル
             SelectTitleButton();
         }
         if (_stateName == _menu) {
+            //ポーズ
             SelectMenuButton();
         }
         if (_stateName == _setting) {
+            //設定
             SelectSettingButton();
         }
         if (_stateName == _op) {
+            //オープニング
             OPStartProcess();
         }
         if (_stateName == _ed) {
+            //エンディング
             EDStartProcess();
         }
         if (_stateName == _result) {
+            //リザルト
             ResultProcess();
         }
-        //EnglishSwitchJapanece();
     }
     #region タイトル
     /// <summary>
@@ -291,12 +296,8 @@ public class ControllerSelectButton : MonoBehaviour {
                 _isLanguageEnglish = TrueFalseInversion(_isLanguageEnglish);
                 _isChangeLanguage = true;
                 SetTextEnglish(_textLanguage, _isLanguageEnglish);
-
-                //EnglishSwitchJapanece();
             }
             PlaySE();
-            // _settingImages[_settingIndex].sprite = _nowSprites;
-            //_selected = true;
         }
         //それぞれに応じた動き
         //BGM
@@ -416,31 +417,45 @@ public class ControllerSelectButton : MonoBehaviour {
         if (!_checkedOP) {
             return;
         }
+        //更新があったら
         if (_checkIndexOp != _indexOP) {
             if (_checkIndexOp >= 0) {
+                //ひとつ前を無効化
                 _textOp[_indexOP - 1].enabled = false;
             }
+            //現在のを有効化
             _textOp[_indexOP].enabled = true;
+            //声が複合しないように止める
             _audioSE.Stop();
+            //音調アップのために２個
             _audioSE.PlayOneShot(_opClip[_indexOP]);
             _audioSE.PlayOneShot(_opClip[_indexOP]);
+            //チェック用のインデックスを更新
             _checkIndexOp = _indexOP;
         }
         if (Input.GetButtonDown("Submit")) {
+            //インデックスの更新
             _indexOP++;
+            //テキストをすべて見たら
             if (_indexOP >= _textOp.Length) {
-                _countDown.PublicStart();
+                //カウントダウンスタート
+                //_countDown.PublicStart();
+                //オープニング用のカメラを無効化
                 _opCamera.SetActive(false);
-                _canvasManager.OPtoCount();
-                _audioBGM.clip = _audioGamePlay;
-                _audioBGM.Play();
+                //カウントダウンモードにする//チュートリアルモードにしたい
+                _canvasManager.OPToTutorial();
+                //ゲーム中BGMに変更
+                //_audioBGM.clip = _audioGamePlay;
+                //_audioBGM.Play();
+                //リセット
                 _indexOP = 0;
+                //もう動かしません
                 _checkedOP = false;
             }
         }
     }
     private void EDStartProcess() {
-        print(_audioSE.volume);
+        //オープニングとやっていることは一緒
         if (_checkIndexEd != _indexED) {
             if (_checkIndexEd >= 0) {
                 _textEd[_indexED - 1].enabled = false;
@@ -461,32 +476,43 @@ public class ControllerSelectButton : MonoBehaviour {
     #endregion
     private void ResultProcess() {
         if (_checkIndexResult != _indexResult) {
+            //対応するものを表示
             _textResult[_indexResult].enabled = true;
             _checkIndexResult = _indexResult;
         }
         if (Input.GetButtonDown("Submit")) {
+            //更新
             _indexResult++;
+            //全部見たら
             if (_indexResult >= _textResult.Length) {
+                //タイトルへ
                 _canvasManager.MenuOrResultToStart();
             }
         }
+        //ピザ爆発
         if (Input.GetKeyDown("joystick button 2")&&_isOne) {
+            //ボックスコライダーとリジットボディ取得して有効化
             foreach (BoxCollider pizza in _rd) {
                 pizza.enabled = true;
                 pizza.gameObject.GetComponent<Rigidbody>().useGravity = true;
             }
+            //バイブレーション取得
             if (_controllerBuru == null) {
                 _controllerBuru=ControllerBuruBuru.Instance;
             }
+            //ぶるぶる
             _controllerBuru.StartLongVibration();
+            //大きい音にしてるだけ
             _audioSE.PlayOneShot(_audioBoom);
             _audioSE.PlayOneShot(_audioBoom);
             _audioSE.PlayOneShot(_audioBoom);
             _audioSE.PlayOneShot(_audioBoom);
+            //もうさせません
             _isOne = false;
         }
     }
     private void PlaySE() {
+        //音大きくしたい
         _audioSE.PlayOneShot(_clickSE);
         _audioSE.PlayOneShot(_clickSE);
     }
@@ -557,6 +583,9 @@ public class ControllerSelectButton : MonoBehaviour {
     public bool LanguageInversionCheak() {
         return _isLanguageEnglish;
     }
+    /// <summary>
+    /// エンディングのBGMにする
+    /// </summary>
     public void StartBGM() {
         _audioBGM.clip = _audioEnding;
         _audioBGM.Play();

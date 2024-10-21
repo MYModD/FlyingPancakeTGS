@@ -39,6 +39,7 @@ public class PizzaMan : MonoBehaviour {
         if (_isProcessing) {
             return;
         }
+        _timeLimit.OUTREsult(true);
 
         _isProcessing = true;
 
@@ -59,14 +60,13 @@ public class PizzaMan : MonoBehaviour {
 
         }
 
-        Destroy(_destoryObjs.gameObject);
+        _destoryObjs.gameObject.SetActive(false );
         _coinInstance.gameObject.SetActive(false);
         Destroy(_coinSpawingPearnt);
 
 
         await UniTask.Delay(TimeSpan.FromSeconds(_endToNextGameDuration), cancellationToken: this.GetCancellationTokenOnDestroy());
 
-        _timeLimit.End3rdGame();
         _isProcessing = false;
     }
 }

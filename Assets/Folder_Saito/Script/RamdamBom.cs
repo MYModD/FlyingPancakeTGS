@@ -17,25 +17,19 @@ public class RamdamBom : MonoBehaviour {
     #endregion
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
+    /// 更新前処理
     /// </summary>
-    void Awake()
-{
-}
-/// <summary>
-/// 更新前処理
-/// </summary>
-void Start ()
-{
-        _source.clip =_clip[Random.Range(0, _clip.Length)];
-}
-/// <summary>
-/// 更新処理
-/// </summary>
-void Update ()
-{
-}
+    void Start() {
+        //ランダムなSE設定
+        _source.clip = _clip[Random.Range(0, _clip.Length)];
+    }
+    /// <summary>
+    /// 更新処理
+    /// </summary>
+    void Update() {
+    }
     private void OnEnable() {
+        //ランダムなSE設定
         _source.clip = _clip[Random.Range(0, _clip.Length)];
     }
     #endregion

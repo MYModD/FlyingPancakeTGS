@@ -25,20 +25,6 @@ public class CameraRotate : MonoBehaviour {
 
     #region メソッド
     /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-        // 必要なら初期化処理をここに
-    }
-
-    /// <summary>
-    /// 更新前処理
-    /// </summary>
-    void Start() {
-        // 必要な処理をここに
-    }
-
-    /// <summary>
     /// 更新処理
     /// </summary>
     void Update() {
@@ -65,19 +51,26 @@ public class CameraRotate : MonoBehaviour {
         // カメラの位置をリザルトポジションへ徐々に移動させる
         this.transform.position = Vector3.Lerp(this.transform.position, _resultPos.position, Time.deltaTime * _moveSpeed);
     }
-    
+    /// <summary>
+    /// ゲーム中のカメラのポジションにする処理
+    /// </summary>
     private void MainGamePosition() {
         if (_isMainGame) {
+            //指定したポジションに移動させる
             this.transform.position = _mainGamePos.position;
             _isMainGame=false;
         }
 
     }
-
+    /// <summary>
+    /// リザルトのポジションに向かわせたいときに呼んでね
+    /// </summary>
     public void IsResultMoveSwitch() {
         _isResult = true;
     }
-
+    /// <summary>
+    /// メインゲームのポジションに戻したいときに呼んでね
+    /// </summary>
     public void IsMainGameSwitch() {
         _isResult = false;
         _isMainGame = true;

@@ -17,13 +17,7 @@ public class TextCope : MonoBehaviour
     #region プロパティ
     #endregion
     #region メソッド
-/// <summary>
-/// 初期化処理 使わないなら消す
-/// </summary>
-void Awake()
-{
-}
-/// <summary>
+
 /// 更新前処理
 /// </summary>
 void Start ()
@@ -36,7 +30,7 @@ void Start ()
 /// </summary>
 void Update ()
 {
-
+        //テキストメッシュプロの内容をテキストに反映
         _thisText.color = _parentTextMeshPro.color;
         if (_parentTextMeshPro.text==_thisText.text) {
             return;

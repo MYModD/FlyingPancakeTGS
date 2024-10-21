@@ -1,8 +1,10 @@
 // ---------------------------------------------------------
 // ControllerBuruBuru.cs
 //
-// 作成日:
-// 作成者:
+// 作成日:9月後半
+// 作成者:G2A118齊藤大志
+//レバブルは気持ちいい
+//シングルトンって素晴らしい
 // ---------------------------------------------------------
 using UnityEngine;
 using System.Collections;
@@ -34,17 +36,31 @@ public class ControllerBuruBuru : MonoBehaviour {
     /// 初期化処理 使わないなら消す
     /// </summary>
     void Awake() {
+        SpeechBubbleAnimateManager s = FindObjectOfType<SpeechBubbleAnimateManager>();
+        print(s);
         // インスタンスが既に存在している場合はこのオブジェクトを破棄
         if (_instance != null && _instance != this) {
             Destroy(this.gameObject);
         }
     }
+    /// <summary>
+    /// ノーマルバイブレーション
+    /// </summary>
     public void StartVibration() {
         StartCoroutine(Vibration());
     }
+    /// <summary>
+    /// ロングバイブレーション
+    /// </summary>
     public void StartLongVibration() {
         StartCoroutine(LBVibration());
     }
+    /// <summary>
+    /// カスタムバイブレーション
+    /// </summary>
+    /// <param name="leftVibration">左の強さ</param>
+    /// <param name="rightVibration">右の強さ</param>
+    /// <param name="vibrationTime">振動時間</param>
     public void CustomVibrationStart(float leftVibration,float rightVibration,float vibrationTime) {
         StartCoroutine(CustomVibration(leftVibration, rightVibration, vibrationTime));
     }

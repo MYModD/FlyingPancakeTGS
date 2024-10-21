@@ -35,7 +35,7 @@ void Update ()
     }
 
     public void OnEvent() {
-       _canvas.FictionAnimEnd();
+       _canvas.FictionToTitle();
         _audioSource.Play();
     }
     #endregion

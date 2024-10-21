@@ -2,7 +2,7 @@
 // DestroySE.cs
 //
 // 作成日:
-// 作成者:
+// 作成者:G2A118齊藤大志
 // ---------------------------------------------------------
 using UnityEngine;
 using System.Collections;
@@ -21,9 +21,9 @@ public class DestroySE : MonoBehaviour {
         if (_buruBuru == null) {
             _buruBuru=ControllerBuruBuru.Instance;
         }
-        _buruBuru.StartVibration();
+        _buruBuru.StartVibration();//ぶっるぶる
         _source.Stop();
-        _source.PlayOneShot(_boom);
+        _source.PlayOneShot(_boom);//爆破音
     }
     #endregion
 }

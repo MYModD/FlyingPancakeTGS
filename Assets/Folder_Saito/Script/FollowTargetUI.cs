@@ -22,6 +22,7 @@ public class FollowTargetUI : MonoBehaviour
     }
 
     private void UpdateUIPosition() {
+        //追尾させる
         Vector3 screenPos = _mainCamera.WorldToScreenPoint(_target.position);
         _uiElement.position = screenPos+(Vector3.down*75);
     }

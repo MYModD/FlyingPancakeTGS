@@ -1,8 +1,8 @@
 // ---------------------------------------------------------
 // GaugeManager.cs
 //
-// 作成日:
-// 作成者:
+// 作成日:9月序盤
+// 作成者:G2A118齊藤大志
 // ---------------------------------------------------------
 using UnityEngine;
 using System.Collections;
@@ -18,19 +18,10 @@ public class GaugeManager : MonoBehaviour {
     #region プロパティ
     #endregion
     #region メソッド
-    /// <summary>
-    /// 初期化処理 使わないなら消す
-    /// </summary>
-    void Awake() {
-    }
-    /// <summary>
-    /// 更新前処理
-    /// </summary>
     void Start() {
         // 初期値を設定
         _currentValue = 0f;
         UpdateGauge();
-        
     }
     /// <summary>
     /// 更新処理
