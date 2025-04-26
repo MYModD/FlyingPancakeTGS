@@ -1,3 +1,5 @@
 **無視されるディレクトリ**
 
-/Assets/!0917LargeFiles - 感嘆符（!）で始まるため、通常であれば無視されるLargeFilesの中でも、この特定のディレクトリは保持されます
+/Assets/LargeFIles  
+/Assets/Mapbox  
+/Assets/!0917LargeFiles  
